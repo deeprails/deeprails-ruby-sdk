@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.email = "support@deeprails.ai"
   s.homepage = "https://gemdocs.org/gems/deeprails"
   s.metadata["homepage_uri"] = s.homepage
-  s.metadata["source_code_uri"] = "https://github.com/stainless-sdks/deeprails-ruby"
+  s.metadata["source_code_uri"] = "https://github.com/deeprails/deeprails-ruby-sdk"
   s.metadata["rubygems_mfa_required"] = false.to_s
   s.required_ruby_version = ">= 3.2.0"
 
