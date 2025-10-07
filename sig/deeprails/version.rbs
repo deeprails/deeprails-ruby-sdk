@@ -1,0 +1,3 @@
+module Deeprails
+  VERSION: String
+end

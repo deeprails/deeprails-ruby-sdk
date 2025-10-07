@@ -1,0 +1,107 @@
+module Deeprails
+  module Models
+    type monitor_submit_event_params =
+      {
+        guardrail_metrics: ::Array[Deeprails::Models::MonitorSubmitEventParams::guardrail_metric],
+        model_input: Deeprails::MonitorSubmitEventParams::ModelInput,
+        model_output: String,
+        model_used: String,
+        nametag: String,
+        run_mode: Deeprails::Models::MonitorSubmitEventParams::run_mode
+      }
+      & Deeprails::Internal::Type::request_parameters
+
+    class MonitorSubmitEventParams < Deeprails::Internal::Type::BaseModel
+      extend Deeprails::Internal::Type::RequestParameters::Converter
+      include Deeprails::Internal::Type::RequestParameters
+
+      attr_accessor guardrail_metrics: ::Array[Deeprails::Models::MonitorSubmitEventParams::guardrail_metric]
+
+      attr_accessor model_input: Deeprails::MonitorSubmitEventParams::ModelInput
+
+      attr_accessor model_output: String
+
+      attr_reader model_used: String?
+
+      def model_used=: (String) -> String
+
+      attr_reader nametag: String?
+
+      def nametag=: (String) -> String
+
+      attr_reader run_mode: Deeprails::Models::MonitorSubmitEventParams::run_mode?
+
+      def run_mode=: (
+        Deeprails::Models::MonitorSubmitEventParams::run_mode
+      ) -> Deeprails::Models::MonitorSubmitEventParams::run_mode
+
+      def initialize: (
+        guardrail_metrics: ::Array[Deeprails::Models::MonitorSubmitEventParams::guardrail_metric],
+        model_input: Deeprails::MonitorSubmitEventParams::ModelInput,
+        model_output: String,
+        ?model_used: String,
+        ?nametag: String,
+        ?run_mode: Deeprails::Models::MonitorSubmitEventParams::run_mode,
+        ?request_options: Deeprails::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        guardrail_metrics: ::Array[Deeprails::Models::MonitorSubmitEventParams::guardrail_metric],
+        model_input: Deeprails::MonitorSubmitEventParams::ModelInput,
+        model_output: String,
+        model_used: String,
+        nametag: String,
+        run_mode: Deeprails::Models::MonitorSubmitEventParams::run_mode,
+        request_options: Deeprails::RequestOptions
+      }
+
+      type guardrail_metric =
+        :correctness
+        | :completeness
+        | :instruction_adherence
+        | :context_adherence
+        | :ground_truth_adherence
+        | :comprehensive_safety
+
+      module GuardrailMetric
+        extend Deeprails::Internal::Type::Enum
+
+        CORRECTNESS: :correctness
+        COMPLETENESS: :completeness
+        INSTRUCTION_ADHERENCE: :instruction_adherence
+        CONTEXT_ADHERENCE: :context_adherence
+        GROUND_TRUTH_ADHERENCE: :ground_truth_adherence
+        COMPREHENSIVE_SAFETY: :comprehensive_safety
+
+        def self?.values: -> ::Array[Deeprails::Models::MonitorSubmitEventParams::guardrail_metric]
+      end
+
+      type model_input = { user_prompt: String, context: String }
+
+      class ModelInput < Deeprails::Internal::Type::BaseModel
+        attr_accessor user_prompt: String
+
+        attr_reader context: String?
+
+        def context=: (String) -> String
+
+        def initialize: (user_prompt: String, ?context: String) -> void
+
+        def to_hash: -> { user_prompt: String, context: String }
+      end
+
+      type run_mode = :precision_plus | :precision | :smart | :economy
+
+      module RunMode
+        extend Deeprails::Internal::Type::Enum
+
+        PRECISION_PLUS: :precision_plus
+        PRECISION: :precision
+        SMART: :smart
+        ECONOMY: :economy
+
+        def self?.values: -> ::Array[Deeprails::Models::MonitorSubmitEventParams::run_mode]
+      end
+    end
+  end
+end

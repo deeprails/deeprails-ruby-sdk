@@ -1,0 +1,30 @@
+module Deeprails
+  module Models
+    type monitor_create_params =
+      { name: String, description: String }
+      & Deeprails::Internal::Type::request_parameters
+
+    class MonitorCreateParams < Deeprails::Internal::Type::BaseModel
+      extend Deeprails::Internal::Type::RequestParameters::Converter
+      include Deeprails::Internal::Type::RequestParameters
+
+      attr_accessor name: String
+
+      attr_reader description: String?
+
+      def description=: (String) -> String
+
+      def initialize: (
+        name: String,
+        ?description: String,
+        ?request_options: Deeprails::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        name: String,
+        description: String,
+        request_options: Deeprails::RequestOptions
+      }
+    end
+  end
+end

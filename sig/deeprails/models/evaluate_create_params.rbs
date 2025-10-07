@@ -1,0 +1,107 @@
+module Deeprails
+  module Models
+    type evaluate_create_params =
+      {
+        model_input: Deeprails::EvaluateCreateParams::ModelInput,
+        model_output: String,
+        run_mode: Deeprails::Models::EvaluateCreateParams::run_mode,
+        guardrail_metrics: ::Array[Deeprails::Models::EvaluateCreateParams::guardrail_metric],
+        model_used: String,
+        nametag: String
+      }
+      & Deeprails::Internal::Type::request_parameters
+
+    class EvaluateCreateParams < Deeprails::Internal::Type::BaseModel
+      extend Deeprails::Internal::Type::RequestParameters::Converter
+      include Deeprails::Internal::Type::RequestParameters
+
+      attr_accessor model_input: Deeprails::EvaluateCreateParams::ModelInput
+
+      attr_accessor model_output: String
+
+      attr_accessor run_mode: Deeprails::Models::EvaluateCreateParams::run_mode
+
+      attr_reader guardrail_metrics: ::Array[Deeprails::Models::EvaluateCreateParams::guardrail_metric]?
+
+      def guardrail_metrics=: (
+        ::Array[Deeprails::Models::EvaluateCreateParams::guardrail_metric]
+      ) -> ::Array[Deeprails::Models::EvaluateCreateParams::guardrail_metric]
+
+      attr_reader model_used: String?
+
+      def model_used=: (String) -> String
+
+      attr_reader nametag: String?
+
+      def nametag=: (String) -> String
+
+      def initialize: (
+        model_input: Deeprails::EvaluateCreateParams::ModelInput,
+        model_output: String,
+        run_mode: Deeprails::Models::EvaluateCreateParams::run_mode,
+        ?guardrail_metrics: ::Array[Deeprails::Models::EvaluateCreateParams::guardrail_metric],
+        ?model_used: String,
+        ?nametag: String,
+        ?request_options: Deeprails::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        model_input: Deeprails::EvaluateCreateParams::ModelInput,
+        model_output: String,
+        run_mode: Deeprails::Models::EvaluateCreateParams::run_mode,
+        guardrail_metrics: ::Array[Deeprails::Models::EvaluateCreateParams::guardrail_metric],
+        model_used: String,
+        nametag: String,
+        request_options: Deeprails::RequestOptions
+      }
+
+      type model_input = { user_prompt: String, context: String }
+
+      class ModelInput < Deeprails::Internal::Type::BaseModel
+        attr_accessor user_prompt: String
+
+        attr_reader context: String?
+
+        def context=: (String) -> String
+
+        def initialize: (user_prompt: String, ?context: String) -> void
+
+        def to_hash: -> { user_prompt: String, context: String }
+      end
+
+      type run_mode = :precision_plus | :precision | :smart | :economy
+
+      module RunMode
+        extend Deeprails::Internal::Type::Enum
+
+        PRECISION_PLUS: :precision_plus
+        PRECISION: :precision
+        SMART: :smart
+        ECONOMY: :economy
+
+        def self?.values: -> ::Array[Deeprails::Models::EvaluateCreateParams::run_mode]
+      end
+
+      type guardrail_metric =
+        :correctness
+        | :completeness
+        | :instruction_adherence
+        | :context_adherence
+        | :ground_truth_adherence
+        | :comprehensive_safety
+
+      module GuardrailMetric
+        extend Deeprails::Internal::Type::Enum
+
+        CORRECTNESS: :correctness
+        COMPLETENESS: :completeness
+        INSTRUCTION_ADHERENCE: :instruction_adherence
+        CONTEXT_ADHERENCE: :context_adherence
+        GROUND_TRUTH_ADHERENCE: :ground_truth_adherence
+        COMPREHENSIVE_SAFETY: :comprehensive_safety
+
+        def self?.values: -> ::Array[Deeprails::Models::EvaluateCreateParams::guardrail_metric]
+      end
+    end
+  end
+end

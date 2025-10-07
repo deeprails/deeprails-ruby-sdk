@@ -1,0 +1,23 @@
+module Deeprails
+  module Models
+    type defend_retrieve_event_params =
+      { workflow_id: String } & Deeprails::Internal::Type::request_parameters
+
+    class DefendRetrieveEventParams < Deeprails::Internal::Type::BaseModel
+      extend Deeprails::Internal::Type::RequestParameters::Converter
+      include Deeprails::Internal::Type::RequestParameters
+
+      attr_accessor workflow_id: String
+
+      def initialize: (
+        workflow_id: String,
+        ?request_options: Deeprails::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        workflow_id: String,
+        request_options: Deeprails::RequestOptions
+      }
+    end
+  end
+end

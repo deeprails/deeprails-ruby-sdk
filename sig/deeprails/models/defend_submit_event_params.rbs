@@ -1,0 +1,73 @@
+module Deeprails
+  module Models
+    type defend_submit_event_params =
+      {
+        model_input: Deeprails::DefendSubmitEventParams::ModelInput,
+        model_output: String,
+        model_used: String,
+        nametag: String,
+        run_mode: Deeprails::Models::DefendSubmitEventParams::run_mode
+      }
+      & Deeprails::Internal::Type::request_parameters
+
+    class DefendSubmitEventParams < Deeprails::Internal::Type::BaseModel
+      extend Deeprails::Internal::Type::RequestParameters::Converter
+      include Deeprails::Internal::Type::RequestParameters
+
+      attr_accessor model_input: Deeprails::DefendSubmitEventParams::ModelInput
+
+      attr_accessor model_output: String
+
+      attr_accessor model_used: String
+
+      attr_accessor nametag: String
+
+      attr_accessor run_mode: Deeprails::Models::DefendSubmitEventParams::run_mode
+
+      def initialize: (
+        model_input: Deeprails::DefendSubmitEventParams::ModelInput,
+        model_output: String,
+        model_used: String,
+        nametag: String,
+        run_mode: Deeprails::Models::DefendSubmitEventParams::run_mode,
+        ?request_options: Deeprails::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        model_input: Deeprails::DefendSubmitEventParams::ModelInput,
+        model_output: String,
+        model_used: String,
+        nametag: String,
+        run_mode: Deeprails::Models::DefendSubmitEventParams::run_mode,
+        request_options: Deeprails::RequestOptions
+      }
+
+      type model_input = { user_prompt: String, context: String }
+
+      class ModelInput < Deeprails::Internal::Type::BaseModel
+        attr_accessor user_prompt: String
+
+        attr_reader context: String?
+
+        def context=: (String) -> String
+
+        def initialize: (user_prompt: String, ?context: String) -> void
+
+        def to_hash: -> { user_prompt: String, context: String }
+      end
+
+      type run_mode = :precision_plus | :precision | :smart | :economy
+
+      module RunMode
+        extend Deeprails::Internal::Type::Enum
+
+        PRECISION_PLUS: :precision_plus
+        PRECISION: :precision
+        SMART: :smart
+        ECONOMY: :economy
+
+        def self?.values: -> ::Array[Deeprails::Models::DefendSubmitEventParams::run_mode]
+      end
+    end
+  end
+end

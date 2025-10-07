@@ -1,0 +1,31 @@
+module Deeprails
+  class APIResponse = Deeprails::Models::APIResponse
+
+  class DefendCreateWorkflowParams = Deeprails::Models::DefendCreateWorkflowParams
+
+  class DefendResponse = Deeprails::Models::DefendResponse
+
+  class DefendRetrieveEventParams = Deeprails::Models::DefendRetrieveEventParams
+
+  class DefendRetrieveWorkflowParams = Deeprails::Models::DefendRetrieveWorkflowParams
+
+  class DefendSubmitEventParams = Deeprails::Models::DefendSubmitEventParams
+
+  class DefendUpdateWorkflowParams = Deeprails::Models::DefendUpdateWorkflowParams
+
+  class EvaluateCreateParams = Deeprails::Models::EvaluateCreateParams
+
+  class EvaluateRetrieveParams = Deeprails::Models::EvaluateRetrieveParams
+
+  class Evaluation = Deeprails::Models::Evaluation
+
+  class MonitorCreateParams = Deeprails::Models::MonitorCreateParams
+
+  class MonitorRetrieveParams = Deeprails::Models::MonitorRetrieveParams
+
+  class MonitorSubmitEventParams = Deeprails::Models::MonitorSubmitEventParams
+
+  class MonitorUpdateParams = Deeprails::Models::MonitorUpdateParams
+
+  class WorkflowEventResponse = Deeprails::Models::WorkflowEventResponse
+end

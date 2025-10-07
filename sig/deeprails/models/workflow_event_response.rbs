@@ -1,0 +1,46 @@
+module Deeprails
+  module Models
+    type workflow_event_response =
+      {
+        event_id: String,
+        workflow_id: String,
+        attempt_number: Integer,
+        evaluation_id: String,
+        filtered: bool
+      }
+
+    class WorkflowEventResponse < Deeprails::Internal::Type::BaseModel
+      attr_accessor event_id: String
+
+      attr_accessor workflow_id: String
+
+      attr_reader attempt_number: Integer?
+
+      def attempt_number=: (Integer) -> Integer
+
+      attr_reader evaluation_id: String?
+
+      def evaluation_id=: (String) -> String
+
+      attr_reader filtered: bool?
+
+      def filtered=: (bool) -> bool
+
+      def initialize: (
+        event_id: String,
+        workflow_id: String,
+        ?attempt_number: Integer,
+        ?evaluation_id: String,
+        ?filtered: bool
+      ) -> void
+
+      def to_hash: -> {
+        event_id: String,
+        workflow_id: String,
+        attempt_number: Integer,
+        evaluation_id: String,
+        filtered: bool
+      }
+    end
+  end
+end
