@@ -32,7 +32,7 @@ deeprails = Deeprails::Client.new(
 
 defend_response = deeprails.defend.create_workflow(
   improvement_action: "fixit",
-  metrics: {completeness: 0.85, instruction_adherence: 0.75},
+  metrics: {completeness: 0.8, instruction_adherence: 0.75},
   name: "Push Alert Workflow",
   type: "custom"
 )
@@ -203,7 +203,7 @@ You can provide typesafe request parameters like so:
 ```ruby
 deeprails.defend.create_workflow(
   improvement_action: "fixit",
-  metrics: {completeness: 0.85, instruction_adherence: 0.75},
+  metrics: {completeness: 0.8, instruction_adherence: 0.75},
   name: "Push Alert Workflow",
   type: "custom"
 )
@@ -215,7 +215,7 @@ Or, equivalently:
 # Hashes work, but are not typesafe:
 deeprails.defend.create_workflow(
   improvement_action: "fixit",
-  metrics: {completeness: 0.85, instruction_adherence: 0.75},
+  metrics: {completeness: 0.8, instruction_adherence: 0.75},
   name: "Push Alert Workflow",
   type: "custom"
 )
@@ -223,7 +223,7 @@ deeprails.defend.create_workflow(
 # You can also splat a full Params class:
 params = Deeprails::DefendCreateWorkflowParams.new(
   improvement_action: "fixit",
-  metrics: {completeness: 0.85, instruction_adherence: 0.75},
+  metrics: {completeness: 0.8, instruction_adherence: 0.75},
   name: "Push Alert Workflow",
   type: "custom"
 )
