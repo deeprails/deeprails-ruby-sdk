@@ -1,0 +1,167 @@
+module Deeprails
+  module Models
+    type monitor_retrieve_response =
+      {
+        success: bool,
+        data: Deeprails::Models::MonitorRetrieveResponse::Data,
+        message: String
+      }
+
+    class MonitorRetrieveResponse < Deeprails::Internal::Type::BaseModel
+      attr_accessor success: bool
+
+      attr_reader data: Deeprails::Models::MonitorRetrieveResponse::Data?
+
+      def data=: (
+        Deeprails::Models::MonitorRetrieveResponse::Data
+      ) -> Deeprails::Models::MonitorRetrieveResponse::Data
+
+      attr_reader message: String?
+
+      def message=: (String) -> String
+
+      def initialize: (
+        success: bool,
+        ?data: Deeprails::Models::MonitorRetrieveResponse::Data,
+        ?message: String
+      ) -> void
+
+      def to_hash: -> {
+        success: bool,
+        data: Deeprails::Models::MonitorRetrieveResponse::Data,
+        message: String
+      }
+
+      type data =
+        {
+          monitor_id: String,
+          monitor_status: Deeprails::Models::MonitorRetrieveResponse::Data::monitor_status,
+          name: String,
+          created_at: Time,
+          description: String,
+          evaluations: ::Array[Deeprails::Evaluation],
+          stats: Deeprails::Models::MonitorRetrieveResponse::Data::Stats,
+          updated_at: Time,
+          user_id: String
+        }
+
+      class Data < Deeprails::Internal::Type::BaseModel
+        attr_accessor monitor_id: String
+
+        attr_accessor monitor_status: Deeprails::Models::MonitorRetrieveResponse::Data::monitor_status
+
+        attr_accessor name: String
+
+        attr_reader created_at: Time?
+
+        def created_at=: (Time) -> Time
+
+        attr_reader description: String?
+
+        def description=: (String) -> String
+
+        attr_reader evaluations: ::Array[Deeprails::Evaluation]?
+
+        def evaluations=: (
+          ::Array[Deeprails::Evaluation]
+        ) -> ::Array[Deeprails::Evaluation]
+
+        attr_reader stats: Deeprails::Models::MonitorRetrieveResponse::Data::Stats?
+
+        def stats=: (
+          Deeprails::Models::MonitorRetrieveResponse::Data::Stats
+        ) -> Deeprails::Models::MonitorRetrieveResponse::Data::Stats
+
+        attr_reader updated_at: Time?
+
+        def updated_at=: (Time) -> Time
+
+        attr_reader user_id: String?
+
+        def user_id=: (String) -> String
+
+        def initialize: (
+          monitor_id: String,
+          monitor_status: Deeprails::Models::MonitorRetrieveResponse::Data::monitor_status,
+          name: String,
+          ?created_at: Time,
+          ?description: String,
+          ?evaluations: ::Array[Deeprails::Evaluation],
+          ?stats: Deeprails::Models::MonitorRetrieveResponse::Data::Stats,
+          ?updated_at: Time,
+          ?user_id: String
+        ) -> void
+
+        def to_hash: -> {
+          monitor_id: String,
+          monitor_status: Deeprails::Models::MonitorRetrieveResponse::Data::monitor_status,
+          name: String,
+          created_at: Time,
+          description: String,
+          evaluations: ::Array[Deeprails::Evaluation],
+          stats: Deeprails::Models::MonitorRetrieveResponse::Data::Stats,
+          updated_at: Time,
+          user_id: String
+        }
+
+        type monitor_status = :active | :inactive
+
+        module MonitorStatus
+          extend Deeprails::Internal::Type::Enum
+
+          ACTIVE: :active
+          INACTIVE: :inactive
+
+          def self?.values: -> ::Array[Deeprails::Models::MonitorRetrieveResponse::Data::monitor_status]
+        end
+
+        type stats =
+          {
+            completed_evaluations: Integer,
+            failed_evaluations: Integer,
+            in_progress_evaluations: Integer,
+            queued_evaluations: Integer,
+            total_evaluations: Integer
+          }
+
+        class Stats < Deeprails::Internal::Type::BaseModel
+          attr_reader completed_evaluations: Integer?
+
+          def completed_evaluations=: (Integer) -> Integer
+
+          attr_reader failed_evaluations: Integer?
+
+          def failed_evaluations=: (Integer) -> Integer
+
+          attr_reader in_progress_evaluations: Integer?
+
+          def in_progress_evaluations=: (Integer) -> Integer
+
+          attr_reader queued_evaluations: Integer?
+
+          def queued_evaluations=: (Integer) -> Integer
+
+          attr_reader total_evaluations: Integer?
+
+          def total_evaluations=: (Integer) -> Integer
+
+          def initialize: (
+            ?completed_evaluations: Integer,
+            ?failed_evaluations: Integer,
+            ?in_progress_evaluations: Integer,
+            ?queued_evaluations: Integer,
+            ?total_evaluations: Integer
+          ) -> void
+
+          def to_hash: -> {
+            completed_evaluations: Integer,
+            failed_evaluations: Integer,
+            in_progress_evaluations: Integer,
+            queued_evaluations: Integer,
+            total_evaluations: Integer
+          }
+        end
+      end
+    end
+  end
+end

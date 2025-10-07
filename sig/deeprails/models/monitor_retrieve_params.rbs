@@ -1,0 +1,25 @@
+module Deeprails
+  module Models
+    type monitor_retrieve_params =
+      { limit: Integer } & Deeprails::Internal::Type::request_parameters
+
+    class MonitorRetrieveParams < Deeprails::Internal::Type::BaseModel
+      extend Deeprails::Internal::Type::RequestParameters::Converter
+      include Deeprails::Internal::Type::RequestParameters
+
+      attr_reader limit: Integer?
+
+      def limit=: (Integer) -> Integer
+
+      def initialize: (
+        ?limit: Integer,
+        ?request_options: Deeprails::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        limit: Integer,
+        request_options: Deeprails::RequestOptions
+      }
+    end
+  end
+end

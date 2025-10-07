@@ -1,0 +1,96 @@
+module Deeprails
+  module Models
+    type defend_response =
+      {
+        name: String,
+        workflow_id: String,
+        created_at: Time,
+        description: String,
+        improvement_action: Deeprails::Models::DefendResponse::improvement_action?,
+        max_retries: Integer,
+        modified_at: Time,
+        status: Deeprails::Models::DefendResponse::status,
+        success_rate: Float
+      }
+
+    class DefendResponse < Deeprails::Internal::Type::BaseModel
+      attr_accessor name: String
+
+      attr_accessor workflow_id: String
+
+      attr_reader created_at: Time?
+
+      def created_at=: (Time) -> Time
+
+      attr_reader description: String?
+
+      def description=: (String) -> String
+
+      attr_accessor improvement_action: Deeprails::Models::DefendResponse::improvement_action?
+
+      attr_reader max_retries: Integer?
+
+      def max_retries=: (Integer) -> Integer
+
+      attr_reader modified_at: Time?
+
+      def modified_at=: (Time) -> Time
+
+      attr_reader status: Deeprails::Models::DefendResponse::status?
+
+      def status=: (
+        Deeprails::Models::DefendResponse::status
+      ) -> Deeprails::Models::DefendResponse::status
+
+      attr_reader success_rate: Float?
+
+      def success_rate=: (Float) -> Float
+
+      def initialize: (
+        name: String,
+        workflow_id: String,
+        ?created_at: Time,
+        ?description: String,
+        ?improvement_action: Deeprails::Models::DefendResponse::improvement_action?,
+        ?max_retries: Integer,
+        ?modified_at: Time,
+        ?status: Deeprails::Models::DefendResponse::status,
+        ?success_rate: Float
+      ) -> void
+
+      def to_hash: -> {
+        name: String,
+        workflow_id: String,
+        created_at: Time,
+        description: String,
+        improvement_action: Deeprails::Models::DefendResponse::improvement_action?,
+        max_retries: Integer,
+        modified_at: Time,
+        status: Deeprails::Models::DefendResponse::status,
+        success_rate: Float
+      }
+
+      type improvement_action = :regenerate | :fixit
+
+      module ImprovementAction
+        extend Deeprails::Internal::Type::Enum
+
+        REGENERATE: :regenerate
+        FIXIT: :fixit
+
+        def self?.values: -> ::Array[Deeprails::Models::DefendResponse::improvement_action]
+      end
+
+      type status = :archived | :active
+
+      module Status
+        extend Deeprails::Internal::Type::Enum
+
+        ARCHIVED: :archived
+        ACTIVE: :active
+
+        def self?.values: -> ::Array[Deeprails::Models::DefendResponse::status]
+      end
+    end
+  end
+end

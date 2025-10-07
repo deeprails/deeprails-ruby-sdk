@@ -1,0 +1,98 @@
+module Deeprails
+  module Models
+    type defend_create_workflow_params =
+      {
+        improvement_action: Deeprails::Models::DefendCreateWorkflowParams::improvement_action?,
+        metrics: ::Hash[Symbol, Float],
+        name: String,
+        type: Deeprails::Models::DefendCreateWorkflowParams::type_,
+        automatic_tolerance: Deeprails::Models::DefendCreateWorkflowParams::automatic_tolerance,
+        description: String,
+        max_retries: Integer
+      }
+      & Deeprails::Internal::Type::request_parameters
+
+    class DefendCreateWorkflowParams < Deeprails::Internal::Type::BaseModel
+      extend Deeprails::Internal::Type::RequestParameters::Converter
+      include Deeprails::Internal::Type::RequestParameters
+
+      attr_accessor improvement_action: Deeprails::Models::DefendCreateWorkflowParams::improvement_action?
+
+      attr_accessor metrics: ::Hash[Symbol, Float]
+
+      attr_accessor name: String
+
+      attr_accessor type: Deeprails::Models::DefendCreateWorkflowParams::type_
+
+      attr_reader automatic_tolerance: Deeprails::Models::DefendCreateWorkflowParams::automatic_tolerance?
+
+      def automatic_tolerance=: (
+        Deeprails::Models::DefendCreateWorkflowParams::automatic_tolerance
+      ) -> Deeprails::Models::DefendCreateWorkflowParams::automatic_tolerance
+
+      attr_reader description: String?
+
+      def description=: (String) -> String
+
+      attr_reader max_retries: Integer?
+
+      def max_retries=: (Integer) -> Integer
+
+      def initialize: (
+        improvement_action: Deeprails::Models::DefendCreateWorkflowParams::improvement_action?,
+        metrics: ::Hash[Symbol, Float],
+        name: String,
+        type: Deeprails::Models::DefendCreateWorkflowParams::type_,
+        ?automatic_tolerance: Deeprails::Models::DefendCreateWorkflowParams::automatic_tolerance,
+        ?description: String,
+        ?max_retries: Integer,
+        ?request_options: Deeprails::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        improvement_action: Deeprails::Models::DefendCreateWorkflowParams::improvement_action?,
+        metrics: ::Hash[Symbol, Float],
+        name: String,
+        type: Deeprails::Models::DefendCreateWorkflowParams::type_,
+        automatic_tolerance: Deeprails::Models::DefendCreateWorkflowParams::automatic_tolerance,
+        description: String,
+        max_retries: Integer,
+        request_options: Deeprails::RequestOptions
+      }
+
+      type improvement_action = :regenerate | :fixit
+
+      module ImprovementAction
+        extend Deeprails::Internal::Type::Enum
+
+        REGENERATE: :regenerate
+        FIXIT: :fixit
+
+        def self?.values: -> ::Array[Deeprails::Models::DefendCreateWorkflowParams::improvement_action]
+      end
+
+      type type_ = :automatic | :custom
+
+      module Type
+        extend Deeprails::Internal::Type::Enum
+
+        AUTOMATIC: :automatic
+        CUSTOM: :custom
+
+        def self?.values: -> ::Array[Deeprails::Models::DefendCreateWorkflowParams::type_]
+      end
+
+      type automatic_tolerance = :low | :medium | :high
+
+      module AutomaticTolerance
+        extend Deeprails::Internal::Type::Enum
+
+        LOW: :low
+        MEDIUM: :medium
+        HIGH: :high
+
+        def self?.values: -> ::Array[Deeprails::Models::DefendCreateWorkflowParams::automatic_tolerance]
+      end
+    end
+  end
+end

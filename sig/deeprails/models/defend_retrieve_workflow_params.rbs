@@ -1,0 +1,15 @@
+module Deeprails
+  module Models
+    type defend_retrieve_workflow_params =
+      {  } & Deeprails::Internal::Type::request_parameters
+
+    class DefendRetrieveWorkflowParams < Deeprails::Internal::Type::BaseModel
+      extend Deeprails::Internal::Type::RequestParameters::Converter
+      include Deeprails::Internal::Type::RequestParameters
+
+      def initialize: (?request_options: Deeprails::request_opts) -> void
+
+      def to_hash: -> { request_options: Deeprails::RequestOptions }
+    end
+  end
+end

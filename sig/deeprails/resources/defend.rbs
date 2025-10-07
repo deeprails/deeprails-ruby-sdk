@@ -1,0 +1,47 @@
+module Deeprails
+  module Resources
+    class Defend
+      def create_workflow: (
+        improvement_action: Deeprails::Models::DefendCreateWorkflowParams::improvement_action?,
+        metrics: ::Hash[Symbol, Float],
+        name: String,
+        type: Deeprails::Models::DefendCreateWorkflowParams::type_,
+        ?automatic_tolerance: Deeprails::Models::DefendCreateWorkflowParams::automatic_tolerance,
+        ?description: String,
+        ?max_retries: Integer,
+        ?request_options: Deeprails::request_opts
+      ) -> Deeprails::DefendResponse
+
+      def retrieve_event: (
+        String event_id,
+        workflow_id: String,
+        ?request_options: Deeprails::request_opts
+      ) -> Deeprails::WorkflowEventResponse
+
+      def retrieve_workflow: (
+        String workflow_id,
+        ?request_options: Deeprails::request_opts
+      ) -> Deeprails::DefendResponse
+
+      def submit_event: (
+        String workflow_id,
+        model_input: Deeprails::DefendSubmitEventParams::ModelInput,
+        model_output: String,
+        model_used: String,
+        nametag: String,
+        run_mode: Deeprails::Models::DefendSubmitEventParams::run_mode,
+        ?request_options: Deeprails::request_opts
+      ) -> Deeprails::WorkflowEventResponse
+
+      def update_workflow: (
+        String workflow_id,
+        ?description: String,
+        ?name: String,
+        ?type: Deeprails::Models::DefendUpdateWorkflowParams::type_,
+        ?request_options: Deeprails::request_opts
+      ) -> Deeprails::DefendResponse
+
+      def initialize: (client: Deeprails::Client) -> void
+    end
+  end
+end

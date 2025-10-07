@@ -1,0 +1,9 @@
+module Deeprails
+  module Internal
+    extend Deeprails::Internal::Util::SorbetRuntimeSupport
+
+    type file_input = Pathname | StringIO | IO | String | Deeprails::FilePart
+
+    OMIT: Object
+  end
+end

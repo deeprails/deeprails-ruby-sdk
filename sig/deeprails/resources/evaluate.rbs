@@ -1,0 +1,22 @@
+module Deeprails
+  module Resources
+    class Evaluate
+      def create: (
+        model_input: Deeprails::EvaluateCreateParams::ModelInput,
+        model_output: String,
+        run_mode: Deeprails::Models::EvaluateCreateParams::run_mode,
+        ?guardrail_metrics: ::Array[Deeprails::Models::EvaluateCreateParams::guardrail_metric],
+        ?model_used: String,
+        ?nametag: String,
+        ?request_options: Deeprails::request_opts
+      ) -> Deeprails::Evaluation
+
+      def retrieve: (
+        String eval_id,
+        ?request_options: Deeprails::request_opts
+      ) -> Deeprails::Evaluation
+
+      def initialize: (client: Deeprails::Client) -> void
+    end
+  end
+end
