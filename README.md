@@ -2,11 +2,11 @@
 
 The Deeprails Ruby library provides convenient access to the Deeprails REST API from any Ruby 3.2.0+ application. It ships with comprehensive types & docstrings in Yard, RBS, and RBI – [see below](https://github.com/deeprails/deeprails-ruby-sdk#Sorbet) for usage with Sorbet. The standard library's `net/http` is used as the HTTP transport, with connection pooling via the `connection_pool` gem.
 
-It is generated with [Stainless](https://www.stainless.com/).
-
 ## Documentation
 
 Documentation for releases of this gem can be found [on RubyDoc](https://gemdocs.org/gems/deeprails).
+
+The REST API documentation can be found on [docs.deeprails.com](https://docs.deeprails.com).
 
 ## Installation
 
@@ -15,7 +15,7 @@ To use this gem, install via Bundler by adding the following to your application
 <!-- x-release-please-start-version -->
 
 ```ruby
-gem "deeprails", "~> 0.0.2"
+gem "deeprails", "~> 0.1.0"
 ```
 
 <!-- x-release-please-end -->
