@@ -3,7 +3,8 @@
 module Deeprails
   module Resources
     class Monitor
-      # Create a new monitor to evaluate model inputs and outputs using guardrails.
+      # Use this endpoint to create a new monitor to evaluate model inputs and outputs
+      # using guardrails
       #
       # @overload create(name:, description: nil, request_options: {})
       #
@@ -27,7 +28,8 @@ module Deeprails
         )
       end
 
-      # Retrieve the details and evaluations associated with a specific monitor.
+      # Use this endpoint to retrieve the details and evaluations associated with a
+      # specific monitor
       #
       # @overload retrieve(monitor_id, limit: nil, request_options: {})
       #
@@ -54,7 +56,8 @@ module Deeprails
       # Some parameter documentations has been truncated, see
       # {Deeprails::Models::MonitorUpdateParams} for more details.
       #
-      # Update the name, description, or status of an existing monitor.
+      # Use this endpoint to update the name, description, or status of an existing
+      # monitor
       #
       # @overload update(monitor_id, description: nil, monitor_status: nil, name: nil, request_options: {})
       #
@@ -85,7 +88,8 @@ module Deeprails
       # Some parameter documentations has been truncated, see
       # {Deeprails::Models::MonitorSubmitEventParams} for more details.
       #
-      # Submit a model input and output pair to a monitor for evaluation.
+      # Use this endpoint to submit a model input and output pair to a monitor for
+      # evaluation
       #
       # @overload submit_event(monitor_id, guardrail_metrics:, model_input:, model_output:, model_used: nil, nametag: nil, run_mode: nil, request_options: {})
       #

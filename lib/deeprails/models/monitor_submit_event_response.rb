@@ -11,7 +11,6 @@ module Deeprails
       required :success, Deeprails::Internal::Type::Boolean
 
       # @!attribute data
-      #   Response payload for monitor event operations.
       #
       #   @return [Deeprails::Models::MonitorSubmitEventResponse::Data, nil]
       optional :data, -> { Deeprails::Models::MonitorSubmitEventResponse::Data }
@@ -31,9 +30,9 @@ module Deeprails
       #
       #   @param success [Boolean] Represents whether the request was completed successfully.
       #
-      #   @param data [Deeprails::Models::MonitorSubmitEventResponse::Data] Response payload for monitor event operations.
+      #   @param data [Deeprails::Models::MonitorSubmitEventResponse::Data]
       #
-      #   @param message [String] The accompanying message for the request. Includes error details when applicabl
+      #   @param message [String] The accompanying message for the request. Includes error details when applicable
 
       # @see Deeprails::Models::MonitorSubmitEventResponse#data
       class Data < Deeprails::Internal::Type::BaseModel
@@ -62,8 +61,6 @@ module Deeprails
         optional :created_at, Time
 
         # @!method initialize(evaluation_id:, event_id:, monitor_id:, created_at: nil)
-        #   Response payload for monitor event operations.
-        #
         #   @param evaluation_id [String] A unique evaluation ID associated with this event.
         #
         #   @param event_id [String] A unique monitor event ID.

@@ -43,7 +43,7 @@ module Deeprails
       )
       end
 
-      # Retrieve the evaluation record for a given evaluation ID.
+      # Use this endpoint to retrieve the evaluation record for a given evaluation ID
       sig do
         params(
           eval_id: String,
