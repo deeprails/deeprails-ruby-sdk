@@ -1,11 +1,7 @@
 module Deeprails
   module Models
     type defend_update_workflow_params =
-      {
-        description: String,
-        name: String,
-        type: Deeprails::Models::DefendUpdateWorkflowParams::type_
-      }
+      { description: String, name: String }
       & Deeprails::Internal::Type::request_parameters
 
     class DefendUpdateWorkflowParams < Deeprails::Internal::Type::BaseModel
@@ -20,36 +16,17 @@ module Deeprails
 
       def name=: (String) -> String
 
-      attr_reader type: Deeprails::Models::DefendUpdateWorkflowParams::type_?
-
-      def type=: (
-        Deeprails::Models::DefendUpdateWorkflowParams::type_
-      ) -> Deeprails::Models::DefendUpdateWorkflowParams::type_
-
       def initialize: (
         ?description: String,
         ?name: String,
-        ?type: Deeprails::Models::DefendUpdateWorkflowParams::type_,
         ?request_options: Deeprails::request_opts
       ) -> void
 
       def to_hash: -> {
         description: String,
         name: String,
-        type: Deeprails::Models::DefendUpdateWorkflowParams::type_,
         request_options: Deeprails::RequestOptions
       }
-
-      type type_ = :automatic | :custom
-
-      module Type
-        extend Deeprails::Internal::Type::Enum
-
-        AUTOMATIC: :automatic
-        CUSTOM: :custom
-
-        def self?.values: -> ::Array[Deeprails::Models::DefendUpdateWorkflowParams::type_]
-      end
     end
   end
 end

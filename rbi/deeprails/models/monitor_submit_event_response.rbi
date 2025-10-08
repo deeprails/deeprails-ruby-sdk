@@ -15,7 +15,6 @@ module Deeprails
       sig { returns(T::Boolean) }
       attr_accessor :success
 
-      # Response payload for monitor event operations.
       sig do
         returns(T.nilable(Deeprails::Models::MonitorSubmitEventResponse::Data))
       end
@@ -47,7 +46,6 @@ module Deeprails
       def self.new(
         # Represents whether the request was completed successfully.
         success:,
-        # Response payload for monitor event operations.
         data: nil,
         # The accompanying message for the request. Includes error details when
         # applicable.
@@ -95,7 +93,6 @@ module Deeprails
         sig { params(created_at: Time).void }
         attr_writer :created_at
 
-        # Response payload for monitor event operations.
         sig do
           params(
             evaluation_id: String,

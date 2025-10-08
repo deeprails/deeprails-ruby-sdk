@@ -31,7 +31,7 @@ module Deeprails
       # @!attribute improvement_action
       #   The action used to improve outputs that fail one or more guardrail metrics for
       #   the workflow events. May be `regenerate`, `fixit`, or null which represents “do
-      #   nothing”. ReGen runs the user's exact input prompt with minor induced variance.
+      #   nothing”. Regenerate runs the user's input prompt with minor induced variance.
       #   Fixit attempts to directly address the shortcomings of the output using the
       #   guardrail failure rationale. Do nothing does not attempt any improvement.
       #
@@ -68,8 +68,6 @@ module Deeprails
       #   Some parameter documentations has been truncated, see
       #   {Deeprails::Models::DefendResponse} for more details.
       #
-      #   Response payload for guardrail workflow operations.
-      #
       #   @param name [String] Name of the workflow.
       #
       #   @param workflow_id [String] A unique workflow ID.
@@ -90,7 +88,7 @@ module Deeprails
 
       # The action used to improve outputs that fail one or more guardrail metrics for
       # the workflow events. May be `regenerate`, `fixit`, or null which represents “do
-      # nothing”. ReGen runs the user's exact input prompt with minor induced variance.
+      # nothing”. Regenerate runs the user's input prompt with minor induced variance.
       # Fixit attempts to directly address the shortcomings of the output using the
       # guardrail failure rationale. Do nothing does not attempt any improvement.
       #

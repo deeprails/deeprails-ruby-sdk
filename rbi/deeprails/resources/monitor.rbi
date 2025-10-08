@@ -3,7 +3,8 @@
 module Deeprails
   module Resources
     class Monitor
-      # Create a new monitor to evaluate model inputs and outputs using guardrails.
+      # Use this endpoint to create a new monitor to evaluate model inputs and outputs
+      # using guardrails
       sig do
         params(
           name: String,
@@ -20,7 +21,8 @@ module Deeprails
       )
       end
 
-      # Retrieve the details and evaluations associated with a specific monitor.
+      # Use this endpoint to retrieve the details and evaluations associated with a
+      # specific monitor
       sig do
         params(
           monitor_id: String,
@@ -37,7 +39,8 @@ module Deeprails
       )
       end
 
-      # Update the name, description, or status of an existing monitor.
+      # Use this endpoint to update the name, description, or status of an existing
+      # monitor
       sig do
         params(
           monitor_id: String,
@@ -62,7 +65,8 @@ module Deeprails
       )
       end
 
-      # Submit a model input and output pair to a monitor for evaluation.
+      # Use this endpoint to submit a model input and output pair to a monitor for
+      # evaluation
       sig do
         params(
           monitor_id: String,

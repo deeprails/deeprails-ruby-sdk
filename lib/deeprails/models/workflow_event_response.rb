@@ -41,8 +41,6 @@ module Deeprails
       #   Some parameter documentations has been truncated, see
       #   {Deeprails::Models::WorkflowEventResponse} for more details.
       #
-      #   Response payload for workflow event operations.
-      #
       #   @param event_id [String] A unique workflow event ID.
       #
       #   @param workflow_id [String] Workflow ID associated with the event.

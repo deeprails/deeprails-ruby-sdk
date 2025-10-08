@@ -3,8 +3,8 @@
 module Deeprails
   module Resources
     class Defend
-      # Create a new guardrail workflow with optional guardrail thresholds and
-      # improvement actions.
+      # Use this endpoint to create a new guardrail workflow with optional guardrail
+      # thresholds and improvement actions
       sig do
         params(
           improvement_action:
@@ -24,7 +24,7 @@ module Deeprails
       def create_workflow(
         # The action used to improve outputs that fail one or guardrail metrics for the
         # workflow events. May be `regenerate`, `fixit`, or null which represents “do
-        # nothing”. ReGen runs the user's exact input prompt with minor induced variance.
+        # nothing”. Regenerate runs the user's input prompt with minor induced variance.
         # Fixit attempts to directly address the shortcomings of the output using the
         # guardrail failure rationale. Do nothing does not attempt any improvement.
         improvement_action:,
@@ -54,7 +54,7 @@ module Deeprails
       )
       end
 
-      # Retrieve a specific event of a guardrail workflow.
+      # Use this endpoint to retrieve a specific event of a guardrail workflow
       sig do
         params(
           event_id: String,
@@ -71,7 +71,7 @@ module Deeprails
       )
       end
 
-      # Retrieve the details for a specific guardrail workflow.
+      # Use this endpoint to retrieve the details for a specific defend workflow
       sig do
         params(
           workflow_id: String,
@@ -85,7 +85,8 @@ module Deeprails
       )
       end
 
-      # Submit a model input and output pair to a workflow for evaluation.
+      # Use this endpoint to submit a model input and output pair to a workflow for
+      # evaluation
       sig do
         params(
           workflow_id: String,
@@ -119,13 +120,12 @@ module Deeprails
       )
       end
 
-      # Update an existing guardrail workflow.
+      # Use this endpoint to update an existing guardrail workflow
       sig do
         params(
           workflow_id: String,
           description: String,
           name: String,
-          type: Deeprails::DefendUpdateWorkflowParams::Type::OrSymbol,
           request_options: Deeprails::RequestOptions::OrHash
         ).returns(Deeprails::DefendResponse)
       end
@@ -136,8 +136,6 @@ module Deeprails
         description: nil,
         # Name of the workflow.
         name: nil,
-        # Type of thresholds to use for the workflow, either `automatic` or `custom`.
-        type: nil,
         request_options: {}
       )
       end

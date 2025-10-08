@@ -11,7 +11,6 @@ module Deeprails
       required :success, Deeprails::Internal::Type::Boolean
 
       # @!attribute data
-      #   Detailed response payload for retrieving a monitor and its evaluations.
       #
       #   @return [Deeprails::Models::MonitorRetrieveResponse::Data, nil]
       optional :data, -> { Deeprails::Models::MonitorRetrieveResponse::Data }
@@ -31,7 +30,7 @@ module Deeprails
       #
       #   @param success [Boolean] Represents whether the request was completed successfully.
       #
-      #   @param data [Deeprails::Models::MonitorRetrieveResponse::Data] Detailed response payload for retrieving a monitor and its evaluations.
+      #   @param data [Deeprails::Models::MonitorRetrieveResponse::Data]
       #
       #   @param message [String] The accompanying message for the request. Includes error details when applicable
 
@@ -98,8 +97,6 @@ module Deeprails
         # @!method initialize(monitor_id:, monitor_status:, name:, created_at: nil, description: nil, evaluations: nil, stats: nil, updated_at: nil, user_id: nil)
         #   Some parameter documentations has been truncated, see
         #   {Deeprails::Models::MonitorRetrieveResponse::Data} for more details.
-        #
-        #   Detailed response payload for retrieving a monitor and its evaluations.
         #
         #   @param monitor_id [String] A unique monitor ID.
         #

@@ -32,7 +32,7 @@ module Deeprails
 
       # The action used to improve outputs that fail one or more guardrail metrics for
       # the workflow events. May be `regenerate`, `fixit`, or null which represents “do
-      # nothing”. ReGen runs the user's exact input prompt with minor induced variance.
+      # nothing”. Regenerate runs the user's input prompt with minor induced variance.
       # Fixit attempts to directly address the shortcomings of the output using the
       # guardrail failure rationale. Do nothing does not attempt any improvement.
       sig do
@@ -74,7 +74,6 @@ module Deeprails
       sig { params(success_rate: Float).void }
       attr_writer :success_rate
 
-      # Response payload for guardrail workflow operations.
       sig do
         params(
           name: String,
@@ -100,7 +99,7 @@ module Deeprails
         description: nil,
         # The action used to improve outputs that fail one or more guardrail metrics for
         # the workflow events. May be `regenerate`, `fixit`, or null which represents “do
-        # nothing”. ReGen runs the user's exact input prompt with minor induced variance.
+        # nothing”. Regenerate runs the user's input prompt with minor induced variance.
         # Fixit attempts to directly address the shortcomings of the output using the
         # guardrail failure rationale. Do nothing does not attempt any improvement.
         improvement_action: nil,
@@ -140,7 +139,7 @@ module Deeprails
 
       # The action used to improve outputs that fail one or more guardrail metrics for
       # the workflow events. May be `regenerate`, `fixit`, or null which represents “do
-      # nothing”. ReGen runs the user's exact input prompt with minor induced variance.
+      # nothing”. Regenerate runs the user's input prompt with minor induced variance.
       # Fixit attempts to directly address the shortcomings of the output using the
       # guardrail failure rationale. Do nothing does not attempt any improvement.
       module ImprovementAction

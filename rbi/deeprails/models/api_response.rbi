@@ -12,7 +12,6 @@ module Deeprails
       sig { returns(T::Boolean) }
       attr_accessor :success
 
-      # Response payload for creating or updating a monitor.
       sig { returns(T.nilable(Deeprails::APIResponse::Data)) }
       attr_reader :data
 
@@ -38,7 +37,6 @@ module Deeprails
       def self.new(
         # Represents whether the request was completed successfully.
         success:,
-        # Response payload for creating or updating a monitor.
         data: nil,
         # The accompanying message for the request. Includes error details when
         # applicable.
@@ -117,7 +115,6 @@ module Deeprails
         sig { params(user_id: String).void }
         attr_writer :user_id
 
-        # Response payload for creating or updating a monitor.
         sig do
           params(
             monitor_id: String,

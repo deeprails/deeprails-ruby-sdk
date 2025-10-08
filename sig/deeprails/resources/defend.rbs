@@ -37,7 +37,6 @@ module Deeprails
         String workflow_id,
         ?description: String,
         ?name: String,
-        ?type: Deeprails::Models::DefendUpdateWorkflowParams::type_,
         ?request_options: Deeprails::request_opts
       ) -> Deeprails::DefendResponse
 
