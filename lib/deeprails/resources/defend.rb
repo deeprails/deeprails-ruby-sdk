@@ -6,8 +6,8 @@ module Deeprails
       # Some parameter documentations has been truncated, see
       # {Deeprails::Models::DefendCreateWorkflowParams} for more details.
       #
-      # Create a new guardrail workflow with optional guardrail thresholds and
-      # improvement actions.
+      # Use this endpoint to create a new guardrail workflow with optional guardrail
+      # thresholds and improvement actions
       #
       # @overload create_workflow(improvement_action:, metrics:, name:, type:, automatic_tolerance: nil, description: nil, max_retries: nil, request_options: {})
       #
@@ -41,7 +41,7 @@ module Deeprails
         )
       end
 
-      # Retrieve a specific event of a guardrail workflow.
+      # Use this endpoint to retrieve a specific event of a guardrail workflow
       #
       # @overload retrieve_event(event_id, workflow_id:, request_options: {})
       #
@@ -68,7 +68,7 @@ module Deeprails
         )
       end
 
-      # Retrieve the details for a specific guardrail workflow.
+      # Use this endpoint to retrieve the details for a specific defend workflow
       #
       # @overload retrieve_workflow(workflow_id, request_options: {})
       #
@@ -91,7 +91,8 @@ module Deeprails
       # Some parameter documentations has been truncated, see
       # {Deeprails::Models::DefendSubmitEventParams} for more details.
       #
-      # Submit a model input and output pair to a workflow for evaluation.
+      # Use this endpoint to submit a model input and output pair to a workflow for
+      # evaluation
       #
       # @overload submit_event(workflow_id, model_input:, model_output:, model_used:, nametag:, run_mode:, request_options: {})
       #
@@ -123,17 +124,15 @@ module Deeprails
         )
       end
 
-      # Update an existing guardrail workflow.
+      # Use this endpoint to update an existing guardrail workflow
       #
-      # @overload update_workflow(workflow_id, description: nil, name: nil, type: nil, request_options: {})
+      # @overload update_workflow(workflow_id, description: nil, name: nil, request_options: {})
       #
       # @param workflow_id [String] The ID of the workflow to edit.
       #
       # @param description [String] Description for the workflow.
       #
       # @param name [String] Name of the workflow.
-      #
-      # @param type [Symbol, Deeprails::Models::DefendUpdateWorkflowParams::Type] Type of thresholds to use for the workflow, either `automatic` or `custom`.
       #
       # @param request_options [Deeprails::RequestOptions, Hash{Symbol=>Object}, nil]
       #

@@ -40,7 +40,6 @@ module Deeprails
       sig { params(filtered: T::Boolean).void }
       attr_writer :filtered
 
-      # Response payload for workflow event operations.
       sig do
         params(
           event_id: String,
