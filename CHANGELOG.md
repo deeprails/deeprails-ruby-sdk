@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.1 (2025-10-09)
+
+Full Changelog: [v0.2.0...v0.2.1](https://github.com/deeprails/deeprails-ruby-sdk/compare/v0.2.0...v0.2.1)
+
+### Chores
+
+* ignore linter error for tests having large collections ([202c9e1](https://github.com/deeprails/deeprails-ruby-sdk/commit/202c9e1977aaebb7e09883564d4694a2d41e4416))
+
 ## 0.2.0 (2025-10-08)
 
 Full Changelog: [v0.1.0...v0.2.0](https://github.com/deeprails/deeprails-ruby-sdk/compare/v0.1.0...v0.2.0)
