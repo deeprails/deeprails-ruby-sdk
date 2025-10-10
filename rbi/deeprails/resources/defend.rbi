@@ -93,8 +93,8 @@ module Deeprails
           model_input: Deeprails::DefendSubmitEventParams::ModelInput::OrHash,
           model_output: String,
           model_used: String,
-          nametag: String,
           run_mode: Deeprails::DefendSubmitEventParams::RunMode::OrSymbol,
+          nametag: String,
           request_options: Deeprails::RequestOptions::OrHash
         ).returns(Deeprails::WorkflowEventResponse)
       end
@@ -109,13 +109,13 @@ module Deeprails
         model_output:,
         # Model ID used to generate the output, like `gpt-4o` or `o3`.
         model_used:,
-        # An optional, user-defined tag for the event.
-        nametag:,
         # Run mode for the workflow event. The run mode allows the user to optimize for
         # speed, accuracy, and cost by determining which models are used to evaluate the
         # event. Available run modes include `precision_plus`, `precision`, `smart`, and
         # `economy`. Defaults to `smart`.
         run_mode:,
+        # An optional, user-defined tag for the event.
+        nametag: nil,
         request_options: {}
       )
       end

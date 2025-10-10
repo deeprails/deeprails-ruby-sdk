@@ -27,12 +27,6 @@ module Deeprails
       #   @return [String]
       required :model_used, String
 
-      # @!attribute nametag
-      #   An optional, user-defined tag for the event.
-      #
-      #   @return [String]
-      required :nametag, String
-
       # @!attribute run_mode
       #   Run mode for the workflow event. The run mode allows the user to optimize for
       #   speed, accuracy, and cost by determining which models are used to evaluate the
@@ -42,7 +36,13 @@ module Deeprails
       #   @return [Symbol, Deeprails::Models::DefendSubmitEventParams::RunMode]
       required :run_mode, enum: -> { Deeprails::DefendSubmitEventParams::RunMode }
 
-      # @!method initialize(model_input:, model_output:, model_used:, nametag:, run_mode:, request_options: {})
+      # @!attribute nametag
+      #   An optional, user-defined tag for the event.
+      #
+      #   @return [String, nil]
+      optional :nametag, String
+
+      # @!method initialize(model_input:, model_output:, model_used:, run_mode:, nametag: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Deeprails::Models::DefendSubmitEventParams} for more details.
       #
@@ -52,9 +52,9 @@ module Deeprails
       #
       #   @param model_used [String] Model ID used to generate the output, like `gpt-4o` or `o3`.
       #
-      #   @param nametag [String] An optional, user-defined tag for the event.
-      #
       #   @param run_mode [Symbol, Deeprails::Models::DefendSubmitEventParams::RunMode] Run mode for the workflow event. The run mode allows the user to optimize for s
+      #
+      #   @param nametag [String] An optional, user-defined tag for the event.
       #
       #   @param request_options [Deeprails::RequestOptions, Hash{Symbol=>Object}]
 

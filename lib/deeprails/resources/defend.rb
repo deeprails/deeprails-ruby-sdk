@@ -94,7 +94,7 @@ module Deeprails
       # Use this endpoint to submit a model input and output pair to a workflow for
       # evaluation
       #
-      # @overload submit_event(workflow_id, model_input:, model_output:, model_used:, nametag:, run_mode:, request_options: {})
+      # @overload submit_event(workflow_id, model_input:, model_output:, model_used:, run_mode:, nametag: nil, request_options: {})
       #
       # @param workflow_id [String] Workflow ID associated with this event.
       #
@@ -104,9 +104,9 @@ module Deeprails
       #
       # @param model_used [String] Model ID used to generate the output, like `gpt-4o` or `o3`.
       #
-      # @param nametag [String] An optional, user-defined tag for the event.
-      #
       # @param run_mode [Symbol, Deeprails::Models::DefendSubmitEventParams::RunMode] Run mode for the workflow event. The run mode allows the user to optimize for s
+      #
+      # @param nametag [String] An optional, user-defined tag for the event.
       #
       # @param request_options [Deeprails::RequestOptions, Hash{Symbol=>Object}, nil]
       #
