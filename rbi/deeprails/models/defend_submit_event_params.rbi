@@ -35,10 +35,6 @@ module Deeprails
       sig { returns(String) }
       attr_accessor :model_used
 
-      # An optional, user-defined tag for the event.
-      sig { returns(String) }
-      attr_accessor :nametag
-
       # Run mode for the workflow event. The run mode allows the user to optimize for
       # speed, accuracy, and cost by determining which models are used to evaluate the
       # event. Available run modes include `precision_plus`, `precision`, `smart`, and
@@ -46,13 +42,20 @@ module Deeprails
       sig { returns(Deeprails::DefendSubmitEventParams::RunMode::OrSymbol) }
       attr_accessor :run_mode
 
+      # An optional, user-defined tag for the event.
+      sig { returns(T.nilable(String)) }
+      attr_reader :nametag
+
+      sig { params(nametag: String).void }
+      attr_writer :nametag
+
       sig do
         params(
           model_input: Deeprails::DefendSubmitEventParams::ModelInput::OrHash,
           model_output: String,
           model_used: String,
-          nametag: String,
           run_mode: Deeprails::DefendSubmitEventParams::RunMode::OrSymbol,
+          nametag: String,
           request_options: Deeprails::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
@@ -65,13 +68,13 @@ module Deeprails
         model_output:,
         # Model ID used to generate the output, like `gpt-4o` or `o3`.
         model_used:,
-        # An optional, user-defined tag for the event.
-        nametag:,
         # Run mode for the workflow event. The run mode allows the user to optimize for
         # speed, accuracy, and cost by determining which models are used to evaluate the
         # event. Available run modes include `precision_plus`, `precision`, `smart`, and
         # `economy`. Defaults to `smart`.
         run_mode:,
+        # An optional, user-defined tag for the event.
+        nametag: nil,
         request_options: {}
       )
       end
@@ -82,8 +85,8 @@ module Deeprails
             model_input: Deeprails::DefendSubmitEventParams::ModelInput,
             model_output: String,
             model_used: String,
-            nametag: String,
             run_mode: Deeprails::DefendSubmitEventParams::RunMode::OrSymbol,
+            nametag: String,
             request_options: Deeprails::RequestOptions
           }
         )

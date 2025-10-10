@@ -86,7 +86,6 @@ class Deeprails::Test::Resources::DefendTest < Deeprails::Test::ResourceTest
         model_input: {user_prompt: "user_prompt"},
         model_output: "model_output",
         model_used: "model_used",
-        nametag: "nametag",
         run_mode: :precision_plus
       )
 
