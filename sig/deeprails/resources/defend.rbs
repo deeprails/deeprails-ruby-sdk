@@ -28,8 +28,8 @@ module Deeprails
         model_input: Deeprails::DefendSubmitEventParams::ModelInput,
         model_output: String,
         model_used: String,
-        nametag: String,
         run_mode: Deeprails::Models::DefendSubmitEventParams::run_mode,
+        ?nametag: String,
         ?request_options: Deeprails::request_opts
       ) -> Deeprails::WorkflowEventResponse
 

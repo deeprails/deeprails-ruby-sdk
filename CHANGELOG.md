@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.0 (2025-10-10)
+
+Full Changelog: [v0.2.1...v0.3.0](https://github.com/deeprails/deeprails-ruby-sdk/compare/v0.2.1...v0.3.0)
+
+### Features
+
+* **api:** manual updates ([986412f](https://github.com/deeprails/deeprails-ruby-sdk/commit/986412f6888691af0abdec609a5d456bdac2c1e9))
+
 ## 0.2.1 (2025-10-09)
 
 Full Changelog: [v0.2.0...v0.2.1](https://github.com/deeprails/deeprails-ruby-sdk/compare/v0.2.0...v0.2.1)

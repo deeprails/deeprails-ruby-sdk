@@ -5,8 +5,8 @@ module Deeprails
         model_input: Deeprails::DefendSubmitEventParams::ModelInput,
         model_output: String,
         model_used: String,
-        nametag: String,
-        run_mode: Deeprails::Models::DefendSubmitEventParams::run_mode
+        run_mode: Deeprails::Models::DefendSubmitEventParams::run_mode,
+        nametag: String
       }
       & Deeprails::Internal::Type::request_parameters
 
@@ -20,16 +20,18 @@ module Deeprails
 
       attr_accessor model_used: String
 
-      attr_accessor nametag: String
-
       attr_accessor run_mode: Deeprails::Models::DefendSubmitEventParams::run_mode
+
+      attr_reader nametag: String?
+
+      def nametag=: (String) -> String
 
       def initialize: (
         model_input: Deeprails::DefendSubmitEventParams::ModelInput,
         model_output: String,
         model_used: String,
-        nametag: String,
         run_mode: Deeprails::Models::DefendSubmitEventParams::run_mode,
+        ?nametag: String,
         ?request_options: Deeprails::request_opts
       ) -> void
 
@@ -37,8 +39,8 @@ module Deeprails
         model_input: Deeprails::DefendSubmitEventParams::ModelInput,
         model_output: String,
         model_used: String,
-        nametag: String,
         run_mode: Deeprails::Models::DefendSubmitEventParams::run_mode,
+        nametag: String,
         request_options: Deeprails::RequestOptions
       }
 
