@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.0 (2025-10-16)
+
+Full Changelog: [v0.3.1...v0.4.0](https://github.com/deeprails/deeprails-ruby-sdk/compare/v0.3.1...v0.4.0)
+
+### Features
+
+* **api:** adding support for system_prompt and ground_truth ([6b292f8](https://github.com/deeprails/deeprails-ruby-sdk/commit/6b292f8e125423e582f3937c343934e916e94ff6))
+
 ## 0.3.1 (2025-10-16)
 
 Full Changelog: [v0.3.0...v0.3.1](https://github.com/deeprails/deeprails-ruby-sdk/compare/v0.3.0...v0.3.1)
