@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.1 (2025-10-16)
+
+Full Changelog: [v0.3.0...v0.3.1](https://github.com/deeprails/deeprails-ruby-sdk/compare/v0.3.0...v0.3.1)
+
+### Bug Fixes
+
+* absolutely qualified uris should always override the default ([0792ee8](https://github.com/deeprails/deeprails-ruby-sdk/commit/0792ee8118dfedf1d4aff38c9373829cdf307a07))
+* should not reuse buffers for `IO.copy_stream` interop ([f2e7d68](https://github.com/deeprails/deeprails-ruby-sdk/commit/f2e7d681dcef52467e0d6b94074cff2869385164))
+
 ## 0.3.0 (2025-10-10)
 
 Full Changelog: [v0.2.1...v0.3.0](https://github.com/deeprails/deeprails-ruby-sdk/compare/v0.2.1...v0.3.0)
