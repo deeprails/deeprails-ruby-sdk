@@ -7,11 +7,7 @@ class Deeprails::Test::Resources::EvaluateTest < Deeprails::Test::ResourceTest
     skip("Prism tests are disabled")
 
     response =
-      @deeprails.evaluate.create(
-        model_input: {user_prompt: "user_prompt"},
-        model_output: "model_output",
-        run_mode: :precision_plus
-      )
+      @deeprails.evaluate.create(model_input: {}, model_output: "model_output", run_mode: :precision_plus)
 
     assert_pattern do
       response => Deeprails::Evaluation

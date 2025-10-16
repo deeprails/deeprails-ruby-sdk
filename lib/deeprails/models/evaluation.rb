@@ -18,8 +18,8 @@ module Deeprails
 
       # @!attribute model_input
       #   A dictionary of inputs sent to the LLM to generate output. The dictionary must
-      #   contain a `user_prompt` field and an optional `context` field. Additional
-      #   properties are allowed.
+      #   contain at least one of `user_prompt` or `system_prompt`. For
+      #   ground_truth_aherence guadrail metric, `ground_truth` should be provided.
       #
       #   @return [Deeprails::Models::Evaluation::ModelInput]
       required :model_input, -> { Deeprails::Evaluation::ModelInput }
@@ -169,26 +169,34 @@ module Deeprails
 
       # @see Deeprails::Models::Evaluation#model_input
       class ModelInput < Deeprails::Internal::Type::BaseModel
+        # @!attribute ground_truth
+        #   The ground truth for evaluating Ground Truth Adherence guardrail.
+        #
+        #   @return [String, nil]
+        optional :ground_truth, String
+
+        # @!attribute system_prompt
+        #   The system prompt used to generate the output.
+        #
+        #   @return [String, nil]
+        optional :system_prompt, String
+
         # @!attribute user_prompt
         #   The user prompt used to generate the output.
         #
-        #   @return [String]
-        required :user_prompt, String
-
-        # @!attribute context
-        #   Optional context supplied to the LLM when generating the output.
-        #
         #   @return [String, nil]
-        optional :context, String
+        optional :user_prompt, String
 
-        # @!method initialize(user_prompt:, context: nil)
+        # @!method initialize(ground_truth: nil, system_prompt: nil, user_prompt: nil)
         #   A dictionary of inputs sent to the LLM to generate output. The dictionary must
-        #   contain a `user_prompt` field and an optional `context` field. Additional
-        #   properties are allowed.
+        #   contain at least one of `user_prompt` or `system_prompt`. For
+        #   ground_truth_aherence guadrail metric, `ground_truth` should be provided.
+        #
+        #   @param ground_truth [String] The ground truth for evaluating Ground Truth Adherence guardrail.
+        #
+        #   @param system_prompt [String] The system prompt used to generate the output.
         #
         #   @param user_prompt [String] The user prompt used to generate the output.
-        #
-        #   @param context [String] Optional context supplied to the LLM when generating the output.
       end
 
       # Run mode for the evaluation. The run mode allows the user to optimize for speed,

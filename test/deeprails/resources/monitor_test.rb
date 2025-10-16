@@ -64,7 +64,7 @@ class Deeprails::Test::Resources::MonitorTest < Deeprails::Test::ResourceTest
       @deeprails.monitor.submit_event(
         "monitor_id",
         guardrail_metrics: [:correctness],
-        model_input: {user_prompt: "user_prompt"},
+        model_input: {},
         model_output: "model_output"
       )
 

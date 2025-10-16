@@ -55,18 +55,33 @@ module Deeprails
         request_options: Deeprails::RequestOptions
       }
 
-      type model_input = { user_prompt: String, context: String }
+      type model_input =
+        { ground_truth: String, system_prompt: String, user_prompt: String }
 
       class ModelInput < Deeprails::Internal::Type::BaseModel
-        attr_accessor user_prompt: String
+        attr_reader ground_truth: String?
 
-        attr_reader context: String?
+        def ground_truth=: (String) -> String
 
-        def context=: (String) -> String
+        attr_reader system_prompt: String?
 
-        def initialize: (user_prompt: String, ?context: String) -> void
+        def system_prompt=: (String) -> String
 
-        def to_hash: -> { user_prompt: String, context: String }
+        attr_reader user_prompt: String?
+
+        def user_prompt=: (String) -> String
+
+        def initialize: (
+          ?ground_truth: String,
+          ?system_prompt: String,
+          ?user_prompt: String
+        ) -> void
+
+        def to_hash: -> {
+          ground_truth: String,
+          system_prompt: String,
+          user_prompt: String
+        }
       end
 
       type run_mode = :precision_plus | :precision | :smart | :economy
