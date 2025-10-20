@@ -34,7 +34,7 @@ deeprails = Deeprails::Client.new(
 
 defend_response = deeprails.defend.create_workflow(
   improvement_action: "fixit",
-  metrics: {completeness: 0.8, instruction_adherence: 0.75},
+  metrics: {completeness: 0.7, instruction_adherence: 0.75},
   name: "Push Alert Workflow",
   type: "custom"
 )
@@ -50,7 +50,7 @@ When the library is unable to connect to the API, or if the API returns a non-su
 begin
   defend = deeprails.defend.create_workflow(
     improvement_action: "fixit",
-    metrics: {completeness: 0.8, instruction_adherence: 0.75},
+    metrics: {completeness: 0.7, instruction_adherence: 0.75},
     name: "Push Alert Workflow",
     type: "custom"
   )
@@ -98,7 +98,7 @@ deeprails = Deeprails::Client.new(
 # Or, configure per-request:
 deeprails.defend.create_workflow(
   improvement_action: "fixit",
-  metrics: {completeness: 0.8, instruction_adherence: 0.75},
+  metrics: {completeness: 0.7, instruction_adherence: 0.75},
   name: "Push Alert Workflow",
   type: "custom",
   request_options: {max_retries: 5}
@@ -118,7 +118,7 @@ deeprails = Deeprails::Client.new(
 # Or, configure per-request:
 deeprails.defend.create_workflow(
   improvement_action: "fixit",
-  metrics: {completeness: 0.8, instruction_adherence: 0.75},
+  metrics: {completeness: 0.7, instruction_adherence: 0.75},
   name: "Push Alert Workflow",
   type: "custom",
   request_options: {timeout: 5}
@@ -155,7 +155,7 @@ Note: the `extra_` parameters of the same name overrides the documented paramete
 defend_response =
   deeprails.defend.create_workflow(
     improvement_action: "fixit",
-    metrics: {completeness: 0.8, instruction_adherence: 0.75},
+    metrics: {completeness: 0.7, instruction_adherence: 0.75},
     name: "Push Alert Workflow",
     type: "custom",
     request_options: {
@@ -205,7 +205,7 @@ You can provide typesafe request parameters like so:
 ```ruby
 deeprails.defend.create_workflow(
   improvement_action: "fixit",
-  metrics: {completeness: 0.8, instruction_adherence: 0.75},
+  metrics: {completeness: 0.7, instruction_adherence: 0.75},
   name: "Push Alert Workflow",
   type: "custom"
 )
@@ -217,7 +217,7 @@ Or, equivalently:
 # Hashes work, but are not typesafe:
 deeprails.defend.create_workflow(
   improvement_action: "fixit",
-  metrics: {completeness: 0.8, instruction_adherence: 0.75},
+  metrics: {completeness: 0.7, instruction_adherence: 0.75},
   name: "Push Alert Workflow",
   type: "custom"
 )
@@ -225,7 +225,7 @@ deeprails.defend.create_workflow(
 # You can also splat a full Params class:
 params = Deeprails::DefendCreateWorkflowParams.new(
   improvement_action: "fixit",
-  metrics: {completeness: 0.8, instruction_adherence: 0.75},
+  metrics: {completeness: 0.7, instruction_adherence: 0.75},
   name: "Push Alert Workflow",
   type: "custom"
 )
