@@ -6,7 +6,12 @@ class Deeprails::Test::Resources::DefendTest < Deeprails::Test::ResourceTest
   def test_create_workflow_required_params
     skip("Prism tests are disabled")
 
-    response = @deeprails.defend.create_workflow(improvement_action: :regen, name: "name", type: :automatic)
+    response = @deeprails.defend.create_workflow(
+      improvement_action: :regen,
+      name: "name",
+      type: :automatic,
+      automatic_hallucination_tolerance_levels: {completeness: :low, instruction_adherence: :medium}
+    )
 
     assert_pattern do
       response => Deeprails::DefendResponse

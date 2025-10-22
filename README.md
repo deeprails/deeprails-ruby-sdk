@@ -15,7 +15,7 @@ To use this gem, install via Bundler by adding the following to your application
 <!-- x-release-please-start-version -->
 
 ```ruby
-gem "deeprails", "~> 0.6.0"
+gem "deeprails", "~> 0.7.0"
 ```
 
 <!-- x-release-please-end -->
@@ -34,7 +34,7 @@ defend_response = deeprails.defend.create_workflow(
   improvement_action: "fixit",
   name: "Push Alert Workflow",
   type: "custom",
-  automatic_hallucination_tolerance_levels: {correctness: "low"}
+  custom_hallucination_threshold_values: {completeness: 0.7, instruction_adherence: 0.75}
 )
 
 puts(defend_response.workflow_id)
@@ -46,7 +46,12 @@ When the library is unable to connect to the API, or if the API returns a non-su
 
 ```ruby
 begin
-  defend = deeprails.defend.create_workflow(improvement_action: "fixit", name: "Push Alert Workflow", type: "custom")
+  defend = deeprails.defend.create_workflow(
+    improvement_action: "fixit",
+    name: "Push Alert Workflow",
+    type: "custom",
+    custom_hallucination_threshold_values: {completeness: 0.7, instruction_adherence: 0.75}
+  )
 rescue Deeprails::Errors::APIConnectionError => e
   puts("The server could not be reached")
   puts(e.cause)  # an underlying Exception, likely raised within `net/http`
@@ -93,6 +98,7 @@ deeprails.defend.create_workflow(
   improvement_action: "fixit",
   name: "Push Alert Workflow",
   type: "custom",
+  custom_hallucination_threshold_values: {completeness: 0.7, instruction_adherence: 0.75},
   request_options: {max_retries: 5}
 )
 ```
@@ -112,6 +118,7 @@ deeprails.defend.create_workflow(
   improvement_action: "fixit",
   name: "Push Alert Workflow",
   type: "custom",
+  custom_hallucination_threshold_values: {completeness: 0.7, instruction_adherence: 0.75},
   request_options: {timeout: 5}
 )
 ```
@@ -148,6 +155,7 @@ defend_response =
     improvement_action: "fixit",
     name: "Push Alert Workflow",
     type: "custom",
+    custom_hallucination_threshold_values: {completeness: 0.7, instruction_adherence: 0.75},
     request_options: {
       extra_query: {my_query_parameter: value},
       extra_body: {my_body_parameter: value},
@@ -193,20 +201,31 @@ This library provides comprehensive [RBI](https://sorbet.org/docs/rbi) definitio
 You can provide typesafe request parameters like so:
 
 ```ruby
-deeprails.defend.create_workflow(improvement_action: "fixit", name: "Push Alert Workflow", type: "custom")
+deeprails.defend.create_workflow(
+  improvement_action: "fixit",
+  name: "Push Alert Workflow",
+  type: "custom",
+  custom_hallucination_threshold_values: {completeness: 0.7, instruction_adherence: 0.75}
+)
 ```
 
 Or, equivalently:
 
 ```ruby
 # Hashes work, but are not typesafe:
-deeprails.defend.create_workflow(improvement_action: "fixit", name: "Push Alert Workflow", type: "custom")
+deeprails.defend.create_workflow(
+  improvement_action: "fixit",
+  name: "Push Alert Workflow",
+  type: "custom",
+  custom_hallucination_threshold_values: {completeness: 0.7, instruction_adherence: 0.75}
+)
 
 # You can also splat a full Params class:
 params = Deeprails::DefendCreateWorkflowParams.new(
   improvement_action: "fixit",
   name: "Push Alert Workflow",
-  type: "custom"
+  type: "custom",
+  custom_hallucination_threshold_values: {completeness: 0.7, instruction_adherence: 0.75}
 )
 deeprails.defend.create_workflow(**params)
 ```
