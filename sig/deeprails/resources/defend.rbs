@@ -2,13 +2,13 @@ module Deeprails
   module Resources
     class Defend
       def create_workflow: (
-        improvement_action: Deeprails::Models::DefendCreateWorkflowParams::improvement_action?,
-        metrics: ::Hash[Symbol, Float],
+        improvement_action: Deeprails::Models::DefendCreateWorkflowParams::improvement_action,
         name: String,
         type: Deeprails::Models::DefendCreateWorkflowParams::type_,
-        ?automatic_tolerance: Deeprails::Models::DefendCreateWorkflowParams::automatic_tolerance,
+        ?automatic_hallucination_tolerance_levels: ::Hash[Symbol, Deeprails::Models::DefendCreateWorkflowParams::automatic_hallucination_tolerance_level],
+        ?custom_hallucination_threshold_values: ::Hash[Symbol, Float],
         ?description: String,
-        ?max_retries: Integer,
+        ?max_improvement_attempt: Integer,
         ?request_options: Deeprails::request_opts
       ) -> Deeprails::DefendResponse
 

@@ -40,12 +40,7 @@ class DeeprailsTest < Minitest::Test
     deeprails = Deeprails::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(Deeprails::Errors::InternalServerError) do
-      deeprails.defend.create_workflow(
-        improvement_action: :regenerate,
-        metrics: {foo: 0},
-        name: "name",
-        type: :automatic
-      )
+      deeprails.defend.create_workflow(improvement_action: :regen, name: "name", type: :automatic)
     end
 
     assert_requested(:any, /./, times: 3)
@@ -57,12 +52,7 @@ class DeeprailsTest < Minitest::Test
     deeprails = Deeprails::Client.new(base_url: "http://localhost", api_key: "My API Key", max_retries: 3)
 
     assert_raises(Deeprails::Errors::InternalServerError) do
-      deeprails.defend.create_workflow(
-        improvement_action: :regenerate,
-        metrics: {foo: 0},
-        name: "name",
-        type: :automatic
-      )
+      deeprails.defend.create_workflow(improvement_action: :regen, name: "name", type: :automatic)
     end
 
     assert_requested(:any, /./, times: 4)
@@ -75,8 +65,7 @@ class DeeprailsTest < Minitest::Test
 
     assert_raises(Deeprails::Errors::InternalServerError) do
       deeprails.defend.create_workflow(
-        improvement_action: :regenerate,
-        metrics: {foo: 0},
+        improvement_action: :regen,
         name: "name",
         type: :automatic,
         request_options: {max_retries: 3}
@@ -93,8 +82,7 @@ class DeeprailsTest < Minitest::Test
 
     assert_raises(Deeprails::Errors::InternalServerError) do
       deeprails.defend.create_workflow(
-        improvement_action: :regenerate,
-        metrics: {foo: 0},
+        improvement_action: :regen,
         name: "name",
         type: :automatic,
         request_options: {max_retries: 4}
@@ -114,12 +102,7 @@ class DeeprailsTest < Minitest::Test
     deeprails = Deeprails::Client.new(base_url: "http://localhost", api_key: "My API Key", max_retries: 1)
 
     assert_raises(Deeprails::Errors::InternalServerError) do
-      deeprails.defend.create_workflow(
-        improvement_action: :regenerate,
-        metrics: {foo: 0},
-        name: "name",
-        type: :automatic
-      )
+      deeprails.defend.create_workflow(improvement_action: :regen, name: "name", type: :automatic)
     end
 
     assert_requested(:any, /./, times: 2)
@@ -137,12 +120,7 @@ class DeeprailsTest < Minitest::Test
 
     assert_raises(Deeprails::Errors::InternalServerError) do
       Thread.current.thread_variable_set(:time_now, Time.now)
-      deeprails.defend.create_workflow(
-        improvement_action: :regenerate,
-        metrics: {foo: 0},
-        name: "name",
-        type: :automatic
-      )
+      deeprails.defend.create_workflow(improvement_action: :regen, name: "name", type: :automatic)
       Thread.current.thread_variable_set(:time_now, nil)
     end
 
@@ -160,12 +138,7 @@ class DeeprailsTest < Minitest::Test
     deeprails = Deeprails::Client.new(base_url: "http://localhost", api_key: "My API Key", max_retries: 1)
 
     assert_raises(Deeprails::Errors::InternalServerError) do
-      deeprails.defend.create_workflow(
-        improvement_action: :regenerate,
-        metrics: {foo: 0},
-        name: "name",
-        type: :automatic
-      )
+      deeprails.defend.create_workflow(improvement_action: :regen, name: "name", type: :automatic)
     end
 
     assert_requested(:any, /./, times: 2)
@@ -178,12 +151,7 @@ class DeeprailsTest < Minitest::Test
     deeprails = Deeprails::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(Deeprails::Errors::InternalServerError) do
-      deeprails.defend.create_workflow(
-        improvement_action: :regenerate,
-        metrics: {foo: 0},
-        name: "name",
-        type: :automatic
-      )
+      deeprails.defend.create_workflow(improvement_action: :regen, name: "name", type: :automatic)
     end
 
     3.times do
@@ -198,8 +166,7 @@ class DeeprailsTest < Minitest::Test
 
     assert_raises(Deeprails::Errors::InternalServerError) do
       deeprails.defend.create_workflow(
-        improvement_action: :regenerate,
-        metrics: {foo: 0},
+        improvement_action: :regen,
         name: "name",
         type: :automatic,
         request_options: {extra_headers: {"x-stainless-retry-count" => nil}}
@@ -218,8 +185,7 @@ class DeeprailsTest < Minitest::Test
 
     assert_raises(Deeprails::Errors::InternalServerError) do
       deeprails.defend.create_workflow(
-        improvement_action: :regenerate,
-        metrics: {foo: 0},
+        improvement_action: :regen,
         name: "name",
         type: :automatic,
         request_options: {extra_headers: {"x-stainless-retry-count" => "42"}}
@@ -244,8 +210,7 @@ class DeeprailsTest < Minitest::Test
 
     assert_raises(Deeprails::Errors::APIConnectionError) do
       deeprails.defend.create_workflow(
-        improvement_action: :regenerate,
-        metrics: {foo: 0},
+        improvement_action: :regen,
         name: "name",
         type: :automatic,
         request_options: {extra_headers: {}}
@@ -279,8 +244,7 @@ class DeeprailsTest < Minitest::Test
 
     assert_raises(Deeprails::Errors::APIConnectionError) do
       deeprails.defend.create_workflow(
-        improvement_action: :regenerate,
-        metrics: {foo: 0},
+        improvement_action: :regen,
         name: "name",
         type: :automatic,
         request_options: {extra_headers: {}}
@@ -309,8 +273,7 @@ class DeeprailsTest < Minitest::Test
 
     assert_raises(Deeprails::Errors::APIConnectionError) do
       deeprails.defend.create_workflow(
-        improvement_action: :regenerate,
-        metrics: {foo: 0},
+        improvement_action: :regen,
         name: "name",
         type: :automatic,
         request_options: {extra_headers: {"authorization" => "Bearer xyz"}}
@@ -342,8 +305,7 @@ class DeeprailsTest < Minitest::Test
 
     assert_raises(Deeprails::Errors::APIConnectionError) do
       deeprails.defend.create_workflow(
-        improvement_action: :regenerate,
-        metrics: {foo: 0},
+        improvement_action: :regen,
         name: "name",
         type: :automatic,
         request_options: {extra_headers: {"authorization" => "Bearer xyz"}}
@@ -361,12 +323,7 @@ class DeeprailsTest < Minitest::Test
 
     deeprails = Deeprails::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
-    deeprails.defend.create_workflow(
-      improvement_action: :regenerate,
-      metrics: {foo: 0},
-      name: "name",
-      type: :automatic
-    )
+    deeprails.defend.create_workflow(improvement_action: :regen, name: "name", type: :automatic)
 
     assert_requested(:any, /./) do |req|
       headers = req.headers.transform_keys(&:downcase).fetch_values("accept", "content-type")

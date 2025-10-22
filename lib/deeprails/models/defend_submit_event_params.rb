@@ -9,7 +9,7 @@ module Deeprails
 
       # @!attribute model_input
       #   A dictionary of inputs sent to the LLM to generate output. The dictionary must
-      #   contain at least one of `user_prompt` or `system_prompt`. For
+      #   contain at least `user_prompt` or `system_prompt` field. For
       #   ground_truth_aherence guadrail metric, `ground_truth` should be provided.
       #
       #   @return [Deeprails::Models::DefendSubmitEventParams::ModelInput]
@@ -79,7 +79,7 @@ module Deeprails
 
         # @!method initialize(ground_truth: nil, system_prompt: nil, user_prompt: nil)
         #   A dictionary of inputs sent to the LLM to generate output. The dictionary must
-        #   contain at least one of `user_prompt` or `system_prompt`. For
+        #   contain at least `user_prompt` or `system_prompt` field. For
         #   ground_truth_aherence guadrail metric, `ground_truth` should be provided.
         #
         #   @param ground_truth [String] The ground truth for evaluating Ground Truth Adherence guardrail.

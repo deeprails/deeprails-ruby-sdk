@@ -30,20 +30,20 @@ module Deeprails
 
       # @!attribute improvement_action
       #   The action used to improve outputs that fail one or more guardrail metrics for
-      #   the workflow events. May be `regenerate`, `fixit`, or null which represents “do
-      #   nothing”. Regenerate runs the user's input prompt with minor induced variance.
-      #   Fixit attempts to directly address the shortcomings of the output using the
-      #   guardrail failure rationale. Do nothing does not attempt any improvement.
+      #   the workflow events. May be `regen`, `fixit`, or `do_nothing`. ReGen runs the
+      #   user's input prompt with minor induced variance. FixIt attempts to directly
+      #   address the shortcomings of the output using the guardrail failure rationale. Do
+      #   Nothing does not attempt any improvement.
       #
       #   @return [Symbol, Deeprails::Models::DefendResponse::ImprovementAction, nil]
-      optional :improvement_action, enum: -> { Deeprails::DefendResponse::ImprovementAction }, nil?: true
+      optional :improvement_action, enum: -> { Deeprails::DefendResponse::ImprovementAction }
 
-      # @!attribute max_retries
+      # @!attribute max_improvement_attempt
       #   Max. number of improvement action retries until a given event passes the
       #   guardrails.
       #
       #   @return [Integer, nil]
-      optional :max_retries, Integer
+      optional :max_improvement_attempt, Integer
 
       # @!attribute modified_at
       #   The most recent time the workflow was modified in UTC.
@@ -52,7 +52,7 @@ module Deeprails
       optional :modified_at, Time
 
       # @!attribute status
-      #   Status of the selected workflow. May be `archived` or `active`. Archived
+      #   Status of the selected workflow. May be `inactive` or `active`. Inactive
       #   workflows will not accept events.
       #
       #   @return [Symbol, Deeprails::Models::DefendResponse::Status, nil]
@@ -64,7 +64,7 @@ module Deeprails
       #   @return [Float, nil]
       optional :success_rate, Float
 
-      # @!method initialize(name:, workflow_id:, created_at: nil, description: nil, improvement_action: nil, max_retries: nil, modified_at: nil, status: nil, success_rate: nil)
+      # @!method initialize(name:, workflow_id:, created_at: nil, description: nil, improvement_action: nil, max_improvement_attempt: nil, modified_at: nil, status: nil, success_rate: nil)
       #   Some parameter documentations has been truncated, see
       #   {Deeprails::Models::DefendResponse} for more details.
       #
@@ -76,41 +76,42 @@ module Deeprails
       #
       #   @param description [String] Description for the workflow.
       #
-      #   @param improvement_action [Symbol, Deeprails::Models::DefendResponse::ImprovementAction, nil] The action used to improve outputs that fail one or more guardrail metrics for t
+      #   @param improvement_action [Symbol, Deeprails::Models::DefendResponse::ImprovementAction] The action used to improve outputs that fail one or more guardrail metrics for t
       #
-      #   @param max_retries [Integer] Max. number of improvement action retries until a given event passes the guardra
+      #   @param max_improvement_attempt [Integer] Max. number of improvement action retries until a given event passes the guardra
       #
       #   @param modified_at [Time] The most recent time the workflow was modified in UTC.
       #
-      #   @param status [Symbol, Deeprails::Models::DefendResponse::Status] Status of the selected workflow. May be `archived` or `active`. Archived workf
+      #   @param status [Symbol, Deeprails::Models::DefendResponse::Status] Status of the selected workflow. May be `inactive` or `active`. Inactive workf
       #
       #   @param success_rate [Float] Rate of events associated with this workflow that passed evaluation.
 
       # The action used to improve outputs that fail one or more guardrail metrics for
-      # the workflow events. May be `regenerate`, `fixit`, or null which represents “do
-      # nothing”. Regenerate runs the user's input prompt with minor induced variance.
-      # Fixit attempts to directly address the shortcomings of the output using the
-      # guardrail failure rationale. Do nothing does not attempt any improvement.
+      # the workflow events. May be `regen`, `fixit`, or `do_nothing`. ReGen runs the
+      # user's input prompt with minor induced variance. FixIt attempts to directly
+      # address the shortcomings of the output using the guardrail failure rationale. Do
+      # Nothing does not attempt any improvement.
       #
       # @see Deeprails::Models::DefendResponse#improvement_action
       module ImprovementAction
         extend Deeprails::Internal::Type::Enum
 
-        REGENERATE = :regenerate
+        REGEN = :regen
         FIXIT = :fixit
+        DO_NOTHING = :do_nothing
 
         # @!method self.values
         #   @return [Array<Symbol>]
       end
 
-      # Status of the selected workflow. May be `archived` or `active`. Archived
+      # Status of the selected workflow. May be `inactive` or `active`. Inactive
       # workflows will not accept events.
       #
       # @see Deeprails::Models::DefendResponse#status
       module Status
         extend Deeprails::Internal::Type::Enum
 
-        ARCHIVED = :archived
+        INACTIVE = :inactive
         ACTIVE = :active
 
         # @!method self.values

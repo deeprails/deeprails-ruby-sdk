@@ -30,12 +30,7 @@ deeprails = Deeprails::Client.new(
   api_key: ENV["DEEPRAILS_API_KEY"] # This is the default and can be omitted
 )
 
-defend_response = deeprails.defend.create_workflow(
-  improvement_action: "fixit",
-  metrics: {completeness: 0.7, instruction_adherence: 0.75},
-  name: "Push Alert Workflow",
-  type: "custom"
-)
+defend_response = deeprails.defend.create_workflow(improvement_action: "fixit", name: "Push Alert Workflow", type: "custom")
 
 puts(defend_response.workflow_id)
 ```
@@ -46,12 +41,7 @@ When the library is unable to connect to the API, or if the API returns a non-su
 
 ```ruby
 begin
-  defend = deeprails.defend.create_workflow(
-    improvement_action: "fixit",
-    metrics: {completeness: 0.7, instruction_adherence: 0.75},
-    name: "Push Alert Workflow",
-    type: "custom"
-  )
+  defend = deeprails.defend.create_workflow(improvement_action: "fixit", name: "Push Alert Workflow", type: "custom")
 rescue Deeprails::Errors::APIConnectionError => e
   puts("The server could not be reached")
   puts(e.cause)  # an underlying Exception, likely raised within `net/http`
@@ -96,7 +86,6 @@ deeprails = Deeprails::Client.new(
 # Or, configure per-request:
 deeprails.defend.create_workflow(
   improvement_action: "fixit",
-  metrics: {completeness: 0.7, instruction_adherence: 0.75},
   name: "Push Alert Workflow",
   type: "custom",
   request_options: {max_retries: 5}
@@ -116,7 +105,6 @@ deeprails = Deeprails::Client.new(
 # Or, configure per-request:
 deeprails.defend.create_workflow(
   improvement_action: "fixit",
-  metrics: {completeness: 0.7, instruction_adherence: 0.75},
   name: "Push Alert Workflow",
   type: "custom",
   request_options: {timeout: 5}
@@ -153,7 +141,6 @@ Note: the `extra_` parameters of the same name overrides the documented paramete
 defend_response =
   deeprails.defend.create_workflow(
     improvement_action: "fixit",
-    metrics: {completeness: 0.7, instruction_adherence: 0.75},
     name: "Push Alert Workflow",
     type: "custom",
     request_options: {
@@ -201,29 +188,18 @@ This library provides comprehensive [RBI](https://sorbet.org/docs/rbi) definitio
 You can provide typesafe request parameters like so:
 
 ```ruby
-deeprails.defend.create_workflow(
-  improvement_action: "fixit",
-  metrics: {completeness: 0.7, instruction_adherence: 0.75},
-  name: "Push Alert Workflow",
-  type: "custom"
-)
+deeprails.defend.create_workflow(improvement_action: "fixit", name: "Push Alert Workflow", type: "custom")
 ```
 
 Or, equivalently:
 
 ```ruby
 # Hashes work, but are not typesafe:
-deeprails.defend.create_workflow(
-  improvement_action: "fixit",
-  metrics: {completeness: 0.7, instruction_adherence: 0.75},
-  name: "Push Alert Workflow",
-  type: "custom"
-)
+deeprails.defend.create_workflow(improvement_action: "fixit", name: "Push Alert Workflow", type: "custom")
 
 # You can also splat a full Params class:
 params = Deeprails::DefendCreateWorkflowParams.new(
   improvement_action: "fixit",
-  metrics: {completeness: 0.7, instruction_adherence: 0.75},
   name: "Push Alert Workflow",
   type: "custom"
 )
@@ -235,11 +211,11 @@ deeprails.defend.create_workflow(**params)
 Since this library does not depend on `sorbet-runtime`, it cannot provide [`T::Enum`](https://sorbet.org/docs/tenum) instances. Instead, we provide "tagged symbols" instead, which is always a primitive at runtime:
 
 ```ruby
-# :regenerate
-puts(Deeprails::DefendCreateWorkflowParams::ImprovementAction::REGENERATE)
+# :regen
+puts(Deeprails::DefendCreateWorkflowParams::ImprovementAction::REGEN)
 
 # Revealed type: `T.all(Deeprails::DefendCreateWorkflowParams::ImprovementAction, Symbol)`
-T.reveal_type(Deeprails::DefendCreateWorkflowParams::ImprovementAction::REGENERATE)
+T.reveal_type(Deeprails::DefendCreateWorkflowParams::ImprovementAction::REGEN)
 ```
 
 Enum parameters have a "relaxed" type, so you can either pass in enum constants or their literal value:
@@ -247,13 +223,13 @@ Enum parameters have a "relaxed" type, so you can either pass in enum constants 
 ```ruby
 # Using the enum constants preserves the tagged type information:
 deeprails.defend.create_workflow(
-  improvement_action: Deeprails::DefendCreateWorkflowParams::ImprovementAction::REGENERATE,
+  improvement_action: Deeprails::DefendCreateWorkflowParams::ImprovementAction::REGEN,
   # …
 )
 
 # Literal values are also permissible:
 deeprails.defend.create_workflow(
-  improvement_action: :regenerate,
+  improvement_action: :regen,
   # …
 )
 ```
