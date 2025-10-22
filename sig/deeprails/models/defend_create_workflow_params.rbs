@@ -2,13 +2,13 @@ module Deeprails
   module Models
     type defend_create_workflow_params =
       {
-        improvement_action: Deeprails::Models::DefendCreateWorkflowParams::improvement_action?,
-        metrics: ::Hash[Symbol, Float],
+        improvement_action: Deeprails::Models::DefendCreateWorkflowParams::improvement_action,
         name: String,
         type: Deeprails::Models::DefendCreateWorkflowParams::type_,
-        automatic_tolerance: Deeprails::Models::DefendCreateWorkflowParams::automatic_tolerance,
+        automatic_hallucination_tolerance_levels: ::Hash[Symbol, Deeprails::Models::DefendCreateWorkflowParams::automatic_hallucination_tolerance_level],
+        custom_hallucination_threshold_values: ::Hash[Symbol, Float],
         description: String,
-        max_retries: Integer
+        max_improvement_attempt: Integer
       }
       & Deeprails::Internal::Type::request_parameters
 
@@ -16,57 +16,62 @@ module Deeprails
       extend Deeprails::Internal::Type::RequestParameters::Converter
       include Deeprails::Internal::Type::RequestParameters
 
-      attr_accessor improvement_action: Deeprails::Models::DefendCreateWorkflowParams::improvement_action?
-
-      attr_accessor metrics: ::Hash[Symbol, Float]
+      attr_accessor improvement_action: Deeprails::Models::DefendCreateWorkflowParams::improvement_action
 
       attr_accessor name: String
 
       attr_accessor type: Deeprails::Models::DefendCreateWorkflowParams::type_
 
-      attr_reader automatic_tolerance: Deeprails::Models::DefendCreateWorkflowParams::automatic_tolerance?
+      attr_reader automatic_hallucination_tolerance_levels: ::Hash[Symbol, Deeprails::Models::DefendCreateWorkflowParams::automatic_hallucination_tolerance_level]?
 
-      def automatic_tolerance=: (
-        Deeprails::Models::DefendCreateWorkflowParams::automatic_tolerance
-      ) -> Deeprails::Models::DefendCreateWorkflowParams::automatic_tolerance
+      def automatic_hallucination_tolerance_levels=: (
+        ::Hash[Symbol, Deeprails::Models::DefendCreateWorkflowParams::automatic_hallucination_tolerance_level]
+      ) -> ::Hash[Symbol, Deeprails::Models::DefendCreateWorkflowParams::automatic_hallucination_tolerance_level]
+
+      attr_reader custom_hallucination_threshold_values: ::Hash[Symbol, Float]?
+
+      def custom_hallucination_threshold_values=: (
+        ::Hash[Symbol, Float]
+      ) -> ::Hash[Symbol, Float]
 
       attr_reader description: String?
 
       def description=: (String) -> String
 
-      attr_reader max_retries: Integer?
+      attr_reader max_improvement_attempt: Integer?
 
-      def max_retries=: (Integer) -> Integer
+      def max_improvement_attempt=: (Integer) -> Integer
 
       def initialize: (
-        improvement_action: Deeprails::Models::DefendCreateWorkflowParams::improvement_action?,
-        metrics: ::Hash[Symbol, Float],
+        improvement_action: Deeprails::Models::DefendCreateWorkflowParams::improvement_action,
         name: String,
         type: Deeprails::Models::DefendCreateWorkflowParams::type_,
-        ?automatic_tolerance: Deeprails::Models::DefendCreateWorkflowParams::automatic_tolerance,
+        ?automatic_hallucination_tolerance_levels: ::Hash[Symbol, Deeprails::Models::DefendCreateWorkflowParams::automatic_hallucination_tolerance_level],
+        ?custom_hallucination_threshold_values: ::Hash[Symbol, Float],
         ?description: String,
-        ?max_retries: Integer,
+        ?max_improvement_attempt: Integer,
         ?request_options: Deeprails::request_opts
       ) -> void
 
       def to_hash: -> {
-        improvement_action: Deeprails::Models::DefendCreateWorkflowParams::improvement_action?,
-        metrics: ::Hash[Symbol, Float],
+        improvement_action: Deeprails::Models::DefendCreateWorkflowParams::improvement_action,
         name: String,
         type: Deeprails::Models::DefendCreateWorkflowParams::type_,
-        automatic_tolerance: Deeprails::Models::DefendCreateWorkflowParams::automatic_tolerance,
+        automatic_hallucination_tolerance_levels: ::Hash[Symbol, Deeprails::Models::DefendCreateWorkflowParams::automatic_hallucination_tolerance_level],
+        custom_hallucination_threshold_values: ::Hash[Symbol, Float],
         description: String,
-        max_retries: Integer,
+        max_improvement_attempt: Integer,
         request_options: Deeprails::RequestOptions
       }
 
-      type improvement_action = :regenerate | :fixit
+      type improvement_action = :regen | :fixit | :do_nothing
 
       module ImprovementAction
         extend Deeprails::Internal::Type::Enum
 
-        REGENERATE: :regenerate
+        REGEN: :regen
         FIXIT: :fixit
+        DO_NOTHING: :do_nothing
 
         def self?.values: -> ::Array[Deeprails::Models::DefendCreateWorkflowParams::improvement_action]
       end
@@ -82,16 +87,16 @@ module Deeprails
         def self?.values: -> ::Array[Deeprails::Models::DefendCreateWorkflowParams::type_]
       end
 
-      type automatic_tolerance = :low | :medium | :high
+      type automatic_hallucination_tolerance_level = :low | :medium | :high
 
-      module AutomaticTolerance
+      module AutomaticHallucinationToleranceLevel
         extend Deeprails::Internal::Type::Enum
 
         LOW: :low
         MEDIUM: :medium
         HIGH: :high
 
-        def self?.values: -> ::Array[Deeprails::Models::DefendCreateWorkflowParams::automatic_tolerance]
+        def self?.values: -> ::Array[Deeprails::Models::DefendCreateWorkflowParams::automatic_hallucination_tolerance_level]
       end
     end
   end

@@ -6,13 +6,7 @@ class Deeprails::Test::Resources::DefendTest < Deeprails::Test::ResourceTest
   def test_create_workflow_required_params
     skip("Prism tests are disabled")
 
-    response =
-      @deeprails.defend.create_workflow(
-        improvement_action: :regenerate,
-        metrics: {foo: 0},
-        name: "name",
-        type: :automatic
-      )
+    response = @deeprails.defend.create_workflow(improvement_action: :regen, name: "name", type: :automatic)
 
     assert_pattern do
       response => Deeprails::DefendResponse
@@ -25,7 +19,7 @@ class Deeprails::Test::Resources::DefendTest < Deeprails::Test::ResourceTest
         created_at: Time | nil,
         description: String | nil,
         improvement_action: Deeprails::DefendResponse::ImprovementAction | nil,
-        max_retries: Integer | nil,
+        max_improvement_attempt: Integer | nil,
         modified_at: Time | nil,
         status: Deeprails::DefendResponse::Status | nil,
         success_rate: Float | nil
@@ -69,7 +63,7 @@ class Deeprails::Test::Resources::DefendTest < Deeprails::Test::ResourceTest
         created_at: Time | nil,
         description: String | nil,
         improvement_action: Deeprails::DefendResponse::ImprovementAction | nil,
-        max_retries: Integer | nil,
+        max_improvement_attempt: Integer | nil,
         modified_at: Time | nil,
         status: Deeprails::DefendResponse::Status | nil,
         success_rate: Float | nil
@@ -120,7 +114,7 @@ class Deeprails::Test::Resources::DefendTest < Deeprails::Test::ResourceTest
         created_at: Time | nil,
         description: String | nil,
         improvement_action: Deeprails::DefendResponse::ImprovementAction | nil,
-        max_retries: Integer | nil,
+        max_improvement_attempt: Integer | nil,
         modified_at: Time | nil,
         status: Deeprails::DefendResponse::Status | nil,
         success_rate: Float | nil

@@ -9,21 +9,21 @@ module Deeprails
       # Use this endpoint to create a new guardrail workflow with optional guardrail
       # thresholds and improvement actions
       #
-      # @overload create_workflow(improvement_action:, metrics:, name:, type:, automatic_tolerance: nil, description: nil, max_retries: nil, request_options: {})
+      # @overload create_workflow(improvement_action:, name:, type:, automatic_hallucination_tolerance_levels: nil, custom_hallucination_threshold_values: nil, description: nil, max_improvement_attempt: nil, request_options: {})
       #
-      # @param improvement_action [Symbol, Deeprails::Models::DefendCreateWorkflowParams::ImprovementAction, nil] The action used to improve outputs that fail one or guardrail metrics for the wo
-      #
-      # @param metrics [Hash{Symbol=>Float}] Mapping of guardrail metrics to floating point threshold values. If the workflo
+      # @param improvement_action [Symbol, Deeprails::Models::DefendCreateWorkflowParams::ImprovementAction] The action used to improve outputs that fail one or guardrail metrics for the wo
       #
       # @param name [String] Name of the workflow.
       #
       # @param type [Symbol, Deeprails::Models::DefendCreateWorkflowParams::Type] Type of thresholds to use for the workflow, either `automatic` or `custom`. Aut
       #
-      # @param automatic_tolerance [Symbol, Deeprails::Models::DefendCreateWorkflowParams::AutomaticTolerance] Hallucination tolerance for automatic workflows; may be `low`, `medium`, or `hig
+      # @param automatic_hallucination_tolerance_levels [Hash{Symbol=>Symbol, Deeprails::Models::DefendCreateWorkflowParams::AutomaticHallucinationToleranceLevel}] Mapping of guardrail metrics to hallucination tolerance levels
+      #
+      # @param custom_hallucination_threshold_values [Hash{Symbol=>Float}] Mapping of guardrail metrics to floating point threshold values. Possible metric
       #
       # @param description [String] Description for the workflow.
       #
-      # @param max_retries [Integer] Max. number of improvement action retries until a given event passes the guardra
+      # @param max_improvement_attempt [Integer] Max. number of improvement action retries until a given event passes the guardra
       #
       # @param request_options [Deeprails::RequestOptions, Hash{Symbol=>Object}, nil]
       #
