@@ -30,7 +30,12 @@ deeprails = Deeprails::Client.new(
   api_key: ENV["DEEPRAILS_API_KEY"] # This is the default and can be omitted
 )
 
-defend_response = deeprails.defend.create_workflow(improvement_action: "fixit", name: "Push Alert Workflow", type: "custom")
+defend_response = deeprails.defend.create_workflow(
+  improvement_action: "fixit",
+  name: "Push Alert Workflow",
+  type: "custom",
+  automatic_hallucination_tolerance_levels: {correctness: "low"}
+)
 
 puts(defend_response.workflow_id)
 ```
