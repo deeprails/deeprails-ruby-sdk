@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.6.0 (2025-10-22)
+
+Full Changelog: [v0.5.0...v0.6.0](https://github.com/deeprails/deeprails-ruby-sdk/compare/v0.5.0...v0.6.0)
+
+### Features
+
+* **api:** update defend naming and data structures ([e345a29](https://github.com/deeprails/deeprails-ruby-sdk/commit/e345a293b74cc3bfedcfcf8b5d9c9a834f82a69b))
+
 ## 0.5.0 (2025-10-20)
 
 Full Changelog: [v0.4.0...v0.5.0](https://github.com/deeprails/deeprails-ruby-sdk/compare/v0.4.0...v0.5.0)
