@@ -9,25 +9,13 @@ module Deeprails
 
       # @!attribute improvement_action
       #   The action used to improve outputs that fail one or guardrail metrics for the
-      #   workflow events. May be `regenerate`, `fixit`, or null which represents “do
-      #   nothing”. Regenerate runs the user's input prompt with minor induced variance.
-      #   Fixit attempts to directly address the shortcomings of the output using the
-      #   guardrail failure rationale. Do nothing does not attempt any improvement.
+      #   workflow events. May be `regen`, `fixit`, or `do_nothing`. ReGen runs the user's
+      #   input prompt with minor induced variance. FixIt attempts to directly address the
+      #   shortcomings of the output using the guardrail failure rationale. Do Nothing
+      #   does not attempt any improvement.
       #
-      #   @return [Symbol, Deeprails::Models::DefendCreateWorkflowParams::ImprovementAction, nil]
-      required :improvement_action,
-               enum: -> { Deeprails::DefendCreateWorkflowParams::ImprovementAction },
-               nil?: true
-
-      # @!attribute metrics
-      #   Mapping of guardrail metrics to floating point threshold values. If the workflow
-      #   type is automatic, only the metric names are used (`automatic_tolerance`
-      #   determines thresholds). Possible metrics are `correctness`, `completeness`,
-      #   `instruction_adherence`, `context_adherence`, `ground_truth_adherence`, or
-      #   `comprehensive_safety`.
-      #
-      #   @return [Hash{Symbol=>Float}]
-      required :metrics, Deeprails::Internal::Type::HashOf[Float]
+      #   @return [Symbol, Deeprails::Models::DefendCreateWorkflowParams::ImprovementAction]
+      required :improvement_action, enum: -> { Deeprails::DefendCreateWorkflowParams::ImprovementAction }
 
       # @!attribute name
       #   Name of the workflow.
@@ -45,12 +33,23 @@ module Deeprails
       #   @return [Symbol, Deeprails::Models::DefendCreateWorkflowParams::Type]
       required :type, enum: -> { Deeprails::DefendCreateWorkflowParams::Type }
 
-      # @!attribute automatic_tolerance
-      #   Hallucination tolerance for automatic workflows; may be `low`, `medium`, or
-      #   `high`. Ignored if `type` is `custom`.
+      # @!attribute automatic_hallucination_tolerance_levels
+      #   Mapping of guardrail metrics to hallucination tolerance levels (either `low`,
+      #   `medium`, or `high`). Possible metrics are `completeness`,
+      #   `instruction_adherence`, `context_adherence`, `ground_truth_adherence`, or
+      #   `comprehensive_safety`.
       #
-      #   @return [Symbol, Deeprails::Models::DefendCreateWorkflowParams::AutomaticTolerance, nil]
-      optional :automatic_tolerance, enum: -> { Deeprails::DefendCreateWorkflowParams::AutomaticTolerance }
+      #   @return [Hash{Symbol=>Symbol, Deeprails::Models::DefendCreateWorkflowParams::AutomaticHallucinationToleranceLevel}, nil]
+      optional :automatic_hallucination_tolerance_levels,
+               -> { Deeprails::Internal::Type::HashOf[enum: Deeprails::DefendCreateWorkflowParams::AutomaticHallucinationToleranceLevel] }
+
+      # @!attribute custom_hallucination_threshold_values
+      #   Mapping of guardrail metrics to floating point threshold values. Possible
+      #   metrics are `correctness`, `completeness`, `instruction_adherence`,
+      #   `context_adherence`, `ground_truth_adherence`, or `comprehensive_safety`.
+      #
+      #   @return [Hash{Symbol=>Float}, nil]
+      optional :custom_hallucination_threshold_values, Deeprails::Internal::Type::HashOf[Float]
 
       # @!attribute description
       #   Description for the workflow.
@@ -58,43 +57,44 @@ module Deeprails
       #   @return [String, nil]
       optional :description, String
 
-      # @!attribute max_retries
+      # @!attribute max_improvement_attempt
       #   Max. number of improvement action retries until a given event passes the
       #   guardrails. Defaults to 10.
       #
       #   @return [Integer, nil]
-      optional :max_retries, Integer
+      optional :max_improvement_attempt, Integer
 
-      # @!method initialize(improvement_action:, metrics:, name:, type:, automatic_tolerance: nil, description: nil, max_retries: nil, request_options: {})
+      # @!method initialize(improvement_action:, name:, type:, automatic_hallucination_tolerance_levels: nil, custom_hallucination_threshold_values: nil, description: nil, max_improvement_attempt: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Deeprails::Models::DefendCreateWorkflowParams} for more details.
       #
-      #   @param improvement_action [Symbol, Deeprails::Models::DefendCreateWorkflowParams::ImprovementAction, nil] The action used to improve outputs that fail one or guardrail metrics for the wo
-      #
-      #   @param metrics [Hash{Symbol=>Float}] Mapping of guardrail metrics to floating point threshold values. If the workflo
+      #   @param improvement_action [Symbol, Deeprails::Models::DefendCreateWorkflowParams::ImprovementAction] The action used to improve outputs that fail one or guardrail metrics for the wo
       #
       #   @param name [String] Name of the workflow.
       #
       #   @param type [Symbol, Deeprails::Models::DefendCreateWorkflowParams::Type] Type of thresholds to use for the workflow, either `automatic` or `custom`. Aut
       #
-      #   @param automatic_tolerance [Symbol, Deeprails::Models::DefendCreateWorkflowParams::AutomaticTolerance] Hallucination tolerance for automatic workflows; may be `low`, `medium`, or `hig
+      #   @param automatic_hallucination_tolerance_levels [Hash{Symbol=>Symbol, Deeprails::Models::DefendCreateWorkflowParams::AutomaticHallucinationToleranceLevel}] Mapping of guardrail metrics to hallucination tolerance levels
+      #
+      #   @param custom_hallucination_threshold_values [Hash{Symbol=>Float}] Mapping of guardrail metrics to floating point threshold values. Possible metric
       #
       #   @param description [String] Description for the workflow.
       #
-      #   @param max_retries [Integer] Max. number of improvement action retries until a given event passes the guardra
+      #   @param max_improvement_attempt [Integer] Max. number of improvement action retries until a given event passes the guardra
       #
       #   @param request_options [Deeprails::RequestOptions, Hash{Symbol=>Object}]
 
       # The action used to improve outputs that fail one or guardrail metrics for the
-      # workflow events. May be `regenerate`, `fixit`, or null which represents “do
-      # nothing”. Regenerate runs the user's input prompt with minor induced variance.
-      # Fixit attempts to directly address the shortcomings of the output using the
-      # guardrail failure rationale. Do nothing does not attempt any improvement.
+      # workflow events. May be `regen`, `fixit`, or `do_nothing`. ReGen runs the user's
+      # input prompt with minor induced variance. FixIt attempts to directly address the
+      # shortcomings of the output using the guardrail failure rationale. Do Nothing
+      # does not attempt any improvement.
       module ImprovementAction
         extend Deeprails::Internal::Type::Enum
 
-        REGENERATE = :regenerate
+        REGEN = :regen
         FIXIT = :fixit
+        DO_NOTHING = :do_nothing
 
         # @!method self.values
         #   @return [Array<Symbol>]
@@ -115,9 +115,7 @@ module Deeprails
         #   @return [Array<Symbol>]
       end
 
-      # Hallucination tolerance for automatic workflows; may be `low`, `medium`, or
-      # `high`. Ignored if `type` is `custom`.
-      module AutomaticTolerance
+      module AutomaticHallucinationToleranceLevel
         extend Deeprails::Internal::Type::Enum
 
         LOW = :low
