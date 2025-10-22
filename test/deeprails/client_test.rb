@@ -40,7 +40,12 @@ class DeeprailsTest < Minitest::Test
     deeprails = Deeprails::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(Deeprails::Errors::InternalServerError) do
-      deeprails.defend.create_workflow(improvement_action: :regen, name: "name", type: :automatic)
+      deeprails.defend.create_workflow(
+        improvement_action: :regen,
+        name: "name",
+        type: :automatic,
+        automatic_hallucination_tolerance_levels: {completeness: :low, instruction_adherence: :medium}
+      )
     end
 
     assert_requested(:any, /./, times: 3)
@@ -68,6 +73,7 @@ class DeeprailsTest < Minitest::Test
         improvement_action: :regen,
         name: "name",
         type: :automatic,
+        automatic_hallucination_tolerance_levels: {completeness: :low, instruction_adherence: :medium},
         request_options: {max_retries: 3}
       )
     end
@@ -85,6 +91,7 @@ class DeeprailsTest < Minitest::Test
         improvement_action: :regen,
         name: "name",
         type: :automatic,
+        automatic_hallucination_tolerance_levels: {completeness: :low, instruction_adherence: :medium},
         request_options: {max_retries: 4}
       )
     end
@@ -102,7 +109,12 @@ class DeeprailsTest < Minitest::Test
     deeprails = Deeprails::Client.new(base_url: "http://localhost", api_key: "My API Key", max_retries: 1)
 
     assert_raises(Deeprails::Errors::InternalServerError) do
-      deeprails.defend.create_workflow(improvement_action: :regen, name: "name", type: :automatic)
+      deeprails.defend.create_workflow(
+        improvement_action: :regen,
+        name: "name",
+        type: :automatic,
+        automatic_hallucination_tolerance_levels: {completeness: :low, instruction_adherence: :medium}
+      )
     end
 
     assert_requested(:any, /./, times: 2)
@@ -120,7 +132,12 @@ class DeeprailsTest < Minitest::Test
 
     assert_raises(Deeprails::Errors::InternalServerError) do
       Thread.current.thread_variable_set(:time_now, Time.now)
-      deeprails.defend.create_workflow(improvement_action: :regen, name: "name", type: :automatic)
+      deeprails.defend.create_workflow(
+        improvement_action: :regen,
+        name: "name",
+        type: :automatic,
+        automatic_hallucination_tolerance_levels: {completeness: :low, instruction_adherence: :medium}
+      )
       Thread.current.thread_variable_set(:time_now, nil)
     end
 
@@ -138,7 +155,12 @@ class DeeprailsTest < Minitest::Test
     deeprails = Deeprails::Client.new(base_url: "http://localhost", api_key: "My API Key", max_retries: 1)
 
     assert_raises(Deeprails::Errors::InternalServerError) do
-      deeprails.defend.create_workflow(improvement_action: :regen, name: "name", type: :automatic)
+      deeprails.defend.create_workflow(
+        improvement_action: :regen,
+        name: "name",
+        type: :automatic,
+        automatic_hallucination_tolerance_levels: {completeness: :low, instruction_adherence: :medium}
+      )
     end
 
     assert_requested(:any, /./, times: 2)
@@ -151,7 +173,12 @@ class DeeprailsTest < Minitest::Test
     deeprails = Deeprails::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(Deeprails::Errors::InternalServerError) do
-      deeprails.defend.create_workflow(improvement_action: :regen, name: "name", type: :automatic)
+      deeprails.defend.create_workflow(
+        improvement_action: :regen,
+        name: "name",
+        type: :automatic,
+        automatic_hallucination_tolerance_levels: {completeness: :low, instruction_adherence: :medium}
+      )
     end
 
     3.times do
@@ -169,6 +196,7 @@ class DeeprailsTest < Minitest::Test
         improvement_action: :regen,
         name: "name",
         type: :automatic,
+        automatic_hallucination_tolerance_levels: {completeness: :low, instruction_adherence: :medium},
         request_options: {extra_headers: {"x-stainless-retry-count" => nil}}
       )
     end
@@ -188,6 +216,7 @@ class DeeprailsTest < Minitest::Test
         improvement_action: :regen,
         name: "name",
         type: :automatic,
+        automatic_hallucination_tolerance_levels: {completeness: :low, instruction_adherence: :medium},
         request_options: {extra_headers: {"x-stainless-retry-count" => "42"}}
       )
     end
@@ -213,6 +242,7 @@ class DeeprailsTest < Minitest::Test
         improvement_action: :regen,
         name: "name",
         type: :automatic,
+        automatic_hallucination_tolerance_levels: {completeness: :low, instruction_adherence: :medium},
         request_options: {extra_headers: {}}
       )
     end
@@ -247,6 +277,7 @@ class DeeprailsTest < Minitest::Test
         improvement_action: :regen,
         name: "name",
         type: :automatic,
+        automatic_hallucination_tolerance_levels: {completeness: :low, instruction_adherence: :medium},
         request_options: {extra_headers: {}}
       )
     end
@@ -276,6 +307,7 @@ class DeeprailsTest < Minitest::Test
         improvement_action: :regen,
         name: "name",
         type: :automatic,
+        automatic_hallucination_tolerance_levels: {completeness: :low, instruction_adherence: :medium},
         request_options: {extra_headers: {"authorization" => "Bearer xyz"}}
       )
     end
@@ -308,6 +340,7 @@ class DeeprailsTest < Minitest::Test
         improvement_action: :regen,
         name: "name",
         type: :automatic,
+        automatic_hallucination_tolerance_levels: {completeness: :low, instruction_adherence: :medium},
         request_options: {extra_headers: {"authorization" => "Bearer xyz"}}
       )
     end
@@ -323,7 +356,12 @@ class DeeprailsTest < Minitest::Test
 
     deeprails = Deeprails::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
-    deeprails.defend.create_workflow(improvement_action: :regen, name: "name", type: :automatic)
+    deeprails.defend.create_workflow(
+      improvement_action: :regen,
+      name: "name",
+      type: :automatic,
+      automatic_hallucination_tolerance_levels: {completeness: :low, instruction_adherence: :medium}
+    )
 
     assert_requested(:any, /./) do |req|
       headers = req.headers.transform_keys(&:downcase).fetch_values("accept", "content-type")
