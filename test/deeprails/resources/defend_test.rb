@@ -24,7 +24,7 @@ class Deeprails::Test::Resources::DefendTest < Deeprails::Test::ResourceTest
         created_at: Time | nil,
         description: String | nil,
         improvement_action: Deeprails::DefendResponse::ImprovementAction | nil,
-        max_improvement_attempt: Integer | nil,
+        max_improvement_attempts: Integer | nil,
         modified_at: Time | nil,
         status: Deeprails::DefendResponse::Status | nil,
         success_rate: Float | nil
@@ -68,7 +68,7 @@ class Deeprails::Test::Resources::DefendTest < Deeprails::Test::ResourceTest
         created_at: Time | nil,
         description: String | nil,
         improvement_action: Deeprails::DefendResponse::ImprovementAction | nil,
-        max_improvement_attempt: Integer | nil,
+        max_improvement_attempts: Integer | nil,
         modified_at: Time | nil,
         status: Deeprails::DefendResponse::Status | nil,
         success_rate: Float | nil
@@ -119,7 +119,7 @@ class Deeprails::Test::Resources::DefendTest < Deeprails::Test::ResourceTest
         created_at: Time | nil,
         description: String | nil,
         improvement_action: Deeprails::DefendResponse::ImprovementAction | nil,
-        max_improvement_attempt: Integer | nil,
+        max_improvement_attempts: Integer | nil,
         modified_at: Time | nil,
         status: Deeprails::DefendResponse::Status | nil,
         success_rate: Float | nil

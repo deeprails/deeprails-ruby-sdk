@@ -38,12 +38,12 @@ module Deeprails
       #   @return [Symbol, Deeprails::Models::DefendResponse::ImprovementAction, nil]
       optional :improvement_action, enum: -> { Deeprails::DefendResponse::ImprovementAction }
 
-      # @!attribute max_improvement_attempt
+      # @!attribute max_improvement_attempts
       #   Max. number of improvement action retries until a given event passes the
       #   guardrails.
       #
       #   @return [Integer, nil]
-      optional :max_improvement_attempt, Integer
+      optional :max_improvement_attempts, Integer
 
       # @!attribute modified_at
       #   The most recent time the workflow was modified in UTC.
@@ -64,7 +64,7 @@ module Deeprails
       #   @return [Float, nil]
       optional :success_rate, Float
 
-      # @!method initialize(name:, workflow_id:, created_at: nil, description: nil, improvement_action: nil, max_improvement_attempt: nil, modified_at: nil, status: nil, success_rate: nil)
+      # @!method initialize(name:, workflow_id:, created_at: nil, description: nil, improvement_action: nil, max_improvement_attempts: nil, modified_at: nil, status: nil, success_rate: nil)
       #   Some parameter documentations has been truncated, see
       #   {Deeprails::Models::DefendResponse} for more details.
       #
@@ -78,7 +78,7 @@ module Deeprails
       #
       #   @param improvement_action [Symbol, Deeprails::Models::DefendResponse::ImprovementAction] The action used to improve outputs that fail one or more guardrail metrics for t
       #
-      #   @param max_improvement_attempt [Integer] Max. number of improvement action retries until a given event passes the guardra
+      #   @param max_improvement_attempts [Integer] Max. number of improvement action retries until a given event passes the guardra
       #
       #   @param modified_at [Time] The most recent time the workflow was modified in UTC.
       #

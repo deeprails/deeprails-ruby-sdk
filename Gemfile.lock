@@ -11,7 +11,7 @@ GIT
 PATH
   remote: .
   specs:
-    deeprails (0.7.0)
+    deeprails (0.8.0)
       connection_pool
 
 GEM
