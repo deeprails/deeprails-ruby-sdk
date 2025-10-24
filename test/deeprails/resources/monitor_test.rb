@@ -9,14 +9,18 @@ class Deeprails::Test::Resources::MonitorTest < Deeprails::Test::ResourceTest
     response = @deeprails.monitor.create(name: "name")
 
     assert_pattern do
-      response => Deeprails::APIResponse
+      response => Deeprails::MonitorResponse
     end
 
     assert_pattern do
       response => {
-        success: Deeprails::Internal::Type::Boolean,
-        data: Deeprails::APIResponse::Data | nil,
-        message: String | nil
+        monitor_id: String,
+        name: String,
+        created_at: Time | nil,
+        description: String | nil,
+        monitor_status: Deeprails::MonitorResponse::MonitorStatus | nil,
+        updated_at: Time | nil,
+        user_id: String | nil
       }
     end
   end
@@ -27,14 +31,20 @@ class Deeprails::Test::Resources::MonitorTest < Deeprails::Test::ResourceTest
     response = @deeprails.monitor.retrieve("monitor_id")
 
     assert_pattern do
-      response => Deeprails::Models::MonitorRetrieveResponse
+      response => Deeprails::MonitorDetailResponse
     end
 
     assert_pattern do
       response => {
-        success: Deeprails::Internal::Type::Boolean,
-        data: Deeprails::Models::MonitorRetrieveResponse::Data | nil,
-        message: String | nil
+        monitor_id: String,
+        monitor_status: Deeprails::MonitorDetailResponse::MonitorStatus,
+        name: String,
+        created_at: Time | nil,
+        description: String | nil,
+        evaluations: ^(Deeprails::Internal::Type::ArrayOf[Deeprails::Evaluation]) | nil,
+        stats: Deeprails::MonitorDetailResponse::Stats | nil,
+        updated_at: Time | nil,
+        user_id: String | nil
       }
     end
   end
@@ -45,14 +55,18 @@ class Deeprails::Test::Resources::MonitorTest < Deeprails::Test::ResourceTest
     response = @deeprails.monitor.update("monitor_id")
 
     assert_pattern do
-      response => Deeprails::APIResponse
+      response => Deeprails::MonitorResponse
     end
 
     assert_pattern do
       response => {
-        success: Deeprails::Internal::Type::Boolean,
-        data: Deeprails::APIResponse::Data | nil,
-        message: String | nil
+        monitor_id: String,
+        name: String,
+        created_at: Time | nil,
+        description: String | nil,
+        monitor_status: Deeprails::MonitorResponse::MonitorStatus | nil,
+        updated_at: Time | nil,
+        user_id: String | nil
       }
     end
   end
@@ -69,14 +83,15 @@ class Deeprails::Test::Resources::MonitorTest < Deeprails::Test::ResourceTest
       )
 
     assert_pattern do
-      response => Deeprails::Models::MonitorSubmitEventResponse
+      response => Deeprails::MonitorEventResponse
     end
 
     assert_pattern do
       response => {
-        success: Deeprails::Internal::Type::Boolean,
-        data: Deeprails::Models::MonitorSubmitEventResponse::Data | nil,
-        message: String | nil
+        evaluation_id: String,
+        event_id: String,
+        monitor_id: String,
+        created_at: Time | nil
       }
     end
   end

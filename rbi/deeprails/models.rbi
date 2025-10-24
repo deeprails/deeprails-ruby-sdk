@@ -1,8 +1,6 @@
 # typed: strong
 
 module Deeprails
-  APIResponse = Deeprails::Models::APIResponse
-
   DefendCreateWorkflowParams = Deeprails::Models::DefendCreateWorkflowParams
 
   DefendResponse = Deeprails::Models::DefendResponse
@@ -22,6 +20,12 @@ module Deeprails
   Evaluation = Deeprails::Models::Evaluation
 
   MonitorCreateParams = Deeprails::Models::MonitorCreateParams
+
+  MonitorDetailResponse = Deeprails::Models::MonitorDetailResponse
+
+  MonitorEventResponse = Deeprails::Models::MonitorEventResponse
+
+  MonitorResponse = Deeprails::Models::MonitorResponse
 
   MonitorRetrieveParams = Deeprails::Models::MonitorRetrieveParams
 

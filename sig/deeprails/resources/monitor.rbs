@@ -5,13 +5,13 @@ module Deeprails
         name: String,
         ?description: String,
         ?request_options: Deeprails::request_opts
-      ) -> Deeprails::APIResponse
+      ) -> Deeprails::MonitorResponse
 
       def retrieve: (
         String monitor_id,
         ?limit: Integer,
         ?request_options: Deeprails::request_opts
-      ) -> Deeprails::Models::MonitorRetrieveResponse
+      ) -> Deeprails::MonitorDetailResponse
 
       def update: (
         String monitor_id,
@@ -19,7 +19,7 @@ module Deeprails
         ?monitor_status: Deeprails::Models::MonitorUpdateParams::monitor_status,
         ?name: String,
         ?request_options: Deeprails::request_opts
-      ) -> Deeprails::APIResponse
+      ) -> Deeprails::MonitorResponse
 
       def submit_event: (
         String monitor_id,
@@ -30,7 +30,7 @@ module Deeprails
         ?nametag: String,
         ?run_mode: Deeprails::Models::MonitorSubmitEventParams::run_mode,
         ?request_options: Deeprails::request_opts
-      ) -> Deeprails::Models::MonitorSubmitEventResponse
+      ) -> Deeprails::MonitorEventResponse
 
       def initialize: (client: Deeprails::Client) -> void
     end

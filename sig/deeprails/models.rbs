@@ -1,6 +1,4 @@
 module Deeprails
-  class APIResponse = Deeprails::Models::APIResponse
-
   class DefendCreateWorkflowParams = Deeprails::Models::DefendCreateWorkflowParams
 
   class DefendResponse = Deeprails::Models::DefendResponse
@@ -20,6 +18,12 @@ module Deeprails
   class Evaluation = Deeprails::Models::Evaluation
 
   class MonitorCreateParams = Deeprails::Models::MonitorCreateParams
+
+  class MonitorDetailResponse = Deeprails::Models::MonitorDetailResponse
+
+  class MonitorEventResponse = Deeprails::Models::MonitorEventResponse
+
+  class MonitorResponse = Deeprails::Models::MonitorResponse
 
   class MonitorRetrieveParams = Deeprails::Models::MonitorRetrieveParams
 
