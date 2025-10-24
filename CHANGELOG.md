@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.8.0 (2025-10-24)
+
+Full Changelog: [v0.7.0...v0.8.0](https://github.com/deeprails/deeprails-ruby-sdk/compare/v0.7.0...v0.8.0)
+
+### Features
+
+* **api:** remove apiresponse from monitor ([c26404c](https://github.com/deeprails/deeprails-ruby-sdk/commit/c26404cf6e750823780141362084731adf50b089))
+* handle thread interrupts in the core HTTP client ([7c7e928](https://github.com/deeprails/deeprails-ruby-sdk/commit/7c7e928f1ec5bb401bce8200ec186e8c080de890))
+
 ## 0.7.0 (2025-10-22)
 
 Full Changelog: [v0.6.0...v0.7.0](https://github.com/deeprails/deeprails-ruby-sdk/compare/v0.6.0...v0.7.0)
