@@ -53,10 +53,10 @@ module Deeprails
       # Max. number of improvement action retries until a given event passes the
       # guardrails.
       sig { returns(T.nilable(Integer)) }
-      attr_reader :max_improvement_attempt
+      attr_reader :max_improvement_attempts
 
-      sig { params(max_improvement_attempt: Integer).void }
-      attr_writer :max_improvement_attempt
+      sig { params(max_improvement_attempts: Integer).void }
+      attr_writer :max_improvement_attempts
 
       # The most recent time the workflow was modified in UTC.
       sig { returns(T.nilable(Time)) }
@@ -90,7 +90,7 @@ module Deeprails
           description: String,
           improvement_action:
             Deeprails::DefendResponse::ImprovementAction::OrSymbol,
-          max_improvement_attempt: Integer,
+          max_improvement_attempts: Integer,
           modified_at: Time,
           status: Deeprails::DefendResponse::Status::OrSymbol,
           success_rate: Float
@@ -113,7 +113,7 @@ module Deeprails
         improvement_action: nil,
         # Max. number of improvement action retries until a given event passes the
         # guardrails.
-        max_improvement_attempt: nil,
+        max_improvement_attempts: nil,
         # The most recent time the workflow was modified in UTC.
         modified_at: nil,
         # Status of the selected workflow. May be `inactive` or `active`. Inactive
@@ -133,7 +133,7 @@ module Deeprails
             description: String,
             improvement_action:
               Deeprails::DefendResponse::ImprovementAction::TaggedSymbol,
-            max_improvement_attempt: Integer,
+            max_improvement_attempts: Integer,
             modified_at: Time,
             status: Deeprails::DefendResponse::Status::TaggedSymbol,
             success_rate: Float

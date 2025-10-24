@@ -88,10 +88,10 @@ module Deeprails
       # Max. number of improvement action retries until a given event passes the
       # guardrails. Defaults to 10.
       sig { returns(T.nilable(Integer)) }
-      attr_reader :max_improvement_attempt
+      attr_reader :max_improvement_attempts
 
-      sig { params(max_improvement_attempt: Integer).void }
-      attr_writer :max_improvement_attempt
+      sig { params(max_improvement_attempts: Integer).void }
+      attr_writer :max_improvement_attempts
 
       sig do
         params(
@@ -106,7 +106,7 @@ module Deeprails
             ],
           custom_hallucination_threshold_values: T::Hash[Symbol, Float],
           description: String,
-          max_improvement_attempt: Integer,
+          max_improvement_attempts: Integer,
           request_options: Deeprails::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
@@ -138,7 +138,7 @@ module Deeprails
         description: nil,
         # Max. number of improvement action retries until a given event passes the
         # guardrails. Defaults to 10.
-        max_improvement_attempt: nil,
+        max_improvement_attempts: nil,
         request_options: {}
       )
       end
@@ -157,7 +157,7 @@ module Deeprails
               ],
             custom_hallucination_threshold_values: T::Hash[Symbol, Float],
             description: String,
-            max_improvement_attempt: Integer,
+            max_improvement_attempts: Integer,
             request_options: Deeprails::RequestOptions
           }
         )

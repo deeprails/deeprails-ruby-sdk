@@ -57,14 +57,14 @@ module Deeprails
       #   @return [String, nil]
       optional :description, String
 
-      # @!attribute max_improvement_attempt
+      # @!attribute max_improvement_attempts
       #   Max. number of improvement action retries until a given event passes the
       #   guardrails. Defaults to 10.
       #
       #   @return [Integer, nil]
-      optional :max_improvement_attempt, Integer
+      optional :max_improvement_attempts, Integer
 
-      # @!method initialize(improvement_action:, name:, type:, automatic_hallucination_tolerance_levels: nil, custom_hallucination_threshold_values: nil, description: nil, max_improvement_attempt: nil, request_options: {})
+      # @!method initialize(improvement_action:, name:, type:, automatic_hallucination_tolerance_levels: nil, custom_hallucination_threshold_values: nil, description: nil, max_improvement_attempts: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Deeprails::Models::DefendCreateWorkflowParams} for more details.
       #
@@ -80,7 +80,7 @@ module Deeprails
       #
       #   @param description [String] Description for the workflow.
       #
-      #   @param max_improvement_attempt [Integer] Max. number of improvement action retries until a given event passes the guardra
+      #   @param max_improvement_attempts [Integer] Max. number of improvement action retries until a given event passes the guardra
       #
       #   @param request_options [Deeprails::RequestOptions, Hash{Symbol=>Object}]
 

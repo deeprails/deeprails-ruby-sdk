@@ -9,7 +9,7 @@ module Deeprails
       # Use this endpoint to create a new guardrail workflow with optional guardrail
       # thresholds and improvement actions
       #
-      # @overload create_workflow(improvement_action:, name:, type:, automatic_hallucination_tolerance_levels: nil, custom_hallucination_threshold_values: nil, description: nil, max_improvement_attempt: nil, request_options: {})
+      # @overload create_workflow(improvement_action:, name:, type:, automatic_hallucination_tolerance_levels: nil, custom_hallucination_threshold_values: nil, description: nil, max_improvement_attempts: nil, request_options: {})
       #
       # @param improvement_action [Symbol, Deeprails::Models::DefendCreateWorkflowParams::ImprovementAction] The action used to improve outputs that fail one or guardrail metrics for the wo
       #
@@ -23,7 +23,7 @@ module Deeprails
       #
       # @param description [String] Description for the workflow.
       #
-      # @param max_improvement_attempt [Integer] Max. number of improvement action retries until a given event passes the guardra
+      # @param max_improvement_attempts [Integer] Max. number of improvement action retries until a given event passes the guardra
       #
       # @param request_options [Deeprails::RequestOptions, Hash{Symbol=>Object}, nil]
       #

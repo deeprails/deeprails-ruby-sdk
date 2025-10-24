@@ -14,7 +14,7 @@ module Deeprails
       #
       # @param request_options [Deeprails::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Deeprails::Models::APIResponse]
+      # @return [Deeprails::Models::MonitorResponse]
       #
       # @see Deeprails::Models::MonitorCreateParams
       def create(params)
@@ -23,7 +23,7 @@ module Deeprails
           method: :post,
           path: "monitor",
           body: parsed,
-          model: Deeprails::APIResponse,
+          model: Deeprails::MonitorResponse,
           options: options
         )
       end
@@ -39,7 +39,7 @@ module Deeprails
       #
       # @param request_options [Deeprails::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Deeprails::Models::MonitorRetrieveResponse]
+      # @return [Deeprails::Models::MonitorDetailResponse]
       #
       # @see Deeprails::Models::MonitorRetrieveParams
       def retrieve(monitor_id, params = {})
@@ -48,7 +48,7 @@ module Deeprails
           method: :get,
           path: ["monitor/%1$s", monitor_id],
           query: parsed,
-          model: Deeprails::Models::MonitorRetrieveResponse,
+          model: Deeprails::MonitorDetailResponse,
           options: options
         )
       end
@@ -71,7 +71,7 @@ module Deeprails
       #
       # @param request_options [Deeprails::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Deeprails::Models::APIResponse]
+      # @return [Deeprails::Models::MonitorResponse]
       #
       # @see Deeprails::Models::MonitorUpdateParams
       def update(monitor_id, params = {})
@@ -80,7 +80,7 @@ module Deeprails
           method: :put,
           path: ["monitor/%1$s", monitor_id],
           body: parsed,
-          model: Deeprails::APIResponse,
+          model: Deeprails::MonitorResponse,
           options: options
         )
       end
@@ -109,7 +109,7 @@ module Deeprails
       #
       # @param request_options [Deeprails::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Deeprails::Models::MonitorSubmitEventResponse]
+      # @return [Deeprails::Models::MonitorEventResponse]
       #
       # @see Deeprails::Models::MonitorSubmitEventParams
       def submit_event(monitor_id, params)
@@ -118,7 +118,7 @@ module Deeprails
           method: :post,
           path: ["monitor/%1$s/events", monitor_id],
           body: parsed,
-          model: Deeprails::Models::MonitorSubmitEventResponse,
+          model: Deeprails::MonitorEventResponse,
           options: options
         )
       end
