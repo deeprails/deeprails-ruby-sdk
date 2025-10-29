@@ -14,8 +14,6 @@ module Deeprails
 
     attr_reader monitor: Deeprails::Resources::Monitor
 
-    attr_reader evaluate: Deeprails::Resources::Evaluate
-
     private def auth_headers: -> ::Hash[String, String]
 
     def initialize: (

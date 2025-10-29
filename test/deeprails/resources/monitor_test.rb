@@ -41,7 +41,7 @@ class Deeprails::Test::Resources::MonitorTest < Deeprails::Test::ResourceTest
         name: String,
         created_at: Time | nil,
         description: String | nil,
-        evaluations: ^(Deeprails::Internal::Type::ArrayOf[Deeprails::Evaluation]) | nil,
+        evaluations: ^(Deeprails::Internal::Type::ArrayOf[Deeprails::MonitorDetailResponse::Evaluation]) | nil,
         stats: Deeprails::MonitorDetailResponse::Stats | nil,
         updated_at: Time | nil,
         user_id: String | nil
