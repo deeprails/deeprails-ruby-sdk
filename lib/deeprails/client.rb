@@ -24,9 +24,6 @@ module Deeprails
     # @return [Deeprails::Resources::Monitor]
     attr_reader :monitor
 
-    # @return [Deeprails::Resources::Evaluate]
-    attr_reader :evaluate
-
     # @api private
     #
     # @return [Hash{String=>String}]
@@ -76,7 +73,6 @@ module Deeprails
 
       @defend = Deeprails::Resources::Defend.new(client: self)
       @monitor = Deeprails::Resources::Monitor.new(client: self)
-      @evaluate = Deeprails::Resources::Evaluate.new(client: self)
     end
   end
 end

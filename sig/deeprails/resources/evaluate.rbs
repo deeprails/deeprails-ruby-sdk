@@ -1,7 +1,0 @@
-module Deeprails
-  module Resources
-    class Evaluate
-      def initialize: (client: Deeprails::Client) -> void
-    end
-  end
-end
