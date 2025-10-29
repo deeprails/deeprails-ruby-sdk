@@ -11,10 +11,6 @@ module Deeprails
 
   class DefendUpdateWorkflowParams = Deeprails::Models::DefendUpdateWorkflowParams
 
-  class EvaluateCreateParams = Deeprails::Models::EvaluateCreateParams
-
-  class EvaluateRetrieveParams = Deeprails::Models::EvaluateRetrieveParams
-
   class Evaluation = Deeprails::Models::Evaluation
 
   class MonitorCreateParams = Deeprails::Models::MonitorCreateParams
