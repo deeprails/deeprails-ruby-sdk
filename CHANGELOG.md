@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.9.0 (2025-10-29)
+
+Full Changelog: [v0.8.0...v0.9.0](https://github.com/deeprails/deeprails-ruby-sdk/compare/v0.8.0...v0.9.0)
+
+### Features
+
+* **api:** remove evaluate api ([733236c](https://github.com/deeprails/deeprails-ruby-sdk/commit/733236c71a7bad030caea5ebe42a3c8061e05ec6))
+* **api:** remove evaluate references ([de622dd](https://github.com/deeprails/deeprails-ruby-sdk/commit/de622dd89f3c14f5db366bd425c1e4c68bc59886))
+
 ## 0.8.0 (2025-10-24)
 
 Full Changelog: [v0.7.0...v0.8.0](https://github.com/deeprails/deeprails-ruby-sdk/compare/v0.7.0...v0.8.0)
