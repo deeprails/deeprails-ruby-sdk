@@ -2,7 +2,6 @@
 
 module Deeprails
   module Models
-    # @see Deeprails::Resources::Evaluate#create
     class Evaluation < Deeprails::Internal::Type::BaseModel
       # @!attribute eval_id
       #   A unique evaluation ID.
