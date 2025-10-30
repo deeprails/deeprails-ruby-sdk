@@ -9,7 +9,7 @@ class Deeprails::Test::Resources::FilesTest < Deeprails::Test::ResourceTest
     response = @deeprails.files.upload(file: Pathname(__FILE__))
 
     assert_pattern do
-      response => Deeprails::Models::FileUploadResponse
+      response => Deeprails::FileResponse
     end
 
     assert_pattern do

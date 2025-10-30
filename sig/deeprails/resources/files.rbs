@@ -4,7 +4,7 @@ module Deeprails
       def upload: (
         file: Deeprails::Internal::file_input,
         ?request_options: Deeprails::request_opts
-      ) -> Deeprails::Models::FileUploadResponse
+      ) -> Deeprails::FileResponse
 
       def initialize: (client: Deeprails::Client) -> void
     end

@@ -11,7 +11,7 @@ module Deeprails
       #
       # @param request_options [Deeprails::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Deeprails::Models::FileUploadResponse]
+      # @return [Deeprails::Models::FileResponse]
       #
       # @see Deeprails::Models::FileUploadParams
       def upload(params)
@@ -21,7 +21,7 @@ module Deeprails
           path: "files/upload",
           headers: {"content-type" => "multipart/form-data"},
           body: parsed,
-          model: Deeprails::Models::FileUploadResponse,
+          model: Deeprails::FileResponse,
           options: options
         )
       end

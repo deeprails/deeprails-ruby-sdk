@@ -50,16 +50,16 @@ Request parameters that correspond to file uploads can be passed as raw contents
 require "pathname"
 
 # Use `Pathname` to send the filename and/or avoid paging a large file into memory:
-response = deeprails.files.upload(file: Pathname("/path/to/file"))
+file_response = deeprails.files.upload(file: Pathname("/path/to/file"))
 
 # Alternatively, pass file contents or a `StringIO` directly:
-response = deeprails.files.upload(file: File.read("/path/to/file"))
+file_response = deeprails.files.upload(file: File.read("/path/to/file"))
 
 # Or, to control the filename and/or content type:
 file = Deeprails::FilePart.new(File.read("/path/to/file"), filename: "/path/to/file", content_type: "…")
-response = deeprails.files.upload(file: file)
+file_response = deeprails.files.upload(file: file)
 
-puts(response.file_id)
+puts(file_response.file_id)
 ```
 
 Note that you can also pass a raw `IO` descriptor, but this disables retries, as the library can't be sure if the descriptor is a file or pipe (which cannot be rewound).
