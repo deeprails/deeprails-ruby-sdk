@@ -15,7 +15,7 @@ To use this gem, install via Bundler by adding the following to your application
 <!-- x-release-please-start-version -->
 
 ```ruby
-gem "deeprails", "~> 0.9.0"
+gem "deeprails", "~> 0.10.0"
 ```
 
 <!-- x-release-please-end -->
@@ -39,6 +39,28 @@ defend_response = deeprails.defend.create_workflow(
 
 puts(defend_response.workflow_id)
 ```
+
+### File uploads
+
+Request parameters that correspond to file uploads can be passed as raw contents, a [`Pathname`](https://rubyapi.org/3.2/o/pathname) instance, [`StringIO`](https://rubyapi.org/3.2/o/stringio), or more.
+
+```ruby
+require "pathname"
+
+# Use `Pathname` to send the filename and/or avoid paging a large file into memory:
+file_response = deeprails.files.upload(file: Pathname("/path/to/file"))
+
+# Alternatively, pass file contents or a `StringIO` directly:
+file_response = deeprails.files.upload(file: File.read("/path/to/file"))
+
+# Or, to control the filename and/or content type:
+file = Deeprails::FilePart.new(File.read("/path/to/file"), filename: "/path/to/file", content_type: "…")
+file_response = deeprails.files.upload(file: file)
+
+puts(file_response.file_id)
+```
+
+Note that you can also pass a raw `IO` descriptor, but this disables retries, as the library can't be sure if the descriptor is a file or pipe (which cannot be rewound).
 
 ### Handling errors
 

@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.10.0 (2025-10-30)
+
+Full Changelog: [v0.9.0...v0.10.0](https://github.com/deeprails/deeprails-ruby-sdk/compare/v0.9.0...v0.10.0)
+
+### Features
+
+* **api:** Add file and web search as extended ai capabilities ([9c3e153](https://github.com/deeprails/deeprails-ruby-sdk/commit/9c3e153565a92a3e4228ffd1193cff119f7acbfe))
+* **api:** manual updates ([7c6bd65](https://github.com/deeprails/deeprails-ruby-sdk/commit/7c6bd65a0fdafc880b467aa2ab5bc587d300bf76))
+
 ## 0.9.0 (2025-10-29)
 
 Full Changelog: [v0.8.0...v0.9.0](https://github.com/deeprails/deeprails-ruby-sdk/compare/v0.8.0...v0.9.0)

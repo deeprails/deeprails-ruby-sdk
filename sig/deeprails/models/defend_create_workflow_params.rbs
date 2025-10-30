@@ -8,7 +8,9 @@ module Deeprails
         automatic_hallucination_tolerance_levels: ::Hash[Symbol, Deeprails::Models::DefendCreateWorkflowParams::automatic_hallucination_tolerance_level],
         custom_hallucination_threshold_values: ::Hash[Symbol, Float],
         description: String,
-        max_improvement_attempts: Integer
+        file_search: ::Array[String],
+        max_improvement_attempts: Integer,
+        web_search: bool
       }
       & Deeprails::Internal::Type::request_parameters
 
@@ -38,9 +40,17 @@ module Deeprails
 
       def description=: (String) -> String
 
+      attr_reader file_search: ::Array[String]?
+
+      def file_search=: (::Array[String]) -> ::Array[String]
+
       attr_reader max_improvement_attempts: Integer?
 
       def max_improvement_attempts=: (Integer) -> Integer
+
+      attr_reader web_search: bool?
+
+      def web_search=: (bool) -> bool
 
       def initialize: (
         improvement_action: Deeprails::Models::DefendCreateWorkflowParams::improvement_action,
@@ -49,7 +59,9 @@ module Deeprails
         ?automatic_hallucination_tolerance_levels: ::Hash[Symbol, Deeprails::Models::DefendCreateWorkflowParams::automatic_hallucination_tolerance_level],
         ?custom_hallucination_threshold_values: ::Hash[Symbol, Float],
         ?description: String,
+        ?file_search: ::Array[String],
         ?max_improvement_attempts: Integer,
+        ?web_search: bool,
         ?request_options: Deeprails::request_opts
       ) -> void
 
@@ -60,7 +72,9 @@ module Deeprails
         automatic_hallucination_tolerance_levels: ::Hash[Symbol, Deeprails::Models::DefendCreateWorkflowParams::automatic_hallucination_tolerance_level],
         custom_hallucination_threshold_values: ::Hash[Symbol, Float],
         description: String,
+        file_search: ::Array[String],
         max_improvement_attempts: Integer,
+        web_search: bool,
         request_options: Deeprails::RequestOptions
       }
 

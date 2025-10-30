@@ -1,0 +1,12 @@
+module Deeprails
+  module Resources
+    class Files
+      def upload: (
+        file: Deeprails::Internal::file_input,
+        ?request_options: Deeprails::request_opts
+      ) -> Deeprails::FileResponse
+
+      def initialize: (client: Deeprails::Client) -> void
+    end
+  end
+end
