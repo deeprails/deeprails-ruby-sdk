@@ -13,6 +13,8 @@ module Deeprails
 
   DefendUpdateWorkflowParams = Deeprails::Models::DefendUpdateWorkflowParams
 
+  FileUploadParams = Deeprails::Models::FileUploadParams
+
   MonitorCreateParams = Deeprails::Models::MonitorCreateParams
 
   MonitorDetailResponse = Deeprails::Models::MonitorDetailResponse

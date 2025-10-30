@@ -19,6 +19,9 @@ module Deeprails
     sig { returns(Deeprails::Resources::Monitor) }
     attr_reader :monitor
 
+    sig { returns(Deeprails::Resources::Files) }
+    attr_reader :files
+
     # @api private
     sig { override.returns(T::Hash[String, String]) }
     private def auth_headers

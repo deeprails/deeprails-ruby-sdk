@@ -8,7 +8,9 @@ module Deeprails
         ?automatic_hallucination_tolerance_levels: ::Hash[Symbol, Deeprails::Models::DefendCreateWorkflowParams::automatic_hallucination_tolerance_level],
         ?custom_hallucination_threshold_values: ::Hash[Symbol, Float],
         ?description: String,
+        ?file_search: ::Array[String],
         ?max_improvement_attempts: Integer,
+        ?web_search: bool,
         ?request_options: Deeprails::request_opts
       ) -> Deeprails::DefendResponse
 

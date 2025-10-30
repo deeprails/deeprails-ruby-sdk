@@ -57,6 +57,13 @@ module Deeprails
       #   @return [String, nil]
       optional :description, String
 
+      # @!attribute file_search
+      #   An array of file IDs to search in the workflow's evaluations. Files must be
+      #   uploaded via the DeepRails API first.
+      #
+      #   @return [Array<String>, nil]
+      optional :file_search, Deeprails::Internal::Type::ArrayOf[String]
+
       # @!attribute max_improvement_attempts
       #   Max. number of improvement action retries until a given event passes the
       #   guardrails. Defaults to 10.
@@ -64,7 +71,13 @@ module Deeprails
       #   @return [Integer, nil]
       optional :max_improvement_attempts, Integer
 
-      # @!method initialize(improvement_action:, name:, type:, automatic_hallucination_tolerance_levels: nil, custom_hallucination_threshold_values: nil, description: nil, max_improvement_attempts: nil, request_options: {})
+      # @!attribute web_search
+      #   Whether to enable web search for this workflow's evaluations. Defaults to false.
+      #
+      #   @return [Boolean, nil]
+      optional :web_search, Deeprails::Internal::Type::Boolean
+
+      # @!method initialize(improvement_action:, name:, type:, automatic_hallucination_tolerance_levels: nil, custom_hallucination_threshold_values: nil, description: nil, file_search: nil, max_improvement_attempts: nil, web_search: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Deeprails::Models::DefendCreateWorkflowParams} for more details.
       #
@@ -80,7 +93,11 @@ module Deeprails
       #
       #   @param description [String] Description for the workflow.
       #
+      #   @param file_search [Array<String>] An array of file IDs to search in the workflow's evaluations. Files must be uplo
+      #
       #   @param max_improvement_attempts [Integer] Max. number of improvement action retries until a given event passes the guardra
+      #
+      #   @param web_search [Boolean] Whether to enable web search for this workflow's evaluations. Defaults to false.
       #
       #   @param request_options [Deeprails::RequestOptions, Hash{Symbol=>Object}]
 

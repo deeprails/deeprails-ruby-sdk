@@ -24,6 +24,9 @@ module Deeprails
     # @return [Deeprails::Resources::Monitor]
     attr_reader :monitor
 
+    # @return [Deeprails::Resources::Files]
+    attr_reader :files
+
     # @api private
     #
     # @return [Hash{String=>String}]
@@ -73,6 +76,7 @@ module Deeprails
 
       @defend = Deeprails::Resources::Defend.new(client: self)
       @monitor = Deeprails::Resources::Monitor.new(client: self)
+      @files = Deeprails::Resources::Files.new(client: self)
     end
   end
 end

@@ -1,0 +1,24 @@
+module Deeprails
+  module Models
+    type file_upload_params =
+      { file: Deeprails::Internal::file_input }
+      & Deeprails::Internal::Type::request_parameters
+
+    class FileUploadParams < Deeprails::Internal::Type::BaseModel
+      extend Deeprails::Internal::Type::RequestParameters::Converter
+      include Deeprails::Internal::Type::RequestParameters
+
+      attr_accessor file: Deeprails::Internal::file_input
+
+      def initialize: (
+        file: Deeprails::Internal::file_input,
+        ?request_options: Deeprails::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        file: Deeprails::Internal::file_input,
+        request_options: Deeprails::RequestOptions
+      }
+    end
+  end
+end
