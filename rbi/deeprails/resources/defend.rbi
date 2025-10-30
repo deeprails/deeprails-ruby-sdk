@@ -18,7 +18,9 @@ module Deeprails
             ],
           custom_hallucination_threshold_values: T::Hash[Symbol, Float],
           description: String,
+          file_search: T::Array[String],
           max_improvement_attempts: Integer,
+          web_search: T::Boolean,
           request_options: Deeprails::RequestOptions::OrHash
         ).returns(Deeprails::DefendResponse)
       end
@@ -48,9 +50,14 @@ module Deeprails
         custom_hallucination_threshold_values: nil,
         # Description for the workflow.
         description: nil,
+        # An array of file IDs to search in the workflow's evaluations. Files must be
+        # uploaded via the DeepRails API first.
+        file_search: nil,
         # Max. number of improvement action retries until a given event passes the
         # guardrails. Defaults to 10.
         max_improvement_attempts: nil,
+        # Whether to enable web search for this workflow's evaluations. Defaults to false.
+        web_search: nil,
         request_options: {}
       )
       end

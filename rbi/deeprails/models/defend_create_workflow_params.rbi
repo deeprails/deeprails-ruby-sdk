@@ -85,6 +85,14 @@ module Deeprails
       sig { params(description: String).void }
       attr_writer :description
 
+      # An array of file IDs to search in the workflow's evaluations. Files must be
+      # uploaded via the DeepRails API first.
+      sig { returns(T.nilable(T::Array[String])) }
+      attr_reader :file_search
+
+      sig { params(file_search: T::Array[String]).void }
+      attr_writer :file_search
+
       # Max. number of improvement action retries until a given event passes the
       # guardrails. Defaults to 10.
       sig { returns(T.nilable(Integer)) }
@@ -92,6 +100,13 @@ module Deeprails
 
       sig { params(max_improvement_attempts: Integer).void }
       attr_writer :max_improvement_attempts
+
+      # Whether to enable web search for this workflow's evaluations. Defaults to false.
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :web_search
+
+      sig { params(web_search: T::Boolean).void }
+      attr_writer :web_search
 
       sig do
         params(
@@ -106,7 +121,9 @@ module Deeprails
             ],
           custom_hallucination_threshold_values: T::Hash[Symbol, Float],
           description: String,
+          file_search: T::Array[String],
           max_improvement_attempts: Integer,
+          web_search: T::Boolean,
           request_options: Deeprails::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
@@ -136,9 +153,14 @@ module Deeprails
         custom_hallucination_threshold_values: nil,
         # Description for the workflow.
         description: nil,
+        # An array of file IDs to search in the workflow's evaluations. Files must be
+        # uploaded via the DeepRails API first.
+        file_search: nil,
         # Max. number of improvement action retries until a given event passes the
         # guardrails. Defaults to 10.
         max_improvement_attempts: nil,
+        # Whether to enable web search for this workflow's evaluations. Defaults to false.
+        web_search: nil,
         request_options: {}
       )
       end
@@ -157,7 +179,9 @@ module Deeprails
               ],
             custom_hallucination_threshold_values: T::Hash[Symbol, Float],
             description: String,
+            file_search: T::Array[String],
             max_improvement_attempts: Integer,
+            web_search: T::Boolean,
             request_options: Deeprails::RequestOptions
           }
         )
