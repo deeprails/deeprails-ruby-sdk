@@ -1,6 +1,6 @@
 module Deeprails
   module Models
-    type file_upload_response =
+    type file_response =
       {
         created_at: Time,
         file_id: String,
@@ -9,7 +9,7 @@ module Deeprails
         updated_at: Time
       }
 
-    class FileUploadResponse < Deeprails::Internal::Type::BaseModel
+    class FileResponse < Deeprails::Internal::Type::BaseModel
       attr_reader created_at: Time?
 
       def created_at=: (Time) -> Time

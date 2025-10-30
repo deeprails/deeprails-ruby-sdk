@@ -2,13 +2,10 @@
 
 module Deeprails
   module Models
-    class FileUploadResponse < Deeprails::Internal::Type::BaseModel
+    class FileResponse < Deeprails::Internal::Type::BaseModel
       OrHash =
         T.type_alias do
-          T.any(
-            Deeprails::Models::FileUploadResponse,
-            Deeprails::Internal::AnyHash
-          )
+          T.any(Deeprails::FileResponse, Deeprails::Internal::AnyHash)
         end
 
       # The time the file was created in UTC.

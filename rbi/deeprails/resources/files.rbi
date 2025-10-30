@@ -8,7 +8,7 @@ module Deeprails
         params(
           file: Deeprails::Internal::FileInput,
           request_options: Deeprails::RequestOptions::OrHash
-        ).returns(Deeprails::Models::FileUploadResponse)
+        ).returns(Deeprails::FileResponse)
       end
       def upload(
         # The contents of the file to upload.

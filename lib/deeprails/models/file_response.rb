@@ -3,7 +3,7 @@
 module Deeprails
   module Models
     # @see Deeprails::Resources::Files#upload
-    class FileUploadResponse < Deeprails::Internal::Type::BaseModel
+    class FileResponse < Deeprails::Internal::Type::BaseModel
       # @!attribute created_at
       #   The time the file was created in UTC.
       #
