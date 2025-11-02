@@ -2,10 +2,8 @@ module Deeprails
   module Models
     type monitor_submit_event_params =
       {
-        guardrail_metrics: ::Array[Deeprails::Models::MonitorSubmitEventParams::guardrail_metric],
         model_input: Deeprails::MonitorSubmitEventParams::ModelInput,
         model_output: String,
-        model_used: String,
         nametag: String,
         run_mode: Deeprails::Models::MonitorSubmitEventParams::run_mode
       }
@@ -15,15 +13,9 @@ module Deeprails
       extend Deeprails::Internal::Type::RequestParameters::Converter
       include Deeprails::Internal::Type::RequestParameters
 
-      attr_accessor guardrail_metrics: ::Array[Deeprails::Models::MonitorSubmitEventParams::guardrail_metric]
-
       attr_accessor model_input: Deeprails::MonitorSubmitEventParams::ModelInput
 
       attr_accessor model_output: String
-
-      attr_reader model_used: String?
-
-      def model_used=: (String) -> String
 
       attr_reader nametag: String?
 
@@ -36,45 +28,20 @@ module Deeprails
       ) -> Deeprails::Models::MonitorSubmitEventParams::run_mode
 
       def initialize: (
-        guardrail_metrics: ::Array[Deeprails::Models::MonitorSubmitEventParams::guardrail_metric],
         model_input: Deeprails::MonitorSubmitEventParams::ModelInput,
         model_output: String,
-        ?model_used: String,
         ?nametag: String,
         ?run_mode: Deeprails::Models::MonitorSubmitEventParams::run_mode,
         ?request_options: Deeprails::request_opts
       ) -> void
 
       def to_hash: -> {
-        guardrail_metrics: ::Array[Deeprails::Models::MonitorSubmitEventParams::guardrail_metric],
         model_input: Deeprails::MonitorSubmitEventParams::ModelInput,
         model_output: String,
-        model_used: String,
         nametag: String,
         run_mode: Deeprails::Models::MonitorSubmitEventParams::run_mode,
         request_options: Deeprails::RequestOptions
       }
-
-      type guardrail_metric =
-        :correctness
-        | :completeness
-        | :instruction_adherence
-        | :context_adherence
-        | :ground_truth_adherence
-        | :comprehensive_safety
-
-      module GuardrailMetric
-        extend Deeprails::Internal::Type::Enum
-
-        CORRECTNESS: :correctness
-        COMPLETENESS: :completeness
-        INSTRUCTION_ADHERENCE: :instruction_adherence
-        CONTEXT_ADHERENCE: :context_adherence
-        GROUND_TRUTH_ADHERENCE: :ground_truth_adherence
-        COMPREHENSIVE_SAFETY: :comprehensive_safety
-
-        def self?.values: -> ::Array[Deeprails::Models::MonitorSubmitEventParams::guardrail_metric]
-      end
 
       type model_input =
         { ground_truth: String, system_prompt: String, user_prompt: String }

@@ -1,12 +1,20 @@
 module Deeprails
   module Models
     type monitor_create_params =
-      { name: String, description: String }
+      {
+        guardrail_metrics: ::Array[Deeprails::Models::MonitorCreateParams::guardrail_metric],
+        name: String,
+        description: String,
+        file_search: ::Array[String],
+        web_search: bool
+      }
       & Deeprails::Internal::Type::request_parameters
 
     class MonitorCreateParams < Deeprails::Internal::Type::BaseModel
       extend Deeprails::Internal::Type::RequestParameters::Converter
       include Deeprails::Internal::Type::RequestParameters
+
+      attr_accessor guardrail_metrics: ::Array[Deeprails::Models::MonitorCreateParams::guardrail_metric]
 
       attr_accessor name: String
 
@@ -14,17 +22,52 @@ module Deeprails
 
       def description=: (String) -> String
 
+      attr_reader file_search: ::Array[String]?
+
+      def file_search=: (::Array[String]) -> ::Array[String]
+
+      attr_reader web_search: bool?
+
+      def web_search=: (bool) -> bool
+
       def initialize: (
+        guardrail_metrics: ::Array[Deeprails::Models::MonitorCreateParams::guardrail_metric],
         name: String,
         ?description: String,
+        ?file_search: ::Array[String],
+        ?web_search: bool,
         ?request_options: Deeprails::request_opts
       ) -> void
 
       def to_hash: -> {
+        guardrail_metrics: ::Array[Deeprails::Models::MonitorCreateParams::guardrail_metric],
         name: String,
         description: String,
+        file_search: ::Array[String],
+        web_search: bool,
         request_options: Deeprails::RequestOptions
       }
+
+      type guardrail_metric =
+        :correctness
+        | :completeness
+        | :instruction_adherence
+        | :context_adherence
+        | :ground_truth_adherence
+        | :comprehensive_safety
+
+      module GuardrailMetric
+        extend Deeprails::Internal::Type::Enum
+
+        CORRECTNESS: :correctness
+        COMPLETENESS: :completeness
+        INSTRUCTION_ADHERENCE: :instruction_adherence
+        CONTEXT_ADHERENCE: :context_adherence
+        GROUND_TRUTH_ADHERENCE: :ground_truth_adherence
+        COMPREHENSIVE_SAFETY: :comprehensive_safety
+
+        def self?.values: -> ::Array[Deeprails::Models::MonitorCreateParams::guardrail_metric]
+      end
     end
   end
 end

@@ -2,8 +2,11 @@ module Deeprails
   module Resources
     class Monitor
       def create: (
+        guardrail_metrics: ::Array[Deeprails::Models::MonitorCreateParams::guardrail_metric],
         name: String,
         ?description: String,
+        ?file_search: ::Array[String],
+        ?web_search: bool,
         ?request_options: Deeprails::request_opts
       ) -> Deeprails::MonitorResponse
 
@@ -23,10 +26,8 @@ module Deeprails
 
       def submit_event: (
         String monitor_id,
-        guardrail_metrics: ::Array[Deeprails::Models::MonitorSubmitEventParams::guardrail_metric],
         model_input: Deeprails::MonitorSubmitEventParams::ModelInput,
         model_output: String,
-        ?model_used: String,
         ?nametag: String,
         ?run_mode: Deeprails::Models::MonitorSubmitEventParams::run_mode,
         ?request_options: Deeprails::request_opts
