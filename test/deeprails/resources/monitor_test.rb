@@ -6,7 +6,7 @@ class Deeprails::Test::Resources::MonitorTest < Deeprails::Test::ResourceTest
   def test_create_required_params
     skip("Prism tests are disabled")
 
-    response = @deeprails.monitor.create(name: "name")
+    response = @deeprails.monitor.create(guardrail_metrics: [:correctness], name: "name")
 
     assert_pattern do
       response => Deeprails::MonitorResponse
@@ -74,13 +74,7 @@ class Deeprails::Test::Resources::MonitorTest < Deeprails::Test::ResourceTest
   def test_submit_event_required_params
     skip("Prism tests are disabled")
 
-    response =
-      @deeprails.monitor.submit_event(
-        "monitor_id",
-        guardrail_metrics: [:correctness],
-        model_input: {},
-        model_output: "model_output"
-      )
+    response = @deeprails.monitor.submit_event("monitor_id", model_input: {}, model_output: "model_output")
 
     assert_pattern do
       response => Deeprails::MonitorEventResponse
