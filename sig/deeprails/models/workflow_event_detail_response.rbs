@@ -1,0 +1,315 @@
+module Deeprails
+  module Models
+    type workflow_event_detail_response =
+      {
+        event_id: String,
+        event_status: Deeprails::Models::WorkflowEventDetailResponse::event_status,
+        filtered: bool,
+        improvement_tool_type: Deeprails::Models::WorkflowEventDetailResponse::improvement_tool_type,
+        workflow_id: String,
+        automatic_hallucination_tolerance_levels: ::Hash[Symbol, Deeprails::Models::WorkflowEventDetailResponse::automatic_hallucination_tolerance_level],
+        capabilities: ::Array[Deeprails::WorkflowEventDetailResponse::Capability],
+        custom_hallucination_threshold_values: ::Hash[Symbol, Float],
+        evaluation_history: ::Array[Deeprails::WorkflowEventDetailResponse::EvaluationHistory],
+        evaluation_result: ::Hash[Symbol, top],
+        files: ::Array[Deeprails::WorkflowEventDetailResponse::File],
+        improved_model_output: String,
+        improvement_tool_status: Deeprails::Models::WorkflowEventDetailResponse::improvement_tool_status?,
+        threshold_type: Deeprails::Models::WorkflowEventDetailResponse::threshold_type
+      }
+
+    class WorkflowEventDetailResponse < Deeprails::Internal::Type::BaseModel
+      attr_accessor event_id: String
+
+      attr_accessor event_status: Deeprails::Models::WorkflowEventDetailResponse::event_status
+
+      attr_accessor filtered: bool
+
+      attr_accessor improvement_tool_type: Deeprails::Models::WorkflowEventDetailResponse::improvement_tool_type
+
+      attr_accessor workflow_id: String
+
+      attr_reader automatic_hallucination_tolerance_levels: ::Hash[Symbol, Deeprails::Models::WorkflowEventDetailResponse::automatic_hallucination_tolerance_level]?
+
+      def automatic_hallucination_tolerance_levels=: (
+        ::Hash[Symbol, Deeprails::Models::WorkflowEventDetailResponse::automatic_hallucination_tolerance_level]
+      ) -> ::Hash[Symbol, Deeprails::Models::WorkflowEventDetailResponse::automatic_hallucination_tolerance_level]
+
+      attr_reader capabilities: ::Array[Deeprails::WorkflowEventDetailResponse::Capability]?
+
+      def capabilities=: (
+        ::Array[Deeprails::WorkflowEventDetailResponse::Capability]
+      ) -> ::Array[Deeprails::WorkflowEventDetailResponse::Capability]
+
+      attr_reader custom_hallucination_threshold_values: ::Hash[Symbol, Float]?
+
+      def custom_hallucination_threshold_values=: (
+        ::Hash[Symbol, Float]
+      ) -> ::Hash[Symbol, Float]
+
+      attr_reader evaluation_history: ::Array[Deeprails::WorkflowEventDetailResponse::EvaluationHistory]?
+
+      def evaluation_history=: (
+        ::Array[Deeprails::WorkflowEventDetailResponse::EvaluationHistory]
+      ) -> ::Array[Deeprails::WorkflowEventDetailResponse::EvaluationHistory]
+
+      attr_reader evaluation_result: ::Hash[Symbol, top]?
+
+      def evaluation_result=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+
+      attr_reader files: ::Array[Deeprails::WorkflowEventDetailResponse::File]?
+
+      def files=: (
+        ::Array[Deeprails::WorkflowEventDetailResponse::File]
+      ) -> ::Array[Deeprails::WorkflowEventDetailResponse::File]
+
+      attr_reader improved_model_output: String?
+
+      def improved_model_output=: (String) -> String
+
+      attr_accessor improvement_tool_status: Deeprails::Models::WorkflowEventDetailResponse::improvement_tool_status?
+
+      attr_reader threshold_type: Deeprails::Models::WorkflowEventDetailResponse::threshold_type?
+
+      def threshold_type=: (
+        Deeprails::Models::WorkflowEventDetailResponse::threshold_type
+      ) -> Deeprails::Models::WorkflowEventDetailResponse::threshold_type
+
+      def initialize: (
+        event_id: String,
+        event_status: Deeprails::Models::WorkflowEventDetailResponse::event_status,
+        filtered: bool,
+        improvement_tool_type: Deeprails::Models::WorkflowEventDetailResponse::improvement_tool_type,
+        workflow_id: String,
+        ?automatic_hallucination_tolerance_levels: ::Hash[Symbol, Deeprails::Models::WorkflowEventDetailResponse::automatic_hallucination_tolerance_level],
+        ?capabilities: ::Array[Deeprails::WorkflowEventDetailResponse::Capability],
+        ?custom_hallucination_threshold_values: ::Hash[Symbol, Float],
+        ?evaluation_history: ::Array[Deeprails::WorkflowEventDetailResponse::EvaluationHistory],
+        ?evaluation_result: ::Hash[Symbol, top],
+        ?files: ::Array[Deeprails::WorkflowEventDetailResponse::File],
+        ?improved_model_output: String,
+        ?improvement_tool_status: Deeprails::Models::WorkflowEventDetailResponse::improvement_tool_status?,
+        ?threshold_type: Deeprails::Models::WorkflowEventDetailResponse::threshold_type
+      ) -> void
+
+      def to_hash: -> {
+        event_id: String,
+        event_status: Deeprails::Models::WorkflowEventDetailResponse::event_status,
+        filtered: bool,
+        improvement_tool_type: Deeprails::Models::WorkflowEventDetailResponse::improvement_tool_type,
+        workflow_id: String,
+        automatic_hallucination_tolerance_levels: ::Hash[Symbol, Deeprails::Models::WorkflowEventDetailResponse::automatic_hallucination_tolerance_level],
+        capabilities: ::Array[Deeprails::WorkflowEventDetailResponse::Capability],
+        custom_hallucination_threshold_values: ::Hash[Symbol, Float],
+        evaluation_history: ::Array[Deeprails::WorkflowEventDetailResponse::EvaluationHistory],
+        evaluation_result: ::Hash[Symbol, top],
+        files: ::Array[Deeprails::WorkflowEventDetailResponse::File],
+        improved_model_output: String,
+        improvement_tool_status: Deeprails::Models::WorkflowEventDetailResponse::improvement_tool_status?,
+        threshold_type: Deeprails::Models::WorkflowEventDetailResponse::threshold_type
+      }
+
+      type event_status = :"In Progress" | :Completed
+
+      module EventStatus
+        extend Deeprails::Internal::Type::Enum
+
+        IN_PROGRESS: :"In Progress"
+        COMPLETED: :Completed
+
+        def self?.values: -> ::Array[Deeprails::Models::WorkflowEventDetailResponse::event_status]
+      end
+
+      type improvement_tool_type = :regen | :fixit | :do_nothing
+
+      module ImprovementToolType
+        extend Deeprails::Internal::Type::Enum
+
+        REGEN: :regen
+        FIXIT: :fixit
+        DO_NOTHING: :do_nothing
+
+        def self?.values: -> ::Array[Deeprails::Models::WorkflowEventDetailResponse::improvement_tool_type]
+      end
+
+      type automatic_hallucination_tolerance_level = :low | :medium | :high
+
+      module AutomaticHallucinationToleranceLevel
+        extend Deeprails::Internal::Type::Enum
+
+        LOW: :low
+        MEDIUM: :medium
+        HIGH: :high
+
+        def self?.values: -> ::Array[Deeprails::Models::WorkflowEventDetailResponse::automatic_hallucination_tolerance_level]
+      end
+
+      type capability = { capability: String }
+
+      class Capability < Deeprails::Internal::Type::BaseModel
+        attr_reader capability: String?
+
+        def capability=: (String) -> String
+
+        def initialize: (?capability: String) -> void
+
+        def to_hash: -> { capability: String }
+      end
+
+      type evaluation_history =
+        {
+          attempt: String,
+          created_at: Time,
+          error_message: String,
+          evaluation_result: ::Hash[Symbol, top],
+          evaluation_status: String,
+          evaluation_total_cost: Float,
+          guardrail_metrics: ::Array[String],
+          model_input: ::Hash[Symbol, top],
+          model_output: String,
+          modified_at: Time,
+          nametag: String,
+          progress: Integer,
+          run_mode: String
+        }
+
+      class EvaluationHistory < Deeprails::Internal::Type::BaseModel
+        attr_reader attempt: String?
+
+        def attempt=: (String) -> String
+
+        attr_reader created_at: Time?
+
+        def created_at=: (Time) -> Time
+
+        attr_reader error_message: String?
+
+        def error_message=: (String) -> String
+
+        attr_reader evaluation_result: ::Hash[Symbol, top]?
+
+        def evaluation_result=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+
+        attr_reader evaluation_status: String?
+
+        def evaluation_status=: (String) -> String
+
+        attr_reader evaluation_total_cost: Float?
+
+        def evaluation_total_cost=: (Float) -> Float
+
+        attr_reader guardrail_metrics: ::Array[String]?
+
+        def guardrail_metrics=: (::Array[String]) -> ::Array[String]
+
+        attr_reader model_input: ::Hash[Symbol, top]?
+
+        def model_input=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+
+        attr_reader model_output: String?
+
+        def model_output=: (String) -> String
+
+        attr_reader modified_at: Time?
+
+        def modified_at=: (Time) -> Time
+
+        attr_reader nametag: String?
+
+        def nametag=: (String) -> String
+
+        attr_reader progress: Integer?
+
+        def progress=: (Integer) -> Integer
+
+        attr_reader run_mode: String?
+
+        def run_mode=: (String) -> String
+
+        def initialize: (
+          ?attempt: String,
+          ?created_at: Time,
+          ?error_message: String,
+          ?evaluation_result: ::Hash[Symbol, top],
+          ?evaluation_status: String,
+          ?evaluation_total_cost: Float,
+          ?guardrail_metrics: ::Array[String],
+          ?model_input: ::Hash[Symbol, top],
+          ?model_output: String,
+          ?modified_at: Time,
+          ?nametag: String,
+          ?progress: Integer,
+          ?run_mode: String
+        ) -> void
+
+        def to_hash: -> {
+          attempt: String,
+          created_at: Time,
+          error_message: String,
+          evaluation_result: ::Hash[Symbol, top],
+          evaluation_status: String,
+          evaluation_total_cost: Float,
+          guardrail_metrics: ::Array[String],
+          model_input: ::Hash[Symbol, top],
+          model_output: String,
+          modified_at: Time,
+          nametag: String,
+          progress: Integer,
+          run_mode: String
+        }
+      end
+
+      type file = { file_id: String, file_name: String, file_size: Integer }
+
+      class File < Deeprails::Internal::Type::BaseModel
+        attr_reader file_id: String?
+
+        def file_id=: (String) -> String
+
+        attr_reader file_name: String?
+
+        def file_name=: (String) -> String
+
+        attr_reader file_size: Integer?
+
+        def file_size=: (Integer) -> Integer
+
+        def initialize: (
+          ?file_id: String,
+          ?file_name: String,
+          ?file_size: Integer
+        ) -> void
+
+        def to_hash: -> {
+          file_id: String,
+          file_name: String,
+          file_size: Integer
+        }
+      end
+
+      type improvement_tool_status =
+        :improved | :"failed on max retries" | :improvement_required
+
+      module ImprovementToolStatus
+        extend Deeprails::Internal::Type::Enum
+
+        IMPROVED: :improved
+        FAILED_ON_MAX_RETRIES: :"failed on max retries"
+        IMPROVEMENT_REQUIRED: :improvement_required
+
+        def self?.values: -> ::Array[Deeprails::Models::WorkflowEventDetailResponse::improvement_tool_status]
+      end
+
+      type threshold_type = :custom | :automatic
+
+      module ThresholdType
+        extend Deeprails::Internal::Type::Enum
+
+        CUSTOM: :custom
+        AUTOMATIC: :automatic
+
+        def self?.values: -> ::Array[Deeprails::Models::WorkflowEventDetailResponse::threshold_type]
+      end
+    end
+  end
+end

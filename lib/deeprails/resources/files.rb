@@ -7,7 +7,7 @@ module Deeprails
       #
       # @overload upload(file:, request_options: {})
       #
-      # @param file [Pathname, StringIO, IO, String, Deeprails::FilePart] The contents of the file to upload.
+      # @param file [Array<String>] The contents of the file to upload.
       #
       # @param request_options [Deeprails::RequestOptions, Hash{Symbol=>Object}, nil]
       #

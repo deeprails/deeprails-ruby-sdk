@@ -1,6 +1,8 @@
 # typed: strong
 
 module Deeprails
+  DefendCreateResponse = Deeprails::Models::DefendCreateResponse
+
   DefendCreateWorkflowParams = Deeprails::Models::DefendCreateWorkflowParams
 
   DefendResponse = Deeprails::Models::DefendResponse
@@ -11,6 +13,8 @@ module Deeprails
 
   DefendSubmitEventParams = Deeprails::Models::DefendSubmitEventParams
 
+  DefendUpdateResponse = Deeprails::Models::DefendUpdateResponse
+
   DefendUpdateWorkflowParams = Deeprails::Models::DefendUpdateWorkflowParams
 
   FileResponse = Deeprails::Models::FileResponse
@@ -19,17 +23,23 @@ module Deeprails
 
   MonitorCreateParams = Deeprails::Models::MonitorCreateParams
 
+  MonitorCreateResponse = Deeprails::Models::MonitorCreateResponse
+
   MonitorDetailResponse = Deeprails::Models::MonitorDetailResponse
 
-  MonitorEventResponse = Deeprails::Models::MonitorEventResponse
+  MonitorEventDetailResponse = Deeprails::Models::MonitorEventDetailResponse
 
-  MonitorResponse = Deeprails::Models::MonitorResponse
+  MonitorEventResponse = Deeprails::Models::MonitorEventResponse
 
   MonitorRetrieveParams = Deeprails::Models::MonitorRetrieveParams
 
   MonitorSubmitEventParams = Deeprails::Models::MonitorSubmitEventParams
 
   MonitorUpdateParams = Deeprails::Models::MonitorUpdateParams
+
+  MonitorUpdateResponse = Deeprails::Models::MonitorUpdateResponse
+
+  WorkflowEventDetailResponse = Deeprails::Models::WorkflowEventDetailResponse
 
   WorkflowEventResponse = Deeprails::Models::WorkflowEventResponse
 end

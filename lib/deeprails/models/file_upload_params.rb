@@ -10,11 +10,11 @@ module Deeprails
       # @!attribute file
       #   The contents of the file to upload.
       #
-      #   @return [Pathname, StringIO, IO, String, Deeprails::FilePart]
-      required :file, Deeprails::Internal::Type::FileInput
+      #   @return [Array<String>]
+      required :file, Deeprails::Internal::Type::ArrayOf[String]
 
       # @!method initialize(file:, request_options: {})
-      #   @param file [Pathname, StringIO, IO, String, Deeprails::FilePart] The contents of the file to upload.
+      #   @param file [Array<String>] The contents of the file to upload.
       #
       #   @param request_options [Deeprails::RequestOptions, Hash{Symbol=>Object}]
     end

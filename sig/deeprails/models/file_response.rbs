@@ -1,19 +1,9 @@
 module Deeprails
   module Models
     type file_response =
-      {
-        created_at: Time,
-        file_id: String,
-        file_name: String,
-        file_path: String,
-        updated_at: Time
-      }
+      { file_id: String, file_name: String, file_size: Integer }
 
     class FileResponse < Deeprails::Internal::Type::BaseModel
-      attr_reader created_at: Time?
-
-      def created_at=: (Time) -> Time
-
       attr_reader file_id: String?
 
       def file_id=: (String) -> String
@@ -22,29 +12,17 @@ module Deeprails
 
       def file_name=: (String) -> String
 
-      attr_reader file_path: String?
+      attr_reader file_size: Integer?
 
-      def file_path=: (String) -> String
-
-      attr_reader updated_at: Time?
-
-      def updated_at=: (Time) -> Time
+      def file_size=: (Integer) -> Integer
 
       def initialize: (
-        ?created_at: Time,
         ?file_id: String,
         ?file_name: String,
-        ?file_path: String,
-        ?updated_at: Time
+        ?file_size: Integer
       ) -> void
 
-      def to_hash: -> {
-        created_at: Time,
-        file_id: String,
-        file_name: String,
-        file_path: String,
-        updated_at: Time
-      }
+      def to_hash: -> { file_id: String, file_name: String, file_size: Integer }
     end
   end
 end

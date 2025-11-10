@@ -1,0 +1,41 @@
+module Deeprails
+  module Models
+    type monitor_update_response =
+      {
+        modified_at: Time,
+        monitor_id: String,
+        status: Deeprails::Models::MonitorUpdateResponse::status
+      }
+
+    class MonitorUpdateResponse < Deeprails::Internal::Type::BaseModel
+      attr_accessor modified_at: Time
+
+      attr_accessor monitor_id: String
+
+      attr_accessor status: Deeprails::Models::MonitorUpdateResponse::status
+
+      def initialize: (
+        modified_at: Time,
+        monitor_id: String,
+        status: Deeprails::Models::MonitorUpdateResponse::status
+      ) -> void
+
+      def to_hash: -> {
+        modified_at: Time,
+        monitor_id: String,
+        status: Deeprails::Models::MonitorUpdateResponse::status
+      }
+
+      type status = :active | :inactive
+
+      module Status
+        extend Deeprails::Internal::Type::Enum
+
+        ACTIVE: :active
+        INACTIVE: :inactive
+
+        def self?.values: -> ::Array[Deeprails::Models::MonitorUpdateResponse::status]
+      end
+    end
+  end
+end

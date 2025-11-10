@@ -2,45 +2,45 @@ module Deeprails
   module Models
     type workflow_event_response =
       {
+        created_at: Time,
         event_id: String,
-        workflow_id: String,
-        attempt_number: Integer,
-        evaluation_id: String,
-        filtered: bool
+        status: Deeprails::Models::WorkflowEventResponse::status,
+        workflow_id: String
       }
 
     class WorkflowEventResponse < Deeprails::Internal::Type::BaseModel
+      attr_accessor created_at: Time
+
       attr_accessor event_id: String
+
+      attr_accessor status: Deeprails::Models::WorkflowEventResponse::status
 
       attr_accessor workflow_id: String
 
-      attr_reader attempt_number: Integer?
-
-      def attempt_number=: (Integer) -> Integer
-
-      attr_reader evaluation_id: String?
-
-      def evaluation_id=: (String) -> String
-
-      attr_reader filtered: bool?
-
-      def filtered=: (bool) -> bool
-
       def initialize: (
+        created_at: Time,
         event_id: String,
-        workflow_id: String,
-        ?attempt_number: Integer,
-        ?evaluation_id: String,
-        ?filtered: bool
+        status: Deeprails::Models::WorkflowEventResponse::status,
+        workflow_id: String
       ) -> void
 
       def to_hash: -> {
+        created_at: Time,
         event_id: String,
-        workflow_id: String,
-        attempt_number: Integer,
-        evaluation_id: String,
-        filtered: bool
+        status: Deeprails::Models::WorkflowEventResponse::status,
+        workflow_id: String
       }
+
+      type status = :"In Progress" | :Completed
+
+      module Status
+        extend Deeprails::Internal::Type::Enum
+
+        IN_PROGRESS: :"In Progress"
+        COMPLETED: :Completed
+
+        def self?.values: -> ::Array[Deeprails::Models::WorkflowEventResponse::status]
+      end
     end
   end
 end

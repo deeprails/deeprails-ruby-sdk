@@ -2,13 +2,25 @@
 
 module Deeprails
   module Models
-    # @see Deeprails::Resources::Defend#retrieve_event
+    # @see Deeprails::Resources::Defend#submit_event
     class WorkflowEventResponse < Deeprails::Internal::Type::BaseModel
+      # @!attribute created_at
+      #   The time the event was created in UTC.
+      #
+      #   @return [Time]
+      required :created_at, Time
+
       # @!attribute event_id
       #   A unique workflow event ID.
       #
       #   @return [String]
       required :event_id, String
+
+      # @!attribute status
+      #   Status of the event.
+      #
+      #   @return [Symbol, Deeprails::Models::WorkflowEventResponse::Status]
+      required :status, enum: -> { Deeprails::WorkflowEventResponse::Status }
 
       # @!attribute workflow_id
       #   Workflow ID associated with the event.
@@ -16,40 +28,27 @@ module Deeprails
       #   @return [String]
       required :workflow_id, String
 
-      # @!attribute attempt_number
-      #   Count of improvement attempts for the event. If greater than one then all
-      #   previous improvement attempts failed.
-      #
-      #   @return [Integer, nil]
-      optional :attempt_number, Integer
-
-      # @!attribute evaluation_id
-      #   A unique evaluation ID associated with this event. Every event has one or more
-      #   evaluation attempts.
-      #
-      #   @return [String, nil]
-      optional :evaluation_id, String
-
-      # @!attribute filtered
-      #   `False` if evaluation passed all of the guardrail metrics, `True` if evaluation
-      #   failed any of the guardrail metrics.
-      #
-      #   @return [Boolean, nil]
-      optional :filtered, Deeprails::Internal::Type::Boolean
-
-      # @!method initialize(event_id:, workflow_id:, attempt_number: nil, evaluation_id: nil, filtered: nil)
-      #   Some parameter documentations has been truncated, see
-      #   {Deeprails::Models::WorkflowEventResponse} for more details.
+      # @!method initialize(created_at:, event_id:, status:, workflow_id:)
+      #   @param created_at [Time] The time the event was created in UTC.
       #
       #   @param event_id [String] A unique workflow event ID.
       #
+      #   @param status [Symbol, Deeprails::Models::WorkflowEventResponse::Status] Status of the event.
+      #
       #   @param workflow_id [String] Workflow ID associated with the event.
+
+      # Status of the event.
       #
-      #   @param attempt_number [Integer] Count of improvement attempts for the event. If greater than one then all previ
-      #
-      #   @param evaluation_id [String] A unique evaluation ID associated with this event. Every event has one or more
-      #
-      #   @param filtered [Boolean] `False` if evaluation passed all of the guardrail metrics, `True` if evaluation
+      # @see Deeprails::Models::WorkflowEventResponse#status
+      module Status
+        extend Deeprails::Internal::Type::Enum
+
+        IN_PROGRESS = :"In Progress"
+        COMPLETED = :Completed
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
+      end
     end
   end
 end

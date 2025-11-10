@@ -10,7 +10,8 @@ module Deeprails
           improvement_action:
             Deeprails::DefendCreateWorkflowParams::ImprovementAction::OrSymbol,
           name: String,
-          type: Deeprails::DefendCreateWorkflowParams::Type::OrSymbol,
+          threshold_type:
+            Deeprails::DefendCreateWorkflowParams::ThresholdType::OrSymbol,
           automatic_hallucination_tolerance_levels:
             T::Hash[
               Symbol,
@@ -22,14 +23,14 @@ module Deeprails
           max_improvement_attempts: Integer,
           web_search: T::Boolean,
           request_options: Deeprails::RequestOptions::OrHash
-        ).returns(Deeprails::DefendResponse)
+        ).returns(Deeprails::DefendCreateResponse)
       end
       def create_workflow(
-        # The action used to improve outputs that fail one or guardrail metrics for the
-        # workflow events. May be `regen`, `fixit`, or `do_nothing`. ReGen runs the user's
-        # input prompt with minor induced variance. FixIt attempts to directly address the
-        # shortcomings of the output using the guardrail failure rationale. Do Nothing
-        # does not attempt any improvement.
+        # The action used to improve outputs that fail one or more guardrail metrics for
+        # the workflow events. May be `regen`, `fixit`, or `do_nothing`. ReGen runs the
+        # user's input prompt with minor induced variance. FixIt attempts to directly
+        # address the shortcomings of the output using the guardrail failure rationale. Do
+        # Nothing does not attempt any improvement.
         improvement_action:,
         # Name of the workflow.
         name:,
@@ -38,7 +39,7 @@ module Deeprails
         # qualitative tolerance for the metrics, whereas custom metrics allow the user to
         # set the threshold for each metric as a floating point number between 0.0 and
         # 1.0.
-        type:,
+        threshold_type:,
         # Mapping of guardrail metrics to hallucination tolerance levels (either `low`,
         # `medium`, or `high`). Possible metrics are `completeness`,
         # `instruction_adherence`, `context_adherence`, `ground_truth_adherence`, or
@@ -53,7 +54,7 @@ module Deeprails
         # An array of file IDs to search in the workflow's evaluations. Files must be
         # uploaded via the DeepRails API first.
         file_search: nil,
-        # Max. number of improvement action retries until a given event passes the
+        # Max. number of improvement action attempts until a given event passes the
         # guardrails. Defaults to 10.
         max_improvement_attempts: nil,
         # Whether to enable web search for this workflow's evaluations. Defaults to false.
@@ -68,7 +69,7 @@ module Deeprails
           event_id: String,
           workflow_id: String,
           request_options: Deeprails::RequestOptions::OrHash
-        ).returns(Deeprails::WorkflowEventResponse)
+        ).returns(Deeprails::WorkflowEventDetailResponse)
       end
       def retrieve_event(
         # The ID of the requested workflow event.
@@ -83,12 +84,16 @@ module Deeprails
       sig do
         params(
           workflow_id: String,
+          limit: Integer,
           request_options: Deeprails::RequestOptions::OrHash
         ).returns(Deeprails::DefendResponse)
       end
       def retrieve_workflow(
         # The ID of the workflow to retrieve.
         workflow_id,
+        # Limit the number of returned events associated with this workflow. Defaults
+        # to 10.
+        limit: nil,
         request_options: {}
       )
       end
@@ -128,14 +133,14 @@ module Deeprails
       )
       end
 
-      # Use this endpoint to update an existing guardrail workflow
+      # Use this endpoint to update an existing defend workflow
       sig do
         params(
           workflow_id: String,
           description: String,
           name: String,
           request_options: Deeprails::RequestOptions::OrHash
-        ).returns(Deeprails::DefendResponse)
+        ).returns(Deeprails::DefendUpdateResponse)
       end
       def update_workflow(
         # The ID of the workflow to edit.

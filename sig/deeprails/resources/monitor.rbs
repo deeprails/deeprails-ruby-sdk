@@ -8,7 +8,7 @@ module Deeprails
         ?file_search: ::Array[String],
         ?web_search: bool,
         ?request_options: Deeprails::request_opts
-      ) -> Deeprails::MonitorResponse
+      ) -> Deeprails::MonitorCreateResponse
 
       def retrieve: (
         String monitor_id,
@@ -19,10 +19,10 @@ module Deeprails
       def update: (
         String monitor_id,
         ?description: String,
-        ?monitor_status: Deeprails::Models::MonitorUpdateParams::monitor_status,
         ?name: String,
+        ?status: Deeprails::Models::MonitorUpdateParams::status,
         ?request_options: Deeprails::request_opts
-      ) -> Deeprails::MonitorResponse
+      ) -> Deeprails::MonitorUpdateResponse
 
       def submit_event: (
         String monitor_id,

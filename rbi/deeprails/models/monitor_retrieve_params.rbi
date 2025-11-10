@@ -11,7 +11,8 @@ module Deeprails
           T.any(Deeprails::MonitorRetrieveParams, Deeprails::Internal::AnyHash)
         end
 
-      # Limit the returned events associated with this monitor. Defaults to 10.
+      # Limit the number of returned evaluations associated with this monitor. Defaults
+      # to 10.
       sig { returns(T.nilable(Integer)) }
       attr_reader :limit
 
@@ -25,7 +26,8 @@ module Deeprails
         ).returns(T.attached_class)
       end
       def self.new(
-        # Limit the returned events associated with this monitor. Defaults to 10.
+        # Limit the number of returned evaluations associated with this monitor. Defaults
+        # to 10.
         limit: nil,
         request_options: {}
       )

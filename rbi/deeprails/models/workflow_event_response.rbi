@@ -8,76 +8,83 @@ module Deeprails
           T.any(Deeprails::WorkflowEventResponse, Deeprails::Internal::AnyHash)
         end
 
+      # The time the event was created in UTC.
+      sig { returns(Time) }
+      attr_accessor :created_at
+
       # A unique workflow event ID.
       sig { returns(String) }
       attr_accessor :event_id
+
+      # Status of the event.
+      sig { returns(Deeprails::WorkflowEventResponse::Status::TaggedSymbol) }
+      attr_accessor :status
 
       # Workflow ID associated with the event.
       sig { returns(String) }
       attr_accessor :workflow_id
 
-      # Count of improvement attempts for the event. If greater than one then all
-      # previous improvement attempts failed.
-      sig { returns(T.nilable(Integer)) }
-      attr_reader :attempt_number
-
-      sig { params(attempt_number: Integer).void }
-      attr_writer :attempt_number
-
-      # A unique evaluation ID associated with this event. Every event has one or more
-      # evaluation attempts.
-      sig { returns(T.nilable(String)) }
-      attr_reader :evaluation_id
-
-      sig { params(evaluation_id: String).void }
-      attr_writer :evaluation_id
-
-      # `False` if evaluation passed all of the guardrail metrics, `True` if evaluation
-      # failed any of the guardrail metrics.
-      sig { returns(T.nilable(T::Boolean)) }
-      attr_reader :filtered
-
-      sig { params(filtered: T::Boolean).void }
-      attr_writer :filtered
-
       sig do
         params(
+          created_at: Time,
           event_id: String,
-          workflow_id: String,
-          attempt_number: Integer,
-          evaluation_id: String,
-          filtered: T::Boolean
+          status: Deeprails::WorkflowEventResponse::Status::OrSymbol,
+          workflow_id: String
         ).returns(T.attached_class)
       end
       def self.new(
+        # The time the event was created in UTC.
+        created_at:,
         # A unique workflow event ID.
         event_id:,
+        # Status of the event.
+        status:,
         # Workflow ID associated with the event.
-        workflow_id:,
-        # Count of improvement attempts for the event. If greater than one then all
-        # previous improvement attempts failed.
-        attempt_number: nil,
-        # A unique evaluation ID associated with this event. Every event has one or more
-        # evaluation attempts.
-        evaluation_id: nil,
-        # `False` if evaluation passed all of the guardrail metrics, `True` if evaluation
-        # failed any of the guardrail metrics.
-        filtered: nil
+        workflow_id:
       )
       end
 
       sig do
         override.returns(
           {
+            created_at: Time,
             event_id: String,
-            workflow_id: String,
-            attempt_number: Integer,
-            evaluation_id: String,
-            filtered: T::Boolean
+            status: Deeprails::WorkflowEventResponse::Status::TaggedSymbol,
+            workflow_id: String
           }
         )
       end
       def to_hash
+      end
+
+      # Status of the event.
+      module Status
+        extend Deeprails::Internal::Type::Enum
+
+        TaggedSymbol =
+          T.type_alias do
+            T.all(Symbol, Deeprails::WorkflowEventResponse::Status)
+          end
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+        IN_PROGRESS =
+          T.let(
+            :"In Progress",
+            Deeprails::WorkflowEventResponse::Status::TaggedSymbol
+          )
+        COMPLETED =
+          T.let(
+            :Completed,
+            Deeprails::WorkflowEventResponse::Status::TaggedSymbol
+          )
+
+        sig do
+          override.returns(
+            T::Array[Deeprails::WorkflowEventResponse::Status::TaggedSymbol]
+          )
+        end
+        def self.values
+        end
       end
     end
   end

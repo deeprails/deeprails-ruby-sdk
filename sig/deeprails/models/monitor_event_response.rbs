@@ -1,16 +1,9 @@
 module Deeprails
   module Models
     type monitor_event_response =
-      {
-        evaluation_id: String,
-        event_id: String,
-        monitor_id: String,
-        created_at: Time
-      }
+      { event_id: String, monitor_id: String, created_at: Time }
 
     class MonitorEventResponse < Deeprails::Internal::Type::BaseModel
-      attr_accessor evaluation_id: String
-
       attr_accessor event_id: String
 
       attr_accessor monitor_id: String
@@ -20,18 +13,12 @@ module Deeprails
       def created_at=: (Time) -> Time
 
       def initialize: (
-        evaluation_id: String,
         event_id: String,
         monitor_id: String,
         ?created_at: Time
       ) -> void
 
-      def to_hash: -> {
-        evaluation_id: String,
-        event_id: String,
-        monitor_id: String,
-        created_at: Time
-      }
+      def to_hash: -> { event_id: String, monitor_id: String, created_at: Time }
     end
   end
 end

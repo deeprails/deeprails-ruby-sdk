@@ -14,7 +14,7 @@ module Deeprails
           file_search: T::Array[String],
           web_search: T::Boolean,
           request_options: Deeprails::RequestOptions::OrHash
-        ).returns(Deeprails::MonitorResponse)
+        ).returns(Deeprails::MonitorCreateResponse)
       end
       def create(
         # An array of guardrail metrics that the model input and output pair will be
@@ -47,7 +47,8 @@ module Deeprails
       def retrieve(
         # The ID of the monitor to retrieve.
         monitor_id,
-        # Limit the returned events associated with this monitor. Defaults to 10.
+        # Limit the number of returned evaluations associated with this monitor. Defaults
+        # to 10.
         limit: nil,
         request_options: {}
       )
@@ -59,22 +60,21 @@ module Deeprails
         params(
           monitor_id: String,
           description: String,
-          monitor_status:
-            Deeprails::MonitorUpdateParams::MonitorStatus::OrSymbol,
           name: String,
+          status: Deeprails::MonitorUpdateParams::Status::OrSymbol,
           request_options: Deeprails::RequestOptions::OrHash
-        ).returns(Deeprails::MonitorResponse)
+        ).returns(Deeprails::MonitorUpdateResponse)
       end
       def update(
         # The ID of the monitor to edit.
         monitor_id,
         # Description of the monitor.
         description: nil,
-        # Status of the monitor. Can be `active` or `inactive`. Inactive monitors no
-        # longer record and evaluate events.
-        monitor_status: nil,
         # Name of the monitor.
         name: nil,
+        # Status of the monitor. Can be `active` or `inactive`. Inactive monitors no
+        # longer record and evaluate events.
+        status: nil,
         request_options: {}
       )
       end
