@@ -3,22 +3,29 @@ module Deeprails
     type monitor_detail_response =
       {
         monitor_id: String,
-        monitor_status: Deeprails::Models::MonitorDetailResponse::monitor_status,
         name: String,
+        status: Deeprails::Models::MonitorDetailResponse::status,
+        capabilities: ::Array[Deeprails::MonitorDetailResponse::Capability],
         created_at: Time,
         description: String,
         evaluations: ::Array[Deeprails::MonitorDetailResponse::Evaluation],
+        files: ::Array[Deeprails::MonitorDetailResponse::File],
         stats: Deeprails::MonitorDetailResponse::Stats,
-        updated_at: Time,
-        user_id: String
+        updated_at: Time
       }
 
     class MonitorDetailResponse < Deeprails::Internal::Type::BaseModel
       attr_accessor monitor_id: String
 
-      attr_accessor monitor_status: Deeprails::Models::MonitorDetailResponse::monitor_status
-
       attr_accessor name: String
+
+      attr_accessor status: Deeprails::Models::MonitorDetailResponse::status
+
+      attr_reader capabilities: ::Array[Deeprails::MonitorDetailResponse::Capability]?
+
+      def capabilities=: (
+        ::Array[Deeprails::MonitorDetailResponse::Capability]
+      ) -> ::Array[Deeprails::MonitorDetailResponse::Capability]
 
       attr_reader created_at: Time?
 
@@ -34,6 +41,12 @@ module Deeprails
         ::Array[Deeprails::MonitorDetailResponse::Evaluation]
       ) -> ::Array[Deeprails::MonitorDetailResponse::Evaluation]
 
+      attr_reader files: ::Array[Deeprails::MonitorDetailResponse::File]?
+
+      def files=: (
+        ::Array[Deeprails::MonitorDetailResponse::File]
+      ) -> ::Array[Deeprails::MonitorDetailResponse::File]
+
       attr_reader stats: Deeprails::MonitorDetailResponse::Stats?
 
       def stats=: (
@@ -44,69 +57,71 @@ module Deeprails
 
       def updated_at=: (Time) -> Time
 
-      attr_reader user_id: String?
-
-      def user_id=: (String) -> String
-
       def initialize: (
         monitor_id: String,
-        monitor_status: Deeprails::Models::MonitorDetailResponse::monitor_status,
         name: String,
+        status: Deeprails::Models::MonitorDetailResponse::status,
+        ?capabilities: ::Array[Deeprails::MonitorDetailResponse::Capability],
         ?created_at: Time,
         ?description: String,
         ?evaluations: ::Array[Deeprails::MonitorDetailResponse::Evaluation],
+        ?files: ::Array[Deeprails::MonitorDetailResponse::File],
         ?stats: Deeprails::MonitorDetailResponse::Stats,
-        ?updated_at: Time,
-        ?user_id: String
+        ?updated_at: Time
       ) -> void
 
       def to_hash: -> {
         monitor_id: String,
-        monitor_status: Deeprails::Models::MonitorDetailResponse::monitor_status,
         name: String,
+        status: Deeprails::Models::MonitorDetailResponse::status,
+        capabilities: ::Array[Deeprails::MonitorDetailResponse::Capability],
         created_at: Time,
         description: String,
         evaluations: ::Array[Deeprails::MonitorDetailResponse::Evaluation],
+        files: ::Array[Deeprails::MonitorDetailResponse::File],
         stats: Deeprails::MonitorDetailResponse::Stats,
-        updated_at: Time,
-        user_id: String
+        updated_at: Time
       }
 
-      type monitor_status = :active | :inactive
+      type status = :active | :inactive
 
-      module MonitorStatus
+      module Status
         extend Deeprails::Internal::Type::Enum
 
         ACTIVE: :active
         INACTIVE: :inactive
 
-        def self?.values: -> ::Array[Deeprails::Models::MonitorDetailResponse::monitor_status]
+        def self?.values: -> ::Array[Deeprails::Models::MonitorDetailResponse::status]
+      end
+
+      type capability = { capability: String }
+
+      class Capability < Deeprails::Internal::Type::BaseModel
+        attr_reader capability: String?
+
+        def capability=: (String) -> String
+
+        def initialize: (?capability: String) -> void
+
+        def to_hash: -> { capability: String }
       end
 
       type evaluation =
         {
-          eval_id: String,
           evaluation_status: Deeprails::Models::MonitorDetailResponse::Evaluation::evaluation_status,
           model_input: Deeprails::MonitorDetailResponse::Evaluation::ModelInput,
           model_output: String,
           run_mode: Deeprails::Models::MonitorDetailResponse::Evaluation::run_mode,
           created_at: Time,
-          end_timestamp: Time,
           error_message: String,
-          error_timestamp: Time,
           evaluation_result: ::Hash[Symbol, top],
           evaluation_total_cost: Float,
           guardrail_metrics: ::Array[Deeprails::Models::MonitorDetailResponse::Evaluation::guardrail_metric],
-          model_used: String,
-          modified_at: Time,
           nametag: String,
-          progress: Integer,
-          start_timestamp: Time
+          progress: Integer
         }
 
       class Evaluation < Deeprails::Internal::Type::BaseModel
-        attr_accessor eval_id: String
-
         attr_accessor evaluation_status: Deeprails::Models::MonitorDetailResponse::Evaluation::evaluation_status
 
         attr_accessor model_input: Deeprails::MonitorDetailResponse::Evaluation::ModelInput
@@ -119,17 +134,9 @@ module Deeprails
 
         def created_at=: (Time) -> Time
 
-        attr_reader end_timestamp: Time?
-
-        def end_timestamp=: (Time) -> Time
-
         attr_reader error_message: String?
 
         def error_message=: (String) -> String
-
-        attr_reader error_timestamp: Time?
-
-        def error_timestamp=: (Time) -> Time
 
         attr_reader evaluation_result: ::Hash[Symbol, top]?
 
@@ -145,14 +152,6 @@ module Deeprails
           ::Array[Deeprails::Models::MonitorDetailResponse::Evaluation::guardrail_metric]
         ) -> ::Array[Deeprails::Models::MonitorDetailResponse::Evaluation::guardrail_metric]
 
-        attr_reader model_used: String?
-
-        def model_used=: (String) -> String
-
-        attr_reader modified_at: Time?
-
-        def modified_at=: (Time) -> Time
-
         attr_reader nametag: String?
 
         def nametag=: (String) -> String
@@ -161,48 +160,32 @@ module Deeprails
 
         def progress=: (Integer) -> Integer
 
-        attr_reader start_timestamp: Time?
-
-        def start_timestamp=: (Time) -> Time
-
         def initialize: (
-          eval_id: String,
           evaluation_status: Deeprails::Models::MonitorDetailResponse::Evaluation::evaluation_status,
           model_input: Deeprails::MonitorDetailResponse::Evaluation::ModelInput,
           model_output: String,
           run_mode: Deeprails::Models::MonitorDetailResponse::Evaluation::run_mode,
           ?created_at: Time,
-          ?end_timestamp: Time,
           ?error_message: String,
-          ?error_timestamp: Time,
           ?evaluation_result: ::Hash[Symbol, top],
           ?evaluation_total_cost: Float,
           ?guardrail_metrics: ::Array[Deeprails::Models::MonitorDetailResponse::Evaluation::guardrail_metric],
-          ?model_used: String,
-          ?modified_at: Time,
           ?nametag: String,
-          ?progress: Integer,
-          ?start_timestamp: Time
+          ?progress: Integer
         ) -> void
 
         def to_hash: -> {
-          eval_id: String,
           evaluation_status: Deeprails::Models::MonitorDetailResponse::Evaluation::evaluation_status,
           model_input: Deeprails::MonitorDetailResponse::Evaluation::ModelInput,
           model_output: String,
           run_mode: Deeprails::Models::MonitorDetailResponse::Evaluation::run_mode,
           created_at: Time,
-          end_timestamp: Time,
           error_message: String,
-          error_timestamp: Time,
           evaluation_result: ::Hash[Symbol, top],
           evaluation_total_cost: Float,
           guardrail_metrics: ::Array[Deeprails::Models::MonitorDetailResponse::Evaluation::guardrail_metric],
-          model_used: String,
-          modified_at: Time,
           nametag: String,
-          progress: Integer,
-          start_timestamp: Time
+          progress: Integer
         }
 
         type evaluation_status =
@@ -282,6 +265,34 @@ module Deeprails
 
           def self?.values: -> ::Array[Deeprails::Models::MonitorDetailResponse::Evaluation::guardrail_metric]
         end
+      end
+
+      type file = { file_id: String, file_name: String, file_size: Integer }
+
+      class File < Deeprails::Internal::Type::BaseModel
+        attr_reader file_id: String?
+
+        def file_id=: (String) -> String
+
+        attr_reader file_name: String?
+
+        def file_name=: (String) -> String
+
+        attr_reader file_size: Integer?
+
+        def file_size=: (Integer) -> Integer
+
+        def initialize: (
+          ?file_id: String,
+          ?file_name: String,
+          ?file_size: Integer
+        ) -> void
+
+        def to_hash: -> {
+          file_id: String,
+          file_name: String,
+          file_size: Integer
+        }
       end
 
       type stats =

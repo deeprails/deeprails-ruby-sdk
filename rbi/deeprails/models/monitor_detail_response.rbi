@@ -12,16 +12,30 @@ module Deeprails
       sig { returns(String) }
       attr_accessor :monitor_id
 
-      # Status of the monitor. Can be `active` or `inactive`. Inactive monitors no
-      # longer record and evaluate events.
-      sig do
-        returns(Deeprails::MonitorDetailResponse::MonitorStatus::TaggedSymbol)
-      end
-      attr_accessor :monitor_status
-
       # Name of this monitor.
       sig { returns(String) }
       attr_accessor :name
+
+      # Status of the monitor. Can be `active` or `inactive`. Inactive monitors no
+      # longer record and evaluate events.
+      sig { returns(Deeprails::MonitorDetailResponse::Status::TaggedSymbol) }
+      attr_accessor :status
+
+      # An array of capabilities associated with this monitor.
+      sig do
+        returns(
+          T.nilable(T::Array[Deeprails::MonitorDetailResponse::Capability])
+        )
+      end
+      attr_reader :capabilities
+
+      sig do
+        params(
+          capabilities:
+            T::Array[Deeprails::MonitorDetailResponse::Capability::OrHash]
+        ).void
+      end
+      attr_writer :capabilities
 
       # The time the monitor was created in UTC.
       sig { returns(T.nilable(Time)) }
@@ -54,6 +68,19 @@ module Deeprails
       end
       attr_writer :evaluations
 
+      # An array of files associated with this monitor.
+      sig do
+        returns(T.nilable(T::Array[Deeprails::MonitorDetailResponse::File]))
+      end
+      attr_reader :files
+
+      sig do
+        params(
+          files: T::Array[Deeprails::MonitorDetailResponse::File::OrHash]
+        ).void
+      end
+      attr_writer :files
+
       # Contains five fields used for stats of this monitor: total evaluations,
       # completed evaluations, failed evaluations, queued evaluations, and in progress
       # evaluations.
@@ -72,36 +99,32 @@ module Deeprails
       sig { params(updated_at: Time).void }
       attr_writer :updated_at
 
-      # User ID of the user who created the monitor.
-      sig { returns(T.nilable(String)) }
-      attr_reader :user_id
-
-      sig { params(user_id: String).void }
-      attr_writer :user_id
-
       sig do
         params(
           monitor_id: String,
-          monitor_status:
-            Deeprails::MonitorDetailResponse::MonitorStatus::OrSymbol,
           name: String,
+          status: Deeprails::MonitorDetailResponse::Status::OrSymbol,
+          capabilities:
+            T::Array[Deeprails::MonitorDetailResponse::Capability::OrHash],
           created_at: Time,
           description: String,
           evaluations:
             T::Array[Deeprails::MonitorDetailResponse::Evaluation::OrHash],
+          files: T::Array[Deeprails::MonitorDetailResponse::File::OrHash],
           stats: Deeprails::MonitorDetailResponse::Stats::OrHash,
-          updated_at: Time,
-          user_id: String
+          updated_at: Time
         ).returns(T.attached_class)
       end
       def self.new(
         # A unique monitor ID.
         monitor_id:,
-        # Status of the monitor. Can be `active` or `inactive`. Inactive monitors no
-        # longer record and evaluate events.
-        monitor_status:,
         # Name of this monitor.
         name:,
+        # Status of the monitor. Can be `active` or `inactive`. Inactive monitors no
+        # longer record and evaluate events.
+        status:,
+        # An array of capabilities associated with this monitor.
+        capabilities: nil,
         # The time the monitor was created in UTC.
         created_at: nil,
         # Description of this monitor.
@@ -109,14 +132,14 @@ module Deeprails
         # An array of all evaluations performed by this monitor. Each one corresponds to a
         # separate monitor event.
         evaluations: nil,
+        # An array of files associated with this monitor.
+        files: nil,
         # Contains five fields used for stats of this monitor: total evaluations,
         # completed evaluations, failed evaluations, queued evaluations, and in progress
         # evaluations.
         stats: nil,
         # The most recent time the monitor was modified in UTC.
-        updated_at: nil,
-        # User ID of the user who created the monitor.
-        user_id: nil
+        updated_at: nil
       )
       end
 
@@ -124,15 +147,16 @@ module Deeprails
         override.returns(
           {
             monitor_id: String,
-            monitor_status:
-              Deeprails::MonitorDetailResponse::MonitorStatus::TaggedSymbol,
             name: String,
+            status: Deeprails::MonitorDetailResponse::Status::TaggedSymbol,
+            capabilities:
+              T::Array[Deeprails::MonitorDetailResponse::Capability],
             created_at: Time,
             description: String,
             evaluations: T::Array[Deeprails::MonitorDetailResponse::Evaluation],
+            files: T::Array[Deeprails::MonitorDetailResponse::File],
             stats: Deeprails::MonitorDetailResponse::Stats,
-            updated_at: Time,
-            user_id: String
+            updated_at: Time
           }
         )
       end
@@ -141,34 +165,57 @@ module Deeprails
 
       # Status of the monitor. Can be `active` or `inactive`. Inactive monitors no
       # longer record and evaluate events.
-      module MonitorStatus
+      module Status
         extend Deeprails::Internal::Type::Enum
 
         TaggedSymbol =
           T.type_alias do
-            T.all(Symbol, Deeprails::MonitorDetailResponse::MonitorStatus)
+            T.all(Symbol, Deeprails::MonitorDetailResponse::Status)
           end
         OrSymbol = T.type_alias { T.any(Symbol, String) }
 
         ACTIVE =
-          T.let(
-            :active,
-            Deeprails::MonitorDetailResponse::MonitorStatus::TaggedSymbol
-          )
+          T.let(:active, Deeprails::MonitorDetailResponse::Status::TaggedSymbol)
         INACTIVE =
           T.let(
             :inactive,
-            Deeprails::MonitorDetailResponse::MonitorStatus::TaggedSymbol
+            Deeprails::MonitorDetailResponse::Status::TaggedSymbol
           )
 
         sig do
           override.returns(
-            T::Array[
-              Deeprails::MonitorDetailResponse::MonitorStatus::TaggedSymbol
-            ]
+            T::Array[Deeprails::MonitorDetailResponse::Status::TaggedSymbol]
           )
         end
         def self.values
+        end
+      end
+
+      class Capability < Deeprails::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              Deeprails::MonitorDetailResponse::Capability,
+              Deeprails::Internal::AnyHash
+            )
+          end
+
+        # The type of capability.
+        sig { returns(T.nilable(String)) }
+        attr_reader :capability
+
+        sig { params(capability: String).void }
+        attr_writer :capability
+
+        sig { params(capability: String).returns(T.attached_class) }
+        def self.new(
+          # The type of capability.
+          capability: nil
+        )
+        end
+
+        sig { override.returns({ capability: String }) }
+        def to_hash
         end
       end
 
@@ -180,10 +227,6 @@ module Deeprails
               Deeprails::Internal::AnyHash
             )
           end
-
-        # A unique evaluation ID.
-        sig { returns(String) }
-        attr_accessor :eval_id
 
         # Status of the evaluation.
         sig do
@@ -229,26 +272,12 @@ module Deeprails
         sig { params(created_at: Time).void }
         attr_writer :created_at
 
-        # The time the evaluation completed in UTC.
-        sig { returns(T.nilable(Time)) }
-        attr_reader :end_timestamp
-
-        sig { params(end_timestamp: Time).void }
-        attr_writer :end_timestamp
-
-        # Description of the error causing the evaluation to fail, if any.
+        # Error message if the evaluation failed.
         sig { returns(T.nilable(String)) }
         attr_reader :error_message
 
         sig { params(error_message: String).void }
         attr_writer :error_message
-
-        # The time the error causing the evaluation to fail was recorded.
-        sig { returns(T.nilable(Time)) }
-        attr_reader :error_timestamp
-
-        sig { params(error_timestamp: Time).void }
-        attr_writer :error_timestamp
 
         # Evaluation result consisting of average scores and rationales for each of the
         # evaluated guardrail metrics.
@@ -288,20 +317,6 @@ module Deeprails
         end
         attr_writer :guardrail_metrics
 
-        # Model ID used to generate the output, like `gpt-4o` or `o3`.
-        sig { returns(T.nilable(String)) }
-        attr_reader :model_used
-
-        sig { params(model_used: String).void }
-        attr_writer :model_used
-
-        # The most recent time the evaluation was modified in UTC.
-        sig { returns(T.nilable(Time)) }
-        attr_reader :modified_at
-
-        sig { params(modified_at: Time).void }
-        attr_writer :modified_at
-
         # An optional, user-defined tag for the evaluation.
         sig { returns(T.nilable(String)) }
         attr_reader :nametag
@@ -317,16 +332,8 @@ module Deeprails
         sig { params(progress: Integer).void }
         attr_writer :progress
 
-        # The time the evaluation started in UTC.
-        sig { returns(T.nilable(Time)) }
-        attr_reader :start_timestamp
-
-        sig { params(start_timestamp: Time).void }
-        attr_writer :start_timestamp
-
         sig do
           params(
-            eval_id: String,
             evaluation_status:
               Deeprails::MonitorDetailResponse::Evaluation::EvaluationStatus::OrSymbol,
             model_input:
@@ -335,25 +342,18 @@ module Deeprails
             run_mode:
               Deeprails::MonitorDetailResponse::Evaluation::RunMode::OrSymbol,
             created_at: Time,
-            end_timestamp: Time,
             error_message: String,
-            error_timestamp: Time,
             evaluation_result: T::Hash[Symbol, T.anything],
             evaluation_total_cost: Float,
             guardrail_metrics:
               T::Array[
                 Deeprails::MonitorDetailResponse::Evaluation::GuardrailMetric::OrSymbol
               ],
-            model_used: String,
-            modified_at: Time,
             nametag: String,
-            progress: Integer,
-            start_timestamp: Time
+            progress: Integer
           ).returns(T.attached_class)
         end
         def self.new(
-          # A unique evaluation ID.
-          eval_id:,
           # Status of the evaluation.
           evaluation_status:,
           # A dictionary of inputs sent to the LLM to generate output. The dictionary must
@@ -367,12 +367,8 @@ module Deeprails
           run_mode:,
           # The time the evaluation was created in UTC.
           created_at: nil,
-          # The time the evaluation completed in UTC.
-          end_timestamp: nil,
-          # Description of the error causing the evaluation to fail, if any.
+          # Error message if the evaluation failed.
           error_message: nil,
-          # The time the error causing the evaluation to fail was recorded.
-          error_timestamp: nil,
           # Evaluation result consisting of average scores and rationales for each of the
           # evaluated guardrail metrics.
           evaluation_result: nil,
@@ -381,24 +377,17 @@ module Deeprails
           # An array of guardrail metrics that the model input and output pair will be
           # evaluated on.
           guardrail_metrics: nil,
-          # Model ID used to generate the output, like `gpt-4o` or `o3`.
-          model_used: nil,
-          # The most recent time the evaluation was modified in UTC.
-          modified_at: nil,
           # An optional, user-defined tag for the evaluation.
           nametag: nil,
           # Evaluation progress. Values range between 0 and 100; 100 corresponds to a
           # completed `evaluation_status`.
-          progress: nil,
-          # The time the evaluation started in UTC.
-          start_timestamp: nil
+          progress: nil
         )
         end
 
         sig do
           override.returns(
             {
-              eval_id: String,
               evaluation_status:
                 Deeprails::MonitorDetailResponse::Evaluation::EvaluationStatus::TaggedSymbol,
               model_input:
@@ -407,20 +396,15 @@ module Deeprails
               run_mode:
                 Deeprails::MonitorDetailResponse::Evaluation::RunMode::TaggedSymbol,
               created_at: Time,
-              end_timestamp: Time,
               error_message: String,
-              error_timestamp: Time,
               evaluation_result: T::Hash[Symbol, T.anything],
               evaluation_total_cost: Float,
               guardrail_metrics:
                 T::Array[
                   Deeprails::MonitorDetailResponse::Evaluation::GuardrailMetric::TaggedSymbol
                 ],
-              model_used: String,
-              modified_at: Time,
               nametag: String,
-              progress: Integer,
-              start_timestamp: Time
+              progress: Integer
             }
           )
         end
@@ -638,6 +622,62 @@ module Deeprails
           end
           def self.values
           end
+        end
+      end
+
+      class File < Deeprails::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              Deeprails::MonitorDetailResponse::File,
+              Deeprails::Internal::AnyHash
+            )
+          end
+
+        # The ID of the file.
+        sig { returns(T.nilable(String)) }
+        attr_reader :file_id
+
+        sig { params(file_id: String).void }
+        attr_writer :file_id
+
+        # The name of the file.
+        sig { returns(T.nilable(String)) }
+        attr_reader :file_name
+
+        sig { params(file_name: String).void }
+        attr_writer :file_name
+
+        # The size of the file in bytes.
+        sig { returns(T.nilable(Integer)) }
+        attr_reader :file_size
+
+        sig { params(file_size: Integer).void }
+        attr_writer :file_size
+
+        sig do
+          params(
+            file_id: String,
+            file_name: String,
+            file_size: Integer
+          ).returns(T.attached_class)
+        end
+        def self.new(
+          # The ID of the file.
+          file_id: nil,
+          # The name of the file.
+          file_name: nil,
+          # The size of the file in bytes.
+          file_size: nil
+        )
+        end
+
+        sig do
+          override.returns(
+            { file_id: String, file_name: String, file_size: Integer }
+          )
+        end
+        def to_hash
         end
       end
 

@@ -23,7 +23,7 @@ module Deeprails
       #
       # @param request_options [Deeprails::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Deeprails::Models::MonitorResponse]
+      # @return [Deeprails::Models::MonitorCreateResponse]
       #
       # @see Deeprails::Models::MonitorCreateParams
       def create(params)
@@ -32,11 +32,14 @@ module Deeprails
           method: :post,
           path: "monitor",
           body: parsed,
-          model: Deeprails::MonitorResponse,
+          model: Deeprails::MonitorCreateResponse,
           options: options
         )
       end
 
+      # Some parameter documentations has been truncated, see
+      # {Deeprails::Models::MonitorRetrieveParams} for more details.
+      #
       # Use this endpoint to retrieve the details and evaluations associated with a
       # specific monitor
       #
@@ -44,7 +47,7 @@ module Deeprails
       #
       # @param monitor_id [String] The ID of the monitor to retrieve.
       #
-      # @param limit [Integer] Limit the returned events associated with this monitor. Defaults to 10.
+      # @param limit [Integer] Limit the number of returned evaluations associated with this monitor. Defaults
       #
       # @param request_options [Deeprails::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -68,19 +71,19 @@ module Deeprails
       # Use this endpoint to update the name, description, or status of an existing
       # monitor
       #
-      # @overload update(monitor_id, description: nil, monitor_status: nil, name: nil, request_options: {})
+      # @overload update(monitor_id, description: nil, name: nil, status: nil, request_options: {})
       #
       # @param monitor_id [String] The ID of the monitor to edit.
       #
       # @param description [String] Description of the monitor.
       #
-      # @param monitor_status [Symbol, Deeprails::Models::MonitorUpdateParams::MonitorStatus] Status of the monitor. Can be `active` or `inactive`. Inactive monitors no lon
-      #
       # @param name [String] Name of the monitor.
+      #
+      # @param status [Symbol, Deeprails::Models::MonitorUpdateParams::Status] Status of the monitor. Can be `active` or `inactive`. Inactive monitors no lon
       #
       # @param request_options [Deeprails::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Deeprails::Models::MonitorResponse]
+      # @return [Deeprails::Models::MonitorUpdateResponse]
       #
       # @see Deeprails::Models::MonitorUpdateParams
       def update(monitor_id, params = {})
@@ -89,7 +92,7 @@ module Deeprails
           method: :put,
           path: ["monitor/%1$s", monitor_id],
           body: parsed,
-          model: Deeprails::MonitorResponse,
+          model: Deeprails::MonitorUpdateResponse,
           options: options
         )
       end

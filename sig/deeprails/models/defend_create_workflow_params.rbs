@@ -4,7 +4,7 @@ module Deeprails
       {
         improvement_action: Deeprails::Models::DefendCreateWorkflowParams::improvement_action,
         name: String,
-        type: Deeprails::Models::DefendCreateWorkflowParams::type_,
+        threshold_type: Deeprails::Models::DefendCreateWorkflowParams::threshold_type,
         automatic_hallucination_tolerance_levels: ::Hash[Symbol, Deeprails::Models::DefendCreateWorkflowParams::automatic_hallucination_tolerance_level],
         custom_hallucination_threshold_values: ::Hash[Symbol, Float],
         description: String,
@@ -22,7 +22,7 @@ module Deeprails
 
       attr_accessor name: String
 
-      attr_accessor type: Deeprails::Models::DefendCreateWorkflowParams::type_
+      attr_accessor threshold_type: Deeprails::Models::DefendCreateWorkflowParams::threshold_type
 
       attr_reader automatic_hallucination_tolerance_levels: ::Hash[Symbol, Deeprails::Models::DefendCreateWorkflowParams::automatic_hallucination_tolerance_level]?
 
@@ -55,7 +55,7 @@ module Deeprails
       def initialize: (
         improvement_action: Deeprails::Models::DefendCreateWorkflowParams::improvement_action,
         name: String,
-        type: Deeprails::Models::DefendCreateWorkflowParams::type_,
+        threshold_type: Deeprails::Models::DefendCreateWorkflowParams::threshold_type,
         ?automatic_hallucination_tolerance_levels: ::Hash[Symbol, Deeprails::Models::DefendCreateWorkflowParams::automatic_hallucination_tolerance_level],
         ?custom_hallucination_threshold_values: ::Hash[Symbol, Float],
         ?description: String,
@@ -68,7 +68,7 @@ module Deeprails
       def to_hash: -> {
         improvement_action: Deeprails::Models::DefendCreateWorkflowParams::improvement_action,
         name: String,
-        type: Deeprails::Models::DefendCreateWorkflowParams::type_,
+        threshold_type: Deeprails::Models::DefendCreateWorkflowParams::threshold_type,
         automatic_hallucination_tolerance_levels: ::Hash[Symbol, Deeprails::Models::DefendCreateWorkflowParams::automatic_hallucination_tolerance_level],
         custom_hallucination_threshold_values: ::Hash[Symbol, Float],
         description: String,
@@ -90,15 +90,15 @@ module Deeprails
         def self?.values: -> ::Array[Deeprails::Models::DefendCreateWorkflowParams::improvement_action]
       end
 
-      type type_ = :automatic | :custom
+      type threshold_type = :automatic | :custom
 
-      module Type
+      module ThresholdType
         extend Deeprails::Internal::Type::Enum
 
         AUTOMATIC: :automatic
         CUSTOM: :custom
 
-        def self?.values: -> ::Array[Deeprails::Models::DefendCreateWorkflowParams::type_]
+        def self?.values: -> ::Array[Deeprails::Models::DefendCreateWorkflowParams::threshold_type]
       end
 
       type automatic_hallucination_tolerance_level = :low | :medium | :high

@@ -3,8 +3,8 @@ module Deeprails
     type monitor_update_params =
       {
         description: String,
-        monitor_status: Deeprails::Models::MonitorUpdateParams::monitor_status,
-        name: String
+        name: String,
+        status: Deeprails::Models::MonitorUpdateParams::status
       }
       & Deeprails::Internal::Type::request_parameters
 
@@ -16,39 +16,39 @@ module Deeprails
 
       def description=: (String) -> String
 
-      attr_reader monitor_status: Deeprails::Models::MonitorUpdateParams::monitor_status?
-
-      def monitor_status=: (
-        Deeprails::Models::MonitorUpdateParams::monitor_status
-      ) -> Deeprails::Models::MonitorUpdateParams::monitor_status
-
       attr_reader name: String?
 
       def name=: (String) -> String
 
+      attr_reader status: Deeprails::Models::MonitorUpdateParams::status?
+
+      def status=: (
+        Deeprails::Models::MonitorUpdateParams::status
+      ) -> Deeprails::Models::MonitorUpdateParams::status
+
       def initialize: (
         ?description: String,
-        ?monitor_status: Deeprails::Models::MonitorUpdateParams::monitor_status,
         ?name: String,
+        ?status: Deeprails::Models::MonitorUpdateParams::status,
         ?request_options: Deeprails::request_opts
       ) -> void
 
       def to_hash: -> {
         description: String,
-        monitor_status: Deeprails::Models::MonitorUpdateParams::monitor_status,
         name: String,
+        status: Deeprails::Models::MonitorUpdateParams::status,
         request_options: Deeprails::RequestOptions
       }
 
-      type monitor_status = :active | :inactive
+      type status = :active | :inactive
 
-      module MonitorStatus
+      module Status
         extend Deeprails::Internal::Type::Enum
 
         ACTIVE: :active
         INACTIVE: :inactive
 
-        def self?.values: -> ::Array[Deeprails::Models::MonitorUpdateParams::monitor_status]
+        def self?.values: -> ::Array[Deeprails::Models::MonitorUpdateParams::status]
       end
     end
   end

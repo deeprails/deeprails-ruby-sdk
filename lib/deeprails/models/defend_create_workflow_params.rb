@@ -8,11 +8,11 @@ module Deeprails
       include Deeprails::Internal::Type::RequestParameters
 
       # @!attribute improvement_action
-      #   The action used to improve outputs that fail one or guardrail metrics for the
-      #   workflow events. May be `regen`, `fixit`, or `do_nothing`. ReGen runs the user's
-      #   input prompt with minor induced variance. FixIt attempts to directly address the
-      #   shortcomings of the output using the guardrail failure rationale. Do Nothing
-      #   does not attempt any improvement.
+      #   The action used to improve outputs that fail one or more guardrail metrics for
+      #   the workflow events. May be `regen`, `fixit`, or `do_nothing`. ReGen runs the
+      #   user's input prompt with minor induced variance. FixIt attempts to directly
+      #   address the shortcomings of the output using the guardrail failure rationale. Do
+      #   Nothing does not attempt any improvement.
       #
       #   @return [Symbol, Deeprails::Models::DefendCreateWorkflowParams::ImprovementAction]
       required :improvement_action, enum: -> { Deeprails::DefendCreateWorkflowParams::ImprovementAction }
@@ -23,15 +23,15 @@ module Deeprails
       #   @return [String]
       required :name, String
 
-      # @!attribute type
+      # @!attribute threshold_type
       #   Type of thresholds to use for the workflow, either `automatic` or `custom`.
       #   Automatic thresholds are assigned internally after the user specifies a
       #   qualitative tolerance for the metrics, whereas custom metrics allow the user to
       #   set the threshold for each metric as a floating point number between 0.0 and
       #   1.0.
       #
-      #   @return [Symbol, Deeprails::Models::DefendCreateWorkflowParams::Type]
-      required :type, enum: -> { Deeprails::DefendCreateWorkflowParams::Type }
+      #   @return [Symbol, Deeprails::Models::DefendCreateWorkflowParams::ThresholdType]
+      required :threshold_type, enum: -> { Deeprails::DefendCreateWorkflowParams::ThresholdType }
 
       # @!attribute automatic_hallucination_tolerance_levels
       #   Mapping of guardrail metrics to hallucination tolerance levels (either `low`,
@@ -65,7 +65,7 @@ module Deeprails
       optional :file_search, Deeprails::Internal::Type::ArrayOf[String]
 
       # @!attribute max_improvement_attempts
-      #   Max. number of improvement action retries until a given event passes the
+      #   Max. number of improvement action attempts until a given event passes the
       #   guardrails. Defaults to 10.
       #
       #   @return [Integer, nil]
@@ -77,15 +77,15 @@ module Deeprails
       #   @return [Boolean, nil]
       optional :web_search, Deeprails::Internal::Type::Boolean
 
-      # @!method initialize(improvement_action:, name:, type:, automatic_hallucination_tolerance_levels: nil, custom_hallucination_threshold_values: nil, description: nil, file_search: nil, max_improvement_attempts: nil, web_search: nil, request_options: {})
+      # @!method initialize(improvement_action:, name:, threshold_type:, automatic_hallucination_tolerance_levels: nil, custom_hallucination_threshold_values: nil, description: nil, file_search: nil, max_improvement_attempts: nil, web_search: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Deeprails::Models::DefendCreateWorkflowParams} for more details.
       #
-      #   @param improvement_action [Symbol, Deeprails::Models::DefendCreateWorkflowParams::ImprovementAction] The action used to improve outputs that fail one or guardrail metrics for the wo
+      #   @param improvement_action [Symbol, Deeprails::Models::DefendCreateWorkflowParams::ImprovementAction] The action used to improve outputs that fail one or more guardrail metrics for t
       #
       #   @param name [String] Name of the workflow.
       #
-      #   @param type [Symbol, Deeprails::Models::DefendCreateWorkflowParams::Type] Type of thresholds to use for the workflow, either `automatic` or `custom`. Aut
+      #   @param threshold_type [Symbol, Deeprails::Models::DefendCreateWorkflowParams::ThresholdType] Type of thresholds to use for the workflow, either `automatic` or `custom`. Aut
       #
       #   @param automatic_hallucination_tolerance_levels [Hash{Symbol=>Symbol, Deeprails::Models::DefendCreateWorkflowParams::AutomaticHallucinationToleranceLevel}] Mapping of guardrail metrics to hallucination tolerance levels
       #
@@ -95,17 +95,17 @@ module Deeprails
       #
       #   @param file_search [Array<String>] An array of file IDs to search in the workflow's evaluations. Files must be uplo
       #
-      #   @param max_improvement_attempts [Integer] Max. number of improvement action retries until a given event passes the guardra
+      #   @param max_improvement_attempts [Integer] Max. number of improvement action attempts until a given event passes the guardr
       #
       #   @param web_search [Boolean] Whether to enable web search for this workflow's evaluations. Defaults to false.
       #
       #   @param request_options [Deeprails::RequestOptions, Hash{Symbol=>Object}]
 
-      # The action used to improve outputs that fail one or guardrail metrics for the
-      # workflow events. May be `regen`, `fixit`, or `do_nothing`. ReGen runs the user's
-      # input prompt with minor induced variance. FixIt attempts to directly address the
-      # shortcomings of the output using the guardrail failure rationale. Do Nothing
-      # does not attempt any improvement.
+      # The action used to improve outputs that fail one or more guardrail metrics for
+      # the workflow events. May be `regen`, `fixit`, or `do_nothing`. ReGen runs the
+      # user's input prompt with minor induced variance. FixIt attempts to directly
+      # address the shortcomings of the output using the guardrail failure rationale. Do
+      # Nothing does not attempt any improvement.
       module ImprovementAction
         extend Deeprails::Internal::Type::Enum
 
@@ -122,7 +122,7 @@ module Deeprails
       # qualitative tolerance for the metrics, whereas custom metrics allow the user to
       # set the threshold for each metric as a floating point number between 0.0 and
       # 1.0.
-      module Type
+      module ThresholdType
         extend Deeprails::Internal::Type::Enum
 
         AUTOMATIC = :automatic
