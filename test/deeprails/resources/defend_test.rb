@@ -38,20 +38,20 @@ class Deeprails::Test::Resources::DefendTest < Deeprails::Test::ResourceTest
 
     assert_pattern do
       response => {
+        evaluation_history: ^(Deeprails::Internal::Type::ArrayOf[Deeprails::WorkflowEventDetailResponse::EvaluationHistory]),
+        evaluation_result: ^(Deeprails::Internal::Type::HashOf[Deeprails::Internal::Type::Unknown]),
         event_id: String,
         event_status: Deeprails::WorkflowEventDetailResponse::EventStatus,
         filtered: Deeprails::Internal::Type::Boolean,
+        improved_model_output: String,
+        improvement_tool_status: Deeprails::WorkflowEventDetailResponse::ImprovementToolStatus | nil,
         improvement_tool_type: Deeprails::WorkflowEventDetailResponse::ImprovementToolType,
+        threshold_type: Deeprails::WorkflowEventDetailResponse::ThresholdType,
         workflow_id: String,
         automatic_hallucination_tolerance_levels: ^(Deeprails::Internal::Type::HashOf[enum: Deeprails::WorkflowEventDetailResponse::AutomaticHallucinationToleranceLevel]) | nil,
         capabilities: ^(Deeprails::Internal::Type::ArrayOf[Deeprails::WorkflowEventDetailResponse::Capability]) | nil,
         custom_hallucination_threshold_values: ^(Deeprails::Internal::Type::HashOf[Float]) | nil,
-        evaluation_history: ^(Deeprails::Internal::Type::ArrayOf[Deeprails::WorkflowEventDetailResponse::EvaluationHistory]) | nil,
-        evaluation_result: ^(Deeprails::Internal::Type::HashOf[Deeprails::Internal::Type::Unknown]) | nil,
-        files: ^(Deeprails::Internal::Type::ArrayOf[Deeprails::WorkflowEventDetailResponse::File]) | nil,
-        improved_model_output: String | nil,
-        improvement_tool_status: Deeprails::WorkflowEventDetailResponse::ImprovementToolStatus | nil,
-        threshold_type: Deeprails::WorkflowEventDetailResponse::ThresholdType | nil
+        files: ^(Deeprails::Internal::Type::ArrayOf[Deeprails::WorkflowEventDetailResponse::File]) | nil
       }
     end
   end
@@ -67,19 +67,19 @@ class Deeprails::Test::Resources::DefendTest < Deeprails::Test::ResourceTest
 
     assert_pattern do
       response => {
+        automatic_hallucination_tolerance_levels: ^(Deeprails::Internal::Type::HashOf[enum: Deeprails::DefendResponse::AutomaticHallucinationToleranceLevel]),
+        capabilities: ^(Deeprails::Internal::Type::ArrayOf[Deeprails::DefendResponse::Capability]),
+        created_at: Time,
+        custom_hallucination_threshold_values: ^(Deeprails::Internal::Type::HashOf[Float]),
+        description: String,
+        events: ^(Deeprails::Internal::Type::ArrayOf[Deeprails::DefendResponse::Event]),
+        files: ^(Deeprails::Internal::Type::ArrayOf[Deeprails::DefendResponse::File]),
         name: String,
+        status: Deeprails::DefendResponse::Status,
+        threshold_type: Deeprails::DefendResponse::ThresholdType,
+        updated_at: Time,
         workflow_id: String,
-        automatic_hallucination_tolerance_levels: ^(Deeprails::Internal::Type::HashOf[enum: Deeprails::DefendResponse::AutomaticHallucinationToleranceLevel]) | nil,
-        capabilities: ^(Deeprails::Internal::Type::ArrayOf[Deeprails::DefendResponse::Capability]) | nil,
-        created_at: Time | nil,
-        custom_hallucination_threshold_values: ^(Deeprails::Internal::Type::HashOf[Float]) | nil,
-        description: String | nil,
-        events: ^(Deeprails::Internal::Type::ArrayOf[Deeprails::DefendResponse::Event]) | nil,
-        files: ^(Deeprails::Internal::Type::ArrayOf[Deeprails::DefendResponse::File]) | nil,
-        stats: Deeprails::DefendResponse::Stats | nil,
-        status: Deeprails::DefendResponse::Status | nil,
-        threshold_type: Deeprails::DefendResponse::ThresholdType | nil,
-        updated_at: Time | nil
+        stats: Deeprails::DefendResponse::Stats | nil
       }
     end
   end

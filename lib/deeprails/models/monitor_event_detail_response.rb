@@ -2,6 +2,7 @@
 
 module Deeprails
   module Models
+    # @see Deeprails::Resources::Monitor#retrieve_event
     class MonitorEventDetailResponse < Deeprails::Internal::Type::BaseModel
       # @!attribute capabilities
       #   The capabilities associated with the monitor event.

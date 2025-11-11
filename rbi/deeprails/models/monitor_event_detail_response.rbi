@@ -101,7 +101,9 @@ module Deeprails
       # The run mode used to evaluate the monitor event.
       sig do
         returns(
-          T.nilable(Deeprails::MonitorEventDetailResponse::RunMode::OrSymbol)
+          T.nilable(
+            Deeprails::MonitorEventDetailResponse::RunMode::TaggedSymbol
+          )
         )
       end
       attr_reader :run_mode
@@ -116,7 +118,7 @@ module Deeprails
       # Status of the monitor event's evaluation.
       sig do
         returns(
-          T.nilable(Deeprails::MonitorEventDetailResponse::Status::OrSymbol)
+          T.nilable(Deeprails::MonitorEventDetailResponse::Status::TaggedSymbol)
         )
       end
       attr_reader :status
@@ -197,8 +199,9 @@ module Deeprails
             model_output: String,
             monitor_id: String,
             nametag: String,
-            run_mode: Deeprails::MonitorEventDetailResponse::RunMode::OrSymbol,
-            status: Deeprails::MonitorEventDetailResponse::Status::OrSymbol,
+            run_mode:
+              Deeprails::MonitorEventDetailResponse::RunMode::TaggedSymbol,
+            status: Deeprails::MonitorEventDetailResponse::Status::TaggedSymbol,
             timestamp: Time
           }
         )
