@@ -18,23 +18,6 @@ module Deeprails
       sig { params(description: String).void }
       attr_writer :description
 
-      # Status of the monitor. Can be `active` or `inactive`. Inactive monitors no
-      # longer record and evaluate events.
-      sig do
-        returns(
-          T.nilable(Deeprails::MonitorUpdateParams::MonitorStatus::OrSymbol)
-        )
-      end
-      attr_reader :monitor_status
-
-      sig do
-        params(
-          monitor_status:
-            Deeprails::MonitorUpdateParams::MonitorStatus::OrSymbol
-        ).void
-      end
-      attr_writer :monitor_status
-
       # Name of the monitor.
       sig { returns(T.nilable(String)) }
       attr_reader :name
@@ -42,23 +25,34 @@ module Deeprails
       sig { params(name: String).void }
       attr_writer :name
 
+      # Status of the monitor. Can be `active` or `inactive`. Inactive monitors no
+      # longer record and evaluate events.
+      sig do
+        returns(T.nilable(Deeprails::MonitorUpdateParams::Status::OrSymbol))
+      end
+      attr_reader :status
+
+      sig do
+        params(status: Deeprails::MonitorUpdateParams::Status::OrSymbol).void
+      end
+      attr_writer :status
+
       sig do
         params(
           description: String,
-          monitor_status:
-            Deeprails::MonitorUpdateParams::MonitorStatus::OrSymbol,
           name: String,
+          status: Deeprails::MonitorUpdateParams::Status::OrSymbol,
           request_options: Deeprails::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
       def self.new(
         # Description of the monitor.
         description: nil,
-        # Status of the monitor. Can be `active` or `inactive`. Inactive monitors no
-        # longer record and evaluate events.
-        monitor_status: nil,
         # Name of the monitor.
         name: nil,
+        # Status of the monitor. Can be `active` or `inactive`. Inactive monitors no
+        # longer record and evaluate events.
+        status: nil,
         request_options: {}
       )
       end
@@ -67,9 +61,8 @@ module Deeprails
         override.returns(
           {
             description: String,
-            monitor_status:
-              Deeprails::MonitorUpdateParams::MonitorStatus::OrSymbol,
             name: String,
+            status: Deeprails::MonitorUpdateParams::Status::OrSymbol,
             request_options: Deeprails::RequestOptions
           }
         )
@@ -79,31 +72,21 @@ module Deeprails
 
       # Status of the monitor. Can be `active` or `inactive`. Inactive monitors no
       # longer record and evaluate events.
-      module MonitorStatus
+      module Status
         extend Deeprails::Internal::Type::Enum
 
         TaggedSymbol =
-          T.type_alias do
-            T.all(Symbol, Deeprails::MonitorUpdateParams::MonitorStatus)
-          end
+          T.type_alias { T.all(Symbol, Deeprails::MonitorUpdateParams::Status) }
         OrSymbol = T.type_alias { T.any(Symbol, String) }
 
         ACTIVE =
-          T.let(
-            :active,
-            Deeprails::MonitorUpdateParams::MonitorStatus::TaggedSymbol
-          )
+          T.let(:active, Deeprails::MonitorUpdateParams::Status::TaggedSymbol)
         INACTIVE =
-          T.let(
-            :inactive,
-            Deeprails::MonitorUpdateParams::MonitorStatus::TaggedSymbol
-          )
+          T.let(:inactive, Deeprails::MonitorUpdateParams::Status::TaggedSymbol)
 
         sig do
           override.returns(
-            T::Array[
-              Deeprails::MonitorUpdateParams::MonitorStatus::TaggedSymbol
-            ]
+            T::Array[Deeprails::MonitorUpdateParams::Status::TaggedSymbol]
           )
         end
         def self.values

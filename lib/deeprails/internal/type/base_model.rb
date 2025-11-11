@@ -438,11 +438,11 @@ module Deeprails
         # @return [Hash{Symbol=>Object}]
         #
         # @example
-        #   # `defend_response` is a `Deeprails::DefendResponse`
-        #   defend_response => {
-        #     name: name,
-        #     workflow_id: workflow_id,
-        #     created_at: created_at
+        #   # `defend_create_response` is a `Deeprails::DefendCreateResponse`
+        #   defend_create_response => {
+        #     created_at: created_at,
+        #     status: status,
+        #     workflow_id: workflow_id
         #   }
         def deconstruct_keys(keys)
           (keys || self.class.known_fields.keys)

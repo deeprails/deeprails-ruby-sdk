@@ -9,18 +9,14 @@ class Deeprails::Test::Resources::MonitorTest < Deeprails::Test::ResourceTest
     response = @deeprails.monitor.create(guardrail_metrics: [:correctness], name: "name")
 
     assert_pattern do
-      response => Deeprails::MonitorResponse
+      response => Deeprails::MonitorCreateResponse
     end
 
     assert_pattern do
       response => {
+        created_at: Time,
         monitor_id: String,
-        name: String,
-        created_at: Time | nil,
-        description: String | nil,
-        monitor_status: Deeprails::MonitorResponse::MonitorStatus | nil,
-        updated_at: Time | nil,
-        user_id: String | nil
+        status: Deeprails::MonitorCreateResponse::Status
       }
     end
   end
@@ -37,14 +33,15 @@ class Deeprails::Test::Resources::MonitorTest < Deeprails::Test::ResourceTest
     assert_pattern do
       response => {
         monitor_id: String,
-        monitor_status: Deeprails::MonitorDetailResponse::MonitorStatus,
         name: String,
+        status: Deeprails::MonitorDetailResponse::Status,
+        capabilities: ^(Deeprails::Internal::Type::ArrayOf[Deeprails::MonitorDetailResponse::Capability]) | nil,
         created_at: Time | nil,
         description: String | nil,
         evaluations: ^(Deeprails::Internal::Type::ArrayOf[Deeprails::MonitorDetailResponse::Evaluation]) | nil,
+        files: ^(Deeprails::Internal::Type::ArrayOf[Deeprails::MonitorDetailResponse::File]) | nil,
         stats: Deeprails::MonitorDetailResponse::Stats | nil,
-        updated_at: Time | nil,
-        user_id: String | nil
+        updated_at: Time | nil
       }
     end
   end
@@ -55,18 +52,14 @@ class Deeprails::Test::Resources::MonitorTest < Deeprails::Test::ResourceTest
     response = @deeprails.monitor.update("monitor_id")
 
     assert_pattern do
-      response => Deeprails::MonitorResponse
+      response => Deeprails::MonitorUpdateResponse
     end
 
     assert_pattern do
       response => {
+        modified_at: Time,
         monitor_id: String,
-        name: String,
-        created_at: Time | nil,
-        description: String | nil,
-        monitor_status: Deeprails::MonitorResponse::MonitorStatus | nil,
-        updated_at: Time | nil,
-        user_id: String | nil
+        status: Deeprails::MonitorUpdateResponse::Status
       }
     end
   end
@@ -82,7 +75,6 @@ class Deeprails::Test::Resources::MonitorTest < Deeprails::Test::ResourceTest
 
     assert_pattern do
       response => {
-        evaluation_id: String,
         event_id: String,
         monitor_id: String,
         created_at: Time | nil

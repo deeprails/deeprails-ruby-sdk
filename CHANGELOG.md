@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.12.0 (2025-11-10)
+
+Full Changelog: [v0.11.0...v0.12.0](https://github.com/deeprails/deeprails-ruby-sdk/compare/v0.11.0...v0.12.0)
+
+### Features
+
+* **api:** Mass restructuring of API, including response bodies and naming schemes ([f52f6ee](https://github.com/deeprails/deeprails-ruby-sdk/commit/f52f6ee3484c15c0f403a2fd615552e6926d0626))
+
+
+### Bug Fixes
+
+* better thread safety via early initializing SSL store during HTTP client creation ([461a0a4](https://github.com/deeprails/deeprails-ruby-sdk/commit/461a0a45e6914b0376077215f353eb83685edc5f))
+
+
+### Chores
+
+* bump dependency version and update sorbet types ([444f9a0](https://github.com/deeprails/deeprails-ruby-sdk/commit/444f9a073d6a85bd83f64c201edfc2065f518bc8))
+
 ## 0.11.0 (2025-11-02)
 
 Full Changelog: [v0.10.0...v0.11.0](https://github.com/deeprails/deeprails-ruby-sdk/compare/v0.10.0...v0.11.0)

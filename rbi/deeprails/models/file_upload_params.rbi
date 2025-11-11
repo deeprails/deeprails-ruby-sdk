@@ -12,12 +12,12 @@ module Deeprails
         end
 
       # The contents of the file to upload.
-      sig { returns(Deeprails::Internal::FileInput) }
+      sig { returns(T::Array[String]) }
       attr_accessor :file
 
       sig do
         params(
-          file: Deeprails::Internal::FileInput,
+          file: T::Array[String],
           request_options: Deeprails::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
@@ -30,10 +30,7 @@ module Deeprails
 
       sig do
         override.returns(
-          {
-            file: Deeprails::Internal::FileInput,
-            request_options: Deeprails::RequestOptions
-          }
+          { file: T::Array[String], request_options: Deeprails::RequestOptions }
         )
       end
       def to_hash

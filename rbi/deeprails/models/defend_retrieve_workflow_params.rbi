@@ -14,15 +14,33 @@ module Deeprails
           )
         end
 
+      # Limit the number of returned events associated with this workflow. Defaults
+      # to 10.
+      sig { returns(T.nilable(Integer)) }
+      attr_reader :limit
+
+      sig { params(limit: Integer).void }
+      attr_writer :limit
+
       sig do
-        params(request_options: Deeprails::RequestOptions::OrHash).returns(
-          T.attached_class
-        )
+        params(
+          limit: Integer,
+          request_options: Deeprails::RequestOptions::OrHash
+        ).returns(T.attached_class)
       end
-      def self.new(request_options: {})
+      def self.new(
+        # Limit the number of returned events associated with this workflow. Defaults
+        # to 10.
+        limit: nil,
+        request_options: {}
+      )
       end
 
-      sig { override.returns({ request_options: Deeprails::RequestOptions }) }
+      sig do
+        override.returns(
+          { limit: Integer, request_options: Deeprails::RequestOptions }
+        )
+      end
       def to_hash
       end
     end

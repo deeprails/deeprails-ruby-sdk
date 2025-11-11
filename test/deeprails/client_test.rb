@@ -43,7 +43,7 @@ class DeeprailsTest < Minitest::Test
       deeprails.defend.create_workflow(
         improvement_action: :regen,
         name: "name",
-        type: :automatic,
+        threshold_type: :automatic,
         automatic_hallucination_tolerance_levels: {completeness: :low, instruction_adherence: :medium}
       )
     end
@@ -57,7 +57,7 @@ class DeeprailsTest < Minitest::Test
     deeprails = Deeprails::Client.new(base_url: "http://localhost", api_key: "My API Key", max_retries: 3)
 
     assert_raises(Deeprails::Errors::InternalServerError) do
-      deeprails.defend.create_workflow(improvement_action: :regen, name: "name", type: :automatic)
+      deeprails.defend.create_workflow(improvement_action: :regen, name: "name", threshold_type: :automatic)
     end
 
     assert_requested(:any, /./, times: 4)
@@ -72,7 +72,7 @@ class DeeprailsTest < Minitest::Test
       deeprails.defend.create_workflow(
         improvement_action: :regen,
         name: "name",
-        type: :automatic,
+        threshold_type: :automatic,
         automatic_hallucination_tolerance_levels: {completeness: :low, instruction_adherence: :medium},
         request_options: {max_retries: 3}
       )
@@ -90,7 +90,7 @@ class DeeprailsTest < Minitest::Test
       deeprails.defend.create_workflow(
         improvement_action: :regen,
         name: "name",
-        type: :automatic,
+        threshold_type: :automatic,
         automatic_hallucination_tolerance_levels: {completeness: :low, instruction_adherence: :medium},
         request_options: {max_retries: 4}
       )
@@ -112,7 +112,7 @@ class DeeprailsTest < Minitest::Test
       deeprails.defend.create_workflow(
         improvement_action: :regen,
         name: "name",
-        type: :automatic,
+        threshold_type: :automatic,
         automatic_hallucination_tolerance_levels: {completeness: :low, instruction_adherence: :medium}
       )
     end
@@ -135,7 +135,7 @@ class DeeprailsTest < Minitest::Test
       deeprails.defend.create_workflow(
         improvement_action: :regen,
         name: "name",
-        type: :automatic,
+        threshold_type: :automatic,
         automatic_hallucination_tolerance_levels: {completeness: :low, instruction_adherence: :medium}
       )
       Thread.current.thread_variable_set(:time_now, nil)
@@ -158,7 +158,7 @@ class DeeprailsTest < Minitest::Test
       deeprails.defend.create_workflow(
         improvement_action: :regen,
         name: "name",
-        type: :automatic,
+        threshold_type: :automatic,
         automatic_hallucination_tolerance_levels: {completeness: :low, instruction_adherence: :medium}
       )
     end
@@ -176,7 +176,7 @@ class DeeprailsTest < Minitest::Test
       deeprails.defend.create_workflow(
         improvement_action: :regen,
         name: "name",
-        type: :automatic,
+        threshold_type: :automatic,
         automatic_hallucination_tolerance_levels: {completeness: :low, instruction_adherence: :medium}
       )
     end
@@ -195,7 +195,7 @@ class DeeprailsTest < Minitest::Test
       deeprails.defend.create_workflow(
         improvement_action: :regen,
         name: "name",
-        type: :automatic,
+        threshold_type: :automatic,
         automatic_hallucination_tolerance_levels: {completeness: :low, instruction_adherence: :medium},
         request_options: {extra_headers: {"x-stainless-retry-count" => nil}}
       )
@@ -215,7 +215,7 @@ class DeeprailsTest < Minitest::Test
       deeprails.defend.create_workflow(
         improvement_action: :regen,
         name: "name",
-        type: :automatic,
+        threshold_type: :automatic,
         automatic_hallucination_tolerance_levels: {completeness: :low, instruction_adherence: :medium},
         request_options: {extra_headers: {"x-stainless-retry-count" => "42"}}
       )
@@ -241,7 +241,7 @@ class DeeprailsTest < Minitest::Test
       deeprails.defend.create_workflow(
         improvement_action: :regen,
         name: "name",
-        type: :automatic,
+        threshold_type: :automatic,
         automatic_hallucination_tolerance_levels: {completeness: :low, instruction_adherence: :medium},
         request_options: {extra_headers: {}}
       )
@@ -276,7 +276,7 @@ class DeeprailsTest < Minitest::Test
       deeprails.defend.create_workflow(
         improvement_action: :regen,
         name: "name",
-        type: :automatic,
+        threshold_type: :automatic,
         automatic_hallucination_tolerance_levels: {completeness: :low, instruction_adherence: :medium},
         request_options: {extra_headers: {}}
       )
@@ -306,7 +306,7 @@ class DeeprailsTest < Minitest::Test
       deeprails.defend.create_workflow(
         improvement_action: :regen,
         name: "name",
-        type: :automatic,
+        threshold_type: :automatic,
         automatic_hallucination_tolerance_levels: {completeness: :low, instruction_adherence: :medium},
         request_options: {extra_headers: {"authorization" => "Bearer xyz"}}
       )
@@ -339,7 +339,7 @@ class DeeprailsTest < Minitest::Test
       deeprails.defend.create_workflow(
         improvement_action: :regen,
         name: "name",
-        type: :automatic,
+        threshold_type: :automatic,
         automatic_hallucination_tolerance_levels: {completeness: :low, instruction_adherence: :medium},
         request_options: {extra_headers: {"authorization" => "Bearer xyz"}}
       )
@@ -359,7 +359,7 @@ class DeeprailsTest < Minitest::Test
     deeprails.defend.create_workflow(
       improvement_action: :regen,
       name: "name",
-      type: :automatic,
+      threshold_type: :automatic,
       automatic_hallucination_tolerance_levels: {completeness: :low, instruction_adherence: :medium}
     )
 

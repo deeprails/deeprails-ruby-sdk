@@ -13,34 +13,34 @@ module Deeprails
       #   @return [String, nil]
       optional :description, String
 
-      # @!attribute monitor_status
-      #   Status of the monitor. Can be `active` or `inactive`. Inactive monitors no
-      #   longer record and evaluate events.
-      #
-      #   @return [Symbol, Deeprails::Models::MonitorUpdateParams::MonitorStatus, nil]
-      optional :monitor_status, enum: -> { Deeprails::MonitorUpdateParams::MonitorStatus }
-
       # @!attribute name
       #   Name of the monitor.
       #
       #   @return [String, nil]
       optional :name, String
 
-      # @!method initialize(description: nil, monitor_status: nil, name: nil, request_options: {})
+      # @!attribute status
+      #   Status of the monitor. Can be `active` or `inactive`. Inactive monitors no
+      #   longer record and evaluate events.
+      #
+      #   @return [Symbol, Deeprails::Models::MonitorUpdateParams::Status, nil]
+      optional :status, enum: -> { Deeprails::MonitorUpdateParams::Status }
+
+      # @!method initialize(description: nil, name: nil, status: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Deeprails::Models::MonitorUpdateParams} for more details.
       #
       #   @param description [String] Description of the monitor.
       #
-      #   @param monitor_status [Symbol, Deeprails::Models::MonitorUpdateParams::MonitorStatus] Status of the monitor. Can be `active` or `inactive`. Inactive monitors no lon
-      #
       #   @param name [String] Name of the monitor.
+      #
+      #   @param status [Symbol, Deeprails::Models::MonitorUpdateParams::Status] Status of the monitor. Can be `active` or `inactive`. Inactive monitors no lon
       #
       #   @param request_options [Deeprails::RequestOptions, Hash{Symbol=>Object}]
 
       # Status of the monitor. Can be `active` or `inactive`. Inactive monitors no
       # longer record and evaluate events.
-      module MonitorStatus
+      module Status
         extend Deeprails::Internal::Type::Enum
 
         ACTIVE = :active

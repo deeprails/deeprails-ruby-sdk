@@ -2,7 +2,7 @@ module Deeprails
   module Resources
     class Files
       def upload: (
-        file: Deeprails::Internal::file_input,
+        file: ::Array[String],
         ?request_options: Deeprails::request_opts
       ) -> Deeprails::FileResponse
 

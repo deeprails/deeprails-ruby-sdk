@@ -7,7 +7,19 @@ module Deeprails
       extend Deeprails::Internal::Type::RequestParameters::Converter
       include Deeprails::Internal::Type::RequestParameters
 
-      # @!method initialize(request_options: {})
+      # @!attribute limit
+      #   Limit the number of returned events associated with this workflow. Defaults
+      #   to 10.
+      #
+      #   @return [Integer, nil]
+      optional :limit, Integer
+
+      # @!method initialize(limit: nil, request_options: {})
+      #   Some parameter documentations has been truncated, see
+      #   {Deeprails::Models::DefendRetrieveWorkflowParams} for more details.
+      #
+      #   @param limit [Integer] Limit the number of returned events associated with this workflow. Defaults to
+      #
       #   @param request_options [Deeprails::RequestOptions, Hash{Symbol=>Object}]
     end
   end
