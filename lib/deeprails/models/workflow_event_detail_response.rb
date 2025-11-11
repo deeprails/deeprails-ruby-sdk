@@ -4,6 +4,20 @@ module Deeprails
   module Models
     # @see Deeprails::Resources::Defend#retrieve_event
     class WorkflowEventDetailResponse < Deeprails::Internal::Type::BaseModel
+      # @!attribute evaluation_history
+      #   History of evaluations for the event.
+      #
+      #   @return [Array<Deeprails::Models::WorkflowEventDetailResponse::EvaluationHistory>]
+      required :evaluation_history,
+               -> { Deeprails::Internal::Type::ArrayOf[Deeprails::WorkflowEventDetailResponse::EvaluationHistory] }
+
+      # @!attribute evaluation_result
+      #   Evaluation result consisting of average scores and rationales for each of the
+      #   evaluated guardrail metrics.
+      #
+      #   @return [Hash{Symbol=>Object}]
+      required :evaluation_result, Deeprails::Internal::Type::HashOf[Deeprails::Internal::Type::Unknown]
+
       # @!attribute event_id
       #   A unique workflow event ID.
       #
@@ -22,11 +36,32 @@ module Deeprails
       #   @return [Boolean]
       required :filtered, Deeprails::Internal::Type::Boolean
 
+      # @!attribute improved_model_output
+      #   Improved model output after improvement tool was applied and each metric passed
+      #   evaluation.
+      #
+      #   @return [String]
+      required :improved_model_output, String
+
+      # @!attribute improvement_tool_status
+      #   Status of the improvement tool used to improve the event.
+      #
+      #   @return [Symbol, Deeprails::Models::WorkflowEventDetailResponse::ImprovementToolStatus, nil]
+      required :improvement_tool_status,
+               enum: -> { Deeprails::WorkflowEventDetailResponse::ImprovementToolStatus },
+               nil?: true
+
       # @!attribute improvement_tool_type
       #   Type of improvement tool used to improve the event.
       #
       #   @return [Symbol, Deeprails::Models::WorkflowEventDetailResponse::ImprovementToolType]
       required :improvement_tool_type, enum: -> { Deeprails::WorkflowEventDetailResponse::ImprovementToolType }
+
+      # @!attribute threshold_type
+      #   Type of thresholds used to evaluate the event.
+      #
+      #   @return [Symbol, Deeprails::Models::WorkflowEventDetailResponse::ThresholdType]
+      required :threshold_type, enum: -> { Deeprails::WorkflowEventDetailResponse::ThresholdType }
 
       # @!attribute workflow_id
       #   Workflow ID associated with the event.
@@ -57,20 +92,6 @@ module Deeprails
       #   @return [Hash{Symbol=>Float}, nil]
       optional :custom_hallucination_threshold_values, Deeprails::Internal::Type::HashOf[Float]
 
-      # @!attribute evaluation_history
-      #   History of evaluations for the event.
-      #
-      #   @return [Array<Deeprails::Models::WorkflowEventDetailResponse::EvaluationHistory>, nil]
-      optional :evaluation_history,
-               -> { Deeprails::Internal::Type::ArrayOf[Deeprails::WorkflowEventDetailResponse::EvaluationHistory] }
-
-      # @!attribute evaluation_result
-      #   Evaluation result consisting of average scores and rationales for each of the
-      #   evaluated guardrail metrics.
-      #
-      #   @return [Hash{Symbol=>Object}, nil]
-      optional :evaluation_result, Deeprails::Internal::Type::HashOf[Deeprails::Internal::Type::Unknown]
-
       # @!attribute files
       #   List of files available to the event, if any. Will only be present if
       #   `file_search` is enabled.
@@ -78,30 +99,13 @@ module Deeprails
       #   @return [Array<Deeprails::Models::WorkflowEventDetailResponse::File>, nil]
       optional :files, -> { Deeprails::Internal::Type::ArrayOf[Deeprails::WorkflowEventDetailResponse::File] }
 
-      # @!attribute improved_model_output
-      #   Improved model output after improvement tool was applied and each metric passed
-      #   evaluation.
-      #
-      #   @return [String, nil]
-      optional :improved_model_output, String
-
-      # @!attribute improvement_tool_status
-      #   Status of the improvement tool used to improve the event.
-      #
-      #   @return [Symbol, Deeprails::Models::WorkflowEventDetailResponse::ImprovementToolStatus, nil]
-      optional :improvement_tool_status,
-               enum: -> { Deeprails::WorkflowEventDetailResponse::ImprovementToolStatus },
-               nil?: true
-
-      # @!attribute threshold_type
-      #   Type of thresholds used to evaluate the event.
-      #
-      #   @return [Symbol, Deeprails::Models::WorkflowEventDetailResponse::ThresholdType, nil]
-      optional :threshold_type, enum: -> { Deeprails::WorkflowEventDetailResponse::ThresholdType }
-
-      # @!method initialize(event_id:, event_status:, filtered:, improvement_tool_type:, workflow_id:, automatic_hallucination_tolerance_levels: nil, capabilities: nil, custom_hallucination_threshold_values: nil, evaluation_history: nil, evaluation_result: nil, files: nil, improved_model_output: nil, improvement_tool_status: nil, threshold_type: nil)
+      # @!method initialize(evaluation_history:, evaluation_result:, event_id:, event_status:, filtered:, improved_model_output:, improvement_tool_status:, improvement_tool_type:, threshold_type:, workflow_id:, automatic_hallucination_tolerance_levels: nil, capabilities: nil, custom_hallucination_threshold_values: nil, files: nil)
       #   Some parameter documentations has been truncated, see
       #   {Deeprails::Models::WorkflowEventDetailResponse} for more details.
+      #
+      #   @param evaluation_history [Array<Deeprails::Models::WorkflowEventDetailResponse::EvaluationHistory>] History of evaluations for the event.
+      #
+      #   @param evaluation_result [Hash{Symbol=>Object}] Evaluation result consisting of average scores and rationales for each of the ev
       #
       #   @param event_id [String] A unique workflow event ID.
       #
@@ -109,7 +113,13 @@ module Deeprails
       #
       #   @param filtered [Boolean] Whether the event was filtered and requires improvement.
       #
+      #   @param improved_model_output [String] Improved model output after improvement tool was applied and each metric passed
+      #
+      #   @param improvement_tool_status [Symbol, Deeprails::Models::WorkflowEventDetailResponse::ImprovementToolStatus, nil] Status of the improvement tool used to improve the event.
+      #
       #   @param improvement_tool_type [Symbol, Deeprails::Models::WorkflowEventDetailResponse::ImprovementToolType] Type of improvement tool used to improve the event.
+      #
+      #   @param threshold_type [Symbol, Deeprails::Models::WorkflowEventDetailResponse::ThresholdType] Type of thresholds used to evaluate the event.
       #
       #   @param workflow_id [String] Workflow ID associated with the event.
       #
@@ -119,65 +129,7 @@ module Deeprails
       #
       #   @param custom_hallucination_threshold_values [Hash{Symbol=>Float}] Mapping of guardrail metric names to threshold values. Values are floating point
       #
-      #   @param evaluation_history [Array<Deeprails::Models::WorkflowEventDetailResponse::EvaluationHistory>] History of evaluations for the event.
-      #
-      #   @param evaluation_result [Hash{Symbol=>Object}] Evaluation result consisting of average scores and rationales for each of the ev
-      #
       #   @param files [Array<Deeprails::Models::WorkflowEventDetailResponse::File>] List of files available to the event, if any. Will only be present if `file_sear
-      #
-      #   @param improved_model_output [String] Improved model output after improvement tool was applied and each metric passed
-      #
-      #   @param improvement_tool_status [Symbol, Deeprails::Models::WorkflowEventDetailResponse::ImprovementToolStatus, nil] Status of the improvement tool used to improve the event.
-      #
-      #   @param threshold_type [Symbol, Deeprails::Models::WorkflowEventDetailResponse::ThresholdType] Type of thresholds used to evaluate the event.
-
-      # Status of the event.
-      #
-      # @see Deeprails::Models::WorkflowEventDetailResponse#event_status
-      module EventStatus
-        extend Deeprails::Internal::Type::Enum
-
-        IN_PROGRESS = :"In Progress"
-        COMPLETED = :Completed
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
-
-      # Type of improvement tool used to improve the event.
-      #
-      # @see Deeprails::Models::WorkflowEventDetailResponse#improvement_tool_type
-      module ImprovementToolType
-        extend Deeprails::Internal::Type::Enum
-
-        REGEN = :regen
-        FIXIT = :fixit
-        DO_NOTHING = :do_nothing
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
-
-      module AutomaticHallucinationToleranceLevel
-        extend Deeprails::Internal::Type::Enum
-
-        LOW = :low
-        MEDIUM = :medium
-        HIGH = :high
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
-
-      class Capability < Deeprails::Internal::Type::BaseModel
-        # @!attribute capability
-        #
-        #   @return [String, nil]
-        optional :capability, String
-
-        # @!method initialize(capability: nil)
-        #   @param capability [String]
-      end
 
       class EvaluationHistory < Deeprails::Internal::Type::BaseModel
         # @!attribute attempt
@@ -261,6 +213,81 @@ module Deeprails
         #   @param run_mode [String]
       end
 
+      # Status of the event.
+      #
+      # @see Deeprails::Models::WorkflowEventDetailResponse#event_status
+      module EventStatus
+        extend Deeprails::Internal::Type::Enum
+
+        IN_PROGRESS = :"In Progress"
+        COMPLETED = :Completed
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
+      end
+
+      # Status of the improvement tool used to improve the event.
+      #
+      # @see Deeprails::Models::WorkflowEventDetailResponse#improvement_tool_status
+      module ImprovementToolStatus
+        extend Deeprails::Internal::Type::Enum
+
+        IMPROVED = :improved
+        FAILED_ON_MAX_RETRIES = :"failed on max retries"
+        IMPROVEMENT_REQUIRED = :improvement_required
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
+      end
+
+      # Type of improvement tool used to improve the event.
+      #
+      # @see Deeprails::Models::WorkflowEventDetailResponse#improvement_tool_type
+      module ImprovementToolType
+        extend Deeprails::Internal::Type::Enum
+
+        REGEN = :regen
+        FIXIT = :fixit
+        DO_NOTHING = :do_nothing
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
+      end
+
+      # Type of thresholds used to evaluate the event.
+      #
+      # @see Deeprails::Models::WorkflowEventDetailResponse#threshold_type
+      module ThresholdType
+        extend Deeprails::Internal::Type::Enum
+
+        CUSTOM = :custom
+        AUTOMATIC = :automatic
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
+      end
+
+      module AutomaticHallucinationToleranceLevel
+        extend Deeprails::Internal::Type::Enum
+
+        LOW = :low
+        MEDIUM = :medium
+        HIGH = :high
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
+      end
+
+      class Capability < Deeprails::Internal::Type::BaseModel
+        # @!attribute capability
+        #
+        #   @return [String, nil]
+        optional :capability, String
+
+        # @!method initialize(capability: nil)
+        #   @param capability [String]
+      end
+
       class File < Deeprails::Internal::Type::BaseModel
         # @!attribute file_id
         #
@@ -281,33 +308,6 @@ module Deeprails
         #   @param file_id [String]
         #   @param file_name [String]
         #   @param file_size [Integer]
-      end
-
-      # Status of the improvement tool used to improve the event.
-      #
-      # @see Deeprails::Models::WorkflowEventDetailResponse#improvement_tool_status
-      module ImprovementToolStatus
-        extend Deeprails::Internal::Type::Enum
-
-        IMPROVED = :improved
-        FAILED_ON_MAX_RETRIES = :"failed on max retries"
-        IMPROVEMENT_REQUIRED = :improvement_required
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
-
-      # Type of thresholds used to evaluate the event.
-      #
-      # @see Deeprails::Models::WorkflowEventDetailResponse#threshold_type
-      module ThresholdType
-        extend Deeprails::Internal::Type::Enum
-
-        CUSTOM = :custom
-        AUTOMATIC = :automatic
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
       end
     end
   end

@@ -8,97 +8,65 @@ module Deeprails
           T.any(Deeprails::DefendResponse, Deeprails::Internal::AnyHash)
         end
 
-      # Name of the workflow.
-      sig { returns(String) }
-      attr_accessor :name
-
-      # A unique workflow ID.
-      sig { returns(String) }
-      attr_accessor :workflow_id
-
       # Mapping of guardrail metric names to tolerance values. Values can be strings
       # (`low`, `medium`, `high`) for automatic tolerance levels.
       sig do
         returns(
-          T.nilable(
-            T::Hash[
-              Symbol,
-              Deeprails::DefendResponse::AutomaticHallucinationToleranceLevel::TaggedSymbol
-            ]
-          )
+          T::Hash[
+            Symbol,
+            Deeprails::DefendResponse::AutomaticHallucinationToleranceLevel::TaggedSymbol
+          ]
         )
       end
-      attr_reader :automatic_hallucination_tolerance_levels
-
-      sig do
-        params(
-          automatic_hallucination_tolerance_levels:
-            T::Hash[
-              Symbol,
-              Deeprails::DefendResponse::AutomaticHallucinationToleranceLevel::OrSymbol
-            ]
-        ).void
-      end
-      attr_writer :automatic_hallucination_tolerance_levels
+      attr_accessor :automatic_hallucination_tolerance_levels
 
       # Extended AI capabilities available to the event, if any. Can be `web_search`
       # and/or `file_search`.
-      sig do
-        returns(T.nilable(T::Array[Deeprails::DefendResponse::Capability]))
-      end
-      attr_reader :capabilities
-
-      sig do
-        params(
-          capabilities: T::Array[Deeprails::DefendResponse::Capability::OrHash]
-        ).void
-      end
-      attr_writer :capabilities
+      sig { returns(T::Array[Deeprails::DefendResponse::Capability]) }
+      attr_accessor :capabilities
 
       # The time the workflow was created in UTC.
-      sig { returns(T.nilable(Time)) }
-      attr_reader :created_at
-
-      sig { params(created_at: Time).void }
-      attr_writer :created_at
+      sig { returns(Time) }
+      attr_accessor :created_at
 
       # Mapping of guardrail metric names to threshold values. Values can be floating
       # point numbers (0.0-1.0) for custom thresholds.
-      sig { returns(T.nilable(T::Hash[Symbol, Float])) }
-      attr_reader :custom_hallucination_threshold_values
-
-      sig do
-        params(
-          custom_hallucination_threshold_values: T::Hash[Symbol, Float]
-        ).void
-      end
-      attr_writer :custom_hallucination_threshold_values
+      sig { returns(T::Hash[Symbol, Float]) }
+      attr_accessor :custom_hallucination_threshold_values
 
       # Description for the workflow.
-      sig { returns(T.nilable(String)) }
-      attr_reader :description
-
-      sig { params(description: String).void }
-      attr_writer :description
+      sig { returns(String) }
+      attr_accessor :description
 
       # An array of events associated with this workflow.
-      sig { returns(T.nilable(T::Array[Deeprails::DefendResponse::Event])) }
-      attr_reader :events
-
-      sig do
-        params(events: T::Array[Deeprails::DefendResponse::Event::OrHash]).void
-      end
-      attr_writer :events
+      sig { returns(T::Array[Deeprails::DefendResponse::Event]) }
+      attr_accessor :events
 
       # List of files associated with the workflow. If this is not empty, models can
       # search these files when performing evaluations or remediations
-      sig { returns(T.nilable(T::Array[Deeprails::DefendResponse::File])) }
-      attr_reader :files
+      sig { returns(T::Array[Deeprails::DefendResponse::File]) }
+      attr_accessor :files
 
-      sig do
-        params(files: T::Array[Deeprails::DefendResponse::File::OrHash]).void
-      end
-      attr_writer :files
+      # Name of the workflow.
+      sig { returns(String) }
+      attr_accessor :name
+
+      # Status of the selected workflow. May be `inactive` or `active`. Inactive
+      # workflows will not accept events.
+      sig { returns(Deeprails::DefendResponse::Status::TaggedSymbol) }
+      attr_accessor :status
+
+      # Type of thresholds used to evaluate the event.
+      sig { returns(Deeprails::DefendResponse::ThresholdType::TaggedSymbol) }
+      attr_accessor :threshold_type
+
+      # The most recent time the workflow was updated in UTC.
+      sig { returns(Time) }
+      attr_accessor :updated_at
+
+      # A unique workflow ID.
+      sig { returns(String) }
+      attr_accessor :workflow_id
 
       sig { returns(T.nilable(Deeprails::DefendResponse::Stats)) }
       attr_reader :stats
@@ -106,42 +74,8 @@ module Deeprails
       sig { params(stats: Deeprails::DefendResponse::Stats::OrHash).void }
       attr_writer :stats
 
-      # Status of the selected workflow. May be `inactive` or `active`. Inactive
-      # workflows will not accept events.
-      sig do
-        returns(T.nilable(Deeprails::DefendResponse::Status::TaggedSymbol))
-      end
-      attr_reader :status
-
-      sig { params(status: Deeprails::DefendResponse::Status::OrSymbol).void }
-      attr_writer :status
-
-      # Type of thresholds used to evaluate the event.
-      sig do
-        returns(
-          T.nilable(Deeprails::DefendResponse::ThresholdType::TaggedSymbol)
-        )
-      end
-      attr_reader :threshold_type
-
       sig do
         params(
-          threshold_type: Deeprails::DefendResponse::ThresholdType::OrSymbol
-        ).void
-      end
-      attr_writer :threshold_type
-
-      # The most recent time the workflow was updated in UTC.
-      sig { returns(T.nilable(Time)) }
-      attr_reader :updated_at
-
-      sig { params(updated_at: Time).void }
-      attr_writer :updated_at
-
-      sig do
-        params(
-          name: String,
-          workflow_id: String,
           automatic_hallucination_tolerance_levels:
             T::Hash[
               Symbol,
@@ -153,51 +87,51 @@ module Deeprails
           description: String,
           events: T::Array[Deeprails::DefendResponse::Event::OrHash],
           files: T::Array[Deeprails::DefendResponse::File::OrHash],
-          stats: Deeprails::DefendResponse::Stats::OrHash,
+          name: String,
           status: Deeprails::DefendResponse::Status::OrSymbol,
           threshold_type: Deeprails::DefendResponse::ThresholdType::OrSymbol,
-          updated_at: Time
+          updated_at: Time,
+          workflow_id: String,
+          stats: Deeprails::DefendResponse::Stats::OrHash
         ).returns(T.attached_class)
       end
       def self.new(
-        # Name of the workflow.
-        name:,
-        # A unique workflow ID.
-        workflow_id:,
         # Mapping of guardrail metric names to tolerance values. Values can be strings
         # (`low`, `medium`, `high`) for automatic tolerance levels.
-        automatic_hallucination_tolerance_levels: nil,
+        automatic_hallucination_tolerance_levels:,
         # Extended AI capabilities available to the event, if any. Can be `web_search`
         # and/or `file_search`.
-        capabilities: nil,
+        capabilities:,
         # The time the workflow was created in UTC.
-        created_at: nil,
+        created_at:,
         # Mapping of guardrail metric names to threshold values. Values can be floating
         # point numbers (0.0-1.0) for custom thresholds.
-        custom_hallucination_threshold_values: nil,
+        custom_hallucination_threshold_values:,
         # Description for the workflow.
-        description: nil,
+        description:,
         # An array of events associated with this workflow.
-        events: nil,
+        events:,
         # List of files associated with the workflow. If this is not empty, models can
         # search these files when performing evaluations or remediations
-        files: nil,
-        stats: nil,
+        files:,
+        # Name of the workflow.
+        name:,
         # Status of the selected workflow. May be `inactive` or `active`. Inactive
         # workflows will not accept events.
-        status: nil,
+        status:,
         # Type of thresholds used to evaluate the event.
-        threshold_type: nil,
+        threshold_type:,
         # The most recent time the workflow was updated in UTC.
-        updated_at: nil
+        updated_at:,
+        # A unique workflow ID.
+        workflow_id:,
+        stats: nil
       )
       end
 
       sig do
         override.returns(
           {
-            name: String,
-            workflow_id: String,
             automatic_hallucination_tolerance_levels:
               T::Hash[
                 Symbol,
@@ -209,11 +143,13 @@ module Deeprails
             description: String,
             events: T::Array[Deeprails::DefendResponse::Event],
             files: T::Array[Deeprails::DefendResponse::File],
-            stats: Deeprails::DefendResponse::Stats,
+            name: String,
             status: Deeprails::DefendResponse::Status::TaggedSymbol,
             threshold_type:
               Deeprails::DefendResponse::ThresholdType::TaggedSymbol,
-            updated_at: Time
+            updated_at: Time,
+            workflow_id: String,
+            stats: Deeprails::DefendResponse::Stats
           }
         )
       end
@@ -578,6 +514,55 @@ module Deeprails
         end
       end
 
+      # Status of the selected workflow. May be `inactive` or `active`. Inactive
+      # workflows will not accept events.
+      module Status
+        extend Deeprails::Internal::Type::Enum
+
+        TaggedSymbol =
+          T.type_alias { T.all(Symbol, Deeprails::DefendResponse::Status) }
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+        INACTIVE =
+          T.let(:inactive, Deeprails::DefendResponse::Status::TaggedSymbol)
+        ACTIVE = T.let(:active, Deeprails::DefendResponse::Status::TaggedSymbol)
+
+        sig do
+          override.returns(
+            T::Array[Deeprails::DefendResponse::Status::TaggedSymbol]
+          )
+        end
+        def self.values
+        end
+      end
+
+      # Type of thresholds used to evaluate the event.
+      module ThresholdType
+        extend Deeprails::Internal::Type::Enum
+
+        TaggedSymbol =
+          T.type_alias do
+            T.all(Symbol, Deeprails::DefendResponse::ThresholdType)
+          end
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+        CUSTOM =
+          T.let(:custom, Deeprails::DefendResponse::ThresholdType::TaggedSymbol)
+        AUTOMATIC =
+          T.let(
+            :automatic,
+            Deeprails::DefendResponse::ThresholdType::TaggedSymbol
+          )
+
+        sig do
+          override.returns(
+            T::Array[Deeprails::DefendResponse::ThresholdType::TaggedSymbol]
+          )
+        end
+        def self.values
+        end
+      end
+
       class Stats < Deeprails::Internal::Type::BaseModel
         OrHash =
           T.type_alias do
@@ -635,55 +620,6 @@ module Deeprails
           )
         end
         def to_hash
-        end
-      end
-
-      # Status of the selected workflow. May be `inactive` or `active`. Inactive
-      # workflows will not accept events.
-      module Status
-        extend Deeprails::Internal::Type::Enum
-
-        TaggedSymbol =
-          T.type_alias { T.all(Symbol, Deeprails::DefendResponse::Status) }
-        OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-        INACTIVE =
-          T.let(:inactive, Deeprails::DefendResponse::Status::TaggedSymbol)
-        ACTIVE = T.let(:active, Deeprails::DefendResponse::Status::TaggedSymbol)
-
-        sig do
-          override.returns(
-            T::Array[Deeprails::DefendResponse::Status::TaggedSymbol]
-          )
-        end
-        def self.values
-        end
-      end
-
-      # Type of thresholds used to evaluate the event.
-      module ThresholdType
-        extend Deeprails::Internal::Type::Enum
-
-        TaggedSymbol =
-          T.type_alias do
-            T.all(Symbol, Deeprails::DefendResponse::ThresholdType)
-          end
-        OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-        CUSTOM =
-          T.let(:custom, Deeprails::DefendResponse::ThresholdType::TaggedSymbol)
-        AUTOMATIC =
-          T.let(
-            :automatic,
-            Deeprails::DefendResponse::ThresholdType::TaggedSymbol
-          )
-
-        sig do
-          override.returns(
-            T::Array[Deeprails::DefendResponse::ThresholdType::TaggedSymbol]
-          )
-        end
-        def self.values
         end
       end
     end

@@ -79,6 +79,23 @@ module Deeprails
       )
       end
 
+      # Use this endpoint to retrieve the details of a specific monitor event
+      sig do
+        params(
+          event_id: String,
+          monitor_id: String,
+          request_options: Deeprails::RequestOptions::OrHash
+        ).returns(Deeprails::MonitorEventDetailResponse)
+      end
+      def retrieve_event(
+        # The ID of the requested monitor event.
+        event_id,
+        # The ID of the monitor associated with this event.
+        monitor_id:,
+        request_options: {}
+      )
+      end
+
       # Use this endpoint to submit a model input and output pair to a monitor for
       # evaluation
       sig do

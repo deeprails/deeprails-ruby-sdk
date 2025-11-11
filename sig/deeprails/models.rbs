@@ -29,6 +29,8 @@ module Deeprails
 
   class MonitorEventResponse = Deeprails::Models::MonitorEventResponse
 
+  class MonitorRetrieveEventParams = Deeprails::Models::MonitorRetrieveEventParams
+
   class MonitorRetrieveParams = Deeprails::Models::MonitorRetrieveParams
 
   class MonitorSubmitEventParams = Deeprails::Models::MonitorSubmitEventParams

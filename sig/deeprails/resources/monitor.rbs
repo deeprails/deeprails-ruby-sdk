@@ -24,6 +24,12 @@ module Deeprails
         ?request_options: Deeprails::request_opts
       ) -> Deeprails::MonitorUpdateResponse
 
+      def retrieve_event: (
+        String event_id,
+        monitor_id: String,
+        ?request_options: Deeprails::request_opts
+      ) -> Deeprails::MonitorEventDetailResponse
+
       def submit_event: (
         String monitor_id,
         model_input: Deeprails::MonitorSubmitEventParams::ModelInput,

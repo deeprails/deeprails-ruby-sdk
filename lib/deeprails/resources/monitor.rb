@@ -97,6 +97,33 @@ module Deeprails
         )
       end
 
+      # Use this endpoint to retrieve the details of a specific monitor event
+      #
+      # @overload retrieve_event(event_id, monitor_id:, request_options: {})
+      #
+      # @param event_id [String] The ID of the requested monitor event.
+      #
+      # @param monitor_id [String] The ID of the monitor associated with this event.
+      #
+      # @param request_options [Deeprails::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [Deeprails::Models::MonitorEventDetailResponse]
+      #
+      # @see Deeprails::Models::MonitorRetrieveEventParams
+      def retrieve_event(event_id, params)
+        parsed, options = Deeprails::MonitorRetrieveEventParams.dump_request(params)
+        monitor_id =
+          parsed.delete(:monitor_id) do
+            raise ArgumentError.new("missing required path argument #{_1}")
+          end
+        @client.request(
+          method: :get,
+          path: ["monitor/%1$s/events/%2$s", monitor_id, event_id],
+          model: Deeprails::MonitorEventDetailResponse,
+          options: options
+        )
+      end
+
       # Some parameter documentations has been truncated, see
       # {Deeprails::Models::MonitorSubmitEventParams} for more details.
       #
