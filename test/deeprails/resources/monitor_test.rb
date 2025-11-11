@@ -32,16 +32,16 @@ class Deeprails::Test::Resources::MonitorTest < Deeprails::Test::ResourceTest
 
     assert_pattern do
       response => {
+        capabilities: ^(Deeprails::Internal::Type::ArrayOf[Deeprails::MonitorDetailResponse::Capability]),
+        created_at: Time,
+        evaluations: ^(Deeprails::Internal::Type::ArrayOf[Deeprails::MonitorDetailResponse::Evaluation]),
+        files: ^(Deeprails::Internal::Type::ArrayOf[Deeprails::MonitorDetailResponse::File]),
         monitor_id: String,
         name: String,
+        stats: Deeprails::MonitorDetailResponse::Stats,
         status: Deeprails::MonitorDetailResponse::Status,
-        capabilities: ^(Deeprails::Internal::Type::ArrayOf[Deeprails::MonitorDetailResponse::Capability]) | nil,
-        created_at: Time | nil,
-        description: String | nil,
-        evaluations: ^(Deeprails::Internal::Type::ArrayOf[Deeprails::MonitorDetailResponse::Evaluation]) | nil,
-        files: ^(Deeprails::Internal::Type::ArrayOf[Deeprails::MonitorDetailResponse::File]) | nil,
-        stats: Deeprails::MonitorDetailResponse::Stats | nil,
-        updated_at: Time | nil
+        updated_at: Time,
+        description: String | nil
       }
     end
   end
@@ -60,6 +60,34 @@ class Deeprails::Test::Resources::MonitorTest < Deeprails::Test::ResourceTest
         modified_at: Time,
         monitor_id: String,
         status: Deeprails::MonitorUpdateResponse::Status
+      }
+    end
+  end
+
+  def test_retrieve_event_required_params
+    skip("Prism tests are disabled")
+
+    response = @deeprails.monitor.retrieve_event("event_id", monitor_id: "monitor_id")
+
+    assert_pattern do
+      response => Deeprails::MonitorEventDetailResponse
+    end
+
+    assert_pattern do
+      response => {
+        capabilities: ^(Deeprails::Internal::Type::ArrayOf[Deeprails::MonitorEventDetailResponse::Capability]) | nil,
+        eval_time: String | nil,
+        evaluation_result: ^(Deeprails::Internal::Type::HashOf[Deeprails::Internal::Type::Unknown]) | nil,
+        event_id: String | nil,
+        files: ^(Deeprails::Internal::Type::ArrayOf[Deeprails::MonitorEventDetailResponse::File]) | nil,
+        guardrail_metrics: ^(Deeprails::Internal::Type::ArrayOf[String]) | nil,
+        model_input: ^(Deeprails::Internal::Type::HashOf[Deeprails::Internal::Type::Unknown]) | nil,
+        model_output: String | nil,
+        monitor_id: String | nil,
+        nametag: String | nil,
+        run_mode: Deeprails::MonitorEventDetailResponse::RunMode | nil,
+        status: Deeprails::MonitorEventDetailResponse::Status | nil,
+        timestamp: Time | nil
       }
     end
   end

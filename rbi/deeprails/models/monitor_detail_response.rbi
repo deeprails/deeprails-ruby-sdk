@@ -8,6 +8,23 @@ module Deeprails
           T.any(Deeprails::MonitorDetailResponse, Deeprails::Internal::AnyHash)
         end
 
+      # An array of capabilities associated with this monitor.
+      sig { returns(T::Array[Deeprails::MonitorDetailResponse::Capability]) }
+      attr_accessor :capabilities
+
+      # The time the monitor was created in UTC.
+      sig { returns(Time) }
+      attr_accessor :created_at
+
+      # An array of all evaluations performed by this monitor. Each one corresponds to a
+      # separate monitor event.
+      sig { returns(T::Array[Deeprails::MonitorDetailResponse::Evaluation]) }
+      attr_accessor :evaluations
+
+      # An array of files associated with this monitor.
+      sig { returns(T::Array[Deeprails::MonitorDetailResponse::File]) }
+      attr_accessor :files
+
       # A unique monitor ID.
       sig { returns(String) }
       attr_accessor :monitor_id
@@ -16,33 +33,25 @@ module Deeprails
       sig { returns(String) }
       attr_accessor :name
 
+      # Contains five fields used for stats of this monitor: total evaluations,
+      # completed evaluations, failed evaluations, queued evaluations, and in progress
+      # evaluations.
+      sig { returns(Deeprails::MonitorDetailResponse::Stats) }
+      attr_reader :stats
+
+      sig do
+        params(stats: Deeprails::MonitorDetailResponse::Stats::OrHash).void
+      end
+      attr_writer :stats
+
       # Status of the monitor. Can be `active` or `inactive`. Inactive monitors no
       # longer record and evaluate events.
       sig { returns(Deeprails::MonitorDetailResponse::Status::TaggedSymbol) }
       attr_accessor :status
 
-      # An array of capabilities associated with this monitor.
-      sig do
-        returns(
-          T.nilable(T::Array[Deeprails::MonitorDetailResponse::Capability])
-        )
-      end
-      attr_reader :capabilities
-
-      sig do
-        params(
-          capabilities:
-            T::Array[Deeprails::MonitorDetailResponse::Capability::OrHash]
-        ).void
-      end
-      attr_writer :capabilities
-
-      # The time the monitor was created in UTC.
-      sig { returns(T.nilable(Time)) }
-      attr_reader :created_at
-
-      sig { params(created_at: Time).void }
-      attr_writer :created_at
+      # The most recent time the monitor was modified in UTC.
+      sig { returns(Time) }
+      attr_accessor :updated_at
 
       # Description of this monitor.
       sig { returns(T.nilable(String)) }
@@ -51,144 +60,68 @@ module Deeprails
       sig { params(description: String).void }
       attr_writer :description
 
-      # An array of all evaluations performed by this monitor. Each one corresponds to a
-      # separate monitor event.
-      sig do
-        returns(
-          T.nilable(T::Array[Deeprails::MonitorDetailResponse::Evaluation])
-        )
-      end
-      attr_reader :evaluations
-
       sig do
         params(
-          evaluations:
-            T::Array[Deeprails::MonitorDetailResponse::Evaluation::OrHash]
-        ).void
-      end
-      attr_writer :evaluations
-
-      # An array of files associated with this monitor.
-      sig do
-        returns(T.nilable(T::Array[Deeprails::MonitorDetailResponse::File]))
-      end
-      attr_reader :files
-
-      sig do
-        params(
-          files: T::Array[Deeprails::MonitorDetailResponse::File::OrHash]
-        ).void
-      end
-      attr_writer :files
-
-      # Contains five fields used for stats of this monitor: total evaluations,
-      # completed evaluations, failed evaluations, queued evaluations, and in progress
-      # evaluations.
-      sig { returns(T.nilable(Deeprails::MonitorDetailResponse::Stats)) }
-      attr_reader :stats
-
-      sig do
-        params(stats: Deeprails::MonitorDetailResponse::Stats::OrHash).void
-      end
-      attr_writer :stats
-
-      # The most recent time the monitor was modified in UTC.
-      sig { returns(T.nilable(Time)) }
-      attr_reader :updated_at
-
-      sig { params(updated_at: Time).void }
-      attr_writer :updated_at
-
-      sig do
-        params(
-          monitor_id: String,
-          name: String,
-          status: Deeprails::MonitorDetailResponse::Status::OrSymbol,
           capabilities:
             T::Array[Deeprails::MonitorDetailResponse::Capability::OrHash],
           created_at: Time,
-          description: String,
           evaluations:
             T::Array[Deeprails::MonitorDetailResponse::Evaluation::OrHash],
           files: T::Array[Deeprails::MonitorDetailResponse::File::OrHash],
+          monitor_id: String,
+          name: String,
           stats: Deeprails::MonitorDetailResponse::Stats::OrHash,
-          updated_at: Time
+          status: Deeprails::MonitorDetailResponse::Status::OrSymbol,
+          updated_at: Time,
+          description: String
         ).returns(T.attached_class)
       end
       def self.new(
+        # An array of capabilities associated with this monitor.
+        capabilities:,
+        # The time the monitor was created in UTC.
+        created_at:,
+        # An array of all evaluations performed by this monitor. Each one corresponds to a
+        # separate monitor event.
+        evaluations:,
+        # An array of files associated with this monitor.
+        files:,
         # A unique monitor ID.
         monitor_id:,
         # Name of this monitor.
         name:,
-        # Status of the monitor. Can be `active` or `inactive`. Inactive monitors no
-        # longer record and evaluate events.
-        status:,
-        # An array of capabilities associated with this monitor.
-        capabilities: nil,
-        # The time the monitor was created in UTC.
-        created_at: nil,
-        # Description of this monitor.
-        description: nil,
-        # An array of all evaluations performed by this monitor. Each one corresponds to a
-        # separate monitor event.
-        evaluations: nil,
-        # An array of files associated with this monitor.
-        files: nil,
         # Contains five fields used for stats of this monitor: total evaluations,
         # completed evaluations, failed evaluations, queued evaluations, and in progress
         # evaluations.
-        stats: nil,
+        stats:,
+        # Status of the monitor. Can be `active` or `inactive`. Inactive monitors no
+        # longer record and evaluate events.
+        status:,
         # The most recent time the monitor was modified in UTC.
-        updated_at: nil
+        updated_at:,
+        # Description of this monitor.
+        description: nil
       )
       end
 
       sig do
         override.returns(
           {
-            monitor_id: String,
-            name: String,
-            status: Deeprails::MonitorDetailResponse::Status::TaggedSymbol,
             capabilities:
               T::Array[Deeprails::MonitorDetailResponse::Capability],
             created_at: Time,
-            description: String,
             evaluations: T::Array[Deeprails::MonitorDetailResponse::Evaluation],
             files: T::Array[Deeprails::MonitorDetailResponse::File],
+            monitor_id: String,
+            name: String,
             stats: Deeprails::MonitorDetailResponse::Stats,
-            updated_at: Time
+            status: Deeprails::MonitorDetailResponse::Status::TaggedSymbol,
+            updated_at: Time,
+            description: String
           }
         )
       end
       def to_hash
-      end
-
-      # Status of the monitor. Can be `active` or `inactive`. Inactive monitors no
-      # longer record and evaluate events.
-      module Status
-        extend Deeprails::Internal::Type::Enum
-
-        TaggedSymbol =
-          T.type_alias do
-            T.all(Symbol, Deeprails::MonitorDetailResponse::Status)
-          end
-        OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-        ACTIVE =
-          T.let(:active, Deeprails::MonitorDetailResponse::Status::TaggedSymbol)
-        INACTIVE =
-          T.let(
-            :inactive,
-            Deeprails::MonitorDetailResponse::Status::TaggedSymbol
-          )
-
-        sig do
-          override.returns(
-            T::Array[Deeprails::MonitorDetailResponse::Status::TaggedSymbol]
-          )
-        end
-        def self.values
-        end
       end
 
       class Capability < Deeprails::Internal::Type::BaseModel
@@ -763,6 +696,34 @@ module Deeprails
           )
         end
         def to_hash
+        end
+      end
+
+      # Status of the monitor. Can be `active` or `inactive`. Inactive monitors no
+      # longer record and evaluate events.
+      module Status
+        extend Deeprails::Internal::Type::Enum
+
+        TaggedSymbol =
+          T.type_alias do
+            T.all(Symbol, Deeprails::MonitorDetailResponse::Status)
+          end
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+        ACTIVE =
+          T.let(:active, Deeprails::MonitorDetailResponse::Status::TaggedSymbol)
+        INACTIVE =
+          T.let(
+            :inactive,
+            Deeprails::MonitorDetailResponse::Status::TaggedSymbol
+          )
+
+        sig do
+          override.returns(
+            T::Array[Deeprails::MonitorDetailResponse::Status::TaggedSymbol]
+          )
+        end
+        def self.values
         end
       end
     end

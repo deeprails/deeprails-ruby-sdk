@@ -4,11 +4,77 @@ module Deeprails
   module Models
     # @see Deeprails::Resources::Defend#retrieve_workflow
     class DefendResponse < Deeprails::Internal::Type::BaseModel
+      # @!attribute automatic_hallucination_tolerance_levels
+      #   Mapping of guardrail metric names to tolerance values. Values can be strings
+      #   (`low`, `medium`, `high`) for automatic tolerance levels.
+      #
+      #   @return [Hash{Symbol=>Symbol, Deeprails::Models::DefendResponse::AutomaticHallucinationToleranceLevel}]
+      required :automatic_hallucination_tolerance_levels,
+               -> { Deeprails::Internal::Type::HashOf[enum: Deeprails::DefendResponse::AutomaticHallucinationToleranceLevel] }
+
+      # @!attribute capabilities
+      #   Extended AI capabilities available to the event, if any. Can be `web_search`
+      #   and/or `file_search`.
+      #
+      #   @return [Array<Deeprails::Models::DefendResponse::Capability>]
+      required :capabilities, -> { Deeprails::Internal::Type::ArrayOf[Deeprails::DefendResponse::Capability] }
+
+      # @!attribute created_at
+      #   The time the workflow was created in UTC.
+      #
+      #   @return [Time]
+      required :created_at, Time
+
+      # @!attribute custom_hallucination_threshold_values
+      #   Mapping of guardrail metric names to threshold values. Values can be floating
+      #   point numbers (0.0-1.0) for custom thresholds.
+      #
+      #   @return [Hash{Symbol=>Float}]
+      required :custom_hallucination_threshold_values, Deeprails::Internal::Type::HashOf[Float]
+
+      # @!attribute description
+      #   Description for the workflow.
+      #
+      #   @return [String]
+      required :description, String
+
+      # @!attribute events
+      #   An array of events associated with this workflow.
+      #
+      #   @return [Array<Deeprails::Models::DefendResponse::Event>]
+      required :events, -> { Deeprails::Internal::Type::ArrayOf[Deeprails::DefendResponse::Event] }
+
+      # @!attribute files
+      #   List of files associated with the workflow. If this is not empty, models can
+      #   search these files when performing evaluations or remediations
+      #
+      #   @return [Array<Deeprails::Models::DefendResponse::File>]
+      required :files, -> { Deeprails::Internal::Type::ArrayOf[Deeprails::DefendResponse::File] }
+
       # @!attribute name
       #   Name of the workflow.
       #
       #   @return [String]
       required :name, String
+
+      # @!attribute status
+      #   Status of the selected workflow. May be `inactive` or `active`. Inactive
+      #   workflows will not accept events.
+      #
+      #   @return [Symbol, Deeprails::Models::DefendResponse::Status]
+      required :status, enum: -> { Deeprails::DefendResponse::Status }
+
+      # @!attribute threshold_type
+      #   Type of thresholds used to evaluate the event.
+      #
+      #   @return [Symbol, Deeprails::Models::DefendResponse::ThresholdType]
+      required :threshold_type, enum: -> { Deeprails::DefendResponse::ThresholdType }
+
+      # @!attribute updated_at
+      #   The most recent time the workflow was updated in UTC.
+      #
+      #   @return [Time]
+      required :updated_at, Time
 
       # @!attribute workflow_id
       #   A unique workflow ID.
@@ -16,84 +82,14 @@ module Deeprails
       #   @return [String]
       required :workflow_id, String
 
-      # @!attribute automatic_hallucination_tolerance_levels
-      #   Mapping of guardrail metric names to tolerance values. Values can be strings
-      #   (`low`, `medium`, `high`) for automatic tolerance levels.
-      #
-      #   @return [Hash{Symbol=>Symbol, Deeprails::Models::DefendResponse::AutomaticHallucinationToleranceLevel}, nil]
-      optional :automatic_hallucination_tolerance_levels,
-               -> { Deeprails::Internal::Type::HashOf[enum: Deeprails::DefendResponse::AutomaticHallucinationToleranceLevel] }
-
-      # @!attribute capabilities
-      #   Extended AI capabilities available to the event, if any. Can be `web_search`
-      #   and/or `file_search`.
-      #
-      #   @return [Array<Deeprails::Models::DefendResponse::Capability>, nil]
-      optional :capabilities, -> { Deeprails::Internal::Type::ArrayOf[Deeprails::DefendResponse::Capability] }
-
-      # @!attribute created_at
-      #   The time the workflow was created in UTC.
-      #
-      #   @return [Time, nil]
-      optional :created_at, Time
-
-      # @!attribute custom_hallucination_threshold_values
-      #   Mapping of guardrail metric names to threshold values. Values can be floating
-      #   point numbers (0.0-1.0) for custom thresholds.
-      #
-      #   @return [Hash{Symbol=>Float}, nil]
-      optional :custom_hallucination_threshold_values, Deeprails::Internal::Type::HashOf[Float]
-
-      # @!attribute description
-      #   Description for the workflow.
-      #
-      #   @return [String, nil]
-      optional :description, String
-
-      # @!attribute events
-      #   An array of events associated with this workflow.
-      #
-      #   @return [Array<Deeprails::Models::DefendResponse::Event>, nil]
-      optional :events, -> { Deeprails::Internal::Type::ArrayOf[Deeprails::DefendResponse::Event] }
-
-      # @!attribute files
-      #   List of files associated with the workflow. If this is not empty, models can
-      #   search these files when performing evaluations or remediations
-      #
-      #   @return [Array<Deeprails::Models::DefendResponse::File>, nil]
-      optional :files, -> { Deeprails::Internal::Type::ArrayOf[Deeprails::DefendResponse::File] }
-
       # @!attribute stats
       #
       #   @return [Deeprails::Models::DefendResponse::Stats, nil]
       optional :stats, -> { Deeprails::DefendResponse::Stats }
 
-      # @!attribute status
-      #   Status of the selected workflow. May be `inactive` or `active`. Inactive
-      #   workflows will not accept events.
-      #
-      #   @return [Symbol, Deeprails::Models::DefendResponse::Status, nil]
-      optional :status, enum: -> { Deeprails::DefendResponse::Status }
-
-      # @!attribute threshold_type
-      #   Type of thresholds used to evaluate the event.
-      #
-      #   @return [Symbol, Deeprails::Models::DefendResponse::ThresholdType, nil]
-      optional :threshold_type, enum: -> { Deeprails::DefendResponse::ThresholdType }
-
-      # @!attribute updated_at
-      #   The most recent time the workflow was updated in UTC.
-      #
-      #   @return [Time, nil]
-      optional :updated_at, Time
-
-      # @!method initialize(name:, workflow_id:, automatic_hallucination_tolerance_levels: nil, capabilities: nil, created_at: nil, custom_hallucination_threshold_values: nil, description: nil, events: nil, files: nil, stats: nil, status: nil, threshold_type: nil, updated_at: nil)
+      # @!method initialize(automatic_hallucination_tolerance_levels:, capabilities:, created_at:, custom_hallucination_threshold_values:, description:, events:, files:, name:, status:, threshold_type:, updated_at:, workflow_id:, stats: nil)
       #   Some parameter documentations has been truncated, see
       #   {Deeprails::Models::DefendResponse} for more details.
-      #
-      #   @param name [String] Name of the workflow.
-      #
-      #   @param workflow_id [String] A unique workflow ID.
       #
       #   @param automatic_hallucination_tolerance_levels [Hash{Symbol=>Symbol, Deeprails::Models::DefendResponse::AutomaticHallucinationToleranceLevel}] Mapping of guardrail metric names to tolerance values. Values can be strings (`l
       #
@@ -109,13 +105,17 @@ module Deeprails
       #
       #   @param files [Array<Deeprails::Models::DefendResponse::File>] List of files associated with the workflow. If this is not empty, models can sea
       #
-      #   @param stats [Deeprails::Models::DefendResponse::Stats]
+      #   @param name [String] Name of the workflow.
       #
       #   @param status [Symbol, Deeprails::Models::DefendResponse::Status] Status of the selected workflow. May be `inactive` or `active`. Inactive workf
       #
       #   @param threshold_type [Symbol, Deeprails::Models::DefendResponse::ThresholdType] Type of thresholds used to evaluate the event.
       #
       #   @param updated_at [Time] The most recent time the workflow was updated in UTC.
+      #
+      #   @param workflow_id [String] A unique workflow ID.
+      #
+      #   @param stats [Deeprails::Models::DefendResponse::Stats]
 
       module AutomaticHallucinationToleranceLevel
         extend Deeprails::Internal::Type::Enum
@@ -303,6 +303,33 @@ module Deeprails
         #   @param file_size [Integer]
       end
 
+      # Status of the selected workflow. May be `inactive` or `active`. Inactive
+      # workflows will not accept events.
+      #
+      # @see Deeprails::Models::DefendResponse#status
+      module Status
+        extend Deeprails::Internal::Type::Enum
+
+        INACTIVE = :inactive
+        ACTIVE = :active
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
+      end
+
+      # Type of thresholds used to evaluate the event.
+      #
+      # @see Deeprails::Models::DefendResponse#threshold_type
+      module ThresholdType
+        extend Deeprails::Internal::Type::Enum
+
+        CUSTOM = :custom
+        AUTOMATIC = :automatic
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
+      end
+
       # @see Deeprails::Models::DefendResponse#stats
       class Stats < Deeprails::Internal::Type::BaseModel
         # @!attribute outputs_below_threshold
@@ -329,33 +356,6 @@ module Deeprails
         #   @param outputs_improved [Integer] Number of AI outputs that were improved.
         #
         #   @param outputs_processed [Integer] Total number of AI outputs processed by the workflow.
-      end
-
-      # Status of the selected workflow. May be `inactive` or `active`. Inactive
-      # workflows will not accept events.
-      #
-      # @see Deeprails::Models::DefendResponse#status
-      module Status
-        extend Deeprails::Internal::Type::Enum
-
-        INACTIVE = :inactive
-        ACTIVE = :active
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
-
-      # Type of thresholds used to evaluate the event.
-      #
-      # @see Deeprails::Models::DefendResponse#threshold_type
-      module ThresholdType
-        extend Deeprails::Internal::Type::Enum
-
-        CUSTOM = :custom
-        AUTOMATIC = :automatic
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
       end
     end
   end

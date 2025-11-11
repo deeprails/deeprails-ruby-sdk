@@ -35,7 +35,7 @@ deeprails = Deeprails::Client.new(
 defend_create_response = deeprails.defend.create_workflow(
   improvement_action: "fixit",
   name: "Push Alert Workflow",
-  threshold_type: "automatic",
+  threshold_type: "custom",
   custom_hallucination_threshold_values: {completeness: 0.7, instruction_adherence: 0.75},
   web_search: true
 )
@@ -52,7 +52,7 @@ begin
   defend = deeprails.defend.create_workflow(
     improvement_action: "fixit",
     name: "Push Alert Workflow",
-    threshold_type: "automatic",
+    threshold_type: "custom",
     custom_hallucination_threshold_values: {completeness: 0.7, instruction_adherence: 0.75},
     web_search: true
   )
@@ -101,7 +101,7 @@ deeprails = Deeprails::Client.new(
 deeprails.defend.create_workflow(
   improvement_action: "fixit",
   name: "Push Alert Workflow",
-  threshold_type: "automatic",
+  threshold_type: "custom",
   custom_hallucination_threshold_values: {completeness: 0.7, instruction_adherence: 0.75},
   web_search: true,
   request_options: {max_retries: 5}
@@ -122,7 +122,7 @@ deeprails = Deeprails::Client.new(
 deeprails.defend.create_workflow(
   improvement_action: "fixit",
   name: "Push Alert Workflow",
-  threshold_type: "automatic",
+  threshold_type: "custom",
   custom_hallucination_threshold_values: {completeness: 0.7, instruction_adherence: 0.75},
   web_search: true,
   request_options: {timeout: 5}
@@ -160,7 +160,7 @@ defend_create_response =
   deeprails.defend.create_workflow(
     improvement_action: "fixit",
     name: "Push Alert Workflow",
-    threshold_type: "automatic",
+    threshold_type: "custom",
     custom_hallucination_threshold_values: {completeness: 0.7, instruction_adherence: 0.75},
     web_search: true,
     request_options: {
@@ -211,7 +211,7 @@ You can provide typesafe request parameters like so:
 deeprails.defend.create_workflow(
   improvement_action: "fixit",
   name: "Push Alert Workflow",
-  threshold_type: "automatic",
+  threshold_type: "custom",
   custom_hallucination_threshold_values: {completeness: 0.7, instruction_adherence: 0.75},
   web_search: true
 )
@@ -224,7 +224,7 @@ Or, equivalently:
 deeprails.defend.create_workflow(
   improvement_action: "fixit",
   name: "Push Alert Workflow",
-  threshold_type: "automatic",
+  threshold_type: "custom",
   custom_hallucination_threshold_values: {completeness: 0.7, instruction_adherence: 0.75},
   web_search: true
 )
@@ -233,7 +233,7 @@ deeprails.defend.create_workflow(
 params = Deeprails::DefendCreateWorkflowParams.new(
   improvement_action: "fixit",
   name: "Push Alert Workflow",
-  threshold_type: "automatic",
+  threshold_type: "custom",
   custom_hallucination_threshold_values: {completeness: 0.7, instruction_adherence: 0.75},
   web_search: true
 )

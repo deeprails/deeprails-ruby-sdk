@@ -2,97 +2,66 @@ module Deeprails
   module Models
     type monitor_detail_response =
       {
-        monitor_id: String,
-        name: String,
-        status: Deeprails::Models::MonitorDetailResponse::status,
         capabilities: ::Array[Deeprails::MonitorDetailResponse::Capability],
         created_at: Time,
-        description: String,
         evaluations: ::Array[Deeprails::MonitorDetailResponse::Evaluation],
         files: ::Array[Deeprails::MonitorDetailResponse::File],
+        monitor_id: String,
+        name: String,
         stats: Deeprails::MonitorDetailResponse::Stats,
-        updated_at: Time
+        status: Deeprails::Models::MonitorDetailResponse::status,
+        updated_at: Time,
+        description: String
       }
 
     class MonitorDetailResponse < Deeprails::Internal::Type::BaseModel
+      attr_accessor capabilities: ::Array[Deeprails::MonitorDetailResponse::Capability]
+
+      attr_accessor created_at: Time
+
+      attr_accessor evaluations: ::Array[Deeprails::MonitorDetailResponse::Evaluation]
+
+      attr_accessor files: ::Array[Deeprails::MonitorDetailResponse::File]
+
       attr_accessor monitor_id: String
 
       attr_accessor name: String
 
+      attr_accessor stats: Deeprails::MonitorDetailResponse::Stats
+
       attr_accessor status: Deeprails::Models::MonitorDetailResponse::status
 
-      attr_reader capabilities: ::Array[Deeprails::MonitorDetailResponse::Capability]?
-
-      def capabilities=: (
-        ::Array[Deeprails::MonitorDetailResponse::Capability]
-      ) -> ::Array[Deeprails::MonitorDetailResponse::Capability]
-
-      attr_reader created_at: Time?
-
-      def created_at=: (Time) -> Time
+      attr_accessor updated_at: Time
 
       attr_reader description: String?
 
       def description=: (String) -> String
 
-      attr_reader evaluations: ::Array[Deeprails::MonitorDetailResponse::Evaluation]?
-
-      def evaluations=: (
-        ::Array[Deeprails::MonitorDetailResponse::Evaluation]
-      ) -> ::Array[Deeprails::MonitorDetailResponse::Evaluation]
-
-      attr_reader files: ::Array[Deeprails::MonitorDetailResponse::File]?
-
-      def files=: (
-        ::Array[Deeprails::MonitorDetailResponse::File]
-      ) -> ::Array[Deeprails::MonitorDetailResponse::File]
-
-      attr_reader stats: Deeprails::MonitorDetailResponse::Stats?
-
-      def stats=: (
-        Deeprails::MonitorDetailResponse::Stats
-      ) -> Deeprails::MonitorDetailResponse::Stats
-
-      attr_reader updated_at: Time?
-
-      def updated_at=: (Time) -> Time
-
       def initialize: (
+        capabilities: ::Array[Deeprails::MonitorDetailResponse::Capability],
+        created_at: Time,
+        evaluations: ::Array[Deeprails::MonitorDetailResponse::Evaluation],
+        files: ::Array[Deeprails::MonitorDetailResponse::File],
         monitor_id: String,
         name: String,
+        stats: Deeprails::MonitorDetailResponse::Stats,
         status: Deeprails::Models::MonitorDetailResponse::status,
-        ?capabilities: ::Array[Deeprails::MonitorDetailResponse::Capability],
-        ?created_at: Time,
-        ?description: String,
-        ?evaluations: ::Array[Deeprails::MonitorDetailResponse::Evaluation],
-        ?files: ::Array[Deeprails::MonitorDetailResponse::File],
-        ?stats: Deeprails::MonitorDetailResponse::Stats,
-        ?updated_at: Time
+        updated_at: Time,
+        ?description: String
       ) -> void
 
       def to_hash: -> {
-        monitor_id: String,
-        name: String,
-        status: Deeprails::Models::MonitorDetailResponse::status,
         capabilities: ::Array[Deeprails::MonitorDetailResponse::Capability],
         created_at: Time,
-        description: String,
         evaluations: ::Array[Deeprails::MonitorDetailResponse::Evaluation],
         files: ::Array[Deeprails::MonitorDetailResponse::File],
+        monitor_id: String,
+        name: String,
         stats: Deeprails::MonitorDetailResponse::Stats,
-        updated_at: Time
+        status: Deeprails::Models::MonitorDetailResponse::status,
+        updated_at: Time,
+        description: String
       }
-
-      type status = :active | :inactive
-
-      module Status
-        extend Deeprails::Internal::Type::Enum
-
-        ACTIVE: :active
-        INACTIVE: :inactive
-
-        def self?.values: -> ::Array[Deeprails::Models::MonitorDetailResponse::status]
-      end
 
       type capability = { capability: String }
 
@@ -340,6 +309,17 @@ module Deeprails
           queued_evaluations: Integer,
           total_evaluations: Integer
         }
+      end
+
+      type status = :active | :inactive
+
+      module Status
+        extend Deeprails::Internal::Type::Enum
+
+        ACTIVE: :active
+        INACTIVE: :inactive
+
+        def self?.values: -> ::Array[Deeprails::Models::MonitorDetailResponse::status]
       end
     end
   end

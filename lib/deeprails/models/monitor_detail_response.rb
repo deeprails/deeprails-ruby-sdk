@@ -4,6 +4,33 @@ module Deeprails
   module Models
     # @see Deeprails::Resources::Monitor#retrieve
     class MonitorDetailResponse < Deeprails::Internal::Type::BaseModel
+      # @!attribute capabilities
+      #   An array of capabilities associated with this monitor.
+      #
+      #   @return [Array<Deeprails::Models::MonitorDetailResponse::Capability>]
+      required :capabilities,
+               -> { Deeprails::Internal::Type::ArrayOf[Deeprails::MonitorDetailResponse::Capability] }
+
+      # @!attribute created_at
+      #   The time the monitor was created in UTC.
+      #
+      #   @return [Time]
+      required :created_at, Time
+
+      # @!attribute evaluations
+      #   An array of all evaluations performed by this monitor. Each one corresponds to a
+      #   separate monitor event.
+      #
+      #   @return [Array<Deeprails::Models::MonitorDetailResponse::Evaluation>]
+      required :evaluations,
+               -> { Deeprails::Internal::Type::ArrayOf[Deeprails::MonitorDetailResponse::Evaluation] }
+
+      # @!attribute files
+      #   An array of files associated with this monitor.
+      #
+      #   @return [Array<Deeprails::Models::MonitorDetailResponse::File>]
+      required :files, -> { Deeprails::Internal::Type::ArrayOf[Deeprails::MonitorDetailResponse::File] }
+
       # @!attribute monitor_id
       #   A unique monitor ID.
       #
@@ -16,6 +43,14 @@ module Deeprails
       #   @return [String]
       required :name, String
 
+      # @!attribute stats
+      #   Contains five fields used for stats of this monitor: total evaluations,
+      #   completed evaluations, failed evaluations, queued evaluations, and in progress
+      #   evaluations.
+      #
+      #   @return [Deeprails::Models::MonitorDetailResponse::Stats]
+      required :stats, -> { Deeprails::MonitorDetailResponse::Stats }
+
       # @!attribute status
       #   Status of the monitor. Can be `active` or `inactive`. Inactive monitors no
       #   longer record and evaluate events.
@@ -23,18 +58,11 @@ module Deeprails
       #   @return [Symbol, Deeprails::Models::MonitorDetailResponse::Status]
       required :status, enum: -> { Deeprails::MonitorDetailResponse::Status }
 
-      # @!attribute capabilities
-      #   An array of capabilities associated with this monitor.
+      # @!attribute updated_at
+      #   The most recent time the monitor was modified in UTC.
       #
-      #   @return [Array<Deeprails::Models::MonitorDetailResponse::Capability>, nil]
-      optional :capabilities,
-               -> { Deeprails::Internal::Type::ArrayOf[Deeprails::MonitorDetailResponse::Capability] }
-
-      # @!attribute created_at
-      #   The time the monitor was created in UTC.
-      #
-      #   @return [Time, nil]
-      optional :created_at, Time
+      #   @return [Time]
+      required :updated_at, Time
 
       # @!attribute description
       #   Description of this monitor.
@@ -42,71 +70,29 @@ module Deeprails
       #   @return [String, nil]
       optional :description, String
 
-      # @!attribute evaluations
-      #   An array of all evaluations performed by this monitor. Each one corresponds to a
-      #   separate monitor event.
-      #
-      #   @return [Array<Deeprails::Models::MonitorDetailResponse::Evaluation>, nil]
-      optional :evaluations,
-               -> { Deeprails::Internal::Type::ArrayOf[Deeprails::MonitorDetailResponse::Evaluation] }
-
-      # @!attribute files
-      #   An array of files associated with this monitor.
-      #
-      #   @return [Array<Deeprails::Models::MonitorDetailResponse::File>, nil]
-      optional :files, -> { Deeprails::Internal::Type::ArrayOf[Deeprails::MonitorDetailResponse::File] }
-
-      # @!attribute stats
-      #   Contains five fields used for stats of this monitor: total evaluations,
-      #   completed evaluations, failed evaluations, queued evaluations, and in progress
-      #   evaluations.
-      #
-      #   @return [Deeprails::Models::MonitorDetailResponse::Stats, nil]
-      optional :stats, -> { Deeprails::MonitorDetailResponse::Stats }
-
-      # @!attribute updated_at
-      #   The most recent time the monitor was modified in UTC.
-      #
-      #   @return [Time, nil]
-      optional :updated_at, Time
-
-      # @!method initialize(monitor_id:, name:, status:, capabilities: nil, created_at: nil, description: nil, evaluations: nil, files: nil, stats: nil, updated_at: nil)
+      # @!method initialize(capabilities:, created_at:, evaluations:, files:, monitor_id:, name:, stats:, status:, updated_at:, description: nil)
       #   Some parameter documentations has been truncated, see
       #   {Deeprails::Models::MonitorDetailResponse} for more details.
-      #
-      #   @param monitor_id [String] A unique monitor ID.
-      #
-      #   @param name [String] Name of this monitor.
-      #
-      #   @param status [Symbol, Deeprails::Models::MonitorDetailResponse::Status] Status of the monitor. Can be `active` or `inactive`. Inactive monitors no lon
       #
       #   @param capabilities [Array<Deeprails::Models::MonitorDetailResponse::Capability>] An array of capabilities associated with this monitor.
       #
       #   @param created_at [Time] The time the monitor was created in UTC.
       #
-      #   @param description [String] Description of this monitor.
-      #
       #   @param evaluations [Array<Deeprails::Models::MonitorDetailResponse::Evaluation>] An array of all evaluations performed by this monitor. Each one corresponds to
       #
       #   @param files [Array<Deeprails::Models::MonitorDetailResponse::File>] An array of files associated with this monitor.
       #
+      #   @param monitor_id [String] A unique monitor ID.
+      #
+      #   @param name [String] Name of this monitor.
+      #
       #   @param stats [Deeprails::Models::MonitorDetailResponse::Stats] Contains five fields used for stats of this monitor: total evaluations, complete
       #
-      #   @param updated_at [Time] The most recent time the monitor was modified in UTC.
-
-      # Status of the monitor. Can be `active` or `inactive`. Inactive monitors no
-      # longer record and evaluate events.
+      #   @param status [Symbol, Deeprails::Models::MonitorDetailResponse::Status] Status of the monitor. Can be `active` or `inactive`. Inactive monitors no lon
       #
-      # @see Deeprails::Models::MonitorDetailResponse#status
-      module Status
-        extend Deeprails::Internal::Type::Enum
-
-        ACTIVE = :active
-        INACTIVE = :inactive
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
+      #   @param updated_at [Time] The most recent time the monitor was modified in UTC.
+      #
+      #   @param description [String] Description of this monitor.
 
       class Capability < Deeprails::Internal::Type::BaseModel
         # @!attribute capability
@@ -371,6 +357,20 @@ module Deeprails
         #   @param queued_evaluations [Integer] Number of evaluations currently queued.
         #
         #   @param total_evaluations [Integer] Total number of evaluations performed by this monitor.
+      end
+
+      # Status of the monitor. Can be `active` or `inactive`. Inactive monitors no
+      # longer record and evaluate events.
+      #
+      # @see Deeprails::Models::MonitorDetailResponse#status
+      module Status
+        extend Deeprails::Internal::Type::Enum
+
+        ACTIVE = :active
+        INACTIVE = :inactive
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
       end
     end
   end

@@ -1,0 +1,23 @@
+module Deeprails
+  module Models
+    type monitor_retrieve_event_params =
+      { monitor_id: String } & Deeprails::Internal::Type::request_parameters
+
+    class MonitorRetrieveEventParams < Deeprails::Internal::Type::BaseModel
+      extend Deeprails::Internal::Type::RequestParameters::Converter
+      include Deeprails::Internal::Type::RequestParameters
+
+      attr_accessor monitor_id: String
+
+      def initialize: (
+        monitor_id: String,
+        ?request_options: Deeprails::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        monitor_id: String,
+        request_options: Deeprails::RequestOptions
+      }
+    end
+  end
+end

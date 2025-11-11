@@ -11,6 +11,19 @@ module Deeprails
           )
         end
 
+      # History of evaluations for the event.
+      sig do
+        returns(
+          T::Array[Deeprails::WorkflowEventDetailResponse::EvaluationHistory]
+        )
+      end
+      attr_accessor :evaluation_history
+
+      # Evaluation result consisting of average scores and rationales for each of the
+      # evaluated guardrail metrics.
+      sig { returns(T::Hash[Symbol, T.anything]) }
+      attr_accessor :evaluation_result
+
       # A unique workflow event ID.
       sig { returns(String) }
       attr_accessor :event_id
@@ -27,6 +40,21 @@ module Deeprails
       sig { returns(T::Boolean) }
       attr_accessor :filtered
 
+      # Improved model output after improvement tool was applied and each metric passed
+      # evaluation.
+      sig { returns(String) }
+      attr_accessor :improved_model_output
+
+      # Status of the improvement tool used to improve the event.
+      sig do
+        returns(
+          T.nilable(
+            Deeprails::WorkflowEventDetailResponse::ImprovementToolStatus::TaggedSymbol
+          )
+        )
+      end
+      attr_accessor :improvement_tool_status
+
       # Type of improvement tool used to improve the event.
       sig do
         returns(
@@ -34,6 +62,14 @@ module Deeprails
         )
       end
       attr_accessor :improvement_tool_type
+
+      # Type of thresholds used to evaluate the event.
+      sig do
+        returns(
+          Deeprails::WorkflowEventDetailResponse::ThresholdType::TaggedSymbol
+        )
+      end
+      attr_accessor :threshold_type
 
       # Workflow ID associated with the event.
       sig { returns(String) }
@@ -95,34 +131,6 @@ module Deeprails
       end
       attr_writer :custom_hallucination_threshold_values
 
-      # History of evaluations for the event.
-      sig do
-        returns(
-          T.nilable(
-            T::Array[Deeprails::WorkflowEventDetailResponse::EvaluationHistory]
-          )
-        )
-      end
-      attr_reader :evaluation_history
-
-      sig do
-        params(
-          evaluation_history:
-            T::Array[
-              Deeprails::WorkflowEventDetailResponse::EvaluationHistory::OrHash
-            ]
-        ).void
-      end
-      attr_writer :evaluation_history
-
-      # Evaluation result consisting of average scores and rationales for each of the
-      # evaluated guardrail metrics.
-      sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
-      attr_reader :evaluation_result
-
-      sig { params(evaluation_result: T::Hash[Symbol, T.anything]).void }
-      attr_writer :evaluation_result
-
       # List of files available to the event, if any. Will only be present if
       # `file_search` is enabled.
       sig do
@@ -139,50 +147,26 @@ module Deeprails
       end
       attr_writer :files
 
-      # Improved model output after improvement tool was applied and each metric passed
-      # evaluation.
-      sig { returns(T.nilable(String)) }
-      attr_reader :improved_model_output
-
-      sig { params(improved_model_output: String).void }
-      attr_writer :improved_model_output
-
-      # Status of the improvement tool used to improve the event.
-      sig do
-        returns(
-          T.nilable(
-            Deeprails::WorkflowEventDetailResponse::ImprovementToolStatus::TaggedSymbol
-          )
-        )
-      end
-      attr_accessor :improvement_tool_status
-
-      # Type of thresholds used to evaluate the event.
-      sig do
-        returns(
-          T.nilable(
-            Deeprails::WorkflowEventDetailResponse::ThresholdType::TaggedSymbol
-          )
-        )
-      end
-      attr_reader :threshold_type
-
       sig do
         params(
-          threshold_type:
-            Deeprails::WorkflowEventDetailResponse::ThresholdType::OrSymbol
-        ).void
-      end
-      attr_writer :threshold_type
-
-      sig do
-        params(
+          evaluation_history:
+            T::Array[
+              Deeprails::WorkflowEventDetailResponse::EvaluationHistory::OrHash
+            ],
+          evaluation_result: T::Hash[Symbol, T.anything],
           event_id: String,
           event_status:
             Deeprails::WorkflowEventDetailResponse::EventStatus::OrSymbol,
           filtered: T::Boolean,
+          improved_model_output: String,
+          improvement_tool_status:
+            T.nilable(
+              Deeprails::WorkflowEventDetailResponse::ImprovementToolStatus::OrSymbol
+            ),
           improvement_tool_type:
             Deeprails::WorkflowEventDetailResponse::ImprovementToolType::OrSymbol,
+          threshold_type:
+            Deeprails::WorkflowEventDetailResponse::ThresholdType::OrSymbol,
           workflow_id: String,
           automatic_hallucination_tolerance_levels:
             T::Hash[
@@ -194,30 +178,30 @@ module Deeprails
               Deeprails::WorkflowEventDetailResponse::Capability::OrHash
             ],
           custom_hallucination_threshold_values: T::Hash[Symbol, Float],
-          evaluation_history:
-            T::Array[
-              Deeprails::WorkflowEventDetailResponse::EvaluationHistory::OrHash
-            ],
-          evaluation_result: T::Hash[Symbol, T.anything],
-          files: T::Array[Deeprails::WorkflowEventDetailResponse::File::OrHash],
-          improved_model_output: String,
-          improvement_tool_status:
-            T.nilable(
-              Deeprails::WorkflowEventDetailResponse::ImprovementToolStatus::OrSymbol
-            ),
-          threshold_type:
-            Deeprails::WorkflowEventDetailResponse::ThresholdType::OrSymbol
+          files: T::Array[Deeprails::WorkflowEventDetailResponse::File::OrHash]
         ).returns(T.attached_class)
       end
       def self.new(
+        # History of evaluations for the event.
+        evaluation_history:,
+        # Evaluation result consisting of average scores and rationales for each of the
+        # evaluated guardrail metrics.
+        evaluation_result:,
         # A unique workflow event ID.
         event_id:,
         # Status of the event.
         event_status:,
         # Whether the event was filtered and requires improvement.
         filtered:,
+        # Improved model output after improvement tool was applied and each metric passed
+        # evaluation.
+        improved_model_output:,
+        # Status of the improvement tool used to improve the event.
+        improvement_tool_status:,
         # Type of improvement tool used to improve the event.
         improvement_tool_type:,
+        # Type of thresholds used to evaluate the event.
+        threshold_type:,
         # Workflow ID associated with the event.
         workflow_id:,
         # Mapping of guardrail metric names to tolerance values. Values are strings
@@ -229,33 +213,33 @@ module Deeprails
         # Mapping of guardrail metric names to threshold values. Values are floating point
         # numbers (0.0-1.0) representing custom thresholds.
         custom_hallucination_threshold_values: nil,
-        # History of evaluations for the event.
-        evaluation_history: nil,
-        # Evaluation result consisting of average scores and rationales for each of the
-        # evaluated guardrail metrics.
-        evaluation_result: nil,
         # List of files available to the event, if any. Will only be present if
         # `file_search` is enabled.
-        files: nil,
-        # Improved model output after improvement tool was applied and each metric passed
-        # evaluation.
-        improved_model_output: nil,
-        # Status of the improvement tool used to improve the event.
-        improvement_tool_status: nil,
-        # Type of thresholds used to evaluate the event.
-        threshold_type: nil
+        files: nil
       )
       end
 
       sig do
         override.returns(
           {
+            evaluation_history:
+              T::Array[
+                Deeprails::WorkflowEventDetailResponse::EvaluationHistory
+              ],
+            evaluation_result: T::Hash[Symbol, T.anything],
             event_id: String,
             event_status:
               Deeprails::WorkflowEventDetailResponse::EventStatus::TaggedSymbol,
             filtered: T::Boolean,
+            improved_model_output: String,
+            improvement_tool_status:
+              T.nilable(
+                Deeprails::WorkflowEventDetailResponse::ImprovementToolStatus::TaggedSymbol
+              ),
             improvement_tool_type:
               Deeprails::WorkflowEventDetailResponse::ImprovementToolType::TaggedSymbol,
+            threshold_type:
+              Deeprails::WorkflowEventDetailResponse::ThresholdType::TaggedSymbol,
             workflow_id: String,
             automatic_hallucination_tolerance_levels:
               T::Hash[
@@ -265,158 +249,11 @@ module Deeprails
             capabilities:
               T::Array[Deeprails::WorkflowEventDetailResponse::Capability],
             custom_hallucination_threshold_values: T::Hash[Symbol, Float],
-            evaluation_history:
-              T::Array[
-                Deeprails::WorkflowEventDetailResponse::EvaluationHistory
-              ],
-            evaluation_result: T::Hash[Symbol, T.anything],
-            files: T::Array[Deeprails::WorkflowEventDetailResponse::File],
-            improved_model_output: String,
-            improvement_tool_status:
-              T.nilable(
-                Deeprails::WorkflowEventDetailResponse::ImprovementToolStatus::TaggedSymbol
-              ),
-            threshold_type:
-              Deeprails::WorkflowEventDetailResponse::ThresholdType::TaggedSymbol
+            files: T::Array[Deeprails::WorkflowEventDetailResponse::File]
           }
         )
       end
       def to_hash
-      end
-
-      # Status of the event.
-      module EventStatus
-        extend Deeprails::Internal::Type::Enum
-
-        TaggedSymbol =
-          T.type_alias do
-            T.all(Symbol, Deeprails::WorkflowEventDetailResponse::EventStatus)
-          end
-        OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-        IN_PROGRESS =
-          T.let(
-            :"In Progress",
-            Deeprails::WorkflowEventDetailResponse::EventStatus::TaggedSymbol
-          )
-        COMPLETED =
-          T.let(
-            :Completed,
-            Deeprails::WorkflowEventDetailResponse::EventStatus::TaggedSymbol
-          )
-
-        sig do
-          override.returns(
-            T::Array[
-              Deeprails::WorkflowEventDetailResponse::EventStatus::TaggedSymbol
-            ]
-          )
-        end
-        def self.values
-        end
-      end
-
-      # Type of improvement tool used to improve the event.
-      module ImprovementToolType
-        extend Deeprails::Internal::Type::Enum
-
-        TaggedSymbol =
-          T.type_alias do
-            T.all(
-              Symbol,
-              Deeprails::WorkflowEventDetailResponse::ImprovementToolType
-            )
-          end
-        OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-        REGEN =
-          T.let(
-            :regen,
-            Deeprails::WorkflowEventDetailResponse::ImprovementToolType::TaggedSymbol
-          )
-        FIXIT =
-          T.let(
-            :fixit,
-            Deeprails::WorkflowEventDetailResponse::ImprovementToolType::TaggedSymbol
-          )
-        DO_NOTHING =
-          T.let(
-            :do_nothing,
-            Deeprails::WorkflowEventDetailResponse::ImprovementToolType::TaggedSymbol
-          )
-
-        sig do
-          override.returns(
-            T::Array[
-              Deeprails::WorkflowEventDetailResponse::ImprovementToolType::TaggedSymbol
-            ]
-          )
-        end
-        def self.values
-        end
-      end
-
-      module AutomaticHallucinationToleranceLevel
-        extend Deeprails::Internal::Type::Enum
-
-        TaggedSymbol =
-          T.type_alias do
-            T.all(
-              Symbol,
-              Deeprails::WorkflowEventDetailResponse::AutomaticHallucinationToleranceLevel
-            )
-          end
-        OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-        LOW =
-          T.let(
-            :low,
-            Deeprails::WorkflowEventDetailResponse::AutomaticHallucinationToleranceLevel::TaggedSymbol
-          )
-        MEDIUM =
-          T.let(
-            :medium,
-            Deeprails::WorkflowEventDetailResponse::AutomaticHallucinationToleranceLevel::TaggedSymbol
-          )
-        HIGH =
-          T.let(
-            :high,
-            Deeprails::WorkflowEventDetailResponse::AutomaticHallucinationToleranceLevel::TaggedSymbol
-          )
-
-        sig do
-          override.returns(
-            T::Array[
-              Deeprails::WorkflowEventDetailResponse::AutomaticHallucinationToleranceLevel::TaggedSymbol
-            ]
-          )
-        end
-        def self.values
-        end
-      end
-
-      class Capability < Deeprails::Internal::Type::BaseModel
-        OrHash =
-          T.type_alias do
-            T.any(
-              Deeprails::WorkflowEventDetailResponse::Capability,
-              Deeprails::Internal::AnyHash
-            )
-          end
-
-        sig { returns(T.nilable(String)) }
-        attr_reader :capability
-
-        sig { params(capability: String).void }
-        attr_writer :capability
-
-        sig { params(capability: String).returns(T.attached_class) }
-        def self.new(capability: nil)
-        end
-
-        sig { override.returns({ capability: String }) }
-        def to_hash
-        end
       end
 
       class EvaluationHistory < Deeprails::Internal::Type::BaseModel
@@ -563,49 +400,35 @@ module Deeprails
         end
       end
 
-      class File < Deeprails::Internal::Type::BaseModel
-        OrHash =
+      # Status of the event.
+      module EventStatus
+        extend Deeprails::Internal::Type::Enum
+
+        TaggedSymbol =
           T.type_alias do
-            T.any(
-              Deeprails::WorkflowEventDetailResponse::File,
-              Deeprails::Internal::AnyHash
-            )
+            T.all(Symbol, Deeprails::WorkflowEventDetailResponse::EventStatus)
           end
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
 
-        sig { returns(T.nilable(String)) }
-        attr_reader :file_id
-
-        sig { params(file_id: String).void }
-        attr_writer :file_id
-
-        sig { returns(T.nilable(String)) }
-        attr_reader :file_name
-
-        sig { params(file_name: String).void }
-        attr_writer :file_name
-
-        sig { returns(T.nilable(Integer)) }
-        attr_reader :file_size
-
-        sig { params(file_size: Integer).void }
-        attr_writer :file_size
-
-        sig do
-          params(
-            file_id: String,
-            file_name: String,
-            file_size: Integer
-          ).returns(T.attached_class)
-        end
-        def self.new(file_id: nil, file_name: nil, file_size: nil)
-        end
+        IN_PROGRESS =
+          T.let(
+            :"In Progress",
+            Deeprails::WorkflowEventDetailResponse::EventStatus::TaggedSymbol
+          )
+        COMPLETED =
+          T.let(
+            :Completed,
+            Deeprails::WorkflowEventDetailResponse::EventStatus::TaggedSymbol
+          )
 
         sig do
           override.returns(
-            { file_id: String, file_name: String, file_size: Integer }
+            T::Array[
+              Deeprails::WorkflowEventDetailResponse::EventStatus::TaggedSymbol
+            ]
           )
         end
-        def to_hash
+        def self.values
         end
       end
 
@@ -649,6 +472,46 @@ module Deeprails
         end
       end
 
+      # Type of improvement tool used to improve the event.
+      module ImprovementToolType
+        extend Deeprails::Internal::Type::Enum
+
+        TaggedSymbol =
+          T.type_alias do
+            T.all(
+              Symbol,
+              Deeprails::WorkflowEventDetailResponse::ImprovementToolType
+            )
+          end
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+        REGEN =
+          T.let(
+            :regen,
+            Deeprails::WorkflowEventDetailResponse::ImprovementToolType::TaggedSymbol
+          )
+        FIXIT =
+          T.let(
+            :fixit,
+            Deeprails::WorkflowEventDetailResponse::ImprovementToolType::TaggedSymbol
+          )
+        DO_NOTHING =
+          T.let(
+            :do_nothing,
+            Deeprails::WorkflowEventDetailResponse::ImprovementToolType::TaggedSymbol
+          )
+
+        sig do
+          override.returns(
+            T::Array[
+              Deeprails::WorkflowEventDetailResponse::ImprovementToolType::TaggedSymbol
+            ]
+          )
+        end
+        def self.values
+        end
+      end
+
       # Type of thresholds used to evaluate the event.
       module ThresholdType
         extend Deeprails::Internal::Type::Enum
@@ -678,6 +541,115 @@ module Deeprails
           )
         end
         def self.values
+        end
+      end
+
+      module AutomaticHallucinationToleranceLevel
+        extend Deeprails::Internal::Type::Enum
+
+        TaggedSymbol =
+          T.type_alias do
+            T.all(
+              Symbol,
+              Deeprails::WorkflowEventDetailResponse::AutomaticHallucinationToleranceLevel
+            )
+          end
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+        LOW =
+          T.let(
+            :low,
+            Deeprails::WorkflowEventDetailResponse::AutomaticHallucinationToleranceLevel::TaggedSymbol
+          )
+        MEDIUM =
+          T.let(
+            :medium,
+            Deeprails::WorkflowEventDetailResponse::AutomaticHallucinationToleranceLevel::TaggedSymbol
+          )
+        HIGH =
+          T.let(
+            :high,
+            Deeprails::WorkflowEventDetailResponse::AutomaticHallucinationToleranceLevel::TaggedSymbol
+          )
+
+        sig do
+          override.returns(
+            T::Array[
+              Deeprails::WorkflowEventDetailResponse::AutomaticHallucinationToleranceLevel::TaggedSymbol
+            ]
+          )
+        end
+        def self.values
+        end
+      end
+
+      class Capability < Deeprails::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              Deeprails::WorkflowEventDetailResponse::Capability,
+              Deeprails::Internal::AnyHash
+            )
+          end
+
+        sig { returns(T.nilable(String)) }
+        attr_reader :capability
+
+        sig { params(capability: String).void }
+        attr_writer :capability
+
+        sig { params(capability: String).returns(T.attached_class) }
+        def self.new(capability: nil)
+        end
+
+        sig { override.returns({ capability: String }) }
+        def to_hash
+        end
+      end
+
+      class File < Deeprails::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              Deeprails::WorkflowEventDetailResponse::File,
+              Deeprails::Internal::AnyHash
+            )
+          end
+
+        sig { returns(T.nilable(String)) }
+        attr_reader :file_id
+
+        sig { params(file_id: String).void }
+        attr_writer :file_id
+
+        sig { returns(T.nilable(String)) }
+        attr_reader :file_name
+
+        sig { params(file_name: String).void }
+        attr_writer :file_name
+
+        sig { returns(T.nilable(Integer)) }
+        attr_reader :file_size
+
+        sig { params(file_size: Integer).void }
+        attr_writer :file_size
+
+        sig do
+          params(
+            file_id: String,
+            file_name: String,
+            file_size: Integer
+          ).returns(T.attached_class)
+        end
+        def self.new(file_id: nil, file_name: nil, file_size: nil)
+        end
+
+        sig do
+          override.returns(
+            { file_id: String, file_name: String, file_size: Integer }
+          )
+        end
+        def to_hash
         end
       end
     end
