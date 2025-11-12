@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.14.0 (2025-11-12)
+
+Full Changelog: [v0.13.0...v0.14.0](https://github.com/deeprails/deeprails-ruby-sdk/compare/v0.13.0...v0.14.0)
+
+### Features
+
+* **api:** remove dev server ([59d5dfb](https://github.com/deeprails/deeprails-ruby-sdk/commit/59d5dfbbae7a7cfc6d5a01893a8397c287f47834))
+
 ## 0.13.0 (2025-11-11)
 
 Full Changelog: [v0.12.0...v0.13.0](https://github.com/deeprails/deeprails-ruby-sdk/compare/v0.12.0...v0.13.0)
