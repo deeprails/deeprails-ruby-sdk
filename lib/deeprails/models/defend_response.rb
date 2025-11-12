@@ -33,7 +33,8 @@ module Deeprails
       required :custom_hallucination_threshold_values, Deeprails::Internal::Type::HashOf[Float]
 
       # @!attribute description
-      #   Description for the workflow.
+      #   A description for the workflow, to help you remember what that workflow means to
+      #   your organization.
       #
       #   @return [String]
       required :description, String
@@ -52,7 +53,7 @@ module Deeprails
       required :files, -> { Deeprails::Internal::Type::ArrayOf[Deeprails::DefendResponse::File] }
 
       # @!attribute name
-      #   Name of the workflow.
+      #   A human-readable name for the workflow that will correspond to it's workflow ID.
       #
       #   @return [String]
       required :name, String
@@ -82,12 +83,19 @@ module Deeprails
       #   @return [String]
       required :workflow_id, String
 
+      # @!attribute improvement_action
+      #   The action used to improve outputs that fail one or more guardrail metrics for
+      #   the workflow events.
+      #
+      #   @return [Symbol, Deeprails::Models::DefendResponse::ImprovementAction, nil]
+      optional :improvement_action, enum: -> { Deeprails::DefendResponse::ImprovementAction }
+
       # @!attribute stats
       #
       #   @return [Deeprails::Models::DefendResponse::Stats, nil]
       optional :stats, -> { Deeprails::DefendResponse::Stats }
 
-      # @!method initialize(automatic_hallucination_tolerance_levels:, capabilities:, created_at:, custom_hallucination_threshold_values:, description:, events:, files:, name:, status:, threshold_type:, updated_at:, workflow_id:, stats: nil)
+      # @!method initialize(automatic_hallucination_tolerance_levels:, capabilities:, created_at:, custom_hallucination_threshold_values:, description:, events:, files:, name:, status:, threshold_type:, updated_at:, workflow_id:, improvement_action: nil, stats: nil)
       #   Some parameter documentations has been truncated, see
       #   {Deeprails::Models::DefendResponse} for more details.
       #
@@ -99,13 +107,13 @@ module Deeprails
       #
       #   @param custom_hallucination_threshold_values [Hash{Symbol=>Float}] Mapping of guardrail metric names to threshold values. Values can be floating po
       #
-      #   @param description [String] Description for the workflow.
+      #   @param description [String] A description for the workflow, to help you remember what that workflow means to
       #
       #   @param events [Array<Deeprails::Models::DefendResponse::Event>] An array of events associated with this workflow.
       #
       #   @param files [Array<Deeprails::Models::DefendResponse::File>] List of files associated with the workflow. If this is not empty, models can sea
       #
-      #   @param name [String] Name of the workflow.
+      #   @param name [String] A human-readable name for the workflow that will correspond to it's workflow ID.
       #
       #   @param status [Symbol, Deeprails::Models::DefendResponse::Status] Status of the selected workflow. May be `inactive` or `active`. Inactive workf
       #
@@ -114,6 +122,8 @@ module Deeprails
       #   @param updated_at [Time] The most recent time the workflow was updated in UTC.
       #
       #   @param workflow_id [String] A unique workflow ID.
+      #
+      #   @param improvement_action [Symbol, Deeprails::Models::DefendResponse::ImprovementAction] The action used to improve outputs that fail one or more guardrail metrics for t
       #
       #   @param stats [Deeprails::Models::DefendResponse::Stats]
 
@@ -325,6 +335,21 @@ module Deeprails
 
         CUSTOM = :custom
         AUTOMATIC = :automatic
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
+      end
+
+      # The action used to improve outputs that fail one or more guardrail metrics for
+      # the workflow events.
+      #
+      # @see Deeprails::Models::DefendResponse#improvement_action
+      module ImprovementAction
+        extend Deeprails::Internal::Type::Enum
+
+        REGEN = :regen
+        FIXIT = :fixit
+        DO_NOTHING = :do_nothing
 
         # @!method self.values
         #   @return [Array<Symbol>]

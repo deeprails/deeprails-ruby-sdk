@@ -8,8 +8,8 @@ module Deeprails
         event_status: Deeprails::Models::WorkflowEventDetailResponse::event_status,
         filtered: bool,
         improved_model_output: String,
+        improvement_action: Deeprails::Models::WorkflowEventDetailResponse::improvement_action,
         improvement_tool_status: Deeprails::Models::WorkflowEventDetailResponse::improvement_tool_status?,
-        improvement_tool_type: Deeprails::Models::WorkflowEventDetailResponse::improvement_tool_type,
         threshold_type: Deeprails::Models::WorkflowEventDetailResponse::threshold_type,
         workflow_id: String,
         automatic_hallucination_tolerance_levels: ::Hash[Symbol, Deeprails::Models::WorkflowEventDetailResponse::automatic_hallucination_tolerance_level],
@@ -31,9 +31,9 @@ module Deeprails
 
       attr_accessor improved_model_output: String
 
-      attr_accessor improvement_tool_status: Deeprails::Models::WorkflowEventDetailResponse::improvement_tool_status?
+      attr_accessor improvement_action: Deeprails::Models::WorkflowEventDetailResponse::improvement_action
 
-      attr_accessor improvement_tool_type: Deeprails::Models::WorkflowEventDetailResponse::improvement_tool_type
+      attr_accessor improvement_tool_status: Deeprails::Models::WorkflowEventDetailResponse::improvement_tool_status?
 
       attr_accessor threshold_type: Deeprails::Models::WorkflowEventDetailResponse::threshold_type
 
@@ -70,8 +70,8 @@ module Deeprails
         event_status: Deeprails::Models::WorkflowEventDetailResponse::event_status,
         filtered: bool,
         improved_model_output: String,
+        improvement_action: Deeprails::Models::WorkflowEventDetailResponse::improvement_action,
         improvement_tool_status: Deeprails::Models::WorkflowEventDetailResponse::improvement_tool_status?,
-        improvement_tool_type: Deeprails::Models::WorkflowEventDetailResponse::improvement_tool_type,
         threshold_type: Deeprails::Models::WorkflowEventDetailResponse::threshold_type,
         workflow_id: String,
         ?automatic_hallucination_tolerance_levels: ::Hash[Symbol, Deeprails::Models::WorkflowEventDetailResponse::automatic_hallucination_tolerance_level],
@@ -87,8 +87,8 @@ module Deeprails
         event_status: Deeprails::Models::WorkflowEventDetailResponse::event_status,
         filtered: bool,
         improved_model_output: String,
+        improvement_action: Deeprails::Models::WorkflowEventDetailResponse::improvement_action,
         improvement_tool_status: Deeprails::Models::WorkflowEventDetailResponse::improvement_tool_status?,
-        improvement_tool_type: Deeprails::Models::WorkflowEventDetailResponse::improvement_tool_type,
         threshold_type: Deeprails::Models::WorkflowEventDetailResponse::threshold_type,
         workflow_id: String,
         automatic_hallucination_tolerance_levels: ::Hash[Symbol, Deeprails::Models::WorkflowEventDetailResponse::automatic_hallucination_tolerance_level],
@@ -211,6 +211,18 @@ module Deeprails
         def self?.values: -> ::Array[Deeprails::Models::WorkflowEventDetailResponse::event_status]
       end
 
+      type improvement_action = :regen | :fixit | :do_nothing
+
+      module ImprovementAction
+        extend Deeprails::Internal::Type::Enum
+
+        REGEN: :regen
+        FIXIT: :fixit
+        DO_NOTHING: :do_nothing
+
+        def self?.values: -> ::Array[Deeprails::Models::WorkflowEventDetailResponse::improvement_action]
+      end
+
       type improvement_tool_status =
         :improved | :"failed on max retries" | :improvement_required
 
@@ -222,18 +234,6 @@ module Deeprails
         IMPROVEMENT_REQUIRED: :improvement_required
 
         def self?.values: -> ::Array[Deeprails::Models::WorkflowEventDetailResponse::improvement_tool_status]
-      end
-
-      type improvement_tool_type = :regen | :fixit | :do_nothing
-
-      module ImprovementToolType
-        extend Deeprails::Internal::Type::Enum
-
-        REGEN: :regen
-        FIXIT: :fixit
-        DO_NOTHING: :do_nothing
-
-        def self?.values: -> ::Array[Deeprails::Models::WorkflowEventDetailResponse::improvement_tool_type]
       end
 
       type threshold_type = :custom | :automatic
