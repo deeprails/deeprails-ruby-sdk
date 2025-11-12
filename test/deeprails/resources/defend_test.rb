@@ -39,8 +39,8 @@ class Deeprails::Test::Resources::DefendTest < Deeprails::Test::ResourceTest
         event_status: Deeprails::WorkflowEventDetailResponse::EventStatus,
         filtered: Deeprails::Internal::Type::Boolean,
         improved_model_output: String,
+        improvement_action: Deeprails::WorkflowEventDetailResponse::ImprovementAction,
         improvement_tool_status: Deeprails::WorkflowEventDetailResponse::ImprovementToolStatus | nil,
-        improvement_tool_type: Deeprails::WorkflowEventDetailResponse::ImprovementToolType,
         threshold_type: Deeprails::WorkflowEventDetailResponse::ThresholdType,
         workflow_id: String,
         automatic_hallucination_tolerance_levels: ^(Deeprails::Internal::Type::HashOf[enum: Deeprails::WorkflowEventDetailResponse::AutomaticHallucinationToleranceLevel]) | nil,
@@ -74,6 +74,7 @@ class Deeprails::Test::Resources::DefendTest < Deeprails::Test::ResourceTest
         threshold_type: Deeprails::DefendResponse::ThresholdType,
         updated_at: Time,
         workflow_id: String,
+        improvement_action: Deeprails::DefendResponse::ImprovementAction | nil,
         stats: Deeprails::DefendResponse::Stats | nil
       }
     end
