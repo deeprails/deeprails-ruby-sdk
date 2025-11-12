@@ -14,6 +14,7 @@ module Deeprails
         threshold_type: Deeprails::Models::DefendResponse::threshold_type,
         updated_at: Time,
         workflow_id: String,
+        improvement_action: Deeprails::Models::DefendResponse::improvement_action,
         stats: Deeprails::DefendResponse::Stats
       }
 
@@ -42,6 +43,12 @@ module Deeprails
 
       attr_accessor workflow_id: String
 
+      attr_reader improvement_action: Deeprails::Models::DefendResponse::improvement_action?
+
+      def improvement_action=: (
+        Deeprails::Models::DefendResponse::improvement_action
+      ) -> Deeprails::Models::DefendResponse::improvement_action
+
       attr_reader stats: Deeprails::DefendResponse::Stats?
 
       def stats=: (
@@ -61,6 +68,7 @@ module Deeprails
         threshold_type: Deeprails::Models::DefendResponse::threshold_type,
         updated_at: Time,
         workflow_id: String,
+        ?improvement_action: Deeprails::Models::DefendResponse::improvement_action,
         ?stats: Deeprails::DefendResponse::Stats
       ) -> void
 
@@ -77,6 +85,7 @@ module Deeprails
         threshold_type: Deeprails::Models::DefendResponse::threshold_type,
         updated_at: Time,
         workflow_id: String,
+        improvement_action: Deeprails::Models::DefendResponse::improvement_action,
         stats: Deeprails::DefendResponse::Stats
       }
 
@@ -297,6 +306,18 @@ module Deeprails
         AUTOMATIC: :automatic
 
         def self?.values: -> ::Array[Deeprails::Models::DefendResponse::threshold_type]
+      end
+
+      type improvement_action = :regen | :fixit | :do_nothing
+
+      module ImprovementAction
+        extend Deeprails::Internal::Type::Enum
+
+        REGEN: :regen
+        FIXIT: :fixit
+        DO_NOTHING: :do_nothing
+
+        def self?.values: -> ::Array[Deeprails::Models::DefendResponse::improvement_action]
       end
 
       type stats =

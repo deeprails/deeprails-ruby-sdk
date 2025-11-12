@@ -45,6 +45,14 @@ module Deeprails
       sig { returns(String) }
       attr_accessor :improved_model_output
 
+      # Type of improvement action used to improve the event.
+      sig do
+        returns(
+          Deeprails::WorkflowEventDetailResponse::ImprovementAction::TaggedSymbol
+        )
+      end
+      attr_accessor :improvement_action
+
       # Status of the improvement tool used to improve the event.
       sig do
         returns(
@@ -54,14 +62,6 @@ module Deeprails
         )
       end
       attr_accessor :improvement_tool_status
-
-      # Type of improvement tool used to improve the event.
-      sig do
-        returns(
-          Deeprails::WorkflowEventDetailResponse::ImprovementToolType::TaggedSymbol
-        )
-      end
-      attr_accessor :improvement_tool_type
 
       # Type of thresholds used to evaluate the event.
       sig do
@@ -159,12 +159,12 @@ module Deeprails
             Deeprails::WorkflowEventDetailResponse::EventStatus::OrSymbol,
           filtered: T::Boolean,
           improved_model_output: String,
+          improvement_action:
+            Deeprails::WorkflowEventDetailResponse::ImprovementAction::OrSymbol,
           improvement_tool_status:
             T.nilable(
               Deeprails::WorkflowEventDetailResponse::ImprovementToolStatus::OrSymbol
             ),
-          improvement_tool_type:
-            Deeprails::WorkflowEventDetailResponse::ImprovementToolType::OrSymbol,
           threshold_type:
             Deeprails::WorkflowEventDetailResponse::ThresholdType::OrSymbol,
           workflow_id: String,
@@ -196,10 +196,10 @@ module Deeprails
         # Improved model output after improvement tool was applied and each metric passed
         # evaluation.
         improved_model_output:,
+        # Type of improvement action used to improve the event.
+        improvement_action:,
         # Status of the improvement tool used to improve the event.
         improvement_tool_status:,
-        # Type of improvement tool used to improve the event.
-        improvement_tool_type:,
         # Type of thresholds used to evaluate the event.
         threshold_type:,
         # Workflow ID associated with the event.
@@ -232,12 +232,12 @@ module Deeprails
               Deeprails::WorkflowEventDetailResponse::EventStatus::TaggedSymbol,
             filtered: T::Boolean,
             improved_model_output: String,
+            improvement_action:
+              Deeprails::WorkflowEventDetailResponse::ImprovementAction::TaggedSymbol,
             improvement_tool_status:
               T.nilable(
                 Deeprails::WorkflowEventDetailResponse::ImprovementToolStatus::TaggedSymbol
               ),
-            improvement_tool_type:
-              Deeprails::WorkflowEventDetailResponse::ImprovementToolType::TaggedSymbol,
             threshold_type:
               Deeprails::WorkflowEventDetailResponse::ThresholdType::TaggedSymbol,
             workflow_id: String,
@@ -432,6 +432,46 @@ module Deeprails
         end
       end
 
+      # Type of improvement action used to improve the event.
+      module ImprovementAction
+        extend Deeprails::Internal::Type::Enum
+
+        TaggedSymbol =
+          T.type_alias do
+            T.all(
+              Symbol,
+              Deeprails::WorkflowEventDetailResponse::ImprovementAction
+            )
+          end
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+        REGEN =
+          T.let(
+            :regen,
+            Deeprails::WorkflowEventDetailResponse::ImprovementAction::TaggedSymbol
+          )
+        FIXIT =
+          T.let(
+            :fixit,
+            Deeprails::WorkflowEventDetailResponse::ImprovementAction::TaggedSymbol
+          )
+        DO_NOTHING =
+          T.let(
+            :do_nothing,
+            Deeprails::WorkflowEventDetailResponse::ImprovementAction::TaggedSymbol
+          )
+
+        sig do
+          override.returns(
+            T::Array[
+              Deeprails::WorkflowEventDetailResponse::ImprovementAction::TaggedSymbol
+            ]
+          )
+        end
+        def self.values
+        end
+      end
+
       # Status of the improvement tool used to improve the event.
       module ImprovementToolStatus
         extend Deeprails::Internal::Type::Enum
@@ -465,46 +505,6 @@ module Deeprails
           override.returns(
             T::Array[
               Deeprails::WorkflowEventDetailResponse::ImprovementToolStatus::TaggedSymbol
-            ]
-          )
-        end
-        def self.values
-        end
-      end
-
-      # Type of improvement tool used to improve the event.
-      module ImprovementToolType
-        extend Deeprails::Internal::Type::Enum
-
-        TaggedSymbol =
-          T.type_alias do
-            T.all(
-              Symbol,
-              Deeprails::WorkflowEventDetailResponse::ImprovementToolType
-            )
-          end
-        OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-        REGEN =
-          T.let(
-            :regen,
-            Deeprails::WorkflowEventDetailResponse::ImprovementToolType::TaggedSymbol
-          )
-        FIXIT =
-          T.let(
-            :fixit,
-            Deeprails::WorkflowEventDetailResponse::ImprovementToolType::TaggedSymbol
-          )
-        DO_NOTHING =
-          T.let(
-            :do_nothing,
-            Deeprails::WorkflowEventDetailResponse::ImprovementToolType::TaggedSymbol
-          )
-
-        sig do
-          override.returns(
-            T::Array[
-              Deeprails::WorkflowEventDetailResponse::ImprovementToolType::TaggedSymbol
             ]
           )
         end

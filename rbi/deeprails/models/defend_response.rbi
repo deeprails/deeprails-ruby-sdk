@@ -34,7 +34,8 @@ module Deeprails
       sig { returns(T::Hash[Symbol, Float]) }
       attr_accessor :custom_hallucination_threshold_values
 
-      # Description for the workflow.
+      # A description for the workflow, to help you remember what that workflow means to
+      # your organization.
       sig { returns(String) }
       attr_accessor :description
 
@@ -47,7 +48,7 @@ module Deeprails
       sig { returns(T::Array[Deeprails::DefendResponse::File]) }
       attr_accessor :files
 
-      # Name of the workflow.
+      # A human-readable name for the workflow that will correspond to it's workflow ID.
       sig { returns(String) }
       attr_accessor :name
 
@@ -67,6 +68,23 @@ module Deeprails
       # A unique workflow ID.
       sig { returns(String) }
       attr_accessor :workflow_id
+
+      # The action used to improve outputs that fail one or more guardrail metrics for
+      # the workflow events.
+      sig do
+        returns(
+          T.nilable(Deeprails::DefendResponse::ImprovementAction::TaggedSymbol)
+        )
+      end
+      attr_reader :improvement_action
+
+      sig do
+        params(
+          improvement_action:
+            Deeprails::DefendResponse::ImprovementAction::OrSymbol
+        ).void
+      end
+      attr_writer :improvement_action
 
       sig { returns(T.nilable(Deeprails::DefendResponse::Stats)) }
       attr_reader :stats
@@ -92,6 +110,8 @@ module Deeprails
           threshold_type: Deeprails::DefendResponse::ThresholdType::OrSymbol,
           updated_at: Time,
           workflow_id: String,
+          improvement_action:
+            Deeprails::DefendResponse::ImprovementAction::OrSymbol,
           stats: Deeprails::DefendResponse::Stats::OrHash
         ).returns(T.attached_class)
       end
@@ -107,14 +127,15 @@ module Deeprails
         # Mapping of guardrail metric names to threshold values. Values can be floating
         # point numbers (0.0-1.0) for custom thresholds.
         custom_hallucination_threshold_values:,
-        # Description for the workflow.
+        # A description for the workflow, to help you remember what that workflow means to
+        # your organization.
         description:,
         # An array of events associated with this workflow.
         events:,
         # List of files associated with the workflow. If this is not empty, models can
         # search these files when performing evaluations or remediations
         files:,
-        # Name of the workflow.
+        # A human-readable name for the workflow that will correspond to it's workflow ID.
         name:,
         # Status of the selected workflow. May be `inactive` or `active`. Inactive
         # workflows will not accept events.
@@ -125,6 +146,9 @@ module Deeprails
         updated_at:,
         # A unique workflow ID.
         workflow_id:,
+        # The action used to improve outputs that fail one or more guardrail metrics for
+        # the workflow events.
+        improvement_action: nil,
         stats: nil
       )
       end
@@ -149,6 +173,8 @@ module Deeprails
               Deeprails::DefendResponse::ThresholdType::TaggedSymbol,
             updated_at: Time,
             workflow_id: String,
+            improvement_action:
+              Deeprails::DefendResponse::ImprovementAction::TaggedSymbol,
             stats: Deeprails::DefendResponse::Stats
           }
         )
@@ -557,6 +583,42 @@ module Deeprails
         sig do
           override.returns(
             T::Array[Deeprails::DefendResponse::ThresholdType::TaggedSymbol]
+          )
+        end
+        def self.values
+        end
+      end
+
+      # The action used to improve outputs that fail one or more guardrail metrics for
+      # the workflow events.
+      module ImprovementAction
+        extend Deeprails::Internal::Type::Enum
+
+        TaggedSymbol =
+          T.type_alias do
+            T.all(Symbol, Deeprails::DefendResponse::ImprovementAction)
+          end
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+        REGEN =
+          T.let(
+            :regen,
+            Deeprails::DefendResponse::ImprovementAction::TaggedSymbol
+          )
+        FIXIT =
+          T.let(
+            :fixit,
+            Deeprails::DefendResponse::ImprovementAction::TaggedSymbol
+          )
+        DO_NOTHING =
+          T.let(
+            :do_nothing,
+            Deeprails::DefendResponse::ImprovementAction::TaggedSymbol
+          )
+
+        sig do
+          override.returns(
+            T::Array[Deeprails::DefendResponse::ImprovementAction::TaggedSymbol]
           )
         end
         def self.values
