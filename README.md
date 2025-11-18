@@ -6,7 +6,7 @@ The Deeprails Ruby library provides convenient access to the Deeprails REST API 
 
 Documentation for releases of this gem can be found [on RubyDoc](https://gemdocs.org/gems/deeprails).
 
-The REST API documentation can be found on [docs.deeprails.com](https://docs.deeprails.com).
+The REST API documentation can be found on [docs.deeprails.ai](https://docs.deeprails.ai).
 
 ## Installation
 
