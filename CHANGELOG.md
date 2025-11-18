@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.16.0 (2025-11-18)
+
+Full Changelog: [v0.15.0...v0.16.0](https://github.com/deeprails/deeprails-ruby-sdk/compare/v0.15.0...v0.16.0)
+
+### Features
+
+* **api:** revert docs URL ([a7f8683](https://github.com/deeprails/deeprails-ruby-sdk/commit/a7f86836399d683ebd49fed5761850a2615cd0a6))
+
 ## 0.15.0 (2025-11-18)
 
 Full Changelog: [v0.14.0...v0.15.0](https://github.com/deeprails/deeprails-ruby-sdk/compare/v0.14.0...v0.15.0)
