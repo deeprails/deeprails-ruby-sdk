@@ -6,8 +6,8 @@ module Deeprails
       # Some parameter documentations has been truncated, see
       # {Deeprails::Models::DefendCreateWorkflowParams} for more details.
       #
-      # Use this endpoint to create a new guardrail workflow with optional guardrail
-      # thresholds and improvement actions
+      # Use this endpoint to create a new guardrail workflow by specifying guardrail
+      # thresholds, an improvement action, and optional extended capabilities.
       #
       # @overload create_workflow(improvement_action:, name:, threshold_type:, automatic_hallucination_tolerance_levels: nil, custom_hallucination_threshold_values: nil, description: nil, file_search: nil, max_improvement_attempts: nil, web_search: nil, request_options: {})
       #
@@ -135,7 +135,7 @@ module Deeprails
         )
       end
 
-      # Use this endpoint to update an existing defend workflow
+      # Use this endpoint to update an existing defend workflow if its details change.
       #
       # @overload update_workflow(workflow_id, description: nil, name: nil, request_options: {})
       #

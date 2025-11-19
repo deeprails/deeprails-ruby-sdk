@@ -227,8 +227,8 @@ module Deeprails
         sig { params(evaluation_total_cost: Float).void }
         attr_writer :evaluation_total_cost
 
-        # An array of guardrail metrics that the model input and output pair will be
-        # evaluated on.
+        # An array of guardrail metrics that the input and output pair will be evaluated
+        # on.
         sig do
           returns(
             T.nilable(
@@ -307,8 +307,8 @@ module Deeprails
           evaluation_result: nil,
           # Total cost of the evaluation.
           evaluation_total_cost: nil,
-          # An array of guardrail metrics that the model input and output pair will be
-          # evaluated on.
+          # An array of guardrail metrics that the input and output pair will be evaluated
+          # on.
           guardrail_metrics: nil,
           # An optional, user-defined tag for the evaluation.
           nametag: nil,
