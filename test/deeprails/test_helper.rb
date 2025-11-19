@@ -74,7 +74,7 @@ class Deeprails::Test::ResourceTest < Minitest::Test
 
   def before_all
     super
-    @deeprails = Deeprails::Test::SingletonClient.instance
+    @deep_rails = Deeprails::Test::SingletonClient.instance
   end
 
   def around_all = async? ? Sync { super } : super
