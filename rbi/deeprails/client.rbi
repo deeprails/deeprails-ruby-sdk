@@ -42,8 +42,8 @@ module Deeprails
       # Defaults to `ENV["DEEPRAILS_API_KEY"]`
       api_key: ENV["DEEPRAILS_API_KEY"],
       # Override the default base URL for the API, e.g.,
-      # `"https://api.example.com/v2/"`. Defaults to `ENV["DEEPRAILS_BASE_URL"]`
-      base_url: ENV["DEEPRAILS_BASE_URL"],
+      # `"https://api.example.com/v2/"`. Defaults to `ENV["DEEP_RAILS_BASE_URL"]`
+      base_url: ENV["DEEP_RAILS_BASE_URL"],
       # Max number of retries to attempt after a failed retryable request.
       max_retries: Deeprails::Client::DEFAULT_MAX_RETRIES,
       timeout: Deeprails::Client::DEFAULT_TIMEOUT_IN_SECONDS,

@@ -5,8 +5,8 @@ require_relative "lib/deeprails/version"
 Gem::Specification.new do |s|
   s.name = "deeprails"
   s.version = Deeprails::VERSION
-  s.summary = "Ruby library to access the Deeprails API"
-  s.authors = ["Deeprails"]
+  s.summary = "Ruby library to access the Deep Rails API"
+  s.authors = ["Deep Rails"]
   s.email = "support@deeprails.ai"
   s.homepage = "https://gemdocs.org/gems/deeprails"
   s.metadata["homepage_uri"] = s.homepage

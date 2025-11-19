@@ -37,10 +37,10 @@ class DeeprailsTest < Minitest::Test
   def test_client_default_request_default_retry_attempts
     stub_request(:post, "http://localhost/defend").to_return_json(status: 500, body: {})
 
-    deeprails = Deeprails::Client.new(base_url: "http://localhost", api_key: "My API Key")
+    deep_rails = Deeprails::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(Deeprails::Errors::InternalServerError) do
-      deeprails.defend.create_workflow(
+      deep_rails.defend.create_workflow(
         improvement_action: :regen,
         name: "name",
         threshold_type: :automatic,
@@ -54,10 +54,10 @@ class DeeprailsTest < Minitest::Test
   def test_client_given_request_default_retry_attempts
     stub_request(:post, "http://localhost/defend").to_return_json(status: 500, body: {})
 
-    deeprails = Deeprails::Client.new(base_url: "http://localhost", api_key: "My API Key", max_retries: 3)
+    deep_rails = Deeprails::Client.new(base_url: "http://localhost", api_key: "My API Key", max_retries: 3)
 
     assert_raises(Deeprails::Errors::InternalServerError) do
-      deeprails.defend.create_workflow(improvement_action: :regen, name: "name", threshold_type: :automatic)
+      deep_rails.defend.create_workflow(improvement_action: :regen, name: "name", threshold_type: :automatic)
     end
 
     assert_requested(:any, /./, times: 4)
@@ -66,10 +66,10 @@ class DeeprailsTest < Minitest::Test
   def test_client_default_request_given_retry_attempts
     stub_request(:post, "http://localhost/defend").to_return_json(status: 500, body: {})
 
-    deeprails = Deeprails::Client.new(base_url: "http://localhost", api_key: "My API Key")
+    deep_rails = Deeprails::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(Deeprails::Errors::InternalServerError) do
-      deeprails.defend.create_workflow(
+      deep_rails.defend.create_workflow(
         improvement_action: :regen,
         name: "name",
         threshold_type: :automatic,
@@ -84,10 +84,10 @@ class DeeprailsTest < Minitest::Test
   def test_client_given_request_given_retry_attempts
     stub_request(:post, "http://localhost/defend").to_return_json(status: 500, body: {})
 
-    deeprails = Deeprails::Client.new(base_url: "http://localhost", api_key: "My API Key", max_retries: 3)
+    deep_rails = Deeprails::Client.new(base_url: "http://localhost", api_key: "My API Key", max_retries: 3)
 
     assert_raises(Deeprails::Errors::InternalServerError) do
-      deeprails.defend.create_workflow(
+      deep_rails.defend.create_workflow(
         improvement_action: :regen,
         name: "name",
         threshold_type: :automatic,
@@ -106,10 +106,10 @@ class DeeprailsTest < Minitest::Test
       body: {}
     )
 
-    deeprails = Deeprails::Client.new(base_url: "http://localhost", api_key: "My API Key", max_retries: 1)
+    deep_rails = Deeprails::Client.new(base_url: "http://localhost", api_key: "My API Key", max_retries: 1)
 
     assert_raises(Deeprails::Errors::InternalServerError) do
-      deeprails.defend.create_workflow(
+      deep_rails.defend.create_workflow(
         improvement_action: :regen,
         name: "name",
         threshold_type: :automatic,
@@ -128,11 +128,11 @@ class DeeprailsTest < Minitest::Test
       body: {}
     )
 
-    deeprails = Deeprails::Client.new(base_url: "http://localhost", api_key: "My API Key", max_retries: 1)
+    deep_rails = Deeprails::Client.new(base_url: "http://localhost", api_key: "My API Key", max_retries: 1)
 
     assert_raises(Deeprails::Errors::InternalServerError) do
       Thread.current.thread_variable_set(:time_now, Time.now)
-      deeprails.defend.create_workflow(
+      deep_rails.defend.create_workflow(
         improvement_action: :regen,
         name: "name",
         threshold_type: :automatic,
@@ -152,10 +152,10 @@ class DeeprailsTest < Minitest::Test
       body: {}
     )
 
-    deeprails = Deeprails::Client.new(base_url: "http://localhost", api_key: "My API Key", max_retries: 1)
+    deep_rails = Deeprails::Client.new(base_url: "http://localhost", api_key: "My API Key", max_retries: 1)
 
     assert_raises(Deeprails::Errors::InternalServerError) do
-      deeprails.defend.create_workflow(
+      deep_rails.defend.create_workflow(
         improvement_action: :regen,
         name: "name",
         threshold_type: :automatic,
@@ -170,10 +170,10 @@ class DeeprailsTest < Minitest::Test
   def test_retry_count_header
     stub_request(:post, "http://localhost/defend").to_return_json(status: 500, body: {})
 
-    deeprails = Deeprails::Client.new(base_url: "http://localhost", api_key: "My API Key")
+    deep_rails = Deeprails::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(Deeprails::Errors::InternalServerError) do
-      deeprails.defend.create_workflow(
+      deep_rails.defend.create_workflow(
         improvement_action: :regen,
         name: "name",
         threshold_type: :automatic,
@@ -189,10 +189,10 @@ class DeeprailsTest < Minitest::Test
   def test_omit_retry_count_header
     stub_request(:post, "http://localhost/defend").to_return_json(status: 500, body: {})
 
-    deeprails = Deeprails::Client.new(base_url: "http://localhost", api_key: "My API Key")
+    deep_rails = Deeprails::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(Deeprails::Errors::InternalServerError) do
-      deeprails.defend.create_workflow(
+      deep_rails.defend.create_workflow(
         improvement_action: :regen,
         name: "name",
         threshold_type: :automatic,
@@ -209,10 +209,10 @@ class DeeprailsTest < Minitest::Test
   def test_overwrite_retry_count_header
     stub_request(:post, "http://localhost/defend").to_return_json(status: 500, body: {})
 
-    deeprails = Deeprails::Client.new(base_url: "http://localhost", api_key: "My API Key")
+    deep_rails = Deeprails::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(Deeprails::Errors::InternalServerError) do
-      deeprails.defend.create_workflow(
+      deep_rails.defend.create_workflow(
         improvement_action: :regen,
         name: "name",
         threshold_type: :automatic,
@@ -235,10 +235,10 @@ class DeeprailsTest < Minitest::Test
       headers: {"location" => "/redirected"}
     )
 
-    deeprails = Deeprails::Client.new(base_url: "http://localhost", api_key: "My API Key")
+    deep_rails = Deeprails::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(Deeprails::Errors::APIConnectionError) do
-      deeprails.defend.create_workflow(
+      deep_rails.defend.create_workflow(
         improvement_action: :regen,
         name: "name",
         threshold_type: :automatic,
@@ -270,10 +270,10 @@ class DeeprailsTest < Minitest::Test
       headers: {"location" => "/redirected"}
     )
 
-    deeprails = Deeprails::Client.new(base_url: "http://localhost", api_key: "My API Key")
+    deep_rails = Deeprails::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(Deeprails::Errors::APIConnectionError) do
-      deeprails.defend.create_workflow(
+      deep_rails.defend.create_workflow(
         improvement_action: :regen,
         name: "name",
         threshold_type: :automatic,
@@ -300,10 +300,10 @@ class DeeprailsTest < Minitest::Test
       headers: {"location" => "/redirected"}
     )
 
-    deeprails = Deeprails::Client.new(base_url: "http://localhost", api_key: "My API Key")
+    deep_rails = Deeprails::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(Deeprails::Errors::APIConnectionError) do
-      deeprails.defend.create_workflow(
+      deep_rails.defend.create_workflow(
         improvement_action: :regen,
         name: "name",
         threshold_type: :automatic,
@@ -333,10 +333,10 @@ class DeeprailsTest < Minitest::Test
       headers: {"location" => "https://example.com/redirected"}
     )
 
-    deeprails = Deeprails::Client.new(base_url: "http://localhost", api_key: "My API Key")
+    deep_rails = Deeprails::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(Deeprails::Errors::APIConnectionError) do
-      deeprails.defend.create_workflow(
+      deep_rails.defend.create_workflow(
         improvement_action: :regen,
         name: "name",
         threshold_type: :automatic,
@@ -354,9 +354,9 @@ class DeeprailsTest < Minitest::Test
   def test_default_headers
     stub_request(:post, "http://localhost/defend").to_return_json(status: 200, body: {})
 
-    deeprails = Deeprails::Client.new(base_url: "http://localhost", api_key: "My API Key")
+    deep_rails = Deeprails::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
-    deeprails.defend.create_workflow(
+    deep_rails.defend.create_workflow(
       improvement_action: :regen,
       name: "name",
       threshold_type: :automatic,
