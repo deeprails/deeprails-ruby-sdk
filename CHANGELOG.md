@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.17.0 (2025-11-19)
+
+Full Changelog: [v0.16.0...v0.17.0](https://github.com/deeprails/deeprails-ruby-sdk/compare/v0.16.0...v0.17.0)
+
+### Features
+
+* **api:** update package name casing ([94dcce7](https://github.com/deeprails/deeprails-ruby-sdk/commit/94dcce764af00fa51541e4fb2217eb2e743efe61))
+
 ## 0.16.0 (2025-11-18)
 
 Full Changelog: [v0.15.0...v0.16.0](https://github.com/deeprails/deeprails-ruby-sdk/compare/v0.15.0...v0.16.0)

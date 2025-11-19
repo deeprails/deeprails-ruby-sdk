@@ -41,7 +41,7 @@ module Deeprails
     # @param api_key [String, nil] Defaults to `ENV["DEEPRAILS_API_KEY"]`
     #
     # @param base_url [String, nil] Override the default base URL for the API, e.g.,
-    # `"https://api.example.com/v2/"`. Defaults to `ENV["DEEPRAILS_BASE_URL"]`
+    # `"https://api.example.com/v2/"`. Defaults to `ENV["DEEP_RAILS_BASE_URL"]`
     #
     # @param max_retries [Integer] Max number of retries to attempt after a failed retryable request.
     #
@@ -52,7 +52,7 @@ module Deeprails
     # @param max_retry_delay [Float]
     def initialize(
       api_key: ENV["DEEPRAILS_API_KEY"],
-      base_url: ENV["DEEPRAILS_BASE_URL"],
+      base_url: ENV["DEEP_RAILS_BASE_URL"],
       max_retries: self.class::DEFAULT_MAX_RETRIES,
       timeout: self.class::DEFAULT_TIMEOUT_IN_SECONDS,
       initial_retry_delay: self.class::DEFAULT_INITIAL_RETRY_DELAY,

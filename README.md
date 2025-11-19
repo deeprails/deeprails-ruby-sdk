@@ -1,6 +1,6 @@
-# Deeprails Ruby API library
+# Deep Rails Ruby API library
 
-The Deeprails Ruby library provides convenient access to the Deeprails REST API from any Ruby 3.2.0+ application. It ships with comprehensive types & docstrings in Yard, RBS, and RBI – [see below](https://github.com/deeprails/deeprails-ruby-sdk#Sorbet) for usage with Sorbet. The standard library's `net/http` is used as the HTTP transport, with connection pooling via the `connection_pool` gem.
+The Deep Rails Ruby library provides convenient access to the Deep Rails REST API from any Ruby 3.2.0+ application. It ships with comprehensive types & docstrings in Yard, RBS, and RBI – [see below](https://github.com/deeprails/deeprails-ruby-sdk#Sorbet) for usage with Sorbet. The standard library's `net/http` is used as the HTTP transport, with connection pooling via the `connection_pool` gem.
 
 ## Documentation
 
@@ -15,7 +15,7 @@ To use this gem, install via Bundler by adding the following to your application
 <!-- x-release-please-start-version -->
 
 ```ruby
-gem "deeprails", "~> 0.16.0"
+gem "deeprails", "~> 0.17.0"
 ```
 
 <!-- x-release-please-end -->
@@ -26,11 +26,11 @@ gem "deeprails", "~> 0.16.0"
 require "bundler/setup"
 require "deeprails"
 
-deeprails = Deeprails::Client.new(
+deep_rails = Deeprails::Client.new(
   api_key: ENV["DEEPRAILS_API_KEY"] # This is the default and can be omitted
 )
 
-defend_create_response = deeprails.defend.create_workflow(
+defend_create_response = deep_rails.defend.create_workflow(
   improvement_action: "fixit",
   name: "Push Alert Workflow",
   threshold_type: "custom",
@@ -47,7 +47,7 @@ When the library is unable to connect to the API, or if the API returns a non-su
 
 ```ruby
 begin
-  defend = deeprails.defend.create_workflow(
+  defend = deep_rails.defend.create_workflow(
     improvement_action: "fixit",
     name: "Push Alert Workflow",
     threshold_type: "custom",
@@ -91,12 +91,12 @@ You can use the `max_retries` option to configure or disable this:
 
 ```ruby
 # Configure the default for all requests:
-deeprails = Deeprails::Client.new(
+deep_rails = Deeprails::Client.new(
   max_retries: 0 # default is 2
 )
 
 # Or, configure per-request:
-deeprails.defend.create_workflow(
+deep_rails.defend.create_workflow(
   improvement_action: "fixit",
   name: "Push Alert Workflow",
   threshold_type: "custom",
@@ -112,12 +112,12 @@ By default, requests will time out after 60 seconds. You can use the timeout opt
 
 ```ruby
 # Configure the default for all requests:
-deeprails = Deeprails::Client.new(
+deep_rails = Deeprails::Client.new(
   timeout: nil # default is 60
 )
 
 # Or, configure per-request:
-deeprails.defend.create_workflow(
+deep_rails.defend.create_workflow(
   improvement_action: "fixit",
   name: "Push Alert Workflow",
   threshold_type: "custom",
@@ -155,7 +155,7 @@ Note: the `extra_` parameters of the same name overrides the documented paramete
 
 ```ruby
 defend_create_response =
-  deeprails.defend.create_workflow(
+  deep_rails.defend.create_workflow(
     improvement_action: "fixit",
     name: "Push Alert Workflow",
     threshold_type: "custom",
@@ -206,7 +206,7 @@ This library provides comprehensive [RBI](https://sorbet.org/docs/rbi) definitio
 You can provide typesafe request parameters like so:
 
 ```ruby
-deeprails.defend.create_workflow(
+deep_rails.defend.create_workflow(
   improvement_action: "fixit",
   name: "Push Alert Workflow",
   threshold_type: "custom",
@@ -219,7 +219,7 @@ Or, equivalently:
 
 ```ruby
 # Hashes work, but are not typesafe:
-deeprails.defend.create_workflow(
+deep_rails.defend.create_workflow(
   improvement_action: "fixit",
   name: "Push Alert Workflow",
   threshold_type: "custom",
@@ -235,7 +235,7 @@ params = Deeprails::DefendCreateWorkflowParams.new(
   custom_hallucination_threshold_values: {completeness: 0.7, instruction_adherence: 0.75},
   web_search: true
 )
-deeprails.defend.create_workflow(**params)
+deep_rails.defend.create_workflow(**params)
 ```
 
 ### Enums
@@ -254,13 +254,13 @@ Enum parameters have a "relaxed" type, so you can either pass in enum constants 
 
 ```ruby
 # Using the enum constants preserves the tagged type information:
-deeprails.defend.create_workflow(
+deep_rails.defend.create_workflow(
   improvement_action: Deeprails::DefendCreateWorkflowParams::ImprovementAction::REGEN,
   # …
 )
 
 # Literal values are also permissible:
-deeprails.defend.create_workflow(
+deep_rails.defend.create_workflow(
   improvement_action: :regen,
   # …
 )
