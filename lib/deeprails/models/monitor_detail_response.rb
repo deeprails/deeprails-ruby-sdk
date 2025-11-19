@@ -159,8 +159,8 @@ module Deeprails
         optional :evaluation_total_cost, Float
 
         # @!attribute guardrail_metrics
-        #   An array of guardrail metrics that the model input and output pair will be
-        #   evaluated on.
+        #   An array of guardrail metrics that the input and output pair will be evaluated
+        #   on.
         #
         #   @return [Array<Symbol, Deeprails::Models::MonitorDetailResponse::Evaluation::GuardrailMetric>, nil]
         optional :guardrail_metrics,
@@ -199,7 +199,7 @@ module Deeprails
         #
         #   @param evaluation_total_cost [Float] Total cost of the evaluation.
         #
-        #   @param guardrail_metrics [Array<Symbol, Deeprails::Models::MonitorDetailResponse::Evaluation::GuardrailMetric>] An array of guardrail metrics that the model input and output pair will be evalu
+        #   @param guardrail_metrics [Array<Symbol, Deeprails::Models::MonitorDetailResponse::Evaluation::GuardrailMetric>] An array of guardrail metrics that the input and output pair will be evaluated o
         #
         #   @param nametag [String] An optional, user-defined tag for the evaluation.
         #
