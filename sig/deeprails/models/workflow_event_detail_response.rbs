@@ -5,11 +5,11 @@ module Deeprails
         evaluation_history: ::Array[Deeprails::WorkflowEventDetailResponse::EvaluationHistory],
         evaluation_result: ::Hash[Symbol, top],
         event_id: String,
-        event_status: Deeprails::Models::WorkflowEventDetailResponse::event_status,
         filtered: bool,
         improved_model_output: String,
         improvement_action: Deeprails::Models::WorkflowEventDetailResponse::improvement_action,
         improvement_tool_status: Deeprails::Models::WorkflowEventDetailResponse::improvement_tool_status?,
+        status: Deeprails::Models::WorkflowEventDetailResponse::status,
         threshold_type: Deeprails::Models::WorkflowEventDetailResponse::threshold_type,
         workflow_id: String,
         automatic_hallucination_tolerance_levels: ::Hash[Symbol, Deeprails::Models::WorkflowEventDetailResponse::automatic_hallucination_tolerance_level],
@@ -25,8 +25,6 @@ module Deeprails
 
       attr_accessor event_id: String
 
-      attr_accessor event_status: Deeprails::Models::WorkflowEventDetailResponse::event_status
-
       attr_accessor filtered: bool
 
       attr_accessor improved_model_output: String
@@ -34,6 +32,8 @@ module Deeprails
       attr_accessor improvement_action: Deeprails::Models::WorkflowEventDetailResponse::improvement_action
 
       attr_accessor improvement_tool_status: Deeprails::Models::WorkflowEventDetailResponse::improvement_tool_status?
+
+      attr_accessor status: Deeprails::Models::WorkflowEventDetailResponse::status
 
       attr_accessor threshold_type: Deeprails::Models::WorkflowEventDetailResponse::threshold_type
 
@@ -67,11 +67,11 @@ module Deeprails
         evaluation_history: ::Array[Deeprails::WorkflowEventDetailResponse::EvaluationHistory],
         evaluation_result: ::Hash[Symbol, top],
         event_id: String,
-        event_status: Deeprails::Models::WorkflowEventDetailResponse::event_status,
         filtered: bool,
         improved_model_output: String,
         improvement_action: Deeprails::Models::WorkflowEventDetailResponse::improvement_action,
         improvement_tool_status: Deeprails::Models::WorkflowEventDetailResponse::improvement_tool_status?,
+        status: Deeprails::Models::WorkflowEventDetailResponse::status,
         threshold_type: Deeprails::Models::WorkflowEventDetailResponse::threshold_type,
         workflow_id: String,
         ?automatic_hallucination_tolerance_levels: ::Hash[Symbol, Deeprails::Models::WorkflowEventDetailResponse::automatic_hallucination_tolerance_level],
@@ -84,11 +84,11 @@ module Deeprails
         evaluation_history: ::Array[Deeprails::WorkflowEventDetailResponse::EvaluationHistory],
         evaluation_result: ::Hash[Symbol, top],
         event_id: String,
-        event_status: Deeprails::Models::WorkflowEventDetailResponse::event_status,
         filtered: bool,
         improved_model_output: String,
         improvement_action: Deeprails::Models::WorkflowEventDetailResponse::improvement_action,
         improvement_tool_status: Deeprails::Models::WorkflowEventDetailResponse::improvement_tool_status?,
+        status: Deeprails::Models::WorkflowEventDetailResponse::status,
         threshold_type: Deeprails::Models::WorkflowEventDetailResponse::threshold_type,
         workflow_id: String,
         automatic_hallucination_tolerance_levels: ::Hash[Symbol, Deeprails::Models::WorkflowEventDetailResponse::automatic_hallucination_tolerance_level],
@@ -200,17 +200,6 @@ module Deeprails
         }
       end
 
-      type event_status = :"In Progress" | :Completed
-
-      module EventStatus
-        extend Deeprails::Internal::Type::Enum
-
-        IN_PROGRESS: :"In Progress"
-        COMPLETED: :Completed
-
-        def self?.values: -> ::Array[Deeprails::Models::WorkflowEventDetailResponse::event_status]
-      end
-
       type improvement_action = :regen | :fixit | :do_nothing
 
       module ImprovementAction
@@ -234,6 +223,17 @@ module Deeprails
         IMPROVEMENT_REQUIRED: :improvement_required
 
         def self?.values: -> ::Array[Deeprails::Models::WorkflowEventDetailResponse::improvement_tool_status]
+      end
+
+      type status = :"In Progress" | :Completed
+
+      module Status
+        extend Deeprails::Internal::Type::Enum
+
+        IN_PROGRESS: :"In Progress"
+        COMPLETED: :Completed
+
+        def self?.values: -> ::Array[Deeprails::Models::WorkflowEventDetailResponse::status]
       end
 
       type threshold_type = :custom | :automatic

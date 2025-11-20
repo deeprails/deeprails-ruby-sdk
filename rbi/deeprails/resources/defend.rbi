@@ -3,8 +3,8 @@
 module Deeprails
   module Resources
     class Defend
-      # Use this endpoint to create a new guardrail workflow with optional guardrail
-      # thresholds and improvement actions
+      # Use this endpoint to create a new guardrail workflow by specifying guardrail
+      # thresholds, an improvement action, and optional extended capabilities.
       sig do
         params(
           improvement_action:
@@ -133,7 +133,7 @@ module Deeprails
       )
       end
 
-      # Use this endpoint to update an existing defend workflow
+      # Use this endpoint to update an existing defend workflow if its details change.
       sig do
         params(
           workflow_id: String,

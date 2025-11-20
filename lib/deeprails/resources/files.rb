@@ -5,9 +5,9 @@ module Deeprails
     class Files
       # Use this endpoint to upload a file to the DeepRails API
       #
-      # @overload upload(file:, request_options: {})
+      # @overload upload(files:, request_options: {})
       #
-      # @param file [Array<String>] The contents of the file to upload.
+      # @param files [Array<String>] The contents of the files to upload.
       #
       # @param request_options [Deeprails::RequestOptions, Hash{Symbol=>Object}, nil]
       #

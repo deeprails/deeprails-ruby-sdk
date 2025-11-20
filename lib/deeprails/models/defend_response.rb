@@ -78,7 +78,7 @@ module Deeprails
       required :updated_at, Time
 
       # @!attribute workflow_id
-      #   A unique workflow ID.
+      #   A unique workflow ID used to identify the workflow in other endpoints.
       #
       #   @return [String]
       required :workflow_id, String
@@ -121,7 +121,7 @@ module Deeprails
       #
       #   @param updated_at [Time] The most recent time the workflow was updated in UTC.
       #
-      #   @param workflow_id [String] A unique workflow ID.
+      #   @param workflow_id [String] A unique workflow ID used to identify the workflow in other endpoints.
       #
       #   @param improvement_action [Symbol, Deeprails::Models::DefendResponse::ImprovementAction] The action used to improve outputs that fail one or more guardrail metrics for t
       #

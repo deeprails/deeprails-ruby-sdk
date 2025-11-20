@@ -65,7 +65,7 @@ module Deeprails
       sig { returns(Time) }
       attr_accessor :updated_at
 
-      # A unique workflow ID.
+      # A unique workflow ID used to identify the workflow in other endpoints.
       sig { returns(String) }
       attr_accessor :workflow_id
 
@@ -144,7 +144,7 @@ module Deeprails
         threshold_type:,
         # The most recent time the workflow was updated in UTC.
         updated_at:,
-        # A unique workflow ID.
+        # A unique workflow ID used to identify the workflow in other endpoints.
         workflow_id:,
         # The action used to improve outputs that fail one or more guardrail metrics for
         # the workflow events.

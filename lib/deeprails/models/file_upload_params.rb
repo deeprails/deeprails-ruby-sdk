@@ -7,14 +7,14 @@ module Deeprails
       extend Deeprails::Internal::Type::RequestParameters::Converter
       include Deeprails::Internal::Type::RequestParameters
 
-      # @!attribute file
-      #   The contents of the file to upload.
+      # @!attribute files
+      #   The contents of the files to upload.
       #
       #   @return [Array<String>]
-      required :file, Deeprails::Internal::Type::ArrayOf[String]
+      required :files, Deeprails::Internal::Type::ArrayOf[String]
 
-      # @!method initialize(file:, request_options: {})
-      #   @param file [Array<String>] The contents of the file to upload.
+      # @!method initialize(files:, request_options: {})
+      #   @param files [Array<String>] The contents of the files to upload.
       #
       #   @param request_options [Deeprails::RequestOptions, Hash{Symbol=>Object}]
     end
