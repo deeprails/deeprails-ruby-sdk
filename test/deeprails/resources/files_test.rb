@@ -6,7 +6,7 @@ class Deeprails::Test::Resources::FilesTest < Deeprails::Test::ResourceTest
   def test_upload_required_params
     skip("Prism tests are disabled")
 
-    response = @deep_rails.files.upload(file: ["string"])
+    response = @deep_rails.files.upload(files: ["string"])
 
     assert_pattern do
       response => Deeprails::FileResponse
