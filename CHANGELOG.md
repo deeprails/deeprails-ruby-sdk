@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.18.0 (2025-11-20)
+
+Full Changelog: [v0.17.0...v0.18.0](https://github.com/deeprails/deeprails-ruby-sdk/compare/v0.17.0...v0.18.0)
+
+### Features
+
+* **api:** fix files upload parameter ([65d38fa](https://github.com/deeprails/deeprails-ruby-sdk/commit/65d38fa89d23857fad01820282af44e8f5a63458))
+* **api:** Minor changes and updates to examples ([4b690d4](https://github.com/deeprails/deeprails-ruby-sdk/commit/4b690d41df9fa9ad16c34015fb806a9a7ce83bd7))
+
 ## 0.17.0 (2025-11-19)
 
 Full Changelog: [v0.16.0...v0.17.0](https://github.com/deeprails/deeprails-ruby-sdk/compare/v0.16.0...v0.17.0)
