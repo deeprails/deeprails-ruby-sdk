@@ -11,26 +11,29 @@ module Deeprails
           T.any(Deeprails::FileUploadParams, Deeprails::Internal::AnyHash)
         end
 
-      # The contents of the file to upload.
+      # The contents of the files to upload.
       sig { returns(T::Array[String]) }
-      attr_accessor :file
+      attr_accessor :files
 
       sig do
         params(
-          file: T::Array[String],
+          files: T::Array[String],
           request_options: Deeprails::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
       def self.new(
-        # The contents of the file to upload.
-        file:,
+        # The contents of the files to upload.
+        files:,
         request_options: {}
       )
       end
 
       sig do
         override.returns(
-          { file: T::Array[String], request_options: Deeprails::RequestOptions }
+          {
+            files: T::Array[String],
+            request_options: Deeprails::RequestOptions
+          }
         )
       end
       def to_hash

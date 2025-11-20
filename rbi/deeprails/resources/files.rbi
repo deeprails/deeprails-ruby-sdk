@@ -6,13 +6,13 @@ module Deeprails
       # Use this endpoint to upload a file to the DeepRails API
       sig do
         params(
-          file: T::Array[String],
+          files: T::Array[String],
           request_options: Deeprails::RequestOptions::OrHash
         ).returns(Deeprails::FileResponse)
       end
       def upload(
-        # The contents of the file to upload.
-        file:,
+        # The contents of the files to upload.
+        files:,
         request_options: {}
       )
       end
