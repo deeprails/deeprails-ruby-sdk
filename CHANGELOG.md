@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.18.1 (2025-11-21)
+
+Full Changelog: [v0.18.0...v0.18.1](https://github.com/deeprails/deeprails-ruby-sdk/compare/v0.18.0...v0.18.1)
+
+### Chores
+
+* explicitly require "base64" gem ([99d2fb5](https://github.com/deeprails/deeprails-ruby-sdk/commit/99d2fb51770004bb14a8f15370956852481eb233))
+
 ## 0.18.0 (2025-11-20)
 
 Full Changelog: [v0.17.0...v0.18.0](https://github.com/deeprails/deeprails-ruby-sdk/compare/v0.17.0...v0.18.0)
