@@ -9,11 +9,13 @@ module Deeprails
       # Use this endpoint to create a new monitor to evaluate model inputs and outputs
       # using guardrails
       #
-      # @overload create(guardrail_metrics:, name:, description: nil, file_search: nil, web_search: nil, request_options: {})
+      # @overload create(guardrail_metrics:, name:, context_awareness: nil, description: nil, file_search: nil, web_search: nil, request_options: {})
       #
       # @param guardrail_metrics [Array<Symbol, Deeprails::Models::MonitorCreateParams::GuardrailMetric>] An array of guardrail metrics that the model input and output pair will be evalu
       #
       # @param name [String] Name of the new monitor.
+      #
+      # @param context_awareness [Boolean] Whether to enable context for this workflow's evaluations. Defaults to false.
       #
       # @param description [String] Description of the new monitor.
       #

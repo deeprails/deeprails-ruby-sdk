@@ -4,6 +4,7 @@ module Deeprails
       def create: (
         guardrail_metrics: ::Array[Deeprails::Models::MonitorCreateParams::guardrail_metric],
         name: String,
+        ?context_awareness: bool,
         ?description: String,
         ?file_search: ::Array[String],
         ?web_search: bool,

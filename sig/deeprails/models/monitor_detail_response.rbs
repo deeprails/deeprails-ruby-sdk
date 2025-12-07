@@ -173,9 +173,18 @@ module Deeprails
         end
 
         type model_input =
-          { ground_truth: String, system_prompt: String, user_prompt: String }
+          {
+            context: ::Array[String],
+            ground_truth: String,
+            system_prompt: String,
+            user_prompt: String
+          }
 
         class ModelInput < Deeprails::Internal::Type::BaseModel
+          attr_reader context: ::Array[String]?
+
+          def context=: (::Array[String]) -> ::Array[String]
+
           attr_reader ground_truth: String?
 
           def ground_truth=: (String) -> String
@@ -189,12 +198,14 @@ module Deeprails
           def user_prompt=: (String) -> String
 
           def initialize: (
+            ?context: ::Array[String],
             ?ground_truth: String,
             ?system_prompt: String,
             ?user_prompt: String
           ) -> void
 
           def to_hash: -> {
+            context: ::Array[String],
             ground_truth: String,
             system_prompt: String,
             user_prompt: String

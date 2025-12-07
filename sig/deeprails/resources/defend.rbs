@@ -6,6 +6,7 @@ module Deeprails
         name: String,
         threshold_type: Deeprails::Models::DefendCreateWorkflowParams::threshold_type,
         ?automatic_hallucination_tolerance_levels: ::Hash[Symbol, Deeprails::Models::DefendCreateWorkflowParams::automatic_hallucination_tolerance_level],
+        ?context_awareness: bool,
         ?custom_hallucination_threshold_values: ::Hash[Symbol, Float],
         ?description: String,
         ?file_search: ::Array[String],
