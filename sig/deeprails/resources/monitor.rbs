@@ -20,8 +20,11 @@ module Deeprails
       def update: (
         String monitor_id,
         ?description: String,
+        ?file_search: ::Array[String],
+        ?guardrail_metrics: ::Array[Deeprails::Models::MonitorUpdateParams::guardrail_metric],
         ?name: String,
         ?status: Deeprails::Models::MonitorUpdateParams::status,
+        ?web_search: bool,
         ?request_options: Deeprails::request_opts
       ) -> Deeprails::MonitorUpdateResponse
 

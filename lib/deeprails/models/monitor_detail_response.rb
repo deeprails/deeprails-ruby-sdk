@@ -5,7 +5,8 @@ module Deeprails
     # @see Deeprails::Resources::Monitor#retrieve
     class MonitorDetailResponse < Deeprails::Internal::Type::BaseModel
       # @!attribute capabilities
-      #   An array of capabilities associated with this monitor.
+      #   An array of extended AI capabilities associated with this monitor. Can be
+      #   `web_search`, `file_search`, and/or `context_awareness`.
       #
       #   @return [Array<Deeprails::Models::MonitorDetailResponse::Capability>]
       required :capabilities,
@@ -74,7 +75,7 @@ module Deeprails
       #   Some parameter documentations has been truncated, see
       #   {Deeprails::Models::MonitorDetailResponse} for more details.
       #
-      #   @param capabilities [Array<Deeprails::Models::MonitorDetailResponse::Capability>] An array of capabilities associated with this monitor.
+      #   @param capabilities [Array<Deeprails::Models::MonitorDetailResponse::Capability>] An array of extended AI capabilities associated with this monitor. Can be `web\_
       #
       #   @param created_at [Time] The time the monitor was created in UTC.
       #
@@ -225,7 +226,7 @@ module Deeprails
         class ModelInput < Deeprails::Internal::Type::BaseModel
           # @!attribute context
           #   Any structured information that directly relates to the model’s input and
-          #   expected output —e.g., the recent turn-by-turn history between an AI tutor and a
+          #   expected output—e.g., the recent turn-by-turn history between an AI tutor and a
           #   student, facts or state passed through an agentic workflow, or other
           #   domain-specific signals your system already knows and wants the model to
           #   condition on.

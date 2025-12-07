@@ -3,8 +3,11 @@ module Deeprails
     type monitor_update_params =
       {
         description: String,
+        file_search: ::Array[String],
+        guardrail_metrics: ::Array[Deeprails::Models::MonitorUpdateParams::guardrail_metric],
         name: String,
-        status: Deeprails::Models::MonitorUpdateParams::status
+        status: Deeprails::Models::MonitorUpdateParams::status,
+        web_search: bool
       }
       & Deeprails::Internal::Type::request_parameters
 
@@ -16,6 +19,16 @@ module Deeprails
 
       def description=: (String) -> String
 
+      attr_reader file_search: ::Array[String]?
+
+      def file_search=: (::Array[String]) -> ::Array[String]
+
+      attr_reader guardrail_metrics: ::Array[Deeprails::Models::MonitorUpdateParams::guardrail_metric]?
+
+      def guardrail_metrics=: (
+        ::Array[Deeprails::Models::MonitorUpdateParams::guardrail_metric]
+      ) -> ::Array[Deeprails::Models::MonitorUpdateParams::guardrail_metric]
+
       attr_reader name: String?
 
       def name=: (String) -> String
@@ -26,19 +39,50 @@ module Deeprails
         Deeprails::Models::MonitorUpdateParams::status
       ) -> Deeprails::Models::MonitorUpdateParams::status
 
+      attr_reader web_search: bool?
+
+      def web_search=: (bool) -> bool
+
       def initialize: (
         ?description: String,
+        ?file_search: ::Array[String],
+        ?guardrail_metrics: ::Array[Deeprails::Models::MonitorUpdateParams::guardrail_metric],
         ?name: String,
         ?status: Deeprails::Models::MonitorUpdateParams::status,
+        ?web_search: bool,
         ?request_options: Deeprails::request_opts
       ) -> void
 
       def to_hash: -> {
         description: String,
+        file_search: ::Array[String],
+        guardrail_metrics: ::Array[Deeprails::Models::MonitorUpdateParams::guardrail_metric],
         name: String,
         status: Deeprails::Models::MonitorUpdateParams::status,
+        web_search: bool,
         request_options: Deeprails::RequestOptions
       }
+
+      type guardrail_metric =
+        :correctness
+        | :completeness
+        | :instruction_adherence
+        | :context_adherence
+        | :ground_truth_adherence
+        | :comprehensive_safety
+
+      module GuardrailMetric
+        extend Deeprails::Internal::Type::Enum
+
+        CORRECTNESS: :correctness
+        COMPLETENESS: :completeness
+        INSTRUCTION_ADHERENCE: :instruction_adherence
+        CONTEXT_ADHERENCE: :context_adherence
+        GROUND_TRUTH_ADHERENCE: :ground_truth_adherence
+        COMPREHENSIVE_SAFETY: :comprehensive_safety
+
+        def self?.values: -> ::Array[Deeprails::Models::MonitorUpdateParams::guardrail_metric]
+      end
 
       type status = :active | :inactive
 

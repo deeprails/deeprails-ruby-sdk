@@ -1,32 +1,134 @@
 module Deeprails
   module Models
     type defend_update_workflow_params =
-      { description: String, name: String }
+      {
+        automatic_hallucination_tolerance_levels: ::Hash[Symbol, Deeprails::Models::DefendUpdateWorkflowParams::automatic_hallucination_tolerance_level],
+        context_awareness: bool,
+        custom_hallucination_threshold_values: ::Hash[Symbol, Float],
+        description: String,
+        file_search: ::Array[String],
+        improvement_action: Deeprails::Models::DefendUpdateWorkflowParams::improvement_action,
+        max_improvement_attempts: Integer,
+        name: String,
+        threshold_type: Deeprails::Models::DefendUpdateWorkflowParams::threshold_type,
+        web_search: bool
+      }
       & Deeprails::Internal::Type::request_parameters
 
     class DefendUpdateWorkflowParams < Deeprails::Internal::Type::BaseModel
       extend Deeprails::Internal::Type::RequestParameters::Converter
       include Deeprails::Internal::Type::RequestParameters
 
+      attr_reader automatic_hallucination_tolerance_levels: ::Hash[Symbol, Deeprails::Models::DefendUpdateWorkflowParams::automatic_hallucination_tolerance_level]?
+
+      def automatic_hallucination_tolerance_levels=: (
+        ::Hash[Symbol, Deeprails::Models::DefendUpdateWorkflowParams::automatic_hallucination_tolerance_level]
+      ) -> ::Hash[Symbol, Deeprails::Models::DefendUpdateWorkflowParams::automatic_hallucination_tolerance_level]
+
+      attr_reader context_awareness: bool?
+
+      def context_awareness=: (bool) -> bool
+
+      attr_reader custom_hallucination_threshold_values: ::Hash[Symbol, Float]?
+
+      def custom_hallucination_threshold_values=: (
+        ::Hash[Symbol, Float]
+      ) -> ::Hash[Symbol, Float]
+
       attr_reader description: String?
 
       def description=: (String) -> String
+
+      attr_reader file_search: ::Array[String]?
+
+      def file_search=: (::Array[String]) -> ::Array[String]
+
+      attr_reader improvement_action: Deeprails::Models::DefendUpdateWorkflowParams::improvement_action?
+
+      def improvement_action=: (
+        Deeprails::Models::DefendUpdateWorkflowParams::improvement_action
+      ) -> Deeprails::Models::DefendUpdateWorkflowParams::improvement_action
+
+      attr_reader max_improvement_attempts: Integer?
+
+      def max_improvement_attempts=: (Integer) -> Integer
 
       attr_reader name: String?
 
       def name=: (String) -> String
 
+      attr_reader threshold_type: Deeprails::Models::DefendUpdateWorkflowParams::threshold_type?
+
+      def threshold_type=: (
+        Deeprails::Models::DefendUpdateWorkflowParams::threshold_type
+      ) -> Deeprails::Models::DefendUpdateWorkflowParams::threshold_type
+
+      attr_reader web_search: bool?
+
+      def web_search=: (bool) -> bool
+
       def initialize: (
+        ?automatic_hallucination_tolerance_levels: ::Hash[Symbol, Deeprails::Models::DefendUpdateWorkflowParams::automatic_hallucination_tolerance_level],
+        ?context_awareness: bool,
+        ?custom_hallucination_threshold_values: ::Hash[Symbol, Float],
         ?description: String,
+        ?file_search: ::Array[String],
+        ?improvement_action: Deeprails::Models::DefendUpdateWorkflowParams::improvement_action,
+        ?max_improvement_attempts: Integer,
         ?name: String,
+        ?threshold_type: Deeprails::Models::DefendUpdateWorkflowParams::threshold_type,
+        ?web_search: bool,
         ?request_options: Deeprails::request_opts
       ) -> void
 
       def to_hash: -> {
+        automatic_hallucination_tolerance_levels: ::Hash[Symbol, Deeprails::Models::DefendUpdateWorkflowParams::automatic_hallucination_tolerance_level],
+        context_awareness: bool,
+        custom_hallucination_threshold_values: ::Hash[Symbol, Float],
         description: String,
+        file_search: ::Array[String],
+        improvement_action: Deeprails::Models::DefendUpdateWorkflowParams::improvement_action,
+        max_improvement_attempts: Integer,
         name: String,
+        threshold_type: Deeprails::Models::DefendUpdateWorkflowParams::threshold_type,
+        web_search: bool,
         request_options: Deeprails::RequestOptions
       }
+
+      type automatic_hallucination_tolerance_level = :low | :medium | :high
+
+      module AutomaticHallucinationToleranceLevel
+        extend Deeprails::Internal::Type::Enum
+
+        LOW: :low
+        MEDIUM: :medium
+        HIGH: :high
+
+        def self?.values: -> ::Array[Deeprails::Models::DefendUpdateWorkflowParams::automatic_hallucination_tolerance_level]
+      end
+
+      type improvement_action = :regen | :fixit | :do_nothing
+
+      module ImprovementAction
+        extend Deeprails::Internal::Type::Enum
+
+        REGEN: :regen
+        FIXIT: :fixit
+        DO_NOTHING: :do_nothing
+
+        def self?.values: -> ::Array[Deeprails::Models::DefendUpdateWorkflowParams::improvement_action]
+      end
+
+      type threshold_type = :automatic | :custom
+
+      module ThresholdType
+        extend Deeprails::Internal::Type::Enum
+
+        AUTOMATIC: :automatic
+        CUSTOM: :custom
+
+        def self?.values: -> ::Array[Deeprails::Models::DefendUpdateWorkflowParams::threshold_type]
+      end
     end
   end
 end

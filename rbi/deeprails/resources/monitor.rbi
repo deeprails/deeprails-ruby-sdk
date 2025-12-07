@@ -25,7 +25,12 @@ module Deeprails
         guardrail_metrics:,
         # Name of the new monitor.
         name:,
-        # Whether to enable context for this workflow's evaluations. Defaults to false.
+        # Context includes any structured information that directly relates to the model’s
+        # input and expected output—e.g., the recent turn-by-turn history between an AI
+        # tutor and a student, facts or state passed through an agentic workflow, or other
+        # domain-specific signals your system already knows and wants the model to
+        # condition on. This field determines whether to enable context awareness for this
+        # monitor's evaluations. Defaults to false.
         context_awareness: nil,
         # Description of the new monitor.
         description: nil,
@@ -57,27 +62,39 @@ module Deeprails
       )
       end
 
-      # Use this endpoint to update the name, description, or status of an existing
-      # monitor
+      # Use this endpoint to update the name, status, and/or other details of an
+      # existing monitor.
       sig do
         params(
           monitor_id: String,
           description: String,
+          file_search: T::Array[String],
+          guardrail_metrics:
+            T::Array[Deeprails::MonitorUpdateParams::GuardrailMetric::OrSymbol],
           name: String,
           status: Deeprails::MonitorUpdateParams::Status::OrSymbol,
+          web_search: T::Boolean,
           request_options: Deeprails::RequestOptions::OrHash
         ).returns(Deeprails::MonitorUpdateResponse)
       end
       def update(
         # The ID of the monitor to edit.
         monitor_id,
-        # Description of the monitor.
+        # New description of the monitor.
         description: nil,
-        # Name of the monitor.
+        # An array of file IDs to search in the monitor's evaluations. Files must be
+        # uploaded via the DeepRails API first.
+        file_search: nil,
+        # An array of the new guardrail metrics that model input and output pairs will be
+        # evaluated on.
+        guardrail_metrics: nil,
+        # New name of the monitor.
         name: nil,
         # Status of the monitor. Can be `active` or `inactive`. Inactive monitors no
         # longer record and evaluate events.
         status: nil,
+        # Whether to enable web search for this monitor's evaluations.
+        web_search: nil,
         request_options: {}
       )
       end

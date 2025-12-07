@@ -11,7 +11,8 @@ module Deeprails
           )
         end
 
-      # The capabilities associated with the monitor event.
+      # The extended AI capabilities associated with the monitor event. Can be
+      # `web_search`, `file_search`, and/or `context_awareness`.
       sig do
         returns(
           T.nilable(T::Array[Deeprails::MonitorEventDetailResponse::Capability])
@@ -156,7 +157,8 @@ module Deeprails
         ).returns(T.attached_class)
       end
       def self.new(
-        # The capabilities associated with the monitor event.
+        # The extended AI capabilities associated with the monitor event. Can be
+        # `web_search`, `file_search`, and/or `context_awareness`.
         capabilities: nil,
         # The time spent on the evaluation in seconds.
         eval_time: nil,

@@ -5,7 +5,8 @@ module Deeprails
     # @see Deeprails::Resources::Monitor#retrieve_event
     class MonitorEventDetailResponse < Deeprails::Internal::Type::BaseModel
       # @!attribute capabilities
-      #   The capabilities associated with the monitor event.
+      #   The extended AI capabilities associated with the monitor event. Can be
+      #   `web_search`, `file_search`, and/or `context_awareness`.
       #
       #   @return [Array<Deeprails::Models::MonitorEventDetailResponse::Capability>, nil]
       optional :capabilities,
@@ -84,7 +85,10 @@ module Deeprails
       optional :timestamp, Time
 
       # @!method initialize(capabilities: nil, eval_time: nil, evaluation_result: nil, event_id: nil, files: nil, guardrail_metrics: nil, model_input: nil, model_output: nil, monitor_id: nil, nametag: nil, run_mode: nil, status: nil, timestamp: nil)
-      #   @param capabilities [Array<Deeprails::Models::MonitorEventDetailResponse::Capability>] The capabilities associated with the monitor event.
+      #   Some parameter documentations has been truncated, see
+      #   {Deeprails::Models::MonitorEventDetailResponse} for more details.
+      #
+      #   @param capabilities [Array<Deeprails::Models::MonitorEventDetailResponse::Capability>] The extended AI capabilities associated with the monitor event. Can be `web_sear
       #
       #   @param eval_time [String] The time spent on the evaluation in seconds.
       #

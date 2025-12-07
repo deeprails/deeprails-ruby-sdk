@@ -8,7 +8,8 @@ module Deeprails
           T.any(Deeprails::MonitorDetailResponse, Deeprails::Internal::AnyHash)
         end
 
-      # An array of capabilities associated with this monitor.
+      # An array of extended AI capabilities associated with this monitor. Can be
+      # `web_search`, `file_search`, and/or `context_awareness`.
       sig { returns(T::Array[Deeprails::MonitorDetailResponse::Capability]) }
       attr_accessor :capabilities
 
@@ -77,7 +78,8 @@ module Deeprails
         ).returns(T.attached_class)
       end
       def self.new(
-        # An array of capabilities associated with this monitor.
+        # An array of extended AI capabilities associated with this monitor. Can be
+        # `web_search`, `file_search`, and/or `context_awareness`.
         capabilities:,
         # The time the monitor was created in UTC.
         created_at:,
@@ -404,7 +406,7 @@ module Deeprails
             end
 
           # Any structured information that directly relates to the model’s input and
-          # expected output —e.g., the recent turn-by-turn history between an AI tutor and a
+          # expected output—e.g., the recent turn-by-turn history between an AI tutor and a
           # student, facts or state passed through an agentic workflow, or other
           # domain-specific signals your system already knows and wants the model to
           # condition on.
@@ -448,7 +450,7 @@ module Deeprails
           end
           def self.new(
             # Any structured information that directly relates to the model’s input and
-            # expected output —e.g., the recent turn-by-turn history between an AI tutor and a
+            # expected output—e.g., the recent turn-by-turn history between an AI tutor and a
             # student, facts or state passed through an agentic workflow, or other
             # domain-specific signals your system already knows and wants the model to
             # condition on.

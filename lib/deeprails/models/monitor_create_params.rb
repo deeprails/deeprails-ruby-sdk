@@ -24,7 +24,12 @@ module Deeprails
       required :name, String
 
       # @!attribute context_awareness
-      #   Whether to enable context for this workflow's evaluations. Defaults to false.
+      #   Context includes any structured information that directly relates to the model’s
+      #   input and expected output—e.g., the recent turn-by-turn history between an AI
+      #   tutor and a student, facts or state passed through an agentic workflow, or other
+      #   domain-specific signals your system already knows and wants the model to
+      #   condition on. This field determines whether to enable context awareness for this
+      #   monitor's evaluations. Defaults to false.
       #
       #   @return [Boolean, nil]
       optional :context_awareness, Deeprails::Internal::Type::Boolean
@@ -56,7 +61,7 @@ module Deeprails
       #
       #   @param name [String] Name of the new monitor.
       #
-      #   @param context_awareness [Boolean] Whether to enable context for this workflow's evaluations. Defaults to false.
+      #   @param context_awareness [Boolean] Context includes any structured information that directly relates to the model’s
       #
       #   @param description [String] Description of the new monitor.
       #

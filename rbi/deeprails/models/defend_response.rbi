@@ -21,7 +21,7 @@ module Deeprails
       attr_accessor :automatic_hallucination_tolerance_levels
 
       # Extended AI capabilities available to the event, if any. Can be `web_search`,
-      # `context_awareness`, and/or `file_search`.
+      # `file_search`, and/or `context_awareness`.
       sig { returns(T::Array[Deeprails::DefendResponse::Capability]) }
       attr_accessor :capabilities
 
@@ -120,7 +120,7 @@ module Deeprails
         # (`low`, `medium`, `high`) for automatic tolerance levels.
         automatic_hallucination_tolerance_levels:,
         # Extended AI capabilities available to the event, if any. Can be `web_search`,
-        # `context_awareness`, and/or `file_search`.
+        # `file_search`, and/or `context_awareness`.
         capabilities:,
         # The time the workflow was created in UTC.
         created_at:,

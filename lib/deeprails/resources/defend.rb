@@ -19,7 +19,7 @@ module Deeprails
       #
       # @param automatic_hallucination_tolerance_levels [Hash{Symbol=>Symbol, Deeprails::Models::DefendCreateWorkflowParams::AutomaticHallucinationToleranceLevel}] Mapping of guardrail metrics to hallucination tolerance levels
       #
-      # @param context_awareness [Boolean] Whether to enable context for this workflow's evaluations. Defaults to false.
+      # @param context_awareness [Boolean] Context includes any structured information that directly relates to the model’s
       #
       # @param custom_hallucination_threshold_values [Hash{Symbol=>Float}] Mapping of guardrail metrics to floating point threshold values. Possible metric
       #
@@ -137,15 +137,34 @@ module Deeprails
         )
       end
 
+      # Some parameter documentations has been truncated, see
+      # {Deeprails::Models::DefendUpdateWorkflowParams} for more details.
+      #
       # Use this endpoint to update an existing defend workflow if its details change.
       #
-      # @overload update_workflow(workflow_id, description: nil, name: nil, request_options: {})
+      # @overload update_workflow(workflow_id, automatic_hallucination_tolerance_levels: nil, context_awareness: nil, custom_hallucination_threshold_values: nil, description: nil, file_search: nil, improvement_action: nil, max_improvement_attempts: nil, name: nil, threshold_type: nil, web_search: nil, request_options: {})
       #
       # @param workflow_id [String] The ID of the workflow to edit.
       #
-      # @param description [String] Description for the workflow.
+      # @param automatic_hallucination_tolerance_levels [Hash{Symbol=>Symbol, Deeprails::Models::DefendUpdateWorkflowParams::AutomaticHallucinationToleranceLevel}] New mapping of guardrail metrics to hallucination tolerance levels
       #
-      # @param name [String] Name of the workflow.
+      # @param context_awareness [Boolean] Whether to enable context awareness for this workflow's evaluations.
+      #
+      # @param custom_hallucination_threshold_values [Hash{Symbol=>Float}] New mapping of guardrail metrics to floating point threshold values to be used w
+      #
+      # @param description [String] New description for the workflow.
+      #
+      # @param file_search [Array<String>] An array of file IDs to search in the workflow's evaluations. Files must be uplo
+      #
+      # @param improvement_action [Symbol, Deeprails::Models::DefendUpdateWorkflowParams::ImprovementAction] The new action used to improve outputs that fail one or more guardrail metrics f
+      #
+      # @param max_improvement_attempts [Integer] Max. number of improvement action attempts until a given event passes the guardr
+      #
+      # @param name [String] New name for the workflow.
+      #
+      # @param threshold_type [Symbol, Deeprails::Models::DefendUpdateWorkflowParams::ThresholdType] New type of thresholds to use for the workflow, either `automatic` or `custom`.
+      #
+      # @param web_search [Boolean] Whether to enable web search for this workflow's evaluations.
       #
       # @param request_options [Deeprails::RequestOptions, Hash{Symbol=>Object}, nil]
       #

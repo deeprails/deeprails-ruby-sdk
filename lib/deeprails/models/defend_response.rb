@@ -14,7 +14,7 @@ module Deeprails
 
       # @!attribute capabilities
       #   Extended AI capabilities available to the event, if any. Can be `web_search`,
-      #   `context_awareness`, and/or `file_search`.
+      #   `file_search`, and/or `context_awareness`.
       #
       #   @return [Array<Deeprails::Models::DefendResponse::Capability>]
       required :capabilities, -> { Deeprails::Internal::Type::ArrayOf[Deeprails::DefendResponse::Capability] }
@@ -101,7 +101,7 @@ module Deeprails
       #
       #   @param automatic_hallucination_tolerance_levels [Hash{Symbol=>Symbol, Deeprails::Models::DefendResponse::AutomaticHallucinationToleranceLevel}] Mapping of guardrail metric names to tolerance values. Values can be strings (`l
       #
-      #   @param capabilities [Array<Deeprails::Models::DefendResponse::Capability>] Extended AI capabilities available to the event, if any. Can be `web_search`, `c
+      #   @param capabilities [Array<Deeprails::Models::DefendResponse::Capability>] Extended AI capabilities available to the event, if any. Can be `web_search`, `f
       #
       #   @param created_at [Time] The time the workflow was created in UTC.
       #

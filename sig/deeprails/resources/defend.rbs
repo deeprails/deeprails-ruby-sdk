@@ -39,8 +39,16 @@ module Deeprails
 
       def update_workflow: (
         String workflow_id,
+        ?automatic_hallucination_tolerance_levels: ::Hash[Symbol, Deeprails::Models::DefendUpdateWorkflowParams::automatic_hallucination_tolerance_level],
+        ?context_awareness: bool,
+        ?custom_hallucination_threshold_values: ::Hash[Symbol, Float],
         ?description: String,
+        ?file_search: ::Array[String],
+        ?improvement_action: Deeprails::Models::DefendUpdateWorkflowParams::improvement_action,
+        ?max_improvement_attempts: Integer,
         ?name: String,
+        ?threshold_type: Deeprails::Models::DefendUpdateWorkflowParams::threshold_type,
+        ?web_search: bool,
         ?request_options: Deeprails::request_opts
       ) -> Deeprails::DefendUpdateResponse
 
