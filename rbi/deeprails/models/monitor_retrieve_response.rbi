@@ -2,7 +2,7 @@
 
 module Deeprails
   module Models
-    MonitorUpdateResponse =
+    MonitorRetrieveResponse =
       T.let(T.anything, Deeprails::Internal::Type::Converter)
   end
 end

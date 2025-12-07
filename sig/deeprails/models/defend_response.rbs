@@ -3,45 +3,36 @@ module Deeprails
     type defend_response =
       {
         automatic_hallucination_tolerance_levels: ::Hash[Symbol, Deeprails::Models::DefendResponse::automatic_hallucination_tolerance_level],
-        capabilities: ::Array[Deeprails::DefendResponse::Capability],
         created_at: Time,
-        custom_hallucination_threshold_values: ::Hash[Symbol, Float],
+        custom_hallucination_threshold_values: top,
         description: String,
-        events: ::Array[Deeprails::DefendResponse::Event],
-        files: ::Array[Deeprails::DefendResponse::File],
+        improvement_action: Deeprails::Models::DefendResponse::improvement_action,
         name: String,
+        stats: Deeprails::DefendResponse::Stats,
         status: Deeprails::Models::DefendResponse::status,
         threshold_type: Deeprails::Models::DefendResponse::threshold_type,
         updated_at: Time,
-        workflow_id: String,
-        improvement_action: Deeprails::Models::DefendResponse::improvement_action,
-        stats: Deeprails::DefendResponse::Stats
+        workflow_id: String
       }
 
     class DefendResponse < Deeprails::Internal::Type::BaseModel
-      attr_accessor automatic_hallucination_tolerance_levels: ::Hash[Symbol, Deeprails::Models::DefendResponse::automatic_hallucination_tolerance_level]
+      attr_reader automatic_hallucination_tolerance_levels: ::Hash[Symbol, Deeprails::Models::DefendResponse::automatic_hallucination_tolerance_level]?
 
-      attr_accessor capabilities: ::Array[Deeprails::DefendResponse::Capability]
+      def automatic_hallucination_tolerance_levels=: (
+        ::Hash[Symbol, Deeprails::Models::DefendResponse::automatic_hallucination_tolerance_level]
+      ) -> ::Hash[Symbol, Deeprails::Models::DefendResponse::automatic_hallucination_tolerance_level]
 
-      attr_accessor created_at: Time
+      attr_reader created_at: Time?
 
-      attr_accessor custom_hallucination_threshold_values: ::Hash[Symbol, Float]
+      def created_at=: (Time) -> Time
 
-      attr_accessor description: String
+      attr_reader custom_hallucination_threshold_values: top?
 
-      attr_accessor events: ::Array[Deeprails::DefendResponse::Event]
+      def custom_hallucination_threshold_values=: (top) -> top
 
-      attr_accessor files: ::Array[Deeprails::DefendResponse::File]
+      attr_reader description: String?
 
-      attr_accessor name: String
-
-      attr_accessor status: Deeprails::Models::DefendResponse::status
-
-      attr_accessor threshold_type: Deeprails::Models::DefendResponse::threshold_type
-
-      attr_accessor updated_at: Time
-
-      attr_accessor workflow_id: String
+      def description=: (String) -> String
 
       attr_reader improvement_action: Deeprails::Models::DefendResponse::improvement_action?
 
@@ -49,44 +40,62 @@ module Deeprails
         Deeprails::Models::DefendResponse::improvement_action
       ) -> Deeprails::Models::DefendResponse::improvement_action
 
+      attr_reader name: String?
+
+      def name=: (String) -> String
+
       attr_reader stats: Deeprails::DefendResponse::Stats?
 
       def stats=: (
         Deeprails::DefendResponse::Stats
       ) -> Deeprails::DefendResponse::Stats
 
+      attr_reader status: Deeprails::Models::DefendResponse::status?
+
+      def status=: (
+        Deeprails::Models::DefendResponse::status
+      ) -> Deeprails::Models::DefendResponse::status
+
+      attr_reader threshold_type: Deeprails::Models::DefendResponse::threshold_type?
+
+      def threshold_type=: (
+        Deeprails::Models::DefendResponse::threshold_type
+      ) -> Deeprails::Models::DefendResponse::threshold_type
+
+      attr_reader updated_at: Time?
+
+      def updated_at=: (Time) -> Time
+
+      attr_reader workflow_id: String?
+
+      def workflow_id=: (String) -> String
+
       def initialize: (
-        automatic_hallucination_tolerance_levels: ::Hash[Symbol, Deeprails::Models::DefendResponse::automatic_hallucination_tolerance_level],
-        capabilities: ::Array[Deeprails::DefendResponse::Capability],
-        created_at: Time,
-        custom_hallucination_threshold_values: ::Hash[Symbol, Float],
-        description: String,
-        events: ::Array[Deeprails::DefendResponse::Event],
-        files: ::Array[Deeprails::DefendResponse::File],
-        name: String,
-        status: Deeprails::Models::DefendResponse::status,
-        threshold_type: Deeprails::Models::DefendResponse::threshold_type,
-        updated_at: Time,
-        workflow_id: String,
+        ?automatic_hallucination_tolerance_levels: ::Hash[Symbol, Deeprails::Models::DefendResponse::automatic_hallucination_tolerance_level],
+        ?created_at: Time,
+        ?custom_hallucination_threshold_values: top,
+        ?description: String,
         ?improvement_action: Deeprails::Models::DefendResponse::improvement_action,
-        ?stats: Deeprails::DefendResponse::Stats
+        ?name: String,
+        ?stats: Deeprails::DefendResponse::Stats,
+        ?status: Deeprails::Models::DefendResponse::status,
+        ?threshold_type: Deeprails::Models::DefendResponse::threshold_type,
+        ?updated_at: Time,
+        ?workflow_id: String
       ) -> void
 
       def to_hash: -> {
         automatic_hallucination_tolerance_levels: ::Hash[Symbol, Deeprails::Models::DefendResponse::automatic_hallucination_tolerance_level],
-        capabilities: ::Array[Deeprails::DefendResponse::Capability],
         created_at: Time,
-        custom_hallucination_threshold_values: ::Hash[Symbol, Float],
+        custom_hallucination_threshold_values: top,
         description: String,
-        events: ::Array[Deeprails::DefendResponse::Event],
-        files: ::Array[Deeprails::DefendResponse::File],
+        improvement_action: Deeprails::Models::DefendResponse::improvement_action,
         name: String,
+        stats: Deeprails::DefendResponse::Stats,
         status: Deeprails::Models::DefendResponse::status,
         threshold_type: Deeprails::Models::DefendResponse::threshold_type,
         updated_at: Time,
-        workflow_id: String,
-        improvement_action: Deeprails::Models::DefendResponse::improvement_action,
-        stats: Deeprails::DefendResponse::Stats
+        workflow_id: String
       }
 
       type automatic_hallucination_tolerance_level = :low | :medium | :high
@@ -99,213 +108,6 @@ module Deeprails
         HIGH: :high
 
         def self?.values: -> ::Array[Deeprails::Models::DefendResponse::automatic_hallucination_tolerance_level]
-      end
-
-      type capability = { capability: String }
-
-      class Capability < Deeprails::Internal::Type::BaseModel
-        attr_reader capability: String?
-
-        def capability=: (String) -> String
-
-        def initialize: (?capability: String) -> void
-
-        def to_hash: -> { capability: String }
-      end
-
-      type event =
-        {
-          evaluations: ::Array[Deeprails::DefendResponse::Event::Evaluation],
-          event_id: String,
-          improved_model_output: String,
-          improvement_tool_status: String
-        }
-
-      class Event < Deeprails::Internal::Type::BaseModel
-        attr_reader evaluations: ::Array[Deeprails::DefendResponse::Event::Evaluation]?
-
-        def evaluations=: (
-          ::Array[Deeprails::DefendResponse::Event::Evaluation]
-        ) -> ::Array[Deeprails::DefendResponse::Event::Evaluation]
-
-        attr_reader event_id: String?
-
-        def event_id=: (String) -> String
-
-        attr_reader improved_model_output: String?
-
-        def improved_model_output=: (String) -> String
-
-        attr_reader improvement_tool_status: String?
-
-        def improvement_tool_status=: (String) -> String
-
-        def initialize: (
-          ?evaluations: ::Array[Deeprails::DefendResponse::Event::Evaluation],
-          ?event_id: String,
-          ?improved_model_output: String,
-          ?improvement_tool_status: String
-        ) -> void
-
-        def to_hash: -> {
-          evaluations: ::Array[Deeprails::DefendResponse::Event::Evaluation],
-          event_id: String,
-          improved_model_output: String,
-          improvement_tool_status: String
-        }
-
-        type evaluation =
-          {
-            attempt: String,
-            created_at: Time,
-            error_message: String,
-            evaluation_result: ::Hash[Symbol, top],
-            evaluation_status: String,
-            evaluation_total_cost: Float,
-            guardrail_metrics: ::Array[String],
-            model_input: ::Hash[Symbol, top],
-            model_output: String,
-            modified_at: Time,
-            nametag: String,
-            progress: Integer,
-            run_mode: String
-          }
-
-        class Evaluation < Deeprails::Internal::Type::BaseModel
-          attr_reader attempt: String?
-
-          def attempt=: (String) -> String
-
-          attr_reader created_at: Time?
-
-          def created_at=: (Time) -> Time
-
-          attr_reader error_message: String?
-
-          def error_message=: (String) -> String
-
-          attr_reader evaluation_result: ::Hash[Symbol, top]?
-
-          def evaluation_result=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
-
-          attr_reader evaluation_status: String?
-
-          def evaluation_status=: (String) -> String
-
-          attr_reader evaluation_total_cost: Float?
-
-          def evaluation_total_cost=: (Float) -> Float
-
-          attr_reader guardrail_metrics: ::Array[String]?
-
-          def guardrail_metrics=: (::Array[String]) -> ::Array[String]
-
-          attr_reader model_input: ::Hash[Symbol, top]?
-
-          def model_input=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
-
-          attr_reader model_output: String?
-
-          def model_output=: (String) -> String
-
-          attr_reader modified_at: Time?
-
-          def modified_at=: (Time) -> Time
-
-          attr_reader nametag: String?
-
-          def nametag=: (String) -> String
-
-          attr_reader progress: Integer?
-
-          def progress=: (Integer) -> Integer
-
-          attr_reader run_mode: String?
-
-          def run_mode=: (String) -> String
-
-          def initialize: (
-            ?attempt: String,
-            ?created_at: Time,
-            ?error_message: String,
-            ?evaluation_result: ::Hash[Symbol, top],
-            ?evaluation_status: String,
-            ?evaluation_total_cost: Float,
-            ?guardrail_metrics: ::Array[String],
-            ?model_input: ::Hash[Symbol, top],
-            ?model_output: String,
-            ?modified_at: Time,
-            ?nametag: String,
-            ?progress: Integer,
-            ?run_mode: String
-          ) -> void
-
-          def to_hash: -> {
-            attempt: String,
-            created_at: Time,
-            error_message: String,
-            evaluation_result: ::Hash[Symbol, top],
-            evaluation_status: String,
-            evaluation_total_cost: Float,
-            guardrail_metrics: ::Array[String],
-            model_input: ::Hash[Symbol, top],
-            model_output: String,
-            modified_at: Time,
-            nametag: String,
-            progress: Integer,
-            run_mode: String
-          }
-        end
-      end
-
-      type file = { file_id: String, file_name: String, file_size: Integer }
-
-      class File < Deeprails::Internal::Type::BaseModel
-        attr_reader file_id: String?
-
-        def file_id=: (String) -> String
-
-        attr_reader file_name: String?
-
-        def file_name=: (String) -> String
-
-        attr_reader file_size: Integer?
-
-        def file_size=: (Integer) -> Integer
-
-        def initialize: (
-          ?file_id: String,
-          ?file_name: String,
-          ?file_size: Integer
-        ) -> void
-
-        def to_hash: -> {
-          file_id: String,
-          file_name: String,
-          file_size: Integer
-        }
-      end
-
-      type status = :inactive | :active
-
-      module Status
-        extend Deeprails::Internal::Type::Enum
-
-        INACTIVE: :inactive
-        ACTIVE: :active
-
-        def self?.values: -> ::Array[Deeprails::Models::DefendResponse::status]
-      end
-
-      type threshold_type = :custom | :automatic
-
-      module ThresholdType
-        extend Deeprails::Internal::Type::Enum
-
-        CUSTOM: :custom
-        AUTOMATIC: :automatic
-
-        def self?.values: -> ::Array[Deeprails::Models::DefendResponse::threshold_type]
       end
 
       type improvement_action = :regen | :fixit | :do_nothing
@@ -351,6 +153,28 @@ module Deeprails
           outputs_improved: Integer,
           outputs_processed: Integer
         }
+      end
+
+      type status = :inactive | :active
+
+      module Status
+        extend Deeprails::Internal::Type::Enum
+
+        INACTIVE: :inactive
+        ACTIVE: :active
+
+        def self?.values: -> ::Array[Deeprails::Models::DefendResponse::status]
+      end
+
+      type threshold_type = :custom | :automatic
+
+      module ThresholdType
+        extend Deeprails::Internal::Type::Enum
+
+        CUSTOM: :custom
+        AUTOMATIC: :automatic
+
+        def self?.values: -> ::Array[Deeprails::Models::DefendResponse::threshold_type]
       end
     end
   end

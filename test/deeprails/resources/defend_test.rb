@@ -10,15 +10,7 @@ class Deeprails::Test::Resources::DefendTest < Deeprails::Test::ResourceTest
       @deep_rails.defend.create_workflow(improvement_action: :regen, name: "name", threshold_type: :automatic)
 
     assert_pattern do
-      response => Deeprails::DefendCreateResponse
-    end
-
-    assert_pattern do
-      response => {
-        created_at: Time,
-        status: Deeprails::DefendCreateResponse::Status,
-        workflow_id: String
-      }
+      response => Deeprails::Internal::Type::Unknown
     end
   end
 
@@ -28,26 +20,7 @@ class Deeprails::Test::Resources::DefendTest < Deeprails::Test::ResourceTest
     response = @deep_rails.defend.retrieve_event("event_id", workflow_id: "workflow_id")
 
     assert_pattern do
-      response => Deeprails::WorkflowEventDetailResponse
-    end
-
-    assert_pattern do
-      response => {
-        evaluation_history: ^(Deeprails::Internal::Type::ArrayOf[Deeprails::WorkflowEventDetailResponse::EvaluationHistory]),
-        evaluation_result: ^(Deeprails::Internal::Type::HashOf[Deeprails::Internal::Type::Unknown]),
-        event_id: String,
-        filtered: Deeprails::Internal::Type::Boolean,
-        improved_model_output: String,
-        improvement_action: Deeprails::WorkflowEventDetailResponse::ImprovementAction,
-        improvement_tool_status: Deeprails::WorkflowEventDetailResponse::ImprovementToolStatus | nil,
-        status: Deeprails::WorkflowEventDetailResponse::Status,
-        threshold_type: Deeprails::WorkflowEventDetailResponse::ThresholdType,
-        workflow_id: String,
-        automatic_hallucination_tolerance_levels: ^(Deeprails::Internal::Type::HashOf[enum: Deeprails::WorkflowEventDetailResponse::AutomaticHallucinationToleranceLevel]) | nil,
-        capabilities: ^(Deeprails::Internal::Type::ArrayOf[Deeprails::WorkflowEventDetailResponse::Capability]) | nil,
-        custom_hallucination_threshold_values: ^(Deeprails::Internal::Type::HashOf[Float]) | nil,
-        files: ^(Deeprails::Internal::Type::ArrayOf[Deeprails::WorkflowEventDetailResponse::File]) | nil
-      }
+      response => Deeprails::Internal::Type::Unknown
     end
   end
 
@@ -62,20 +35,17 @@ class Deeprails::Test::Resources::DefendTest < Deeprails::Test::ResourceTest
 
     assert_pattern do
       response => {
-        automatic_hallucination_tolerance_levels: ^(Deeprails::Internal::Type::HashOf[enum: Deeprails::DefendResponse::AutomaticHallucinationToleranceLevel]),
-        capabilities: ^(Deeprails::Internal::Type::ArrayOf[Deeprails::DefendResponse::Capability]),
-        created_at: Time,
-        custom_hallucination_threshold_values: ^(Deeprails::Internal::Type::HashOf[Float]),
-        description: String,
-        events: ^(Deeprails::Internal::Type::ArrayOf[Deeprails::DefendResponse::Event]),
-        files: ^(Deeprails::Internal::Type::ArrayOf[Deeprails::DefendResponse::File]),
-        name: String,
-        status: Deeprails::DefendResponse::Status,
-        threshold_type: Deeprails::DefendResponse::ThresholdType,
-        updated_at: Time,
-        workflow_id: String,
+        automatic_hallucination_tolerance_levels: ^(Deeprails::Internal::Type::HashOf[enum: Deeprails::DefendResponse::AutomaticHallucinationToleranceLevel]) | nil,
+        created_at: Time | nil,
+        custom_hallucination_threshold_values: Deeprails::Internal::Type::Unknown | nil,
+        description: String | nil,
         improvement_action: Deeprails::DefendResponse::ImprovementAction | nil,
-        stats: Deeprails::DefendResponse::Stats | nil
+        name: String | nil,
+        stats: Deeprails::DefendResponse::Stats | nil,
+        status: Deeprails::DefendResponse::Status | nil,
+        threshold_type: Deeprails::DefendResponse::ThresholdType | nil,
+        updated_at: Time | nil,
+        workflow_id: String | nil
       }
     end
   end
@@ -93,16 +63,7 @@ class Deeprails::Test::Resources::DefendTest < Deeprails::Test::ResourceTest
       )
 
     assert_pattern do
-      response => Deeprails::WorkflowEventResponse
-    end
-
-    assert_pattern do
-      response => {
-        created_at: Time,
-        event_id: String,
-        status: Deeprails::WorkflowEventResponse::Status,
-        workflow_id: String
-      }
+      response => Deeprails::Internal::Type::Unknown
     end
   end
 
@@ -112,15 +73,7 @@ class Deeprails::Test::Resources::DefendTest < Deeprails::Test::ResourceTest
     response = @deep_rails.defend.update_workflow("workflow_id")
 
     assert_pattern do
-      response => Deeprails::DefendUpdateResponse
-    end
-
-    assert_pattern do
-      response => {
-        modified_at: Time,
-        status: Deeprails::DefendUpdateResponse::Status,
-        workflow_id: String
-      }
+      response => Deeprails::Internal::Type::Unknown
     end
   end
 end

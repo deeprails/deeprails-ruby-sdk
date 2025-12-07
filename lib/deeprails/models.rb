@@ -39,8 +39,6 @@ module Deeprails
     mod.define_sorbet_constant!(const) { T.type_alias { mod.to_sorbet_type } }
   end
 
-  DefendCreateResponse = Deeprails::Models::DefendCreateResponse
-
   DefendCreateWorkflowParams = Deeprails::Models::DefendCreateWorkflowParams
 
   DefendResponse = Deeprails::Models::DefendResponse
@@ -51,8 +49,6 @@ module Deeprails
 
   DefendSubmitEventParams = Deeprails::Models::DefendSubmitEventParams
 
-  DefendUpdateResponse = Deeprails::Models::DefendUpdateResponse
-
   DefendUpdateWorkflowParams = Deeprails::Models::DefendUpdateWorkflowParams
 
   FileResponse = Deeprails::Models::FileResponse
@@ -61,14 +57,6 @@ module Deeprails
 
   MonitorCreateParams = Deeprails::Models::MonitorCreateParams
 
-  MonitorCreateResponse = Deeprails::Models::MonitorCreateResponse
-
-  MonitorDetailResponse = Deeprails::Models::MonitorDetailResponse
-
-  MonitorEventDetailResponse = Deeprails::Models::MonitorEventDetailResponse
-
-  MonitorEventResponse = Deeprails::Models::MonitorEventResponse
-
   MonitorRetrieveEventParams = Deeprails::Models::MonitorRetrieveEventParams
 
   MonitorRetrieveParams = Deeprails::Models::MonitorRetrieveParams
@@ -76,10 +64,4 @@ module Deeprails
   MonitorSubmitEventParams = Deeprails::Models::MonitorSubmitEventParams
 
   MonitorUpdateParams = Deeprails::Models::MonitorUpdateParams
-
-  MonitorUpdateResponse = Deeprails::Models::MonitorUpdateResponse
-
-  WorkflowEventDetailResponse = Deeprails::Models::WorkflowEventDetailResponse
-
-  WorkflowEventResponse = Deeprails::Models::WorkflowEventResponse
 end

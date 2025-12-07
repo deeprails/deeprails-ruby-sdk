@@ -9,27 +9,30 @@ module Deeprails
         ?file_search: ::Array[String],
         ?web_search: bool,
         ?request_options: Deeprails::request_opts
-      ) -> Deeprails::MonitorCreateResponse
+      ) -> top
 
       def retrieve: (
         String monitor_id,
         ?limit: Integer,
         ?request_options: Deeprails::request_opts
-      ) -> Deeprails::MonitorDetailResponse
+      ) -> top
 
       def update: (
         String monitor_id,
         ?description: String,
+        ?file_search: ::Array[String],
+        ?guardrail_metrics: ::Array[Deeprails::Models::MonitorUpdateParams::guardrail_metric],
         ?name: String,
         ?status: Deeprails::Models::MonitorUpdateParams::status,
+        ?web_search: bool,
         ?request_options: Deeprails::request_opts
-      ) -> Deeprails::MonitorUpdateResponse
+      ) -> top
 
       def retrieve_event: (
         String event_id,
         monitor_id: String,
         ?request_options: Deeprails::request_opts
-      ) -> Deeprails::MonitorEventDetailResponse
+      ) -> top
 
       def submit_event: (
         String monitor_id,
@@ -38,7 +41,7 @@ module Deeprails
         ?nametag: String,
         ?run_mode: Deeprails::Models::MonitorSubmitEventParams::run_mode,
         ?request_options: Deeprails::request_opts
-      ) -> Deeprails::MonitorEventResponse
+      ) -> top
 
       def initialize: (client: Deeprails::Client) -> void
     end

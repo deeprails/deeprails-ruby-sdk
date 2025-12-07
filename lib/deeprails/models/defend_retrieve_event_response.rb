@@ -3,6 +3,6 @@
 module Deeprails
   module Models
     # @type [Deeprails::Internal::Type::Converter]
-    MonitorUpdateResponse = Deeprails::Internal::Type::Unknown
+    DefendRetrieveEventResponse = Deeprails::Internal::Type::Unknown
   end
 end
