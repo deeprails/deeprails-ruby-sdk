@@ -1,5 +1,0 @@
-module Deeprails
-  module Models
-    DefendCreateWorkflowResponse: Deeprails::Internal::Type::Converter
-  end
-end

@@ -1,5 +1,0 @@
-module Deeprails
-  module Models
-    MonitorRetrieveEventResponse: Deeprails::Internal::Type::Converter
-  end
-end

@@ -25,7 +25,7 @@ module Deeprails
       #
       # @param request_options [Deeprails::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Object]
+      # @return [Deeprails::Models::MonitorCreateResponse]
       #
       # @see Deeprails::Models::MonitorCreateParams
       def create(params)
@@ -34,7 +34,7 @@ module Deeprails
           method: :post,
           path: "monitor",
           body: parsed,
-          model: Deeprails::Internal::Type::Unknown,
+          model: Deeprails::MonitorCreateResponse,
           options: options
         )
       end
@@ -53,7 +53,7 @@ module Deeprails
       #
       # @param request_options [Deeprails::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Object]
+      # @return [Deeprails::Models::MonitorDetailResponse]
       #
       # @see Deeprails::Models::MonitorRetrieveParams
       def retrieve(monitor_id, params = {})
@@ -62,7 +62,7 @@ module Deeprails
           method: :get,
           path: ["monitor/%1$s", monitor_id],
           query: parsed,
-          model: Deeprails::Internal::Type::Unknown,
+          model: Deeprails::MonitorDetailResponse,
           options: options
         )
       end
@@ -91,7 +91,7 @@ module Deeprails
       #
       # @param request_options [Deeprails::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Object]
+      # @return [Deeprails::Models::MonitorUpdateResponse]
       #
       # @see Deeprails::Models::MonitorUpdateParams
       def update(monitor_id, params = {})
@@ -100,7 +100,7 @@ module Deeprails
           method: :put,
           path: ["monitor/%1$s", monitor_id],
           body: parsed,
-          model: Deeprails::Internal::Type::Unknown,
+          model: Deeprails::MonitorUpdateResponse,
           options: options
         )
       end
@@ -115,7 +115,7 @@ module Deeprails
       #
       # @param request_options [Deeprails::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Object]
+      # @return [Deeprails::Models::MonitorEventDetailResponse]
       #
       # @see Deeprails::Models::MonitorRetrieveEventParams
       def retrieve_event(event_id, params)
@@ -127,7 +127,7 @@ module Deeprails
         @client.request(
           method: :get,
           path: ["monitor/%1$s/events/%2$s", monitor_id, event_id],
-          model: Deeprails::Internal::Type::Unknown,
+          model: Deeprails::MonitorEventDetailResponse,
           options: options
         )
       end
@@ -152,7 +152,7 @@ module Deeprails
       #
       # @param request_options [Deeprails::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Object]
+      # @return [Deeprails::Models::MonitorEventResponse]
       #
       # @see Deeprails::Models::MonitorSubmitEventParams
       def submit_event(monitor_id, params)
@@ -161,7 +161,7 @@ module Deeprails
           method: :post,
           path: ["monitor/%1$s/events", monitor_id],
           body: parsed,
-          model: Deeprails::Internal::Type::Unknown,
+          model: Deeprails::MonitorEventResponse,
           options: options
         )
       end

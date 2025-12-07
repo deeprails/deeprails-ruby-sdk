@@ -13,13 +13,13 @@ module Deeprails
         ?max_improvement_attempts: Integer,
         ?web_search: bool,
         ?request_options: Deeprails::request_opts
-      ) -> top
+      ) -> Deeprails::DefendCreateResponse
 
       def retrieve_event: (
         String event_id,
         workflow_id: String,
         ?request_options: Deeprails::request_opts
-      ) -> top
+      ) -> Deeprails::WorkflowEventDetailResponse
 
       def retrieve_workflow: (
         String workflow_id,
@@ -35,7 +35,7 @@ module Deeprails
         run_mode: Deeprails::Models::DefendSubmitEventParams::run_mode,
         ?nametag: String,
         ?request_options: Deeprails::request_opts
-      ) -> top
+      ) -> Deeprails::WorkflowEventResponse
 
       def update_workflow: (
         String workflow_id,
@@ -50,7 +50,7 @@ module Deeprails
         ?threshold_type: Deeprails::Models::DefendUpdateWorkflowParams::threshold_type,
         ?web_search: bool,
         ?request_options: Deeprails::request_opts
-      ) -> top
+      ) -> Deeprails::DefendUpdateResponse
 
       def initialize: (client: Deeprails::Client) -> void
     end

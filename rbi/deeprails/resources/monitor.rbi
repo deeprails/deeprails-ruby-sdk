@@ -15,7 +15,7 @@ module Deeprails
           file_search: T::Array[String],
           web_search: T::Boolean,
           request_options: Deeprails::RequestOptions::OrHash
-        ).returns(T.anything)
+        ).returns(Deeprails::MonitorCreateResponse)
       end
       def create(
         # An array of guardrail metrics that the model input and output pair will be
@@ -50,7 +50,7 @@ module Deeprails
           monitor_id: String,
           limit: Integer,
           request_options: Deeprails::RequestOptions::OrHash
-        ).returns(T.anything)
+        ).returns(Deeprails::MonitorDetailResponse)
       end
       def retrieve(
         # The ID of the monitor to retrieve.
@@ -75,7 +75,7 @@ module Deeprails
           status: Deeprails::MonitorUpdateParams::Status::OrSymbol,
           web_search: T::Boolean,
           request_options: Deeprails::RequestOptions::OrHash
-        ).returns(T.anything)
+        ).returns(Deeprails::MonitorUpdateResponse)
       end
       def update(
         # The ID of the monitor to edit.
@@ -105,7 +105,7 @@ module Deeprails
           event_id: String,
           monitor_id: String,
           request_options: Deeprails::RequestOptions::OrHash
-        ).returns(T.anything)
+        ).returns(Deeprails::MonitorEventDetailResponse)
       end
       def retrieve_event(
         # The ID of the requested monitor event.
@@ -126,7 +126,7 @@ module Deeprails
           nametag: String,
           run_mode: Deeprails::MonitorSubmitEventParams::RunMode::OrSymbol,
           request_options: Deeprails::RequestOptions::OrHash
-        ).returns(T.anything)
+        ).returns(Deeprails::MonitorEventResponse)
       end
       def submit_event(
         # The ID of the monitor associated with this event.

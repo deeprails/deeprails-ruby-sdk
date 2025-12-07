@@ -1,0 +1,41 @@
+module Deeprails
+  module Models
+    type defend_update_response =
+      {
+        modified_at: Time,
+        status: Deeprails::Models::DefendUpdateResponse::status,
+        workflow_id: String
+      }
+
+    class DefendUpdateResponse < Deeprails::Internal::Type::BaseModel
+      attr_accessor modified_at: Time
+
+      attr_accessor status: Deeprails::Models::DefendUpdateResponse::status
+
+      attr_accessor workflow_id: String
+
+      def initialize: (
+        modified_at: Time,
+        status: Deeprails::Models::DefendUpdateResponse::status,
+        workflow_id: String
+      ) -> void
+
+      def to_hash: -> {
+        modified_at: Time,
+        status: Deeprails::Models::DefendUpdateResponse::status,
+        workflow_id: String
+      }
+
+      type status = :inactive | :active
+
+      module Status
+        extend Deeprails::Internal::Type::Enum
+
+        INACTIVE: :inactive
+        ACTIVE: :active
+
+        def self?.values: -> ::Array[Deeprails::Models::DefendUpdateResponse::status]
+      end
+    end
+  end
+end
