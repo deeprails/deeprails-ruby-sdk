@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.20.0 (2025-12-07)
+
+Full Changelog: [v0.19.0...v0.20.0](https://github.com/deeprails/deeprails-ruby-sdk/compare/v0.19.0...v0.20.0)
+
+### Features
+
+* **api:** Expand update endpoints ([faaf87b](https://github.com/deeprails/deeprails-ruby-sdk/commit/faaf87bc835773fe50e20c43a8ca59b69f4d3b2e))
+* **api:** manual updates ([b8a55ea](https://github.com/deeprails/deeprails-ruby-sdk/commit/b8a55eafa68bed34063f8745a8d460266d1a30d1))
+
 ## 0.19.0 (2025-12-07)
 
 Full Changelog: [v0.18.1...v0.19.0](https://github.com/deeprails/deeprails-ruby-sdk/compare/v0.18.1...v0.19.0)
