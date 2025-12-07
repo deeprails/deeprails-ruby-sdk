@@ -23,6 +23,12 @@ module Deeprails
       #   @return [String]
       required :name, String
 
+      # @!attribute context_awareness
+      #   Whether to enable context for this workflow's evaluations. Defaults to false.
+      #
+      #   @return [Boolean, nil]
+      optional :context_awareness, Deeprails::Internal::Type::Boolean
+
       # @!attribute description
       #   Description of the new monitor.
       #
@@ -42,13 +48,15 @@ module Deeprails
       #   @return [Boolean, nil]
       optional :web_search, Deeprails::Internal::Type::Boolean
 
-      # @!method initialize(guardrail_metrics:, name:, description: nil, file_search: nil, web_search: nil, request_options: {})
+      # @!method initialize(guardrail_metrics:, name:, context_awareness: nil, description: nil, file_search: nil, web_search: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Deeprails::Models::MonitorCreateParams} for more details.
       #
       #   @param guardrail_metrics [Array<Symbol, Deeprails::Models::MonitorCreateParams::GuardrailMetric>] An array of guardrail metrics that the model input and output pair will be evalu
       #
       #   @param name [String] Name of the new monitor.
+      #
+      #   @param context_awareness [Boolean] Whether to enable context for this workflow's evaluations. Defaults to false.
       #
       #   @param description [String] Description of the new monitor.
       #

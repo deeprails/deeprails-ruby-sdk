@@ -20,8 +20,8 @@ module Deeprails
       end
       attr_accessor :automatic_hallucination_tolerance_levels
 
-      # Extended AI capabilities available to the event, if any. Can be `web_search`
-      # and/or `file_search`.
+      # Extended AI capabilities available to the event, if any. Can be `web_search`,
+      # `context_awareness`, and/or `file_search`.
       sig { returns(T::Array[Deeprails::DefendResponse::Capability]) }
       attr_accessor :capabilities
 
@@ -119,8 +119,8 @@ module Deeprails
         # Mapping of guardrail metric names to tolerance values. Values can be strings
         # (`low`, `medium`, `high`) for automatic tolerance levels.
         automatic_hallucination_tolerance_levels:,
-        # Extended AI capabilities available to the event, if any. Can be `web_search`
-        # and/or `file_search`.
+        # Extended AI capabilities available to the event, if any. Can be `web_search`,
+        # `context_awareness`, and/or `file_search`.
         capabilities:,
         # The time the workflow was created in UTC.
         created_at:,

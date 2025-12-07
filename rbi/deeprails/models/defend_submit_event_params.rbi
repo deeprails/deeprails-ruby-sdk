@@ -103,6 +103,17 @@ module Deeprails
             )
           end
 
+        # Any structured information that directly relates to the model’s input and
+        # expected output —e.g., the recent turn-by-turn history between an AI tutor and a
+        # student, facts or state passed through an agentic workflow, or other
+        # domain-specific signals your system already knows and wants the model to
+        # condition on.
+        sig { returns(T.nilable(T::Array[String])) }
+        attr_reader :context
+
+        sig { params(context: T::Array[String]).void }
+        attr_writer :context
+
         # The ground truth for evaluating the Ground Truth Adherence guardrail.
         sig { returns(T.nilable(String)) }
         attr_reader :ground_truth
@@ -129,12 +140,19 @@ module Deeprails
         # ground_truth_adherence guardrail metric, `ground_truth` should be provided.
         sig do
           params(
+            context: T::Array[String],
             ground_truth: String,
             system_prompt: String,
             user_prompt: String
           ).returns(T.attached_class)
         end
         def self.new(
+          # Any structured information that directly relates to the model’s input and
+          # expected output —e.g., the recent turn-by-turn history between an AI tutor and a
+          # student, facts or state passed through an agentic workflow, or other
+          # domain-specific signals your system already knows and wants the model to
+          # condition on.
+          context: nil,
           # The ground truth for evaluating the Ground Truth Adherence guardrail.
           ground_truth: nil,
           # The system prompt used to generate the output.
@@ -146,7 +164,12 @@ module Deeprails
 
         sig do
           override.returns(
-            { ground_truth: String, system_prompt: String, user_prompt: String }
+            {
+              context: T::Array[String],
+              ground_truth: String,
+              system_prompt: String,
+              user_prompt: String
+            }
           )
         end
         def to_hash

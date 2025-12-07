@@ -59,6 +59,16 @@ module Deeprails
       #   @param request_options [Deeprails::RequestOptions, Hash{Symbol=>Object}]
 
       class ModelInput < Deeprails::Internal::Type::BaseModel
+        # @!attribute context
+        #   Any structured information that directly relates to the model’s input and
+        #   expected output —e.g., the recent turn-by-turn history between an AI tutor and a
+        #   student, facts or state passed through an agentic workflow, or other
+        #   domain-specific signals your system already knows and wants the model to
+        #   condition on.
+        #
+        #   @return [Array<String>, nil]
+        optional :context, Deeprails::Internal::Type::ArrayOf[String]
+
         # @!attribute ground_truth
         #   The ground truth for evaluating the Ground Truth Adherence guardrail.
         #
@@ -77,10 +87,15 @@ module Deeprails
         #   @return [String, nil]
         optional :user_prompt, String
 
-        # @!method initialize(ground_truth: nil, system_prompt: nil, user_prompt: nil)
+        # @!method initialize(context: nil, ground_truth: nil, system_prompt: nil, user_prompt: nil)
+        #   Some parameter documentations has been truncated, see
+        #   {Deeprails::Models::DefendSubmitEventParams::ModelInput} for more details.
+        #
         #   A dictionary of inputs sent to the LLM to generate output. The dictionary must
         #   contain at least a `user_prompt` field or a `system_prompt` field. For the
         #   ground_truth_adherence guardrail metric, `ground_truth` should be provided.
+        #
+        #   @param context [Array<String>] Any structured information that directly relates to the model’s input and expect
         #
         #   @param ground_truth [String] The ground truth for evaluating the Ground Truth Adherence guardrail.
         #

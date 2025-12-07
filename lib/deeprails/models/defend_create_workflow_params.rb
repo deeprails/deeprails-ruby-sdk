@@ -43,6 +43,12 @@ module Deeprails
       optional :automatic_hallucination_tolerance_levels,
                -> { Deeprails::Internal::Type::HashOf[enum: Deeprails::DefendCreateWorkflowParams::AutomaticHallucinationToleranceLevel] }
 
+      # @!attribute context_awareness
+      #   Whether to enable context for this workflow's evaluations. Defaults to false.
+      #
+      #   @return [Boolean, nil]
+      optional :context_awareness, Deeprails::Internal::Type::Boolean
+
       # @!attribute custom_hallucination_threshold_values
       #   Mapping of guardrail metrics to floating point threshold values. Possible
       #   metrics are `correctness`, `completeness`, `instruction_adherence`,
@@ -77,7 +83,7 @@ module Deeprails
       #   @return [Boolean, nil]
       optional :web_search, Deeprails::Internal::Type::Boolean
 
-      # @!method initialize(improvement_action:, name:, threshold_type:, automatic_hallucination_tolerance_levels: nil, custom_hallucination_threshold_values: nil, description: nil, file_search: nil, max_improvement_attempts: nil, web_search: nil, request_options: {})
+      # @!method initialize(improvement_action:, name:, threshold_type:, automatic_hallucination_tolerance_levels: nil, context_awareness: nil, custom_hallucination_threshold_values: nil, description: nil, file_search: nil, max_improvement_attempts: nil, web_search: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Deeprails::Models::DefendCreateWorkflowParams} for more details.
       #
@@ -88,6 +94,8 @@ module Deeprails
       #   @param threshold_type [Symbol, Deeprails::Models::DefendCreateWorkflowParams::ThresholdType] Type of thresholds to use for the workflow, either `automatic` or `custom`. Aut
       #
       #   @param automatic_hallucination_tolerance_levels [Hash{Symbol=>Symbol, Deeprails::Models::DefendCreateWorkflowParams::AutomaticHallucinationToleranceLevel}] Mapping of guardrail metrics to hallucination tolerance levels
+      #
+      #   @param context_awareness [Boolean] Whether to enable context for this workflow's evaluations. Defaults to false.
       #
       #   @param custom_hallucination_threshold_values [Hash{Symbol=>Float}] Mapping of guardrail metrics to floating point threshold values. Possible metric
       #

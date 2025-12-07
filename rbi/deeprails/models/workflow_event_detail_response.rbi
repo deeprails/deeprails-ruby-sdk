@@ -98,8 +98,8 @@ module Deeprails
       end
       attr_writer :automatic_hallucination_tolerance_levels
 
-      # Extended AI capabilities available to the event, if any. Can be `web_search`
-      # and/or `file_search`.
+      # Extended AI capabilities available to the event, if any. Can be `web_search`,
+      # `context_awareness`, and/or `file_search`.
       sig do
         returns(
           T.nilable(
@@ -204,8 +204,8 @@ module Deeprails
         # Mapping of guardrail metric names to tolerance values. Values are strings
         # (`low`, `medium`, `high`) representing automatic tolerance levels.
         automatic_hallucination_tolerance_levels: nil,
-        # Extended AI capabilities available to the event, if any. Can be `web_search`
-        # and/or `file_search`.
+        # Extended AI capabilities available to the event, if any. Can be `web_search`,
+        # `context_awareness`, and/or `file_search`.
         capabilities: nil,
         # Mapping of guardrail metric names to threshold values. Values are floating point
         # numbers (0.0-1.0) representing custom thresholds.

@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.19.0 (2025-12-07)
+
+Full Changelog: [v0.18.1...v0.19.0](https://github.com/deeprails/deeprails-ruby-sdk/compare/v0.18.1...v0.19.0)
+
+### Features
+
+* **api:** added context_awareness and context ([9562c79](https://github.com/deeprails/deeprails-ruby-sdk/commit/9562c797fdfd5fdb45b28a4b428b005017998c55))
+
 ## 0.18.1 (2025-11-21)
 
 Full Changelog: [v0.18.0...v0.18.1](https://github.com/deeprails/deeprails-ruby-sdk/compare/v0.18.0...v0.18.1)

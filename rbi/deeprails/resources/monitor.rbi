@@ -10,6 +10,7 @@ module Deeprails
           guardrail_metrics:
             T::Array[Deeprails::MonitorCreateParams::GuardrailMetric::OrSymbol],
           name: String,
+          context_awareness: T::Boolean,
           description: String,
           file_search: T::Array[String],
           web_search: T::Boolean,
@@ -24,6 +25,8 @@ module Deeprails
         guardrail_metrics:,
         # Name of the new monitor.
         name:,
+        # Whether to enable context for this workflow's evaluations. Defaults to false.
+        context_awareness: nil,
         # Description of the new monitor.
         description: nil,
         # An array of file IDs to search in the monitor's evaluations. Files must be
