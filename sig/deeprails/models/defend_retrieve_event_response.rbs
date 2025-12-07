@@ -1,0 +1,5 @@
+module Deeprails
+  module Models
+    DefendRetrieveEventResponse: Deeprails::Internal::Type::Converter
+  end
+end

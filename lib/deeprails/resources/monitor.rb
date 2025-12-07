@@ -15,7 +15,7 @@ module Deeprails
       #
       # @param name [String] Name of the new monitor.
       #
-      # @param context_awareness [Boolean] Whether to enable context for this workflow's evaluations. Defaults to false.
+      # @param context_awareness [Boolean] Context includes any structured information that directly relates to the model’s
       #
       # @param description [String] Description of the new monitor.
       #
@@ -25,7 +25,7 @@ module Deeprails
       #
       # @param request_options [Deeprails::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Deeprails::Models::MonitorCreateResponse]
+      # @return [Object]
       #
       # @see Deeprails::Models::MonitorCreateParams
       def create(params)
@@ -34,7 +34,7 @@ module Deeprails
           method: :post,
           path: "monitor",
           body: parsed,
-          model: Deeprails::MonitorCreateResponse,
+          model: Deeprails::Internal::Type::Unknown,
           options: options
         )
       end
@@ -53,7 +53,7 @@ module Deeprails
       #
       # @param request_options [Deeprails::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Deeprails::Models::MonitorDetailResponse]
+      # @return [Object]
       #
       # @see Deeprails::Models::MonitorRetrieveParams
       def retrieve(monitor_id, params = {})
@@ -62,7 +62,7 @@ module Deeprails
           method: :get,
           path: ["monitor/%1$s", monitor_id],
           query: parsed,
-          model: Deeprails::MonitorDetailResponse,
+          model: Deeprails::Internal::Type::Unknown,
           options: options
         )
       end
@@ -70,22 +70,28 @@ module Deeprails
       # Some parameter documentations has been truncated, see
       # {Deeprails::Models::MonitorUpdateParams} for more details.
       #
-      # Use this endpoint to update the name, description, or status of an existing
-      # monitor
+      # Use this endpoint to update the name, status, and/or other details of an
+      # existing monitor.
       #
-      # @overload update(monitor_id, description: nil, name: nil, status: nil, request_options: {})
+      # @overload update(monitor_id, description: nil, file_search: nil, guardrail_metrics: nil, name: nil, status: nil, web_search: nil, request_options: {})
       #
       # @param monitor_id [String] The ID of the monitor to edit.
       #
-      # @param description [String] Description of the monitor.
+      # @param description [String] New description of the monitor.
       #
-      # @param name [String] Name of the monitor.
+      # @param file_search [Array<String>] An array of file IDs to search in the monitor's evaluations. Files must be uploa
+      #
+      # @param guardrail_metrics [Array<Symbol, Deeprails::Models::MonitorUpdateParams::GuardrailMetric>] An array of the new guardrail metrics that model input and output pairs will be
+      #
+      # @param name [String] New name of the monitor.
       #
       # @param status [Symbol, Deeprails::Models::MonitorUpdateParams::Status] Status of the monitor. Can be `active` or `inactive`. Inactive monitors no lon
       #
+      # @param web_search [Boolean] Whether to enable web search for this monitor's evaluations.
+      #
       # @param request_options [Deeprails::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Deeprails::Models::MonitorUpdateResponse]
+      # @return [Object]
       #
       # @see Deeprails::Models::MonitorUpdateParams
       def update(monitor_id, params = {})
@@ -94,7 +100,7 @@ module Deeprails
           method: :put,
           path: ["monitor/%1$s", monitor_id],
           body: parsed,
-          model: Deeprails::MonitorUpdateResponse,
+          model: Deeprails::Internal::Type::Unknown,
           options: options
         )
       end
@@ -109,7 +115,7 @@ module Deeprails
       #
       # @param request_options [Deeprails::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Deeprails::Models::MonitorEventDetailResponse]
+      # @return [Object]
       #
       # @see Deeprails::Models::MonitorRetrieveEventParams
       def retrieve_event(event_id, params)
@@ -121,7 +127,7 @@ module Deeprails
         @client.request(
           method: :get,
           path: ["monitor/%1$s/events/%2$s", monitor_id, event_id],
-          model: Deeprails::MonitorEventDetailResponse,
+          model: Deeprails::Internal::Type::Unknown,
           options: options
         )
       end
@@ -146,7 +152,7 @@ module Deeprails
       #
       # @param request_options [Deeprails::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Deeprails::Models::MonitorEventResponse]
+      # @return [Object]
       #
       # @see Deeprails::Models::MonitorSubmitEventParams
       def submit_event(monitor_id, params)
@@ -155,7 +161,7 @@ module Deeprails
           method: :post,
           path: ["monitor/%1$s/events", monitor_id],
           body: parsed,
-          model: Deeprails::MonitorEventResponse,
+          model: Deeprails::Internal::Type::Unknown,
           options: options
         )
       end

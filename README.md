@@ -30,7 +30,7 @@ deep_rails = Deeprails::Client.new(
   api_key: ENV["DEEPRAILS_API_KEY"] # This is the default and can be omitted
 )
 
-defend_create_response = deep_rails.defend.create_workflow(
+response = deep_rails.defend.create_workflow(
   improvement_action: "fixit",
   name: "Push Alert Workflow",
   threshold_type: "custom",
@@ -38,7 +38,7 @@ defend_create_response = deep_rails.defend.create_workflow(
   web_search: true
 )
 
-puts(defend_create_response.workflow_id)
+puts(response)
 ```
 
 ### Handling errors
@@ -154,7 +154,7 @@ You can send undocumented parameters to any endpoint, and read undocumented resp
 Note: the `extra_` parameters of the same name overrides the documented parameters.
 
 ```ruby
-defend_create_response =
+response =
   deep_rails.defend.create_workflow(
     improvement_action: "fixit",
     name: "Push Alert Workflow",
@@ -168,7 +168,7 @@ defend_create_response =
     }
   )
 
-puts(defend_create_response[:my_undocumented_property])
+puts(response[:my_undocumented_property])
 ```
 
 #### Undocumented request params

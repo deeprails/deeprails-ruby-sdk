@@ -67,7 +67,12 @@ module Deeprails
       end
       attr_writer :automatic_hallucination_tolerance_levels
 
-      # Whether to enable context for this workflow's evaluations. Defaults to false.
+      # Context includes any structured information that directly relates to the model’s
+      # input and expected output—e.g., the recent turn-by-turn history between an AI
+      # tutor and a student, facts or state passed through an agentic workflow, or other
+      # domain-specific signals your system already knows and wants the model to
+      # condition on. This field determines whether to enable context awareness for this
+      # workflow's evaluations. Defaults to false.
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :context_awareness
 
@@ -158,7 +163,12 @@ module Deeprails
         # `instruction_adherence`, `context_adherence`, `ground_truth_adherence`, or
         # `comprehensive_safety`.
         automatic_hallucination_tolerance_levels: nil,
-        # Whether to enable context for this workflow's evaluations. Defaults to false.
+        # Context includes any structured information that directly relates to the model’s
+        # input and expected output—e.g., the recent turn-by-turn history between an AI
+        # tutor and a student, facts or state passed through an agentic workflow, or other
+        # domain-specific signals your system already knows and wants the model to
+        # condition on. This field determines whether to enable context awareness for this
+        # workflow's evaluations. Defaults to false.
         context_awareness: nil,
         # Mapping of guardrail metrics to floating point threshold values. Possible
         # metrics are `correctness`, `completeness`, `instruction_adherence`,

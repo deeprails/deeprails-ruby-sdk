@@ -438,11 +438,11 @@ module Deeprails
         # @return [Hash{Symbol=>Object}]
         #
         # @example
-        #   # `defend_create_response` is a `Deeprails::DefendCreateResponse`
-        #   defend_create_response => {
+        #   # `defend_response` is a `Deeprails::DefendResponse`
+        #   defend_response => {
+        #     automatic_hallucination_tolerance_levels: automatic_hallucination_tolerance_levels,
         #     created_at: created_at,
-        #     status: status,
-        #     workflow_id: workflow_id
+        #     custom_hallucination_threshold_values: custom_hallucination_threshold_values
         #   }
         def deconstruct_keys(keys)
           (keys || self.class.known_fields.keys)
