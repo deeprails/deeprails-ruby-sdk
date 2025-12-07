@@ -67,6 +67,13 @@ module Deeprails
       end
       attr_writer :automatic_hallucination_tolerance_levels
 
+      # Whether to enable context for this workflow's evaluations. Defaults to false.
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :context_awareness
+
+      sig { params(context_awareness: T::Boolean).void }
+      attr_writer :context_awareness
+
       # Mapping of guardrail metrics to floating point threshold values. Possible
       # metrics are `correctness`, `completeness`, `instruction_adherence`,
       # `context_adherence`, `ground_truth_adherence`, or `comprehensive_safety`.
@@ -122,6 +129,7 @@ module Deeprails
               Symbol,
               Deeprails::DefendCreateWorkflowParams::AutomaticHallucinationToleranceLevel::OrSymbol
             ],
+          context_awareness: T::Boolean,
           custom_hallucination_threshold_values: T::Hash[Symbol, Float],
           description: String,
           file_search: T::Array[String],
@@ -150,6 +158,8 @@ module Deeprails
         # `instruction_adherence`, `context_adherence`, `ground_truth_adherence`, or
         # `comprehensive_safety`.
         automatic_hallucination_tolerance_levels: nil,
+        # Whether to enable context for this workflow's evaluations. Defaults to false.
+        context_awareness: nil,
         # Mapping of guardrail metrics to floating point threshold values. Possible
         # metrics are `correctness`, `completeness`, `instruction_adherence`,
         # `context_adherence`, `ground_truth_adherence`, or `comprehensive_safety`.
@@ -181,6 +191,7 @@ module Deeprails
                 Symbol,
                 Deeprails::DefendCreateWorkflowParams::AutomaticHallucinationToleranceLevel::OrSymbol
               ],
+            context_awareness: T::Boolean,
             custom_hallucination_threshold_values: T::Hash[Symbol, Float],
             description: String,
             file_search: T::Array[String],

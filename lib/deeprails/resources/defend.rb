@@ -9,7 +9,7 @@ module Deeprails
       # Use this endpoint to create a new guardrail workflow by specifying guardrail
       # thresholds, an improvement action, and optional extended capabilities.
       #
-      # @overload create_workflow(improvement_action:, name:, threshold_type:, automatic_hallucination_tolerance_levels: nil, custom_hallucination_threshold_values: nil, description: nil, file_search: nil, max_improvement_attempts: nil, web_search: nil, request_options: {})
+      # @overload create_workflow(improvement_action:, name:, threshold_type:, automatic_hallucination_tolerance_levels: nil, context_awareness: nil, custom_hallucination_threshold_values: nil, description: nil, file_search: nil, max_improvement_attempts: nil, web_search: nil, request_options: {})
       #
       # @param improvement_action [Symbol, Deeprails::Models::DefendCreateWorkflowParams::ImprovementAction] The action used to improve outputs that fail one or more guardrail metrics for t
       #
@@ -18,6 +18,8 @@ module Deeprails
       # @param threshold_type [Symbol, Deeprails::Models::DefendCreateWorkflowParams::ThresholdType] Type of thresholds to use for the workflow, either `automatic` or `custom`. Aut
       #
       # @param automatic_hallucination_tolerance_levels [Hash{Symbol=>Symbol, Deeprails::Models::DefendCreateWorkflowParams::AutomaticHallucinationToleranceLevel}] Mapping of guardrail metrics to hallucination tolerance levels
+      #
+      # @param context_awareness [Boolean] Whether to enable context for this workflow's evaluations. Defaults to false.
       #
       # @param custom_hallucination_threshold_values [Hash{Symbol=>Float}] Mapping of guardrail metrics to floating point threshold values. Possible metric
       #
