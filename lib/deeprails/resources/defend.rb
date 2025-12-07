@@ -33,7 +33,7 @@ module Deeprails
       #
       # @param request_options [Deeprails::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Object]
+      # @return [Deeprails::Models::DefendCreateResponse]
       #
       # @see Deeprails::Models::DefendCreateWorkflowParams
       def create_workflow(params)
@@ -42,7 +42,7 @@ module Deeprails
           method: :post,
           path: "defend",
           body: parsed,
-          model: Deeprails::Internal::Type::Unknown,
+          model: Deeprails::DefendCreateResponse,
           options: options
         )
       end
@@ -57,7 +57,7 @@ module Deeprails
       #
       # @param request_options [Deeprails::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Object]
+      # @return [Deeprails::Models::WorkflowEventDetailResponse]
       #
       # @see Deeprails::Models::DefendRetrieveEventParams
       def retrieve_event(event_id, params)
@@ -69,7 +69,7 @@ module Deeprails
         @client.request(
           method: :get,
           path: ["defend/%1$s/events/%2$s", workflow_id, event_id],
-          model: Deeprails::Internal::Type::Unknown,
+          model: Deeprails::WorkflowEventDetailResponse,
           options: options
         )
       end
@@ -123,7 +123,7 @@ module Deeprails
       #
       # @param request_options [Deeprails::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Object]
+      # @return [Deeprails::Models::WorkflowEventResponse]
       #
       # @see Deeprails::Models::DefendSubmitEventParams
       def submit_event(workflow_id, params)
@@ -132,7 +132,7 @@ module Deeprails
           method: :post,
           path: ["defend/%1$s/events", workflow_id],
           body: parsed,
-          model: Deeprails::Internal::Type::Unknown,
+          model: Deeprails::WorkflowEventResponse,
           options: options
         )
       end
@@ -168,7 +168,7 @@ module Deeprails
       #
       # @param request_options [Deeprails::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Object]
+      # @return [Deeprails::Models::DefendUpdateResponse]
       #
       # @see Deeprails::Models::DefendUpdateWorkflowParams
       def update_workflow(workflow_id, params = {})
@@ -177,7 +177,7 @@ module Deeprails
           method: :put,
           path: ["defend/%1$s", workflow_id],
           body: parsed,
-          model: Deeprails::Internal::Type::Unknown,
+          model: Deeprails::DefendUpdateResponse,
           options: options
         )
       end

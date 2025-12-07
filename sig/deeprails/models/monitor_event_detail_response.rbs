@@ -1,0 +1,181 @@
+module Deeprails
+  module Models
+    type monitor_event_detail_response =
+      {
+        capabilities: ::Array[Deeprails::MonitorEventDetailResponse::Capability],
+        eval_time: String,
+        evaluation_result: ::Hash[Symbol, top],
+        event_id: String,
+        files: ::Array[Deeprails::MonitorEventDetailResponse::File],
+        guardrail_metrics: ::Array[String],
+        model_input: ::Hash[Symbol, top],
+        model_output: String,
+        monitor_id: String,
+        nametag: String,
+        run_mode: Deeprails::Models::MonitorEventDetailResponse::run_mode,
+        status: Deeprails::Models::MonitorEventDetailResponse::status,
+        timestamp: Time
+      }
+
+    class MonitorEventDetailResponse < Deeprails::Internal::Type::BaseModel
+      attr_reader capabilities: ::Array[Deeprails::MonitorEventDetailResponse::Capability]?
+
+      def capabilities=: (
+        ::Array[Deeprails::MonitorEventDetailResponse::Capability]
+      ) -> ::Array[Deeprails::MonitorEventDetailResponse::Capability]
+
+      attr_reader eval_time: String?
+
+      def eval_time=: (String) -> String
+
+      attr_reader evaluation_result: ::Hash[Symbol, top]?
+
+      def evaluation_result=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+
+      attr_reader event_id: String?
+
+      def event_id=: (String) -> String
+
+      attr_reader files: ::Array[Deeprails::MonitorEventDetailResponse::File]?
+
+      def files=: (
+        ::Array[Deeprails::MonitorEventDetailResponse::File]
+      ) -> ::Array[Deeprails::MonitorEventDetailResponse::File]
+
+      attr_reader guardrail_metrics: ::Array[String]?
+
+      def guardrail_metrics=: (::Array[String]) -> ::Array[String]
+
+      attr_reader model_input: ::Hash[Symbol, top]?
+
+      def model_input=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+
+      attr_reader model_output: String?
+
+      def model_output=: (String) -> String
+
+      attr_reader monitor_id: String?
+
+      def monitor_id=: (String) -> String
+
+      attr_reader nametag: String?
+
+      def nametag=: (String) -> String
+
+      attr_reader run_mode: Deeprails::Models::MonitorEventDetailResponse::run_mode?
+
+      def run_mode=: (
+        Deeprails::Models::MonitorEventDetailResponse::run_mode
+      ) -> Deeprails::Models::MonitorEventDetailResponse::run_mode
+
+      attr_reader status: Deeprails::Models::MonitorEventDetailResponse::status?
+
+      def status=: (
+        Deeprails::Models::MonitorEventDetailResponse::status
+      ) -> Deeprails::Models::MonitorEventDetailResponse::status
+
+      attr_reader timestamp: Time?
+
+      def timestamp=: (Time) -> Time
+
+      def initialize: (
+        ?capabilities: ::Array[Deeprails::MonitorEventDetailResponse::Capability],
+        ?eval_time: String,
+        ?evaluation_result: ::Hash[Symbol, top],
+        ?event_id: String,
+        ?files: ::Array[Deeprails::MonitorEventDetailResponse::File],
+        ?guardrail_metrics: ::Array[String],
+        ?model_input: ::Hash[Symbol, top],
+        ?model_output: String,
+        ?monitor_id: String,
+        ?nametag: String,
+        ?run_mode: Deeprails::Models::MonitorEventDetailResponse::run_mode,
+        ?status: Deeprails::Models::MonitorEventDetailResponse::status,
+        ?timestamp: Time
+      ) -> void
+
+      def to_hash: -> {
+        capabilities: ::Array[Deeprails::MonitorEventDetailResponse::Capability],
+        eval_time: String,
+        evaluation_result: ::Hash[Symbol, top],
+        event_id: String,
+        files: ::Array[Deeprails::MonitorEventDetailResponse::File],
+        guardrail_metrics: ::Array[String],
+        model_input: ::Hash[Symbol, top],
+        model_output: String,
+        monitor_id: String,
+        nametag: String,
+        run_mode: Deeprails::Models::MonitorEventDetailResponse::run_mode,
+        status: Deeprails::Models::MonitorEventDetailResponse::status,
+        timestamp: Time
+      }
+
+      type capability = { capability: String }
+
+      class Capability < Deeprails::Internal::Type::BaseModel
+        attr_reader capability: String?
+
+        def capability=: (String) -> String
+
+        def initialize: (?capability: String) -> void
+
+        def to_hash: -> { capability: String }
+      end
+
+      type file = { file_id: String, file_name: String, file_size: Integer }
+
+      class File < Deeprails::Internal::Type::BaseModel
+        attr_reader file_id: String?
+
+        def file_id=: (String) -> String
+
+        attr_reader file_name: String?
+
+        def file_name=: (String) -> String
+
+        attr_reader file_size: Integer?
+
+        def file_size=: (Integer) -> Integer
+
+        def initialize: (
+          ?file_id: String,
+          ?file_name: String,
+          ?file_size: Integer
+        ) -> void
+
+        def to_hash: -> {
+          file_id: String,
+          file_name: String,
+          file_size: Integer
+        }
+      end
+
+      type run_mode = :precision_plus | :precision | :smart | :economy
+
+      module RunMode
+        extend Deeprails::Internal::Type::Enum
+
+        PRECISION_PLUS: :precision_plus
+        PRECISION: :precision
+        SMART: :smart
+        ECONOMY: :economy
+
+        def self?.values: -> ::Array[Deeprails::Models::MonitorEventDetailResponse::run_mode]
+      end
+
+      type status = :in_progress | :completed | :canceled | :queued | :failed
+
+      module Status
+        extend Deeprails::Internal::Type::Enum
+
+        IN_PROGRESS: :in_progress
+        COMPLETED: :completed
+        CANCELED: :canceled
+        QUEUED: :queued
+        FAILED: :failed
+
+        def self?.values: -> ::Array[Deeprails::Models::MonitorEventDetailResponse::status]
+      end
+    end
+  end
+end

@@ -24,7 +24,7 @@ module Deeprails
           max_improvement_attempts: Integer,
           web_search: T::Boolean,
           request_options: Deeprails::RequestOptions::OrHash
-        ).returns(T.anything)
+        ).returns(Deeprails::DefendCreateResponse)
       end
       def create_workflow(
         # The action used to improve outputs that fail one or more guardrail metrics for
@@ -77,7 +77,7 @@ module Deeprails
           event_id: String,
           workflow_id: String,
           request_options: Deeprails::RequestOptions::OrHash
-        ).returns(T.anything)
+        ).returns(Deeprails::WorkflowEventDetailResponse)
       end
       def retrieve_event(
         # The ID of the requested workflow event.
@@ -117,7 +117,7 @@ module Deeprails
           run_mode: Deeprails::DefendSubmitEventParams::RunMode::OrSymbol,
           nametag: String,
           request_options: Deeprails::RequestOptions::OrHash
-        ).returns(T.anything)
+        ).returns(Deeprails::WorkflowEventResponse)
       end
       def submit_event(
         # Workflow ID associated with this event.
@@ -162,7 +162,7 @@ module Deeprails
             Deeprails::DefendUpdateWorkflowParams::ThresholdType::OrSymbol,
           web_search: T::Boolean,
           request_options: Deeprails::RequestOptions::OrHash
-        ).returns(T.anything)
+        ).returns(Deeprails::DefendUpdateResponse)
       end
       def update_workflow(
         # The ID of the workflow to edit.
