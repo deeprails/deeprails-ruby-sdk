@@ -44,7 +44,12 @@ module Deeprails
       required :improvement_action, enum: -> { Deeprails::WorkflowEventDetailResponse::ImprovementAction }
 
       # @!attribute improvement_tool_status
-      #   Status of the improvement tool used to improve the event.
+      #   Status of the improvement tool used to improve the event. `improvement_required`
+      #   indicates that the evaluation is complete and the improvement action is needed
+      #   but is not taking place. `improved` and `improvement_failed` indicate when the
+      #   improvement action concludes, successfully and unsuccessfully, respectively.
+      #   `no_improvement_required` means that the first evaluation passed all its
+      #   metrics!
       #
       #   @return [Symbol, Deeprails::Models::WorkflowEventDetailResponse::ImprovementToolStatus, nil]
       required :improvement_tool_status,
@@ -115,7 +120,7 @@ module Deeprails
       #
       #   @param improvement_action [Symbol, Deeprails::Models::WorkflowEventDetailResponse::ImprovementAction] Type of improvement action used to improve the event.
       #
-      #   @param improvement_tool_status [Symbol, Deeprails::Models::WorkflowEventDetailResponse::ImprovementToolStatus, nil] Status of the improvement tool used to improve the event.
+      #   @param improvement_tool_status [Symbol, Deeprails::Models::WorkflowEventDetailResponse::ImprovementToolStatus, nil] Status of the improvement tool used to improve the event. `improvement_required`
       #
       #   @param status [Symbol, Deeprails::Models::WorkflowEventDetailResponse::Status] Status of the event.
       #
@@ -227,14 +232,20 @@ module Deeprails
         #   @return [Array<Symbol>]
       end
 
-      # Status of the improvement tool used to improve the event.
+      # Status of the improvement tool used to improve the event. `improvement_required`
+      # indicates that the evaluation is complete and the improvement action is needed
+      # but is not taking place. `improved` and `improvement_failed` indicate when the
+      # improvement action concludes, successfully and unsuccessfully, respectively.
+      # `no_improvement_required` means that the first evaluation passed all its
+      # metrics!
       #
       # @see Deeprails::Models::WorkflowEventDetailResponse#improvement_tool_status
       module ImprovementToolStatus
         extend Deeprails::Internal::Type::Enum
 
         IMPROVED = :improved
-        FAILED_ON_MAX_RETRIES = :"failed on max retries"
+        IMPROVEMENT_FAILED = :improvement_failed
+        NO_IMPROVEMENT_REQUIRED = :no_improvement_required
         IMPROVEMENT_REQUIRED = :improvement_required
 
         # @!method self.values

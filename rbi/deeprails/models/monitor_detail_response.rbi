@@ -405,6 +405,10 @@ module Deeprails
               )
             end
 
+          # The user prompt used to generate the output.
+          sig { returns(String) }
+          attr_accessor :user_prompt
+
           # Any structured information that directly relates to the model’s input and
           # expected output—e.g., the recent turn-by-turn history between an AI tutor and a
           # student, facts or state passed through an agentic workflow, or other
@@ -430,25 +434,20 @@ module Deeprails
           sig { params(system_prompt: String).void }
           attr_writer :system_prompt
 
-          # The user prompt used to generate the output.
-          sig { returns(T.nilable(String)) }
-          attr_reader :user_prompt
-
-          sig { params(user_prompt: String).void }
-          attr_writer :user_prompt
-
           # A dictionary of inputs sent to the LLM to generate output. The dictionary must
           # contain at least a `user_prompt` field or a `system_prompt` field. For
           # ground_truth_adherence guardrail metric, `ground_truth` should be provided.
           sig do
             params(
+              user_prompt: String,
               context: T::Array[String],
               ground_truth: String,
-              system_prompt: String,
-              user_prompt: String
+              system_prompt: String
             ).returns(T.attached_class)
           end
           def self.new(
+            # The user prompt used to generate the output.
+            user_prompt:,
             # Any structured information that directly relates to the model’s input and
             # expected output—e.g., the recent turn-by-turn history between an AI tutor and a
             # student, facts or state passed through an agentic workflow, or other
@@ -458,19 +457,17 @@ module Deeprails
             # The ground truth for evaluating Ground Truth Adherence guardrail.
             ground_truth: nil,
             # The system prompt used to generate the output.
-            system_prompt: nil,
-            # The user prompt used to generate the output.
-            user_prompt: nil
+            system_prompt: nil
           )
           end
 
           sig do
             override.returns(
               {
+                user_prompt: String,
                 context: T::Array[String],
                 ground_truth: String,
-                system_prompt: String,
-                user_prompt: String
+                system_prompt: String
               }
             )
           end

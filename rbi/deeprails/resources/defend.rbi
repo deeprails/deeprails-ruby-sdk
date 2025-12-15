@@ -132,8 +132,8 @@ module Deeprails
         model_used:,
         # Run mode for the workflow event. The run mode allows the user to optimize for
         # speed, accuracy, and cost by determining which models are used to evaluate the
-        # event. Available run modes include `precision_plus`, `precision`, `smart`, and
-        # `economy`. Defaults to `smart`.
+        # event. Available run modes include `precision_plus_codex`, `precision_plus`,
+        # `precision`, `smart`, and `economy`. Defaults to `smart`.
         run_mode:,
         # An optional, user-defined tag for the event.
         nametag: nil,

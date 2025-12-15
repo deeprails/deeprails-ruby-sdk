@@ -45,7 +45,12 @@ module Deeprails
       end
       attr_accessor :improvement_action
 
-      # Status of the improvement tool used to improve the event.
+      # Status of the improvement tool used to improve the event. `improvement_required`
+      # indicates that the evaluation is complete and the improvement action is needed
+      # but is not taking place. `improved` and `improvement_failed` indicate when the
+      # improvement action concludes, successfully and unsuccessfully, respectively.
+      # `no_improvement_required` means that the first evaluation passed all its
+      # metrics!
       sig do
         returns(
           T.nilable(
@@ -193,7 +198,12 @@ module Deeprails
         improved_model_output:,
         # Type of improvement action used to improve the event.
         improvement_action:,
-        # Status of the improvement tool used to improve the event.
+        # Status of the improvement tool used to improve the event. `improvement_required`
+        # indicates that the evaluation is complete and the improvement action is needed
+        # but is not taking place. `improved` and `improvement_failed` indicate when the
+        # improvement action concludes, successfully and unsuccessfully, respectively.
+        # `no_improvement_required` means that the first evaluation passed all its
+        # metrics!
         improvement_tool_status:,
         # Status of the event.
         status:,
@@ -437,7 +447,12 @@ module Deeprails
         end
       end
 
-      # Status of the improvement tool used to improve the event.
+      # Status of the improvement tool used to improve the event. `improvement_required`
+      # indicates that the evaluation is complete and the improvement action is needed
+      # but is not taking place. `improved` and `improvement_failed` indicate when the
+      # improvement action concludes, successfully and unsuccessfully, respectively.
+      # `no_improvement_required` means that the first evaluation passed all its
+      # metrics!
       module ImprovementToolStatus
         extend Deeprails::Internal::Type::Enum
 
@@ -455,9 +470,14 @@ module Deeprails
             :improved,
             Deeprails::WorkflowEventDetailResponse::ImprovementToolStatus::TaggedSymbol
           )
-        FAILED_ON_MAX_RETRIES =
+        IMPROVEMENT_FAILED =
           T.let(
-            :"failed on max retries",
+            :improvement_failed,
+            Deeprails::WorkflowEventDetailResponse::ImprovementToolStatus::TaggedSymbol
+          )
+        NO_IMPROVEMENT_REQUIRED =
+          T.let(
+            :no_improvement_required,
             Deeprails::WorkflowEventDetailResponse::ImprovementToolStatus::TaggedSymbol
           )
         IMPROVEMENT_REQUIRED =

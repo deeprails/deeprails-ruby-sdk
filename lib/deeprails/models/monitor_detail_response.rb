@@ -224,6 +224,12 @@ module Deeprails
 
         # @see Deeprails::Models::MonitorDetailResponse::Evaluation#model_input
         class ModelInput < Deeprails::Internal::Type::BaseModel
+          # @!attribute user_prompt
+          #   The user prompt used to generate the output.
+          #
+          #   @return [String]
+          required :user_prompt, String
+
           # @!attribute context
           #   Any structured information that directly relates to the model’s input and
           #   expected output—e.g., the recent turn-by-turn history between an AI tutor and a
@@ -246,13 +252,7 @@ module Deeprails
           #   @return [String, nil]
           optional :system_prompt, String
 
-          # @!attribute user_prompt
-          #   The user prompt used to generate the output.
-          #
-          #   @return [String, nil]
-          optional :user_prompt, String
-
-          # @!method initialize(context: nil, ground_truth: nil, system_prompt: nil, user_prompt: nil)
+          # @!method initialize(user_prompt:, context: nil, ground_truth: nil, system_prompt: nil)
           #   Some parameter documentations has been truncated, see
           #   {Deeprails::Models::MonitorDetailResponse::Evaluation::ModelInput} for more
           #   details.
@@ -261,13 +261,13 @@ module Deeprails
           #   contain at least a `user_prompt` field or a `system_prompt` field. For
           #   ground_truth_adherence guardrail metric, `ground_truth` should be provided.
           #
+          #   @param user_prompt [String] The user prompt used to generate the output.
+          #
           #   @param context [Array<String>] Any structured information that directly relates to the model’s input and expect
           #
           #   @param ground_truth [String] The ground truth for evaluating Ground Truth Adherence guardrail.
           #
           #   @param system_prompt [String] The system prompt used to generate the output.
-          #
-          #   @param user_prompt [String] The user prompt used to generate the output.
         end
 
         # Run mode for the evaluation. The run mode allows the user to optimize for speed,
