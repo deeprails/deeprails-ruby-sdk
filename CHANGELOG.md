@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.21.0 (2025-12-15)
+
+Full Changelog: [v0.20.0...v0.21.0](https://github.com/deeprails/deeprails-ruby-sdk/compare/v0.20.0...v0.21.0)
+
+### Features
+
+* **api:** add precision plus codex ([d67ca44](https://github.com/deeprails/deeprails-ruby-sdk/commit/d67ca4443d30fad4211caf43f0d7a63adf4f8b2b))
+
 ## 0.20.0 (2025-12-07)
 
 Full Changelog: [v0.19.0...v0.20.0](https://github.com/deeprails/deeprails-ruby-sdk/compare/v0.19.0...v0.20.0)
