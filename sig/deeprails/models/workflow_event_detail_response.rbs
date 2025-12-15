@@ -213,13 +213,17 @@ module Deeprails
       end
 
       type improvement_tool_status =
-        :improved | :"failed on max retries" | :improvement_required
+        :improved
+        | :improvement_failed
+        | :no_improvement_required
+        | :improvement_required
 
       module ImprovementToolStatus
         extend Deeprails::Internal::Type::Enum
 
         IMPROVED: :improved
-        FAILED_ON_MAX_RETRIES: :"failed on max retries"
+        IMPROVEMENT_FAILED: :improvement_failed
+        NO_IMPROVEMENT_REQUIRED: :no_improvement_required
         IMPROVEMENT_REQUIRED: :improvement_required
 
         def self?.values: -> ::Array[Deeprails::Models::WorkflowEventDetailResponse::improvement_tool_status]

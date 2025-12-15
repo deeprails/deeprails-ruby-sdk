@@ -95,7 +95,12 @@ class Deeprails::Test::Resources::MonitorTest < Deeprails::Test::ResourceTest
   def test_submit_event_required_params
     skip("Prism tests are disabled")
 
-    response = @deep_rails.monitor.submit_event("monitor_id", model_input: {}, model_output: "model_output")
+    response =
+      @deep_rails.monitor.submit_event(
+        "monitor_id",
+        model_input: {user_prompt: "user_prompt"},
+        model_output: "model_output"
+      )
 
     assert_pattern do
       response => Deeprails::MonitorEventResponse
