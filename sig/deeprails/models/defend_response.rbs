@@ -118,7 +118,7 @@ module Deeprails
           evaluations: ::Array[Deeprails::DefendResponse::Event::Evaluation],
           event_id: String,
           improved_model_output: String,
-          improvement_tool_status: String
+          improvement_tool_status: Deeprails::Models::DefendResponse::Event::improvement_tool_status
         }
 
       class Event < Deeprails::Internal::Type::BaseModel
@@ -136,22 +136,24 @@ module Deeprails
 
         def improved_model_output=: (String) -> String
 
-        attr_reader improvement_tool_status: String?
+        attr_reader improvement_tool_status: Deeprails::Models::DefendResponse::Event::improvement_tool_status?
 
-        def improvement_tool_status=: (String) -> String
+        def improvement_tool_status=: (
+          Deeprails::Models::DefendResponse::Event::improvement_tool_status
+        ) -> Deeprails::Models::DefendResponse::Event::improvement_tool_status
 
         def initialize: (
           ?evaluations: ::Array[Deeprails::DefendResponse::Event::Evaluation],
           ?event_id: String,
           ?improved_model_output: String,
-          ?improvement_tool_status: String
+          ?improvement_tool_status: Deeprails::Models::DefendResponse::Event::improvement_tool_status
         ) -> void
 
         def to_hash: -> {
           evaluations: ::Array[Deeprails::DefendResponse::Event::Evaluation],
           event_id: String,
           improved_model_output: String,
-          improvement_tool_status: String
+          improvement_tool_status: Deeprails::Models::DefendResponse::Event::improvement_tool_status
         }
 
         type evaluation =
@@ -255,6 +257,23 @@ module Deeprails
             progress: Integer,
             run_mode: String
           }
+        end
+
+        type improvement_tool_status =
+          :improved
+          | :improvement_failed
+          | :no_improvement_required
+          | :improvement_required
+
+        module ImprovementToolStatus
+          extend Deeprails::Internal::Type::Enum
+
+          IMPROVED: :improved
+          IMPROVEMENT_FAILED: :improvement_failed
+          NO_IMPROVEMENT_REQUIRED: :no_improvement_required
+          IMPROVEMENT_REQUIRED: :improvement_required
+
+          def self?.values: -> ::Array[Deeprails::Models::DefendResponse::Event::improvement_tool_status]
         end
       end
 

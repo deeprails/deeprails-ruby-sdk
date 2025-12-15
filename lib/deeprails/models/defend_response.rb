@@ -169,19 +169,27 @@ module Deeprails
         optional :improved_model_output, String
 
         # @!attribute improvement_tool_status
-        #   Status of the improvement tool used to improve the event.
+        #   Status of the improvement tool used to improve the event. `improvement_required`
+        #   indicates that the evaluation is complete and the improvement action is needed
+        #   but is not taking place. `improved` and `improvement_failed` indicate when the
+        #   improvement action concludes, successfully and unsuccessfully, respectively.
+        #   `no_improvement_required` means that the first evaluation passed all its
+        #   metrics!
         #
-        #   @return [String, nil]
-        optional :improvement_tool_status, String
+        #   @return [Symbol, Deeprails::Models::DefendResponse::Event::ImprovementToolStatus, nil]
+        optional :improvement_tool_status, enum: -> { Deeprails::DefendResponse::Event::ImprovementToolStatus }
 
         # @!method initialize(evaluations: nil, event_id: nil, improved_model_output: nil, improvement_tool_status: nil)
+        #   Some parameter documentations has been truncated, see
+        #   {Deeprails::Models::DefendResponse::Event} for more details.
+        #
         #   @param evaluations [Array<Deeprails::Models::DefendResponse::Event::Evaluation>] An array of evaluations for this event.
         #
         #   @param event_id [String] A unique workflow event ID.
         #
         #   @param improved_model_output [String] Improved model output after improvement tool was applied.
         #
-        #   @param improvement_tool_status [String] Status of the improvement tool used to improve the event.
+        #   @param improvement_tool_status [Symbol, Deeprails::Models::DefendResponse::Event::ImprovementToolStatus] Status of the improvement tool used to improve the event. `improvement_required`
 
         class Evaluation < Deeprails::Internal::Type::BaseModel
           # @!attribute attempt
@@ -288,6 +296,26 @@ module Deeprails
           #   @param progress [Integer] Evaluation progress (0-100).
           #
           #   @param run_mode [String] Run mode used for the evaluation.
+        end
+
+        # Status of the improvement tool used to improve the event. `improvement_required`
+        # indicates that the evaluation is complete and the improvement action is needed
+        # but is not taking place. `improved` and `improvement_failed` indicate when the
+        # improvement action concludes, successfully and unsuccessfully, respectively.
+        # `no_improvement_required` means that the first evaluation passed all its
+        # metrics!
+        #
+        # @see Deeprails::Models::DefendResponse::Event#improvement_tool_status
+        module ImprovementToolStatus
+          extend Deeprails::Internal::Type::Enum
+
+          IMPROVED = :improved
+          IMPROVEMENT_FAILED = :improvement_failed
+          NO_IMPROVEMENT_REQUIRED = :no_improvement_required
+          IMPROVEMENT_REQUIRED = :improvement_required
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
         end
       end
 

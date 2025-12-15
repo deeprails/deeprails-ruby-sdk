@@ -284,11 +284,27 @@ module Deeprails
         sig { params(improved_model_output: String).void }
         attr_writer :improved_model_output
 
-        # Status of the improvement tool used to improve the event.
-        sig { returns(T.nilable(String)) }
+        # Status of the improvement tool used to improve the event. `improvement_required`
+        # indicates that the evaluation is complete and the improvement action is needed
+        # but is not taking place. `improved` and `improvement_failed` indicate when the
+        # improvement action concludes, successfully and unsuccessfully, respectively.
+        # `no_improvement_required` means that the first evaluation passed all its
+        # metrics!
+        sig do
+          returns(
+            T.nilable(
+              Deeprails::DefendResponse::Event::ImprovementToolStatus::TaggedSymbol
+            )
+          )
+        end
         attr_reader :improvement_tool_status
 
-        sig { params(improvement_tool_status: String).void }
+        sig do
+          params(
+            improvement_tool_status:
+              Deeprails::DefendResponse::Event::ImprovementToolStatus::OrSymbol
+          ).void
+        end
         attr_writer :improvement_tool_status
 
         sig do
@@ -297,7 +313,8 @@ module Deeprails
               T::Array[Deeprails::DefendResponse::Event::Evaluation::OrHash],
             event_id: String,
             improved_model_output: String,
-            improvement_tool_status: String
+            improvement_tool_status:
+              Deeprails::DefendResponse::Event::ImprovementToolStatus::OrSymbol
           ).returns(T.attached_class)
         end
         def self.new(
@@ -307,7 +324,12 @@ module Deeprails
           event_id: nil,
           # Improved model output after improvement tool was applied.
           improved_model_output: nil,
-          # Status of the improvement tool used to improve the event.
+          # Status of the improvement tool used to improve the event. `improvement_required`
+          # indicates that the evaluation is complete and the improvement action is needed
+          # but is not taking place. `improved` and `improvement_failed` indicate when the
+          # improvement action concludes, successfully and unsuccessfully, respectively.
+          # `no_improvement_required` means that the first evaluation passed all its
+          # metrics!
           improvement_tool_status: nil
         )
         end
@@ -319,7 +341,8 @@ module Deeprails
                 T::Array[Deeprails::DefendResponse::Event::Evaluation],
               event_id: String,
               improved_model_output: String,
-              improvement_tool_status: String
+              improvement_tool_status:
+                Deeprails::DefendResponse::Event::ImprovementToolStatus::TaggedSymbol
             }
           )
         end
@@ -493,6 +516,56 @@ module Deeprails
             )
           end
           def to_hash
+          end
+        end
+
+        # Status of the improvement tool used to improve the event. `improvement_required`
+        # indicates that the evaluation is complete and the improvement action is needed
+        # but is not taking place. `improved` and `improvement_failed` indicate when the
+        # improvement action concludes, successfully and unsuccessfully, respectively.
+        # `no_improvement_required` means that the first evaluation passed all its
+        # metrics!
+        module ImprovementToolStatus
+          extend Deeprails::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(
+                Symbol,
+                Deeprails::DefendResponse::Event::ImprovementToolStatus
+              )
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          IMPROVED =
+            T.let(
+              :improved,
+              Deeprails::DefendResponse::Event::ImprovementToolStatus::TaggedSymbol
+            )
+          IMPROVEMENT_FAILED =
+            T.let(
+              :improvement_failed,
+              Deeprails::DefendResponse::Event::ImprovementToolStatus::TaggedSymbol
+            )
+          NO_IMPROVEMENT_REQUIRED =
+            T.let(
+              :no_improvement_required,
+              Deeprails::DefendResponse::Event::ImprovementToolStatus::TaggedSymbol
+            )
+          IMPROVEMENT_REQUIRED =
+            T.let(
+              :improvement_required,
+              Deeprails::DefendResponse::Event::ImprovementToolStatus::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                Deeprails::DefendResponse::Event::ImprovementToolStatus::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
           end
         end
       end

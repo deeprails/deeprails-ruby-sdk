@@ -91,10 +91,10 @@ class Deeprails::Test::Resources::DefendTest < Deeprails::Test::ResourceTest
     response =
       @deep_rails.defend.submit_event(
         "workflow_id",
-        model_input: {},
+        model_input: {user_prompt: "user_prompt"},
         model_output: "model_output",
         model_used: "model_used",
-        run_mode: :precision_plus
+        run_mode: :precision_plus_codex
       )
 
     assert_pattern do

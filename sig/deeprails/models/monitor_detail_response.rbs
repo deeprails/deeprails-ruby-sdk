@@ -174,13 +174,15 @@ module Deeprails
 
         type model_input =
           {
+            user_prompt: String,
             context: ::Array[String],
             ground_truth: String,
-            system_prompt: String,
-            user_prompt: String
+            system_prompt: String
           }
 
         class ModelInput < Deeprails::Internal::Type::BaseModel
+          attr_accessor user_prompt: String
+
           attr_reader context: ::Array[String]?
 
           def context=: (::Array[String]) -> ::Array[String]
@@ -193,22 +195,18 @@ module Deeprails
 
           def system_prompt=: (String) -> String
 
-          attr_reader user_prompt: String?
-
-          def user_prompt=: (String) -> String
-
           def initialize: (
+            user_prompt: String,
             ?context: ::Array[String],
             ?ground_truth: String,
-            ?system_prompt: String,
-            ?user_prompt: String
+            ?system_prompt: String
           ) -> void
 
           def to_hash: -> {
+            user_prompt: String,
             context: ::Array[String],
             ground_truth: String,
-            system_prompt: String,
-            user_prompt: String
+            system_prompt: String
           }
         end
 
