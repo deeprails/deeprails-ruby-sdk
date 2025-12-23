@@ -4,6 +4,12 @@ module Deeprails
   module Models
     # @see Deeprails::Resources::Defend#submit_event
     class WorkflowEventResponse < Deeprails::Internal::Type::BaseModel
+      # @!attribute billing_request_id
+      #   The ID of the billing request for the event.
+      #
+      #   @return [String]
+      required :billing_request_id, String
+
       # @!attribute created_at
       #   The time the event was created in UTC.
       #
@@ -28,7 +34,9 @@ module Deeprails
       #   @return [String]
       required :workflow_id, String
 
-      # @!method initialize(created_at:, event_id:, status:, workflow_id:)
+      # @!method initialize(billing_request_id:, created_at:, event_id:, status:, workflow_id:)
+      #   @param billing_request_id [String] The ID of the billing request for the event.
+      #
       #   @param created_at [Time] The time the event was created in UTC.
       #
       #   @param event_id [String] A unique workflow event ID.

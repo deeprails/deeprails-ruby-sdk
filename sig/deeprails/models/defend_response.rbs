@@ -115,13 +115,19 @@ module Deeprails
 
       type event =
         {
+          billing_request_id: String,
           evaluations: ::Array[Deeprails::DefendResponse::Event::Evaluation],
           event_id: String,
           improved_model_output: String,
-          improvement_tool_status: Deeprails::Models::DefendResponse::Event::improvement_tool_status
+          improvement_tool_status: Deeprails::Models::DefendResponse::Event::improvement_tool_status,
+          status: Deeprails::Models::DefendResponse::Event::status
         }
 
       class Event < Deeprails::Internal::Type::BaseModel
+        attr_reader billing_request_id: String?
+
+        def billing_request_id=: (String) -> String
+
         attr_reader evaluations: ::Array[Deeprails::DefendResponse::Event::Evaluation]?
 
         def evaluations=: (
@@ -142,22 +148,33 @@ module Deeprails
           Deeprails::Models::DefendResponse::Event::improvement_tool_status
         ) -> Deeprails::Models::DefendResponse::Event::improvement_tool_status
 
+        attr_reader status: Deeprails::Models::DefendResponse::Event::status?
+
+        def status=: (
+          Deeprails::Models::DefendResponse::Event::status
+        ) -> Deeprails::Models::DefendResponse::Event::status
+
         def initialize: (
+          ?billing_request_id: String,
           ?evaluations: ::Array[Deeprails::DefendResponse::Event::Evaluation],
           ?event_id: String,
           ?improved_model_output: String,
-          ?improvement_tool_status: Deeprails::Models::DefendResponse::Event::improvement_tool_status
+          ?improvement_tool_status: Deeprails::Models::DefendResponse::Event::improvement_tool_status,
+          ?status: Deeprails::Models::DefendResponse::Event::status
         ) -> void
 
         def to_hash: -> {
+          billing_request_id: String,
           evaluations: ::Array[Deeprails::DefendResponse::Event::Evaluation],
           event_id: String,
           improved_model_output: String,
-          improvement_tool_status: Deeprails::Models::DefendResponse::Event::improvement_tool_status
+          improvement_tool_status: Deeprails::Models::DefendResponse::Event::improvement_tool_status,
+          status: Deeprails::Models::DefendResponse::Event::status
         }
 
         type evaluation =
           {
+            analysis_of_failures: String,
             attempt: String,
             created_at: Time,
             error_message: String,
@@ -165,6 +182,8 @@ module Deeprails
             evaluation_status: String,
             evaluation_total_cost: Float,
             guardrail_metrics: ::Array[String],
+            improvement_tool_status: Deeprails::Models::DefendResponse::Event::Evaluation::improvement_tool_status,
+            key_improvements: ::Array[String],
             model_input: ::Hash[Symbol, top],
             model_output: String,
             modified_at: Time,
@@ -174,6 +193,10 @@ module Deeprails
           }
 
         class Evaluation < Deeprails::Internal::Type::BaseModel
+          attr_reader analysis_of_failures: String?
+
+          def analysis_of_failures=: (String) -> String
+
           attr_reader attempt: String?
 
           def attempt=: (String) -> String
@@ -202,6 +225,16 @@ module Deeprails
 
           def guardrail_metrics=: (::Array[String]) -> ::Array[String]
 
+          attr_reader improvement_tool_status: Deeprails::Models::DefendResponse::Event::Evaluation::improvement_tool_status?
+
+          def improvement_tool_status=: (
+            Deeprails::Models::DefendResponse::Event::Evaluation::improvement_tool_status
+          ) -> Deeprails::Models::DefendResponse::Event::Evaluation::improvement_tool_status
+
+          attr_reader key_improvements: ::Array[String]?
+
+          def key_improvements=: (::Array[String]) -> ::Array[String]
+
           attr_reader model_input: ::Hash[Symbol, top]?
 
           def model_input=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
@@ -227,6 +260,7 @@ module Deeprails
           def run_mode=: (String) -> String
 
           def initialize: (
+            ?analysis_of_failures: String,
             ?attempt: String,
             ?created_at: Time,
             ?error_message: String,
@@ -234,6 +268,8 @@ module Deeprails
             ?evaluation_status: String,
             ?evaluation_total_cost: Float,
             ?guardrail_metrics: ::Array[String],
+            ?improvement_tool_status: Deeprails::Models::DefendResponse::Event::Evaluation::improvement_tool_status,
+            ?key_improvements: ::Array[String],
             ?model_input: ::Hash[Symbol, top],
             ?model_output: String,
             ?modified_at: Time,
@@ -243,6 +279,7 @@ module Deeprails
           ) -> void
 
           def to_hash: -> {
+            analysis_of_failures: String,
             attempt: String,
             created_at: Time,
             error_message: String,
@@ -250,6 +287,8 @@ module Deeprails
             evaluation_status: String,
             evaluation_total_cost: Float,
             guardrail_metrics: ::Array[String],
+            improvement_tool_status: Deeprails::Models::DefendResponse::Event::Evaluation::improvement_tool_status,
+            key_improvements: ::Array[String],
             model_input: ::Hash[Symbol, top],
             model_output: String,
             modified_at: Time,
@@ -257,6 +296,23 @@ module Deeprails
             progress: Integer,
             run_mode: String
           }
+
+          type improvement_tool_status =
+            :improved
+            | :improvement_failed
+            | :no_improvement_required
+            | :improvement_required
+
+          module ImprovementToolStatus
+            extend Deeprails::Internal::Type::Enum
+
+            IMPROVED: :improved
+            IMPROVEMENT_FAILED: :improvement_failed
+            NO_IMPROVEMENT_REQUIRED: :no_improvement_required
+            IMPROVEMENT_REQUIRED: :improvement_required
+
+            def self?.values: -> ::Array[Deeprails::Models::DefendResponse::Event::Evaluation::improvement_tool_status]
+          end
         end
 
         type improvement_tool_status =
@@ -275,9 +331,28 @@ module Deeprails
 
           def self?.values: -> ::Array[Deeprails::Models::DefendResponse::Event::improvement_tool_status]
         end
+
+        type status = :completed | :failed | :in_progress
+
+        module Status
+          extend Deeprails::Internal::Type::Enum
+
+          COMPLETED: :completed
+          FAILED: :failed
+          IN_PROGRESS: :in_progress
+
+          def self?.values: -> ::Array[Deeprails::Models::DefendResponse::Event::status]
+        end
       end
 
-      type file = { file_id: String, file_name: String, file_size: Integer }
+      type file =
+        {
+          file_id: String,
+          file_name: String,
+          file_size: Integer,
+          presigned_url: String,
+          presigned_url_expires_at: Time
+        }
 
       class File < Deeprails::Internal::Type::BaseModel
         attr_reader file_id: String?
@@ -292,16 +367,28 @@ module Deeprails
 
         def file_size=: (Integer) -> Integer
 
+        attr_reader presigned_url: String?
+
+        def presigned_url=: (String) -> String
+
+        attr_reader presigned_url_expires_at: Time?
+
+        def presigned_url_expires_at=: (Time) -> Time
+
         def initialize: (
           ?file_id: String,
           ?file_name: String,
-          ?file_size: Integer
+          ?file_size: Integer,
+          ?presigned_url: String,
+          ?presigned_url_expires_at: Time
         ) -> void
 
         def to_hash: -> {
           file_id: String,
           file_name: String,
-          file_size: Integer
+          file_size: Integer,
+          presigned_url: String,
+          presigned_url_expires_at: Time
         }
       end
 

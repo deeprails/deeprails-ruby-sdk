@@ -46,7 +46,7 @@ module Deeprails
       type model_input =
         {
           user_prompt: String,
-          context: ::Array[String],
+          context: ::Array[Deeprails::MonitorSubmitEventParams::ModelInput::Context],
           ground_truth: String,
           system_prompt: String
         }
@@ -54,9 +54,11 @@ module Deeprails
       class ModelInput < Deeprails::Internal::Type::BaseModel
         attr_accessor user_prompt: String
 
-        attr_reader context: ::Array[String]?
+        attr_reader context: ::Array[Deeprails::MonitorSubmitEventParams::ModelInput::Context]?
 
-        def context=: (::Array[String]) -> ::Array[String]
+        def context=: (
+          ::Array[Deeprails::MonitorSubmitEventParams::ModelInput::Context]
+        ) -> ::Array[Deeprails::MonitorSubmitEventParams::ModelInput::Context]
 
         attr_reader ground_truth: String?
 
@@ -68,17 +70,33 @@ module Deeprails
 
         def initialize: (
           user_prompt: String,
-          ?context: ::Array[String],
+          ?context: ::Array[Deeprails::MonitorSubmitEventParams::ModelInput::Context],
           ?ground_truth: String,
           ?system_prompt: String
         ) -> void
 
         def to_hash: -> {
           user_prompt: String,
-          context: ::Array[String],
+          context: ::Array[Deeprails::MonitorSubmitEventParams::ModelInput::Context],
           ground_truth: String,
           system_prompt: String
         }
+
+        type context = { content: String, role: String }
+
+        class Context < Deeprails::Internal::Type::BaseModel
+          attr_reader content: String?
+
+          def content=: (String) -> String
+
+          attr_reader role: String?
+
+          def role=: (String) -> String
+
+          def initialize: (?content: String, ?role: String) -> void
+
+          def to_hash: -> { content: String, role: String }
+        end
       end
 
       type run_mode =

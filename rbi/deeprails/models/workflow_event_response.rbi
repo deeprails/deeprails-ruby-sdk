@@ -8,6 +8,10 @@ module Deeprails
           T.any(Deeprails::WorkflowEventResponse, Deeprails::Internal::AnyHash)
         end
 
+      # The ID of the billing request for the event.
+      sig { returns(String) }
+      attr_accessor :billing_request_id
+
       # The time the event was created in UTC.
       sig { returns(Time) }
       attr_accessor :created_at
@@ -26,6 +30,7 @@ module Deeprails
 
       sig do
         params(
+          billing_request_id: String,
           created_at: Time,
           event_id: String,
           status: Deeprails::WorkflowEventResponse::Status::OrSymbol,
@@ -33,6 +38,8 @@ module Deeprails
         ).returns(T.attached_class)
       end
       def self.new(
+        # The ID of the billing request for the event.
+        billing_request_id:,
         # The time the event was created in UTC.
         created_at:,
         # A unique workflow event ID.
@@ -47,6 +54,7 @@ module Deeprails
       sig do
         override.returns(
           {
+            billing_request_id: String,
             created_at: Time,
             event_id: String,
             status: Deeprails::WorkflowEventResponse::Status::TaggedSymbol,

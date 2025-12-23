@@ -254,6 +254,13 @@ module Deeprails
             )
           end
 
+        # The ID of the billing request for the event.
+        sig { returns(T.nilable(String)) }
+        attr_reader :billing_request_id
+
+        sig { params(billing_request_id: String).void }
+        attr_writer :billing_request_id
+
         # An array of evaluations for this event.
         sig do
           returns(
@@ -307,17 +314,36 @@ module Deeprails
         end
         attr_writer :improvement_tool_status
 
+        # Status of the event.
+        sig do
+          returns(
+            T.nilable(Deeprails::DefendResponse::Event::Status::TaggedSymbol)
+          )
+        end
+        attr_reader :status
+
         sig do
           params(
+            status: Deeprails::DefendResponse::Event::Status::OrSymbol
+          ).void
+        end
+        attr_writer :status
+
+        sig do
+          params(
+            billing_request_id: String,
             evaluations:
               T::Array[Deeprails::DefendResponse::Event::Evaluation::OrHash],
             event_id: String,
             improved_model_output: String,
             improvement_tool_status:
-              Deeprails::DefendResponse::Event::ImprovementToolStatus::OrSymbol
+              Deeprails::DefendResponse::Event::ImprovementToolStatus::OrSymbol,
+            status: Deeprails::DefendResponse::Event::Status::OrSymbol
           ).returns(T.attached_class)
         end
         def self.new(
+          # The ID of the billing request for the event.
+          billing_request_id: nil,
           # An array of evaluations for this event.
           evaluations: nil,
           # A unique workflow event ID.
@@ -330,19 +356,23 @@ module Deeprails
           # improvement action concludes, successfully and unsuccessfully, respectively.
           # `no_improvement_required` means that the first evaluation passed all its
           # metrics!
-          improvement_tool_status: nil
+          improvement_tool_status: nil,
+          # Status of the event.
+          status: nil
         )
         end
 
         sig do
           override.returns(
             {
+              billing_request_id: String,
               evaluations:
                 T::Array[Deeprails::DefendResponse::Event::Evaluation],
               event_id: String,
               improved_model_output: String,
               improvement_tool_status:
-                Deeprails::DefendResponse::Event::ImprovementToolStatus::TaggedSymbol
+                Deeprails::DefendResponse::Event::ImprovementToolStatus::TaggedSymbol,
+              status: Deeprails::DefendResponse::Event::Status::TaggedSymbol
             }
           )
         end
@@ -357,6 +387,14 @@ module Deeprails
                 Deeprails::Internal::AnyHash
               )
             end
+
+          # Analysis of the failures of the model_output according to the guardrail metrics
+          # evaluated.
+          sig { returns(T.nilable(String)) }
+          attr_reader :analysis_of_failures
+
+          sig { params(analysis_of_failures: String).void }
+          attr_writer :analysis_of_failures
 
           # The attempt number or identifier for this evaluation.
           sig { returns(T.nilable(String)) }
@@ -407,6 +445,36 @@ module Deeprails
           sig { params(guardrail_metrics: T::Array[String]).void }
           attr_writer :guardrail_metrics
 
+          # Status of the improvement tool used to improve the event. `improvement_required`
+          # indicates that the evaluation is complete and the improvement action is needed
+          # but is not taking place. `improved` and `improvement_failed` indicate when the
+          # improvement action concludes, successfully and unsuccessfully, respectively.
+          # `no_improvement_required` means that the first evaluation passed all its
+          # metrics!
+          sig do
+            returns(
+              T.nilable(
+                Deeprails::DefendResponse::Event::Evaluation::ImprovementToolStatus::TaggedSymbol
+              )
+            )
+          end
+          attr_reader :improvement_tool_status
+
+          sig do
+            params(
+              improvement_tool_status:
+                Deeprails::DefendResponse::Event::Evaluation::ImprovementToolStatus::OrSymbol
+            ).void
+          end
+          attr_writer :improvement_tool_status
+
+          # A list of key improvements made to the model_output to address the failures.
+          sig { returns(T.nilable(T::Array[String])) }
+          attr_reader :key_improvements
+
+          sig { params(key_improvements: T::Array[String]).void }
+          attr_writer :key_improvements
+
           # The model input used for the evaluation.
           sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
           attr_reader :model_input
@@ -451,6 +519,7 @@ module Deeprails
 
           sig do
             params(
+              analysis_of_failures: String,
               attempt: String,
               created_at: Time,
               error_message: String,
@@ -458,6 +527,9 @@ module Deeprails
               evaluation_status: String,
               evaluation_total_cost: Float,
               guardrail_metrics: T::Array[String],
+              improvement_tool_status:
+                Deeprails::DefendResponse::Event::Evaluation::ImprovementToolStatus::OrSymbol,
+              key_improvements: T::Array[String],
               model_input: T::Hash[Symbol, T.anything],
               model_output: String,
               modified_at: Time,
@@ -467,6 +539,9 @@ module Deeprails
             ).returns(T.attached_class)
           end
           def self.new(
+            # Analysis of the failures of the model_output according to the guardrail metrics
+            # evaluated.
+            analysis_of_failures: nil,
             # The attempt number or identifier for this evaluation.
             attempt: nil,
             # The time the evaluation was created in UTC.
@@ -481,6 +556,15 @@ module Deeprails
             evaluation_total_cost: nil,
             # An array of guardrail metrics evaluated.
             guardrail_metrics: nil,
+            # Status of the improvement tool used to improve the event. `improvement_required`
+            # indicates that the evaluation is complete and the improvement action is needed
+            # but is not taking place. `improved` and `improvement_failed` indicate when the
+            # improvement action concludes, successfully and unsuccessfully, respectively.
+            # `no_improvement_required` means that the first evaluation passed all its
+            # metrics!
+            improvement_tool_status: nil,
+            # A list of key improvements made to the model_output to address the failures.
+            key_improvements: nil,
             # The model input used for the evaluation.
             model_input: nil,
             # The model output that was evaluated.
@@ -499,6 +583,7 @@ module Deeprails
           sig do
             override.returns(
               {
+                analysis_of_failures: String,
                 attempt: String,
                 created_at: Time,
                 error_message: String,
@@ -506,6 +591,9 @@ module Deeprails
                 evaluation_status: String,
                 evaluation_total_cost: Float,
                 guardrail_metrics: T::Array[String],
+                improvement_tool_status:
+                  Deeprails::DefendResponse::Event::Evaluation::ImprovementToolStatus::TaggedSymbol,
+                key_improvements: T::Array[String],
                 model_input: T::Hash[Symbol, T.anything],
                 model_output: String,
                 modified_at: Time,
@@ -516,6 +604,56 @@ module Deeprails
             )
           end
           def to_hash
+          end
+
+          # Status of the improvement tool used to improve the event. `improvement_required`
+          # indicates that the evaluation is complete and the improvement action is needed
+          # but is not taking place. `improved` and `improvement_failed` indicate when the
+          # improvement action concludes, successfully and unsuccessfully, respectively.
+          # `no_improvement_required` means that the first evaluation passed all its
+          # metrics!
+          module ImprovementToolStatus
+            extend Deeprails::Internal::Type::Enum
+
+            TaggedSymbol =
+              T.type_alias do
+                T.all(
+                  Symbol,
+                  Deeprails::DefendResponse::Event::Evaluation::ImprovementToolStatus
+                )
+              end
+            OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+            IMPROVED =
+              T.let(
+                :improved,
+                Deeprails::DefendResponse::Event::Evaluation::ImprovementToolStatus::TaggedSymbol
+              )
+            IMPROVEMENT_FAILED =
+              T.let(
+                :improvement_failed,
+                Deeprails::DefendResponse::Event::Evaluation::ImprovementToolStatus::TaggedSymbol
+              )
+            NO_IMPROVEMENT_REQUIRED =
+              T.let(
+                :no_improvement_required,
+                Deeprails::DefendResponse::Event::Evaluation::ImprovementToolStatus::TaggedSymbol
+              )
+            IMPROVEMENT_REQUIRED =
+              T.let(
+                :improvement_required,
+                Deeprails::DefendResponse::Event::Evaluation::ImprovementToolStatus::TaggedSymbol
+              )
+
+            sig do
+              override.returns(
+                T::Array[
+                  Deeprails::DefendResponse::Event::Evaluation::ImprovementToolStatus::TaggedSymbol
+                ]
+              )
+            end
+            def self.values
+            end
           end
         end
 
@@ -568,6 +706,41 @@ module Deeprails
           def self.values
           end
         end
+
+        # Status of the event.
+        module Status
+          extend Deeprails::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(Symbol, Deeprails::DefendResponse::Event::Status)
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          COMPLETED =
+            T.let(
+              :completed,
+              Deeprails::DefendResponse::Event::Status::TaggedSymbol
+            )
+          FAILED =
+            T.let(
+              :failed,
+              Deeprails::DefendResponse::Event::Status::TaggedSymbol
+            )
+          IN_PROGRESS =
+            T.let(
+              :in_progress,
+              Deeprails::DefendResponse::Event::Status::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[Deeprails::DefendResponse::Event::Status::TaggedSymbol]
+            )
+          end
+          def self.values
+          end
+        end
       end
 
       class File < Deeprails::Internal::Type::BaseModel
@@ -594,19 +767,45 @@ module Deeprails
         sig { params(file_size: Integer).void }
         attr_writer :file_size
 
+        sig { returns(T.nilable(String)) }
+        attr_reader :presigned_url
+
+        sig { params(presigned_url: String).void }
+        attr_writer :presigned_url
+
+        sig { returns(T.nilable(Time)) }
+        attr_reader :presigned_url_expires_at
+
+        sig { params(presigned_url_expires_at: Time).void }
+        attr_writer :presigned_url_expires_at
+
         sig do
           params(
             file_id: String,
             file_name: String,
-            file_size: Integer
+            file_size: Integer,
+            presigned_url: String,
+            presigned_url_expires_at: Time
           ).returns(T.attached_class)
         end
-        def self.new(file_id: nil, file_name: nil, file_size: nil)
+        def self.new(
+          file_id: nil,
+          file_name: nil,
+          file_size: nil,
+          presigned_url: nil,
+          presigned_url_expires_at: nil
+        )
         end
 
         sig do
           override.returns(
-            { file_id: String, file_name: String, file_size: Integer }
+            {
+              file_id: String,
+              file_name: String,
+              file_size: Integer,
+              presigned_url: String,
+              presigned_url_expires_at: Time
+            }
           )
         end
         def to_hash

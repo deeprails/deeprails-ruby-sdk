@@ -38,6 +38,7 @@ class Deeprails::Test::Resources::DefendTest < Deeprails::Test::ResourceTest
 
     assert_pattern do
       response => {
+        analysis_of_failures: ^(Deeprails::Internal::Type::ArrayOf[String]),
         evaluation_history: ^(Deeprails::Internal::Type::ArrayOf[Deeprails::WorkflowEventDetailResponse::EvaluationHistory]),
         evaluation_result: ^(Deeprails::Internal::Type::HashOf[Deeprails::Internal::Type::Unknown]),
         event_id: String,
@@ -45,13 +46,15 @@ class Deeprails::Test::Resources::DefendTest < Deeprails::Test::ResourceTest
         improved_model_output: String,
         improvement_action: Deeprails::WorkflowEventDetailResponse::ImprovementAction,
         improvement_tool_status: Deeprails::WorkflowEventDetailResponse::ImprovementToolStatus | nil,
+        key_improvements: ^(Deeprails::Internal::Type::ArrayOf[Deeprails::Internal::Type::Unknown]),
         status: Deeprails::WorkflowEventDetailResponse::Status,
         threshold_type: Deeprails::WorkflowEventDetailResponse::ThresholdType,
         workflow_id: String,
         automatic_hallucination_tolerance_levels: ^(Deeprails::Internal::Type::HashOf[enum: Deeprails::WorkflowEventDetailResponse::AutomaticHallucinationToleranceLevel]) | nil,
         capabilities: ^(Deeprails::Internal::Type::ArrayOf[Deeprails::WorkflowEventDetailResponse::Capability]) | nil,
         custom_hallucination_threshold_values: ^(Deeprails::Internal::Type::HashOf[Float]) | nil,
-        files: ^(Deeprails::Internal::Type::ArrayOf[Deeprails::WorkflowEventDetailResponse::File]) | nil
+        files: ^(Deeprails::Internal::Type::ArrayOf[Deeprails::WorkflowEventDetailResponse::File]) | nil,
+        max_improvement_attempts: Integer | nil
       }
     end
   end
@@ -103,6 +106,7 @@ class Deeprails::Test::Resources::DefendTest < Deeprails::Test::ResourceTest
 
     assert_pattern do
       response => {
+        billing_request_id: String,
         created_at: Time,
         event_id: String,
         status: Deeprails::WorkflowEventResponse::Status,
@@ -124,7 +128,8 @@ class Deeprails::Test::Resources::DefendTest < Deeprails::Test::ResourceTest
       response => {
         modified_at: Time,
         status: Deeprails::DefendUpdateResponse::Status,
-        workflow_id: String
+        workflow_id: String,
+        name: String | nil
       }
     end
   end

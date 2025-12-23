@@ -21,11 +21,19 @@ module Deeprails
       sig { returns(String) }
       attr_accessor :workflow_id
 
+      # The name of the workflow.
+      sig { returns(T.nilable(String)) }
+      attr_reader :name
+
+      sig { params(name: String).void }
+      attr_writer :name
+
       sig do
         params(
           modified_at: Time,
           status: Deeprails::DefendUpdateResponse::Status::OrSymbol,
-          workflow_id: String
+          workflow_id: String,
+          name: String
         ).returns(T.attached_class)
       end
       def self.new(
@@ -35,7 +43,9 @@ module Deeprails
         # workflows will not accept events.
         status:,
         # A unique workflow ID.
-        workflow_id:
+        workflow_id:,
+        # The name of the workflow.
+        name: nil
       )
       end
 
@@ -44,7 +54,8 @@ module Deeprails
           {
             modified_at: Time,
             status: Deeprails::DefendUpdateResponse::Status::TaggedSymbol,
-            workflow_id: String
+            workflow_id: String,
+            name: String
           }
         )
       end
