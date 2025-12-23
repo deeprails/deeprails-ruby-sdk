@@ -23,7 +23,13 @@ module Deeprails
       #   @return [String]
       required :workflow_id, String
 
-      # @!method initialize(modified_at:, status:, workflow_id:)
+      # @!attribute name
+      #   The name of the workflow.
+      #
+      #   @return [String, nil]
+      optional :name, String
+
+      # @!method initialize(modified_at:, status:, workflow_id:, name: nil)
       #   Some parameter documentations has been truncated, see
       #   {Deeprails::Models::DefendUpdateResponse} for more details.
       #
@@ -32,6 +38,8 @@ module Deeprails
       #   @param status [Symbol, Deeprails::Models::DefendUpdateResponse::Status] Status of the selected workflow. May be `inactive` or `active`. Inactive workf
       #
       #   @param workflow_id [String] A unique workflow ID.
+      #
+      #   @param name [String] The name of the workflow.
 
       # Status of the selected workflow. May be `inactive` or `active`. Inactive
       # workflows will not accept events.

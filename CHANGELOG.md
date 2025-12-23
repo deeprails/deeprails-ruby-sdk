@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.22.0 (2025-12-23)
+
+Full Changelog: [v0.21.0...v0.22.0](https://github.com/deeprails/deeprails-ruby-sdk/compare/v0.21.0...v0.22.0)
+
+### Features
+
+* **api:** add key improvements and analysis of failures ([8cc372b](https://github.com/deeprails/deeprails-ruby-sdk/commit/8cc372b0f1cf6b6c7d5f55b6f90d3a27ac74b76c))
+
+
+### Bug Fixes
+
+* calling `break` out of streams should be instantaneous ([5f7ac38](https://github.com/deeprails/deeprails-ruby-sdk/commit/5f7ac38fa7016361c356072867dc3a025b3c3a92))
+* issue where json.parse errors when receiving HTTP 204 with nobody ([f7b4a02](https://github.com/deeprails/deeprails-ruby-sdk/commit/f7b4a026be2ddc89a52eedc4643c7e2e51f76e5d))
+
 ## 0.21.0 (2025-12-15)
 
 Full Changelog: [v0.20.0...v0.21.0](https://github.com/deeprails/deeprails-ruby-sdk/compare/v0.20.0...v0.21.0)

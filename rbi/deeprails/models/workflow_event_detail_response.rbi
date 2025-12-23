@@ -11,6 +11,9 @@ module Deeprails
           )
         end
 
+      sig { returns(T::Array[String]) }
+      attr_accessor :analysis_of_failures
+
       # History of evaluations for the event.
       sig do
         returns(
@@ -59,6 +62,9 @@ module Deeprails
         )
       end
       attr_accessor :improvement_tool_status
+
+      sig { returns(T::Array[T.anything]) }
+      attr_accessor :key_improvements
 
       # Status of the event.
       sig do
@@ -150,8 +156,17 @@ module Deeprails
       end
       attr_writer :files
 
+      # The maximum number of improvement attempts to be applied to one event before it
+      # is considered failed.
+      sig { returns(T.nilable(Integer)) }
+      attr_reader :max_improvement_attempts
+
+      sig { params(max_improvement_attempts: Integer).void }
+      attr_writer :max_improvement_attempts
+
       sig do
         params(
+          analysis_of_failures: T::Array[String],
           evaluation_history:
             T::Array[
               Deeprails::WorkflowEventDetailResponse::EvaluationHistory::OrHash
@@ -166,6 +181,7 @@ module Deeprails
             T.nilable(
               Deeprails::WorkflowEventDetailResponse::ImprovementToolStatus::OrSymbol
             ),
+          key_improvements: T::Array[T.anything],
           status: Deeprails::WorkflowEventDetailResponse::Status::OrSymbol,
           threshold_type:
             Deeprails::WorkflowEventDetailResponse::ThresholdType::OrSymbol,
@@ -180,10 +196,12 @@ module Deeprails
               Deeprails::WorkflowEventDetailResponse::Capability::OrHash
             ],
           custom_hallucination_threshold_values: T::Hash[Symbol, Float],
-          files: T::Array[Deeprails::WorkflowEventDetailResponse::File::OrHash]
+          files: T::Array[Deeprails::WorkflowEventDetailResponse::File::OrHash],
+          max_improvement_attempts: Integer
         ).returns(T.attached_class)
       end
       def self.new(
+        analysis_of_failures:,
         # History of evaluations for the event.
         evaluation_history:,
         # Evaluation result consisting of average scores and rationales for each of the
@@ -205,6 +223,7 @@ module Deeprails
         # `no_improvement_required` means that the first evaluation passed all its
         # metrics!
         improvement_tool_status:,
+        key_improvements:,
         # Status of the event.
         status:,
         # Type of thresholds used to evaluate the event.
@@ -222,13 +241,17 @@ module Deeprails
         custom_hallucination_threshold_values: nil,
         # List of files available to the event, if any. Will only be present if
         # `file_search` is enabled.
-        files: nil
+        files: nil,
+        # The maximum number of improvement attempts to be applied to one event before it
+        # is considered failed.
+        max_improvement_attempts: nil
       )
       end
 
       sig do
         override.returns(
           {
+            analysis_of_failures: T::Array[String],
             evaluation_history:
               T::Array[
                 Deeprails::WorkflowEventDetailResponse::EvaluationHistory
@@ -243,6 +266,7 @@ module Deeprails
               T.nilable(
                 Deeprails::WorkflowEventDetailResponse::ImprovementToolStatus::TaggedSymbol
               ),
+            key_improvements: T::Array[T.anything],
             status:
               Deeprails::WorkflowEventDetailResponse::Status::TaggedSymbol,
             threshold_type:
@@ -256,7 +280,8 @@ module Deeprails
             capabilities:
               T::Array[Deeprails::WorkflowEventDetailResponse::Capability],
             custom_hallucination_threshold_values: T::Hash[Symbol, Float],
-            files: T::Array[Deeprails::WorkflowEventDetailResponse::File]
+            files: T::Array[Deeprails::WorkflowEventDetailResponse::File],
+            max_improvement_attempts: Integer
           }
         )
       end
@@ -271,6 +296,12 @@ module Deeprails
               Deeprails::Internal::AnyHash
             )
           end
+
+        sig { returns(T.nilable(String)) }
+        attr_reader :analysis_of_failures
+
+        sig { params(analysis_of_failures: String).void }
+        attr_writer :analysis_of_failures
 
         sig { returns(T.nilable(String)) }
         attr_reader :attempt
@@ -314,6 +345,29 @@ module Deeprails
         sig { params(guardrail_metrics: T::Array[String]).void }
         attr_writer :guardrail_metrics
 
+        sig do
+          returns(
+            T.nilable(
+              Deeprails::WorkflowEventDetailResponse::EvaluationHistory::ImprovementToolStatus::TaggedSymbol
+            )
+          )
+        end
+        attr_reader :improvement_tool_status
+
+        sig do
+          params(
+            improvement_tool_status:
+              Deeprails::WorkflowEventDetailResponse::EvaluationHistory::ImprovementToolStatus::OrSymbol
+          ).void
+        end
+        attr_writer :improvement_tool_status
+
+        sig { returns(T.nilable(T::Array[String])) }
+        attr_reader :key_improvements
+
+        sig { params(key_improvements: T::Array[String]).void }
+        attr_writer :key_improvements
+
         sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
         attr_reader :model_input
 
@@ -325,12 +379,6 @@ module Deeprails
 
         sig { params(model_output: String).void }
         attr_writer :model_output
-
-        sig { returns(T.nilable(Time)) }
-        attr_reader :modified_at
-
-        sig { params(modified_at: Time).void }
-        attr_writer :modified_at
 
         sig { returns(T.nilable(String)) }
         attr_reader :nametag
@@ -352,6 +400,7 @@ module Deeprails
 
         sig do
           params(
+            analysis_of_failures: String,
             attempt: String,
             created_at: Time,
             error_message: String,
@@ -359,15 +408,18 @@ module Deeprails
             evaluation_status: String,
             evaluation_total_cost: Float,
             guardrail_metrics: T::Array[String],
+            improvement_tool_status:
+              Deeprails::WorkflowEventDetailResponse::EvaluationHistory::ImprovementToolStatus::OrSymbol,
+            key_improvements: T::Array[String],
             model_input: T::Hash[Symbol, T.anything],
             model_output: String,
-            modified_at: Time,
             nametag: String,
             progress: Integer,
             run_mode: String
           ).returns(T.attached_class)
         end
         def self.new(
+          analysis_of_failures: nil,
           attempt: nil,
           created_at: nil,
           error_message: nil,
@@ -375,9 +427,10 @@ module Deeprails
           evaluation_status: nil,
           evaluation_total_cost: nil,
           guardrail_metrics: nil,
+          improvement_tool_status: nil,
+          key_improvements: nil,
           model_input: nil,
           model_output: nil,
-          modified_at: nil,
           nametag: nil,
           progress: nil,
           run_mode: nil
@@ -387,6 +440,7 @@ module Deeprails
         sig do
           override.returns(
             {
+              analysis_of_failures: String,
               attempt: String,
               created_at: Time,
               error_message: String,
@@ -394,9 +448,11 @@ module Deeprails
               evaluation_status: String,
               evaluation_total_cost: Float,
               guardrail_metrics: T::Array[String],
+              improvement_tool_status:
+                Deeprails::WorkflowEventDetailResponse::EvaluationHistory::ImprovementToolStatus::TaggedSymbol,
+              key_improvements: T::Array[String],
               model_input: T::Hash[Symbol, T.anything],
               model_output: String,
-              modified_at: Time,
               nametag: String,
               progress: Integer,
               run_mode: String
@@ -404,6 +460,50 @@ module Deeprails
           )
         end
         def to_hash
+        end
+
+        module ImprovementToolStatus
+          extend Deeprails::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(
+                Symbol,
+                Deeprails::WorkflowEventDetailResponse::EvaluationHistory::ImprovementToolStatus
+              )
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          IMPROVED =
+            T.let(
+              :improved,
+              Deeprails::WorkflowEventDetailResponse::EvaluationHistory::ImprovementToolStatus::TaggedSymbol
+            )
+          IMPROVEMENT_FAILED =
+            T.let(
+              :improvement_failed,
+              Deeprails::WorkflowEventDetailResponse::EvaluationHistory::ImprovementToolStatus::TaggedSymbol
+            )
+          NO_IMPROVEMENT_REQUIRED =
+            T.let(
+              :no_improvement_required,
+              Deeprails::WorkflowEventDetailResponse::EvaluationHistory::ImprovementToolStatus::TaggedSymbol
+            )
+          IMPROVEMENT_REQUIRED =
+            T.let(
+              :improvement_required,
+              Deeprails::WorkflowEventDetailResponse::EvaluationHistory::ImprovementToolStatus::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                Deeprails::WorkflowEventDetailResponse::EvaluationHistory::ImprovementToolStatus::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
         end
       end
 
@@ -651,19 +751,45 @@ module Deeprails
         sig { params(file_size: Integer).void }
         attr_writer :file_size
 
+        sig { returns(T.nilable(String)) }
+        attr_reader :presigned_url
+
+        sig { params(presigned_url: String).void }
+        attr_writer :presigned_url
+
+        sig { returns(T.nilable(Time)) }
+        attr_reader :presigned_url_expires_at
+
+        sig { params(presigned_url_expires_at: Time).void }
+        attr_writer :presigned_url_expires_at
+
         sig do
           params(
             file_id: String,
             file_name: String,
-            file_size: Integer
+            file_size: Integer,
+            presigned_url: String,
+            presigned_url_expires_at: Time
           ).returns(T.attached_class)
         end
-        def self.new(file_id: nil, file_name: nil, file_size: nil)
+        def self.new(
+          file_id: nil,
+          file_name: nil,
+          file_size: nil,
+          presigned_url: nil,
+          presigned_url_expires_at: nil
+        )
         end
 
         sig do
           override.returns(
-            { file_id: String, file_name: String, file_size: Integer }
+            {
+              file_id: String,
+              file_name: String,
+              file_size: Integer,
+              presigned_url: String,
+              presigned_url_expires_at: Time
+            }
           )
         end
         def to_hash

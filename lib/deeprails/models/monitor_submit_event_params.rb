@@ -9,8 +9,8 @@ module Deeprails
 
       # @!attribute model_input
       #   A dictionary of inputs sent to the LLM to generate output. The dictionary must
-      #   contain at least a `user_prompt` field or a `system_prompt` field. For
-      #   ground_truth_adherence guardrail metric, `ground_truth` should be provided.
+      #   contain a `user_prompt` field. For ground_truth_adherence guardrail metric,
+      #   `ground_truth` should be provided.
       #
       #   @return [Deeprails::Models::MonitorSubmitEventParams::ModelInput]
       required :model_input, -> { Deeprails::MonitorSubmitEventParams::ModelInput }
@@ -64,8 +64,9 @@ module Deeprails
         #   domain-specific signals your system already knows and wants the model to
         #   condition on.
         #
-        #   @return [Array<String>, nil]
-        optional :context, Deeprails::Internal::Type::ArrayOf[String]
+        #   @return [Array<Deeprails::Models::MonitorSubmitEventParams::ModelInput::Context>, nil]
+        optional :context,
+                 -> { Deeprails::Internal::Type::ArrayOf[Deeprails::MonitorSubmitEventParams::ModelInput::Context] }
 
         # @!attribute ground_truth
         #   The ground truth for evaluating Ground Truth Adherence guardrail.
@@ -84,16 +85,35 @@ module Deeprails
         #   {Deeprails::Models::MonitorSubmitEventParams::ModelInput} for more details.
         #
         #   A dictionary of inputs sent to the LLM to generate output. The dictionary must
-        #   contain at least a `user_prompt` field or a `system_prompt` field. For
-        #   ground_truth_adherence guardrail metric, `ground_truth` should be provided.
+        #   contain a `user_prompt` field. For ground_truth_adherence guardrail metric,
+        #   `ground_truth` should be provided.
         #
         #   @param user_prompt [String] The user prompt used to generate the output.
         #
-        #   @param context [Array<String>] Any structured information that directly relates to the model’s input and expect
+        #   @param context [Array<Deeprails::Models::MonitorSubmitEventParams::ModelInput::Context>] Any structured information that directly relates to the model’s input and expect
         #
         #   @param ground_truth [String] The ground truth for evaluating Ground Truth Adherence guardrail.
         #
         #   @param system_prompt [String] The system prompt used to generate the output.
+
+        class Context < Deeprails::Internal::Type::BaseModel
+          # @!attribute content
+          #   The content of the message.
+          #
+          #   @return [String, nil]
+          optional :content, String
+
+          # @!attribute role
+          #   The role of the speaker.
+          #
+          #   @return [String, nil]
+          optional :role, String
+
+          # @!method initialize(content: nil, role: nil)
+          #   @param content [String] The content of the message.
+          #
+          #   @param role [String] The role of the speaker.
+        end
       end
 
       # Run mode for the monitor event. The run mode allows the user to optimize for

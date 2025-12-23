@@ -4,7 +4,8 @@ module Deeprails
       {
         modified_at: Time,
         status: Deeprails::Models::DefendUpdateResponse::status,
-        workflow_id: String
+        workflow_id: String,
+        name: String
       }
 
     class DefendUpdateResponse < Deeprails::Internal::Type::BaseModel
@@ -14,16 +15,22 @@ module Deeprails
 
       attr_accessor workflow_id: String
 
+      attr_reader name: String?
+
+      def name=: (String) -> String
+
       def initialize: (
         modified_at: Time,
         status: Deeprails::Models::DefendUpdateResponse::status,
-        workflow_id: String
+        workflow_id: String,
+        ?name: String
       ) -> void
 
       def to_hash: -> {
         modified_at: Time,
         status: Deeprails::Models::DefendUpdateResponse::status,
-        workflow_id: String
+        workflow_id: String,
+        name: String
       }
 
       type status = :inactive | :active
