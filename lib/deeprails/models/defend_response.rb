@@ -149,6 +149,12 @@ module Deeprails
       end
 
       class Event < Deeprails::Internal::Type::BaseModel
+        # @!attribute billing_request_id
+        #   The ID of the billing request for the event.
+        #
+        #   @return [String, nil]
+        optional :billing_request_id, String
+
         # @!attribute evaluations
         #   An array of evaluations for this event.
         #
@@ -179,9 +185,17 @@ module Deeprails
         #   @return [Symbol, Deeprails::Models::DefendResponse::Event::ImprovementToolStatus, nil]
         optional :improvement_tool_status, enum: -> { Deeprails::DefendResponse::Event::ImprovementToolStatus }
 
-        # @!method initialize(evaluations: nil, event_id: nil, improved_model_output: nil, improvement_tool_status: nil)
+        # @!attribute status
+        #   Status of the event.
+        #
+        #   @return [Symbol, Deeprails::Models::DefendResponse::Event::Status, nil]
+        optional :status, enum: -> { Deeprails::DefendResponse::Event::Status }
+
+        # @!method initialize(billing_request_id: nil, evaluations: nil, event_id: nil, improved_model_output: nil, improvement_tool_status: nil, status: nil)
         #   Some parameter documentations has been truncated, see
         #   {Deeprails::Models::DefendResponse::Event} for more details.
+        #
+        #   @param billing_request_id [String] The ID of the billing request for the event.
         #
         #   @param evaluations [Array<Deeprails::Models::DefendResponse::Event::Evaluation>] An array of evaluations for this event.
         #
@@ -190,8 +204,17 @@ module Deeprails
         #   @param improved_model_output [String] Improved model output after improvement tool was applied.
         #
         #   @param improvement_tool_status [Symbol, Deeprails::Models::DefendResponse::Event::ImprovementToolStatus] Status of the improvement tool used to improve the event. `improvement_required`
+        #
+        #   @param status [Symbol, Deeprails::Models::DefendResponse::Event::Status] Status of the event.
 
         class Evaluation < Deeprails::Internal::Type::BaseModel
+          # @!attribute analysis_of_failures
+          #   Analysis of the failures of the model_output according to the guardrail metrics
+          #   evaluated.
+          #
+          #   @return [String, nil]
+          optional :analysis_of_failures, String
+
           # @!attribute attempt
           #   The attempt number or identifier for this evaluation.
           #
@@ -234,6 +257,24 @@ module Deeprails
           #   @return [Array<String>, nil]
           optional :guardrail_metrics, Deeprails::Internal::Type::ArrayOf[String]
 
+          # @!attribute improvement_tool_status
+          #   Status of the improvement tool used to improve the event. `improvement_required`
+          #   indicates that the evaluation is complete and the improvement action is needed
+          #   but is not taking place. `improved` and `improvement_failed` indicate when the
+          #   improvement action concludes, successfully and unsuccessfully, respectively.
+          #   `no_improvement_required` means that the first evaluation passed all its
+          #   metrics!
+          #
+          #   @return [Symbol, Deeprails::Models::DefendResponse::Event::Evaluation::ImprovementToolStatus, nil]
+          optional :improvement_tool_status,
+                   enum: -> { Deeprails::DefendResponse::Event::Evaluation::ImprovementToolStatus }
+
+          # @!attribute key_improvements
+          #   A list of key improvements made to the model_output to address the failures.
+          #
+          #   @return [Array<String>, nil]
+          optional :key_improvements, Deeprails::Internal::Type::ArrayOf[String]
+
           # @!attribute model_input
           #   The model input used for the evaluation.
           #
@@ -270,7 +311,12 @@ module Deeprails
           #   @return [String, nil]
           optional :run_mode, String
 
-          # @!method initialize(attempt: nil, created_at: nil, error_message: nil, evaluation_result: nil, evaluation_status: nil, evaluation_total_cost: nil, guardrail_metrics: nil, model_input: nil, model_output: nil, modified_at: nil, nametag: nil, progress: nil, run_mode: nil)
+          # @!method initialize(analysis_of_failures: nil, attempt: nil, created_at: nil, error_message: nil, evaluation_result: nil, evaluation_status: nil, evaluation_total_cost: nil, guardrail_metrics: nil, improvement_tool_status: nil, key_improvements: nil, model_input: nil, model_output: nil, modified_at: nil, nametag: nil, progress: nil, run_mode: nil)
+          #   Some parameter documentations has been truncated, see
+          #   {Deeprails::Models::DefendResponse::Event::Evaluation} for more details.
+          #
+          #   @param analysis_of_failures [String] Analysis of the failures of the model_output according to the guardrail metrics
+          #
           #   @param attempt [String] The attempt number or identifier for this evaluation.
           #
           #   @param created_at [Time] The time the evaluation was created in UTC.
@@ -285,6 +331,10 @@ module Deeprails
           #
           #   @param guardrail_metrics [Array<String>] An array of guardrail metrics evaluated.
           #
+          #   @param improvement_tool_status [Symbol, Deeprails::Models::DefendResponse::Event::Evaluation::ImprovementToolStatus] Status of the improvement tool used to improve the event. `improvement_required`
+          #
+          #   @param key_improvements [Array<String>] A list of key improvements made to the model_output to address the failures.
+          #
           #   @param model_input [Hash{Symbol=>Object}] The model input used for the evaluation.
           #
           #   @param model_output [String] The model output that was evaluated.
@@ -296,6 +346,26 @@ module Deeprails
           #   @param progress [Integer] Evaluation progress (0-100).
           #
           #   @param run_mode [String] Run mode used for the evaluation.
+
+          # Status of the improvement tool used to improve the event. `improvement_required`
+          # indicates that the evaluation is complete and the improvement action is needed
+          # but is not taking place. `improved` and `improvement_failed` indicate when the
+          # improvement action concludes, successfully and unsuccessfully, respectively.
+          # `no_improvement_required` means that the first evaluation passed all its
+          # metrics!
+          #
+          # @see Deeprails::Models::DefendResponse::Event::Evaluation#improvement_tool_status
+          module ImprovementToolStatus
+            extend Deeprails::Internal::Type::Enum
+
+            IMPROVED = :improved
+            IMPROVEMENT_FAILED = :improvement_failed
+            NO_IMPROVEMENT_REQUIRED = :no_improvement_required
+            IMPROVEMENT_REQUIRED = :improvement_required
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
         end
 
         # Status of the improvement tool used to improve the event. `improvement_required`
@@ -313,6 +383,20 @@ module Deeprails
           IMPROVEMENT_FAILED = :improvement_failed
           NO_IMPROVEMENT_REQUIRED = :no_improvement_required
           IMPROVEMENT_REQUIRED = :improvement_required
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+
+        # Status of the event.
+        #
+        # @see Deeprails::Models::DefendResponse::Event#status
+        module Status
+          extend Deeprails::Internal::Type::Enum
+
+          COMPLETED = :completed
+          FAILED = :failed
+          IN_PROGRESS = :in_progress
 
           # @!method self.values
           #   @return [Array<Symbol>]
@@ -335,10 +419,22 @@ module Deeprails
         #   @return [Integer, nil]
         optional :file_size, Integer
 
-        # @!method initialize(file_id: nil, file_name: nil, file_size: nil)
+        # @!attribute presigned_url
+        #
+        #   @return [String, nil]
+        optional :presigned_url, String
+
+        # @!attribute presigned_url_expires_at
+        #
+        #   @return [Time, nil]
+        optional :presigned_url_expires_at, Time
+
+        # @!method initialize(file_id: nil, file_name: nil, file_size: nil, presigned_url: nil, presigned_url_expires_at: nil)
         #   @param file_id [String]
         #   @param file_name [String]
         #   @param file_size [Integer]
+        #   @param presigned_url [String]
+        #   @param presigned_url_expires_at [Time]
       end
 
       # Status of the selected workflow. May be `inactive` or `active`. Inactive

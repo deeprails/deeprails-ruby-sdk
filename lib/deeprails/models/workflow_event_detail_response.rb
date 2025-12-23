@@ -4,6 +4,11 @@ module Deeprails
   module Models
     # @see Deeprails::Resources::Defend#retrieve_event
     class WorkflowEventDetailResponse < Deeprails::Internal::Type::BaseModel
+      # @!attribute analysis_of_failures
+      #
+      #   @return [Array<String>]
+      required :analysis_of_failures, Deeprails::Internal::Type::ArrayOf[String]
+
       # @!attribute evaluation_history
       #   History of evaluations for the event.
       #
@@ -56,6 +61,11 @@ module Deeprails
                enum: -> { Deeprails::WorkflowEventDetailResponse::ImprovementToolStatus },
                nil?: true
 
+      # @!attribute key_improvements
+      #
+      #   @return [Array<Object>]
+      required :key_improvements, Deeprails::Internal::Type::ArrayOf[Deeprails::Internal::Type::Unknown]
+
       # @!attribute status
       #   Status of the event.
       #
@@ -104,9 +114,18 @@ module Deeprails
       #   @return [Array<Deeprails::Models::WorkflowEventDetailResponse::File>, nil]
       optional :files, -> { Deeprails::Internal::Type::ArrayOf[Deeprails::WorkflowEventDetailResponse::File] }
 
-      # @!method initialize(evaluation_history:, evaluation_result:, event_id:, filtered:, improved_model_output:, improvement_action:, improvement_tool_status:, status:, threshold_type:, workflow_id:, automatic_hallucination_tolerance_levels: nil, capabilities: nil, custom_hallucination_threshold_values: nil, files: nil)
+      # @!attribute max_improvement_attempts
+      #   The maximum number of improvement attempts to be applied to one event before it
+      #   is considered failed.
+      #
+      #   @return [Integer, nil]
+      optional :max_improvement_attempts, Integer
+
+      # @!method initialize(analysis_of_failures:, evaluation_history:, evaluation_result:, event_id:, filtered:, improved_model_output:, improvement_action:, improvement_tool_status:, key_improvements:, status:, threshold_type:, workflow_id:, automatic_hallucination_tolerance_levels: nil, capabilities: nil, custom_hallucination_threshold_values: nil, files: nil, max_improvement_attempts: nil)
       #   Some parameter documentations has been truncated, see
       #   {Deeprails::Models::WorkflowEventDetailResponse} for more details.
+      #
+      #   @param analysis_of_failures [Array<String>]
       #
       #   @param evaluation_history [Array<Deeprails::Models::WorkflowEventDetailResponse::EvaluationHistory>] History of evaluations for the event.
       #
@@ -122,6 +141,8 @@ module Deeprails
       #
       #   @param improvement_tool_status [Symbol, Deeprails::Models::WorkflowEventDetailResponse::ImprovementToolStatus, nil] Status of the improvement tool used to improve the event. `improvement_required`
       #
+      #   @param key_improvements [Array<Object>]
+      #
       #   @param status [Symbol, Deeprails::Models::WorkflowEventDetailResponse::Status] Status of the event.
       #
       #   @param threshold_type [Symbol, Deeprails::Models::WorkflowEventDetailResponse::ThresholdType] Type of thresholds used to evaluate the event.
@@ -135,8 +156,15 @@ module Deeprails
       #   @param custom_hallucination_threshold_values [Hash{Symbol=>Float}] Mapping of guardrail metric names to threshold values. Values are floating point
       #
       #   @param files [Array<Deeprails::Models::WorkflowEventDetailResponse::File>] List of files available to the event, if any. Will only be present if `file_sear
+      #
+      #   @param max_improvement_attempts [Integer] The maximum number of improvement attempts to be applied to one event before it
 
       class EvaluationHistory < Deeprails::Internal::Type::BaseModel
+        # @!attribute analysis_of_failures
+        #
+        #   @return [String, nil]
+        optional :analysis_of_failures, String
+
         # @!attribute attempt
         #
         #   @return [String, nil]
@@ -172,6 +200,17 @@ module Deeprails
         #   @return [Array<String>, nil]
         optional :guardrail_metrics, Deeprails::Internal::Type::ArrayOf[String]
 
+        # @!attribute improvement_tool_status
+        #
+        #   @return [Symbol, Deeprails::Models::WorkflowEventDetailResponse::EvaluationHistory::ImprovementToolStatus, nil]
+        optional :improvement_tool_status,
+                 enum: -> { Deeprails::WorkflowEventDetailResponse::EvaluationHistory::ImprovementToolStatus }
+
+        # @!attribute key_improvements
+        #
+        #   @return [Array<String>, nil]
+        optional :key_improvements, Deeprails::Internal::Type::ArrayOf[String]
+
         # @!attribute model_input
         #
         #   @return [Hash{Symbol=>Object}, nil]
@@ -181,11 +220,6 @@ module Deeprails
         #
         #   @return [String, nil]
         optional :model_output, String
-
-        # @!attribute modified_at
-        #
-        #   @return [Time, nil]
-        optional :modified_at, Time
 
         # @!attribute nametag
         #
@@ -202,7 +236,8 @@ module Deeprails
         #   @return [String, nil]
         optional :run_mode, String
 
-        # @!method initialize(attempt: nil, created_at: nil, error_message: nil, evaluation_result: nil, evaluation_status: nil, evaluation_total_cost: nil, guardrail_metrics: nil, model_input: nil, model_output: nil, modified_at: nil, nametag: nil, progress: nil, run_mode: nil)
+        # @!method initialize(analysis_of_failures: nil, attempt: nil, created_at: nil, error_message: nil, evaluation_result: nil, evaluation_status: nil, evaluation_total_cost: nil, guardrail_metrics: nil, improvement_tool_status: nil, key_improvements: nil, model_input: nil, model_output: nil, nametag: nil, progress: nil, run_mode: nil)
+        #   @param analysis_of_failures [String]
         #   @param attempt [String]
         #   @param created_at [Time]
         #   @param error_message [String]
@@ -210,12 +245,26 @@ module Deeprails
         #   @param evaluation_status [String]
         #   @param evaluation_total_cost [Float]
         #   @param guardrail_metrics [Array<String>]
+        #   @param improvement_tool_status [Symbol, Deeprails::Models::WorkflowEventDetailResponse::EvaluationHistory::ImprovementToolStatus]
+        #   @param key_improvements [Array<String>]
         #   @param model_input [Hash{Symbol=>Object}]
         #   @param model_output [String]
-        #   @param modified_at [Time]
         #   @param nametag [String]
         #   @param progress [Integer]
         #   @param run_mode [String]
+
+        # @see Deeprails::Models::WorkflowEventDetailResponse::EvaluationHistory#improvement_tool_status
+        module ImprovementToolStatus
+          extend Deeprails::Internal::Type::Enum
+
+          IMPROVED = :improved
+          IMPROVEMENT_FAILED = :improvement_failed
+          NO_IMPROVEMENT_REQUIRED = :no_improvement_required
+          IMPROVEMENT_REQUIRED = :improvement_required
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
       end
 
       # Type of improvement action used to improve the event.
@@ -315,10 +364,22 @@ module Deeprails
         #   @return [Integer, nil]
         optional :file_size, Integer
 
-        # @!method initialize(file_id: nil, file_name: nil, file_size: nil)
+        # @!attribute presigned_url
+        #
+        #   @return [String, nil]
+        optional :presigned_url, String
+
+        # @!attribute presigned_url_expires_at
+        #
+        #   @return [Time, nil]
+        optional :presigned_url_expires_at, Time
+
+        # @!method initialize(file_id: nil, file_name: nil, file_size: nil, presigned_url: nil, presigned_url_expires_at: nil)
         #   @param file_id [String]
         #   @param file_name [String]
         #   @param file_size [Integer]
+        #   @param presigned_url [String]
+        #   @param presigned_url_expires_at [Time]
       end
     end
   end
