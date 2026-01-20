@@ -1,0 +1,9 @@
+module Deeprails
+  module Internal
+    class Stream[Elem]
+      include Deeprails::Internal::Type::BaseStream[Deeprails::Internal::Util::server_sent_event, Elem]
+
+      private def iterator: -> Enumerable[Elem]
+    end
+  end
+end

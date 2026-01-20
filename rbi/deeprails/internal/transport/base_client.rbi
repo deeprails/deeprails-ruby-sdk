@@ -49,7 +49,15 @@ module Deeprails
                     ]
                   ]
                 ),
-              stream: T.nilable(T::Class[T.anything]),
+              stream:
+                T.nilable(
+                  T::Class[
+                    Deeprails::Internal::Type::BaseStream[
+                      T.anything,
+                      Deeprails::Internal::Type::BaseModel
+                    ]
+                  ]
+                ),
               model: T.nilable(Deeprails::Internal::Type::Converter::Input),
               options: T.nilable(Deeprails::RequestOptions::OrHash)
             }
@@ -269,7 +277,15 @@ module Deeprails
                   ]
                 ]
               ),
-            stream: T.nilable(T::Class[T.anything]),
+            stream:
+              T.nilable(
+                T::Class[
+                  Deeprails::Internal::Type::BaseStream[
+                    T.anything,
+                    Deeprails::Internal::Type::BaseModel
+                  ]
+                ]
+              ),
             model: T.nilable(Deeprails::Internal::Type::Converter::Input),
             options: T.nilable(Deeprails::RequestOptions::OrHash)
           ).returns(T.anything)

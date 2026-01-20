@@ -9,6 +9,8 @@ module Deeprails
 
   class DefendRetrieveWorkflowParams = Deeprails::Models::DefendRetrieveWorkflowParams
 
+  class DefendSubmitAndStreamEventParams = Deeprails::Models::DefendSubmitAndStreamEventParams
+
   class DefendSubmitEventParams = Deeprails::Models::DefendSubmitEventParams
 
   class DefendUpdateResponse = Deeprails::Models::DefendUpdateResponse

@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.23.0 (2026-01-20)
+
+Full Changelog: [v0.22.0...v0.23.0](https://github.com/deeprails/deeprails-ruby-sdk/compare/v0.22.0...v0.23.0)
+
+### Features
+
+* **api:** manual updates ([dbfbe16](https://github.com/deeprails/deeprails-ruby-sdk/commit/dbfbe16ac8b8bef8066b3a1b12ffc1d1b6e793d3))
+
+
+### Chores
+
+* **internal:** codegen related update ([3cae355](https://github.com/deeprails/deeprails-ruby-sdk/commit/3cae35599062af95a670c3bb23ab52ee5ccb5fe6))
+* **internal:** codegen related update ([cbd8b12](https://github.com/deeprails/deeprails-ruby-sdk/commit/cbd8b12f0ddfd8f0ec1e15930095ede2a5bc1fe1))
+* **internal:** update `actions/checkout` version ([b24ab56](https://github.com/deeprails/deeprails-ruby-sdk/commit/b24ab5603ff3fc351e833ecc41522c6a4065908e))
+
 ## 0.22.0 (2025-12-23)
 
 Full Changelog: [v0.21.0...v0.22.0](https://github.com/deeprails/deeprails-ruby-sdk/compare/v0.21.0...v0.22.0)
