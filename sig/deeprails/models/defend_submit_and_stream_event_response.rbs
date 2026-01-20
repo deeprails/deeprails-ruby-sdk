@@ -1,0 +1,5 @@
+module Deeprails
+  module Models
+    class DefendSubmitAndStreamEventResponse = String
+  end
+end
