@@ -1,0 +1,74 @@
+module Deeprails
+  module Models
+    type defend_submit_and_stream_event_params =
+      {
+        model_input: ::Hash[Symbol, top],
+        model_output: String,
+        model_used: String,
+        run_mode: Deeprails::Models::DefendSubmitAndStreamEventParams::run_mode,
+        stream: bool,
+        nametag: String
+      }
+      & Deeprails::Internal::Type::request_parameters
+
+    class DefendSubmitAndStreamEventParams < Deeprails::Internal::Type::BaseModel
+      extend Deeprails::Internal::Type::RequestParameters::Converter
+      include Deeprails::Internal::Type::RequestParameters
+
+      attr_accessor model_input: ::Hash[Symbol, top]
+
+      attr_accessor model_output: String
+
+      attr_accessor model_used: String
+
+      attr_accessor run_mode: Deeprails::Models::DefendSubmitAndStreamEventParams::run_mode
+
+      attr_reader stream: bool?
+
+      def stream=: (bool) -> bool
+
+      attr_reader nametag: String?
+
+      def nametag=: (String) -> String
+
+      def initialize: (
+        model_input: ::Hash[Symbol, top],
+        model_output: String,
+        model_used: String,
+        run_mode: Deeprails::Models::DefendSubmitAndStreamEventParams::run_mode,
+        ?stream: bool,
+        ?nametag: String,
+        ?request_options: Deeprails::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        model_input: ::Hash[Symbol, top],
+        model_output: String,
+        model_used: String,
+        run_mode: Deeprails::Models::DefendSubmitAndStreamEventParams::run_mode,
+        stream: bool,
+        nametag: String,
+        request_options: Deeprails::RequestOptions
+      }
+
+      type run_mode =
+        :fast
+        | :precision
+        | :precision_codex
+        | :precision_max
+        | :precision_max_codex
+
+      module RunMode
+        extend Deeprails::Internal::Type::Enum
+
+        FAST: :fast
+        PRECISION: :precision
+        PRECISION_CODEX: :precision_codex
+        PRECISION_MAX: :precision_max
+        PRECISION_MAX_CODEX: :precision_max_codex
+
+        def self?.values: -> ::Array[Deeprails::Models::DefendSubmitAndStreamEventParams::run_mode]
+      end
+    end
+  end
+end

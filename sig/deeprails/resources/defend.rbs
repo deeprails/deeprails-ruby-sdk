@@ -27,6 +27,17 @@ module Deeprails
         ?request_options: Deeprails::request_opts
       ) -> Deeprails::DefendResponse
 
+      def submit_and_stream_event_streaming: (
+        String workflow_id,
+        model_input: ::Hash[Symbol, top],
+        model_output: String,
+        model_used: String,
+        run_mode: Deeprails::Models::DefendSubmitAndStreamEventParams::run_mode,
+        ?stream: bool,
+        ?nametag: String,
+        ?request_options: Deeprails::request_opts
+      ) -> Deeprails::Internal::Stream[String]
+
       def submit_event: (
         String workflow_id,
         model_input: Deeprails::DefendSubmitEventParams::ModelInput,
