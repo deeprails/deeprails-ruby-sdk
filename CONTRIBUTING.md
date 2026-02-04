@@ -43,13 +43,13 @@ If you’d like to use the repository from source, you can either install from g
 To install via git in your `Gemfile`:
 
 ```ruby
-gem "deeprails", git: "https://www.github.com/deeprails/deeprails-ruby-sdk"
+gem "deeprails", git: "https://github.com/deeprails/deeprails-ruby-sdk"
 ```
 
 Alternatively, reference local copy of the repo:
 
 ```bash
-$ git clone -- 'https://www.github.com/deeprails/deeprails-ruby-sdk' '<path-to-repo>'
+$ git clone -- 'https://github.com/deeprails/deeprails-ruby-sdk' '<path-to-repo>'
 ```
 
 ```ruby
