@@ -4,7 +4,7 @@ require_relative "../test_helper"
 
 class Deeprails::Test::Resources::FilesTest < Deeprails::Test::ResourceTest
   def test_upload_required_params
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @deep_rails.files.upload(files: ["string"])
 
