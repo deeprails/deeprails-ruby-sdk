@@ -4,7 +4,7 @@ require_relative "../test_helper"
 
 class Deeprails::Test::Resources::DefendTest < Deeprails::Test::ResourceTest
   def test_create_workflow_required_params
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response =
       @deep_rails.defend.create_workflow(
@@ -28,7 +28,7 @@ class Deeprails::Test::Resources::DefendTest < Deeprails::Test::ResourceTest
   end
 
   def test_retrieve_event_required_params
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @deep_rails.defend.retrieve_event("event_id", workflow_id: "workflow_id")
 
@@ -60,7 +60,7 @@ class Deeprails::Test::Resources::DefendTest < Deeprails::Test::ResourceTest
   end
 
   def test_retrieve_workflow
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @deep_rails.defend.retrieve_workflow("workflow_id")
 
@@ -89,7 +89,7 @@ class Deeprails::Test::Resources::DefendTest < Deeprails::Test::ResourceTest
   end
 
   def test_submit_event_required_params
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response =
       @deep_rails.defend.submit_event(
@@ -116,7 +116,7 @@ class Deeprails::Test::Resources::DefendTest < Deeprails::Test::ResourceTest
   end
 
   def test_update_workflow
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @deep_rails.defend.update_workflow("workflow_id")
 
