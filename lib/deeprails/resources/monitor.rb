@@ -58,10 +58,11 @@ module Deeprails
       # @see Deeprails::Models::MonitorRetrieveParams
       def retrieve(monitor_id, params = {})
         parsed, options = Deeprails::MonitorRetrieveParams.dump_request(params)
+        query = Deeprails::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: ["monitor/%1$s", monitor_id],
-          query: parsed,
+          query: query,
           model: Deeprails::MonitorDetailResponse,
           options: options
         )

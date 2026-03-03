@@ -92,10 +92,11 @@ module Deeprails
       # @see Deeprails::Models::DefendRetrieveWorkflowParams
       def retrieve_workflow(workflow_id, params = {})
         parsed, options = Deeprails::DefendRetrieveWorkflowParams.dump_request(params)
+        query = Deeprails::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: ["defend/%1$s", workflow_id],
-          query: parsed,
+          query: query,
           model: Deeprails::DefendResponse,
           options: options
         )
@@ -129,12 +130,13 @@ module Deeprails
       #
       # @see Deeprails::Models::DefendSubmitAndStreamEventParams
       def submit_and_stream_event_streaming(workflow_id, params)
-        parsed, options = Deeprails::DefendSubmitAndStreamEventParams.dump_request(params)
         query_params = [:stream]
+        parsed, options = Deeprails::DefendSubmitAndStreamEventParams.dump_request(params)
+        query = Deeprails::Internal::Util.encode_query_params(parsed.slice(*query_params))
         @client.request(
           method: :post,
           path: ["defend/%1$s/events?stream=true", workflow_id],
-          query: parsed.slice(*query_params),
+          query: query,
           headers: {"accept" => "text/event-stream"},
           body: parsed.except(*query_params),
           stream: Deeprails::Internal::Stream,
