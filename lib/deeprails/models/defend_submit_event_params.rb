@@ -7,6 +7,11 @@ module Deeprails
       extend Deeprails::Internal::Type::RequestParameters::Converter
       include Deeprails::Internal::Type::RequestParameters
 
+      # @!attribute workflow_id
+      #
+      #   @return [String]
+      required :workflow_id, String
+
       # @!attribute model_input
       #   A dictionary of inputs sent to the LLM to generate output. The dictionary must
       #   contain a `user_prompt` field. For the ground_truth_adherence guardrail metric,
@@ -42,9 +47,11 @@ module Deeprails
       #   @return [String, nil]
       optional :nametag, String
 
-      # @!method initialize(model_input:, model_output:, model_used:, run_mode:, nametag: nil, request_options: {})
+      # @!method initialize(workflow_id:, model_input:, model_output:, model_used:, run_mode:, nametag: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Deeprails::Models::DefendSubmitEventParams} for more details.
+      #
+      #   @param workflow_id [String]
       #
       #   @param model_input [Deeprails::Models::DefendSubmitEventParams::ModelInput] A dictionary of inputs sent to the LLM to generate output. The dictionary must c
       #

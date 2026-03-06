@@ -14,6 +14,9 @@ module Deeprails
           )
         end
 
+      sig { returns(String) }
+      attr_accessor :workflow_id
+
       # Limit the number of returned events associated with this workflow. Defaults
       # to 10.
       sig { returns(T.nilable(Integer)) }
@@ -24,11 +27,13 @@ module Deeprails
 
       sig do
         params(
+          workflow_id: String,
           limit: Integer,
           request_options: Deeprails::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
       def self.new(
+        workflow_id:,
         # Limit the number of returned events associated with this workflow. Defaults
         # to 10.
         limit: nil,
@@ -38,7 +43,11 @@ module Deeprails
 
       sig do
         override.returns(
-          { limit: Integer, request_options: Deeprails::RequestOptions }
+          {
+            workflow_id: String,
+            limit: Integer,
+            request_options: Deeprails::RequestOptions
+          }
         )
       end
       def to_hash

@@ -14,6 +14,9 @@ module Deeprails
           )
         end
 
+      sig { returns(String) }
+      attr_accessor :monitor_id
+
       # A dictionary of inputs sent to the LLM to generate output. The dictionary must
       # contain a `user_prompt` field. For ground_truth_adherence guardrail metric,
       # `ground_truth` should be provided.
@@ -58,6 +61,7 @@ module Deeprails
 
       sig do
         params(
+          monitor_id: String,
           model_input: Deeprails::MonitorSubmitEventParams::ModelInput::OrHash,
           model_output: String,
           nametag: String,
@@ -66,6 +70,7 @@ module Deeprails
         ).returns(T.attached_class)
       end
       def self.new(
+        monitor_id:,
         # A dictionary of inputs sent to the LLM to generate output. The dictionary must
         # contain a `user_prompt` field. For ground_truth_adherence guardrail metric,
         # `ground_truth` should be provided.
@@ -86,6 +91,7 @@ module Deeprails
       sig do
         override.returns(
           {
+            monitor_id: String,
             model_input: Deeprails::MonitorSubmitEventParams::ModelInput,
             model_output: String,
             nametag: String,

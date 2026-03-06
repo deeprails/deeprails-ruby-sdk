@@ -14,6 +14,9 @@ module Deeprails
           )
         end
 
+      sig { returns(String) }
+      attr_accessor :workflow_id
+
       # A dictionary of inputs sent to the LLM to generate output. The dictionary must
       # contain a `user_prompt` field. For the ground_truth_adherence guardrail metric,
       # `ground_truth` should be provided.
@@ -51,6 +54,7 @@ module Deeprails
 
       sig do
         params(
+          workflow_id: String,
           model_input: Deeprails::DefendSubmitEventParams::ModelInput::OrHash,
           model_output: String,
           model_used: String,
@@ -60,6 +64,7 @@ module Deeprails
         ).returns(T.attached_class)
       end
       def self.new(
+        workflow_id:,
         # A dictionary of inputs sent to the LLM to generate output. The dictionary must
         # contain a `user_prompt` field. For the ground_truth_adherence guardrail metric,
         # `ground_truth` should be provided.
@@ -82,6 +87,7 @@ module Deeprails
       sig do
         override.returns(
           {
+            workflow_id: String,
             model_input: Deeprails::DefendSubmitEventParams::ModelInput,
             model_output: String,
             model_used: String,
