@@ -2,6 +2,7 @@ module Deeprails
   module Models
     type monitor_update_params =
       {
+        monitor_id: String,
         description: String,
         file_search: ::Array[String],
         guardrail_metrics: ::Array[Deeprails::Models::MonitorUpdateParams::guardrail_metric],
@@ -14,6 +15,8 @@ module Deeprails
     class MonitorUpdateParams < Deeprails::Internal::Type::BaseModel
       extend Deeprails::Internal::Type::RequestParameters::Converter
       include Deeprails::Internal::Type::RequestParameters
+
+      attr_accessor monitor_id: String
 
       attr_reader description: String?
 
@@ -44,6 +47,7 @@ module Deeprails
       def web_search=: (bool) -> bool
 
       def initialize: (
+        monitor_id: String,
         ?description: String,
         ?file_search: ::Array[String],
         ?guardrail_metrics: ::Array[Deeprails::Models::MonitorUpdateParams::guardrail_metric],
@@ -54,6 +58,7 @@ module Deeprails
       ) -> void
 
       def to_hash: -> {
+        monitor_id: String,
         description: String,
         file_search: ::Array[String],
         guardrail_metrics: ::Array[Deeprails::Models::MonitorUpdateParams::guardrail_metric],

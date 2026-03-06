@@ -2,6 +2,7 @@ module Deeprails
   module Models
     type defend_submit_and_stream_event_params =
       {
+        workflow_id: String,
         model_input: ::Hash[Symbol, top],
         model_output: String,
         model_used: String,
@@ -14,6 +15,8 @@ module Deeprails
     class DefendSubmitAndStreamEventParams < Deeprails::Internal::Type::BaseModel
       extend Deeprails::Internal::Type::RequestParameters::Converter
       include Deeprails::Internal::Type::RequestParameters
+
+      attr_accessor workflow_id: String
 
       attr_accessor model_input: ::Hash[Symbol, top]
 
@@ -32,6 +35,7 @@ module Deeprails
       def nametag=: (String) -> String
 
       def initialize: (
+        workflow_id: String,
         model_input: ::Hash[Symbol, top],
         model_output: String,
         model_used: String,
@@ -42,6 +46,7 @@ module Deeprails
       ) -> void
 
       def to_hash: -> {
+        workflow_id: String,
         model_input: ::Hash[Symbol, top],
         model_output: String,
         model_used: String,

@@ -7,6 +7,11 @@ module Deeprails
       extend Deeprails::Internal::Type::RequestParameters::Converter
       include Deeprails::Internal::Type::RequestParameters
 
+      # @!attribute workflow_id
+      #
+      #   @return [String]
+      required :workflow_id, String
+
       # @!attribute limit
       #   Limit the number of returned events associated with this workflow. Defaults
       #   to 10.
@@ -14,9 +19,11 @@ module Deeprails
       #   @return [Integer, nil]
       optional :limit, Integer
 
-      # @!method initialize(limit: nil, request_options: {})
+      # @!method initialize(workflow_id:, limit: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Deeprails::Models::DefendRetrieveWorkflowParams} for more details.
+      #
+      #   @param workflow_id [String]
       #
       #   @param limit [Integer] Limit the number of returned events associated with this workflow. Defaults to
       #

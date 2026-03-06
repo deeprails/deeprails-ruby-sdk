@@ -11,6 +11,9 @@ module Deeprails
           T.any(Deeprails::MonitorRetrieveParams, Deeprails::Internal::AnyHash)
         end
 
+      sig { returns(String) }
+      attr_accessor :monitor_id
+
       # Limit the number of returned evaluations associated with this monitor. Defaults
       # to 10.
       sig { returns(T.nilable(Integer)) }
@@ -21,11 +24,13 @@ module Deeprails
 
       sig do
         params(
+          monitor_id: String,
           limit: Integer,
           request_options: Deeprails::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
       def self.new(
+        monitor_id:,
         # Limit the number of returned evaluations associated with this monitor. Defaults
         # to 10.
         limit: nil,
@@ -35,7 +40,11 @@ module Deeprails
 
       sig do
         override.returns(
-          { limit: Integer, request_options: Deeprails::RequestOptions }
+          {
+            monitor_id: String,
+            limit: Integer,
+            request_options: Deeprails::RequestOptions
+          }
         )
       end
       def to_hash

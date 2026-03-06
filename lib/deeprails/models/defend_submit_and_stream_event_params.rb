@@ -7,6 +7,11 @@ module Deeprails
       extend Deeprails::Internal::Type::RequestParameters::Converter
       include Deeprails::Internal::Type::RequestParameters
 
+      # @!attribute workflow_id
+      #
+      #   @return [String]
+      required :workflow_id, String
+
       # @!attribute model_input
       #   The input provided to the model (e.g., prompt, messages).
       #
@@ -45,9 +50,11 @@ module Deeprails
       #   @return [String, nil]
       optional :nametag, String
 
-      # @!method initialize(model_input:, model_output:, model_used:, run_mode:, stream: nil, nametag: nil, request_options: {})
+      # @!method initialize(workflow_id:, model_input:, model_output:, model_used:, run_mode:, stream: nil, nametag: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Deeprails::Models::DefendSubmitAndStreamEventParams} for more details.
+      #
+      #   @param workflow_id [String]
       #
       #   @param model_input [Hash{Symbol=>Object}] The input provided to the model (e.g., prompt, messages).
       #

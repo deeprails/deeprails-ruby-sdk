@@ -7,6 +7,11 @@ module Deeprails
       extend Deeprails::Internal::Type::RequestParameters::Converter
       include Deeprails::Internal::Type::RequestParameters
 
+      # @!attribute monitor_id
+      #
+      #   @return [String]
+      required :monitor_id, String
+
       # @!attribute description
       #   New description of the monitor.
       #
@@ -47,9 +52,11 @@ module Deeprails
       #   @return [Boolean, nil]
       optional :web_search, Deeprails::Internal::Type::Boolean
 
-      # @!method initialize(description: nil, file_search: nil, guardrail_metrics: nil, name: nil, status: nil, web_search: nil, request_options: {})
+      # @!method initialize(monitor_id:, description: nil, file_search: nil, guardrail_metrics: nil, name: nil, status: nil, web_search: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Deeprails::Models::MonitorUpdateParams} for more details.
+      #
+      #   @param monitor_id [String]
       #
       #   @param description [String] New description of the monitor.
       #
