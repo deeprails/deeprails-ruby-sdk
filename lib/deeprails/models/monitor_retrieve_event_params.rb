@@ -12,8 +12,14 @@ module Deeprails
       #   @return [String]
       required :monitor_id, String
 
-      # @!method initialize(monitor_id:, request_options: {})
+      # @!attribute event_id
+      #
+      #   @return [String]
+      required :event_id, String
+
+      # @!method initialize(monitor_id:, event_id:, request_options: {})
       #   @param monitor_id [String]
+      #   @param event_id [String]
       #   @param request_options [Deeprails::RequestOptions, Hash{Symbol=>Object}]
     end
   end

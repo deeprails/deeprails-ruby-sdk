@@ -7,6 +7,11 @@ module Deeprails
       extend Deeprails::Internal::Type::RequestParameters::Converter
       include Deeprails::Internal::Type::RequestParameters
 
+      # @!attribute monitor_id
+      #
+      #   @return [String]
+      required :monitor_id, String
+
       # @!attribute model_input
       #   A dictionary of inputs sent to the LLM to generate output. The dictionary must
       #   contain a `user_prompt` field. For ground_truth_adherence guardrail metric,
@@ -36,9 +41,11 @@ module Deeprails
       #   @return [Symbol, Deeprails::Models::MonitorSubmitEventParams::RunMode, nil]
       optional :run_mode, enum: -> { Deeprails::MonitorSubmitEventParams::RunMode }
 
-      # @!method initialize(model_input:, model_output:, nametag: nil, run_mode: nil, request_options: {})
+      # @!method initialize(monitor_id:, model_input:, model_output:, nametag: nil, run_mode: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Deeprails::Models::MonitorSubmitEventParams} for more details.
+      #
+      #   @param monitor_id [String]
       #
       #   @param model_input [Deeprails::Models::MonitorSubmitEventParams::ModelInput] A dictionary of inputs sent to the LLM to generate output. The dictionary must c
       #

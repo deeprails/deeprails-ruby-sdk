@@ -11,6 +11,9 @@ module Deeprails
           T.any(Deeprails::MonitorUpdateParams, Deeprails::Internal::AnyHash)
         end
 
+      sig { returns(String) }
+      attr_accessor :monitor_id
+
       # New description of the monitor.
       sig { returns(T.nilable(String)) }
       attr_reader :description
@@ -73,6 +76,7 @@ module Deeprails
 
       sig do
         params(
+          monitor_id: String,
           description: String,
           file_search: T::Array[String],
           guardrail_metrics:
@@ -84,6 +88,7 @@ module Deeprails
         ).returns(T.attached_class)
       end
       def self.new(
+        monitor_id:,
         # New description of the monitor.
         description: nil,
         # An array of file IDs to search in the monitor's evaluations. Files must be
@@ -106,6 +111,7 @@ module Deeprails
       sig do
         override.returns(
           {
+            monitor_id: String,
             description: String,
             file_search: T::Array[String],
             guardrail_metrics:

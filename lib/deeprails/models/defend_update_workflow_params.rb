@@ -7,6 +7,11 @@ module Deeprails
       extend Deeprails::Internal::Type::RequestParameters::Converter
       include Deeprails::Internal::Type::RequestParameters
 
+      # @!attribute workflow_id
+      #
+      #   @return [String]
+      required :workflow_id, String
+
       # @!attribute automatic_hallucination_tolerance_levels
       #   New mapping of guardrail metrics to hallucination tolerance levels (either
       #   `low`, `medium`, or `high`) to be used when `threshold_type` is set to
@@ -84,9 +89,11 @@ module Deeprails
       #   @return [Boolean, nil]
       optional :web_search, Deeprails::Internal::Type::Boolean
 
-      # @!method initialize(automatic_hallucination_tolerance_levels: nil, context_awareness: nil, custom_hallucination_threshold_values: nil, description: nil, file_search: nil, improvement_action: nil, max_improvement_attempts: nil, name: nil, threshold_type: nil, web_search: nil, request_options: {})
+      # @!method initialize(workflow_id:, automatic_hallucination_tolerance_levels: nil, context_awareness: nil, custom_hallucination_threshold_values: nil, description: nil, file_search: nil, improvement_action: nil, max_improvement_attempts: nil, name: nil, threshold_type: nil, web_search: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Deeprails::Models::DefendUpdateWorkflowParams} for more details.
+      #
+      #   @param workflow_id [String]
       #
       #   @param automatic_hallucination_tolerance_levels [Hash{Symbol=>Symbol, Deeprails::Models::DefendUpdateWorkflowParams::AutomaticHallucinationToleranceLevel}] New mapping of guardrail metrics to hallucination tolerance levels
       #

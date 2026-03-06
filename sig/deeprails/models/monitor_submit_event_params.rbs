@@ -2,6 +2,7 @@ module Deeprails
   module Models
     type monitor_submit_event_params =
       {
+        monitor_id: String,
         model_input: Deeprails::MonitorSubmitEventParams::ModelInput,
         model_output: String,
         nametag: String,
@@ -12,6 +13,8 @@ module Deeprails
     class MonitorSubmitEventParams < Deeprails::Internal::Type::BaseModel
       extend Deeprails::Internal::Type::RequestParameters::Converter
       include Deeprails::Internal::Type::RequestParameters
+
+      attr_accessor monitor_id: String
 
       attr_accessor model_input: Deeprails::MonitorSubmitEventParams::ModelInput
 
@@ -28,6 +31,7 @@ module Deeprails
       ) -> Deeprails::Models::MonitorSubmitEventParams::run_mode
 
       def initialize: (
+        monitor_id: String,
         model_input: Deeprails::MonitorSubmitEventParams::ModelInput,
         model_output: String,
         ?nametag: String,
@@ -36,6 +40,7 @@ module Deeprails
       ) -> void
 
       def to_hash: -> {
+        monitor_id: String,
         model_input: Deeprails::MonitorSubmitEventParams::ModelInput,
         model_output: String,
         nametag: String,

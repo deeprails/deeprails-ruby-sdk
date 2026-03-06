@@ -17,18 +17,26 @@ module Deeprails
       sig { returns(String) }
       attr_accessor :monitor_id
 
+      sig { returns(String) }
+      attr_accessor :event_id
+
       sig do
         params(
           monitor_id: String,
+          event_id: String,
           request_options: Deeprails::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(monitor_id:, request_options: {})
+      def self.new(monitor_id:, event_id:, request_options: {})
       end
 
       sig do
         override.returns(
-          { monitor_id: String, request_options: Deeprails::RequestOptions }
+          {
+            monitor_id: String,
+            event_id: String,
+            request_options: Deeprails::RequestOptions
+          }
         )
       end
       def to_hash

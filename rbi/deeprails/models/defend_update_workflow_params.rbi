@@ -14,6 +14,9 @@ module Deeprails
           )
         end
 
+      sig { returns(String) }
+      attr_accessor :workflow_id
+
       # New mapping of guardrail metrics to hallucination tolerance levels (either
       # `low`, `medium`, or `high`) to be used when `threshold_type` is set to
       # `automatic`. Possible metrics are `completeness`, `instruction_adherence`,
@@ -145,6 +148,7 @@ module Deeprails
 
       sig do
         params(
+          workflow_id: String,
           automatic_hallucination_tolerance_levels:
             T::Hash[
               Symbol,
@@ -165,6 +169,7 @@ module Deeprails
         ).returns(T.attached_class)
       end
       def self.new(
+        workflow_id:,
         # New mapping of guardrail metrics to hallucination tolerance levels (either
         # `low`, `medium`, or `high`) to be used when `threshold_type` is set to
         # `automatic`. Possible metrics are `completeness`, `instruction_adherence`,
@@ -208,6 +213,7 @@ module Deeprails
       sig do
         override.returns(
           {
+            workflow_id: String,
             automatic_hallucination_tolerance_levels:
               T::Hash[
                 Symbol,
