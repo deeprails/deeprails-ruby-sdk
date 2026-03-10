@@ -46,7 +46,7 @@ class Deeprails::Test::Resources::DefendTest < Deeprails::Test::ResourceTest
         improved_model_output: String,
         improvement_action: Deeprails::WorkflowEventDetailResponse::ImprovementAction,
         improvement_tool_status: Deeprails::WorkflowEventDetailResponse::ImprovementToolStatus | nil,
-        key_improvements: ^(Deeprails::Internal::Type::ArrayOf[Deeprails::Internal::Type::Unknown]),
+        key_improvements: ^(Deeprails::Internal::Type::ArrayOf[Deeprails::WorkflowEventDetailResponse::KeyImprovement]),
         status: Deeprails::WorkflowEventDetailResponse::Status,
         threshold_type: Deeprails::WorkflowEventDetailResponse::ThresholdType,
         workflow_id: String,
