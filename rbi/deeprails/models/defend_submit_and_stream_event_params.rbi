@@ -29,15 +29,17 @@ module Deeprails
       sig { returns(String) }
       attr_accessor :model_used
 
-      # The evaluation run mode. Streaming only supports fast, precision, and
-      # precision_codex.
+      # The evaluation run mode. Streaming is supported on all run modes except
+      # precision_max and precision_max_codex. Note: super_fast does not support Web
+      # Search or File Search — if your workflow has these enabled, use a different run
+      # mode or disable the capability on the workflow.
       sig do
         returns(Deeprails::DefendSubmitAndStreamEventParams::RunMode::OrSymbol)
       end
       attr_accessor :run_mode
 
-      # Enable SSE streaming for real-time token feedback. Only supported for
-      # single-model run modes (fast, precision, precision_codex).
+      # Enable SSE streaming for real-time token feedback. Supported on all run modes
+      # except precision_max and precision_max_codex.
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :stream
 
@@ -72,11 +74,13 @@ module Deeprails
         model_output:,
         # The model that generated the output (e.g., "gpt-4", "claude-3").
         model_used:,
-        # The evaluation run mode. Streaming only supports fast, precision, and
-        # precision_codex.
+        # The evaluation run mode. Streaming is supported on all run modes except
+        # precision_max and precision_max_codex. Note: super_fast does not support Web
+        # Search or File Search — if your workflow has these enabled, use a different run
+        # mode or disable the capability on the workflow.
         run_mode:,
-        # Enable SSE streaming for real-time token feedback. Only supported for
-        # single-model run modes (fast, precision, precision_codex).
+        # Enable SSE streaming for real-time token feedback. Supported on all run modes
+        # except precision_max and precision_max_codex.
         stream: nil,
         # Optional tag to identify this event.
         nametag: nil,
@@ -102,8 +106,10 @@ module Deeprails
       def to_hash
       end
 
-      # The evaluation run mode. Streaming only supports fast, precision, and
-      # precision_codex.
+      # The evaluation run mode. Streaming is supported on all run modes except
+      # precision_max and precision_max_codex. Note: super_fast does not support Web
+      # Search or File Search — if your workflow has these enabled, use a different run
+      # mode or disable the capability on the workflow.
       module RunMode
         extend Deeprails::Internal::Type::Enum
 
@@ -113,6 +119,11 @@ module Deeprails
           end
         OrSymbol = T.type_alias { T.any(Symbol, String) }
 
+        SUPER_FAST =
+          T.let(
+            :super_fast,
+            Deeprails::DefendSubmitAndStreamEventParams::RunMode::TaggedSymbol
+          )
         FAST =
           T.let(
             :fast,
@@ -126,16 +137,6 @@ module Deeprails
         PRECISION_CODEX =
           T.let(
             :precision_codex,
-            Deeprails::DefendSubmitAndStreamEventParams::RunMode::TaggedSymbol
-          )
-        PRECISION_MAX =
-          T.let(
-            :precision_max,
-            Deeprails::DefendSubmitAndStreamEventParams::RunMode::TaggedSymbol
-          )
-        PRECISION_MAX_CODEX =
-          T.let(
-            :precision_max_codex,
             Deeprails::DefendSubmitAndStreamEventParams::RunMode::TaggedSymbol
           )
 

@@ -131,6 +131,7 @@ module Deeprails
         # @!attribute run_mode
         #   Run mode for the evaluation. The run mode allows the user to optimize for speed,
         #   accuracy, and cost by determining which models are used to evaluate the event.
+        #   Note: `super_fast` do not support Web Search or File Search capabilities.
         #
         #   @return [Symbol, Deeprails::Models::MonitorDetailResponse::Evaluation::RunMode]
         required :run_mode, enum: -> { Deeprails::MonitorDetailResponse::Evaluation::RunMode }
@@ -294,15 +295,18 @@ module Deeprails
 
         # Run mode for the evaluation. The run mode allows the user to optimize for speed,
         # accuracy, and cost by determining which models are used to evaluate the event.
+        # Note: `super_fast` do not support Web Search or File Search capabilities.
         #
         # @see Deeprails::Models::MonitorDetailResponse::Evaluation#run_mode
         module RunMode
           extend Deeprails::Internal::Type::Enum
 
-          PRECISION_PLUS = :precision_plus
+          SUPER_FAST = :super_fast
+          FAST = :fast
           PRECISION = :precision
-          SMART = :smart
-          ECONOMY = :economy
+          PRECISION_CODEX = :precision_codex
+          PRECISION_MAX = :precision_max
+          PRECISION_MAX_CODEX = :precision_max_codex
 
           # @!method self.values
           #   @return [Array<Symbol>]

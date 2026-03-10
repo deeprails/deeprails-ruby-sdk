@@ -40,8 +40,11 @@ module Deeprails
 
       # Run mode for the workflow event. The run mode allows the user to optimize for
       # speed, accuracy, and cost by determining which models are used to evaluate the
-      # event. Available run modes include `precision_plus_codex`, `precision_plus`,
-      # `precision`, `smart`, and `economy`. Defaults to `smart`.
+      # event. Available run modes (fastest to most thorough): `super_fast`, `fast`,
+      # `precision`, `precision_codex`, `precision_max`, and `precision_max_codex`.
+      # Defaults to `fast`. Note: `super_fast` does not support Web Search or File
+      # Search — if your workflow has these capabilities enabled, use a different run
+      # mode or edit the workflow to disable them.
       sig { returns(Deeprails::DefendSubmitEventParams::RunMode::OrSymbol) }
       attr_accessor :run_mode
 
@@ -75,8 +78,11 @@ module Deeprails
         model_used:,
         # Run mode for the workflow event. The run mode allows the user to optimize for
         # speed, accuracy, and cost by determining which models are used to evaluate the
-        # event. Available run modes include `precision_plus_codex`, `precision_plus`,
-        # `precision`, `smart`, and `economy`. Defaults to `smart`.
+        # event. Available run modes (fastest to most thorough): `super_fast`, `fast`,
+        # `precision`, `precision_codex`, `precision_max`, and `precision_max_codex`.
+        # Defaults to `fast`. Note: `super_fast` does not support Web Search or File
+        # Search — if your workflow has these capabilities enabled, use a different run
+        # mode or edit the workflow to disable them.
         run_mode:,
         # An optional, user-defined tag for the event.
         nametag: nil,
@@ -239,8 +245,11 @@ module Deeprails
 
       # Run mode for the workflow event. The run mode allows the user to optimize for
       # speed, accuracy, and cost by determining which models are used to evaluate the
-      # event. Available run modes include `precision_plus_codex`, `precision_plus`,
-      # `precision`, `smart`, and `economy`. Defaults to `smart`.
+      # event. Available run modes (fastest to most thorough): `super_fast`, `fast`,
+      # `precision`, `precision_codex`, `precision_max`, and `precision_max_codex`.
+      # Defaults to `fast`. Note: `super_fast` does not support Web Search or File
+      # Search — if your workflow has these capabilities enabled, use a different run
+      # mode or edit the workflow to disable them.
       module RunMode
         extend Deeprails::Internal::Type::Enum
 
@@ -250,14 +259,14 @@ module Deeprails
           end
         OrSymbol = T.type_alias { T.any(Symbol, String) }
 
-        PRECISION_PLUS_CODEX =
+        SUPER_FAST =
           T.let(
-            :precision_plus_codex,
+            :super_fast,
             Deeprails::DefendSubmitEventParams::RunMode::TaggedSymbol
           )
-        PRECISION_PLUS =
+        FAST =
           T.let(
-            :precision_plus,
+            :fast,
             Deeprails::DefendSubmitEventParams::RunMode::TaggedSymbol
           )
         PRECISION =
@@ -265,14 +274,19 @@ module Deeprails
             :precision,
             Deeprails::DefendSubmitEventParams::RunMode::TaggedSymbol
           )
-        SMART =
+        PRECISION_CODEX =
           T.let(
-            :smart,
+            :precision_codex,
             Deeprails::DefendSubmitEventParams::RunMode::TaggedSymbol
           )
-        ECONOMY =
+        PRECISION_MAX =
           T.let(
-            :economy,
+            :precision_max,
+            Deeprails::DefendSubmitEventParams::RunMode::TaggedSymbol
+          )
+        PRECISION_MAX_CODEX =
+          T.let(
+            :precision_max_codex,
             Deeprails::DefendSubmitEventParams::RunMode::TaggedSymbol
           )
 
