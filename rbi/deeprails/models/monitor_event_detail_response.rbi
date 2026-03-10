@@ -305,9 +305,14 @@ module Deeprails
           end
         OrSymbol = T.type_alias { T.any(Symbol, String) }
 
-        PRECISION_PLUS =
+        SUPER_FAST =
           T.let(
-            :precision_plus,
+            :super_fast,
+            Deeprails::MonitorEventDetailResponse::RunMode::TaggedSymbol
+          )
+        FAST =
+          T.let(
+            :fast,
             Deeprails::MonitorEventDetailResponse::RunMode::TaggedSymbol
           )
         PRECISION =
@@ -315,14 +320,19 @@ module Deeprails
             :precision,
             Deeprails::MonitorEventDetailResponse::RunMode::TaggedSymbol
           )
-        SMART =
+        PRECISION_CODEX =
           T.let(
-            :smart,
+            :precision_codex,
             Deeprails::MonitorEventDetailResponse::RunMode::TaggedSymbol
           )
-        ECONOMY =
+        PRECISION_MAX =
           T.let(
-            :economy,
+            :precision_max,
+            Deeprails::MonitorEventDetailResponse::RunMode::TaggedSymbol
+          )
+        PRECISION_MAX_CODEX =
+          T.let(
+            :precision_max_codex,
             Deeprails::MonitorEventDetailResponse::RunMode::TaggedSymbol
           )
 

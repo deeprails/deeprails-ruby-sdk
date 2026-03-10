@@ -56,21 +56,15 @@ module Deeprails
         request_options: Deeprails::RequestOptions
       }
 
-      type run_mode =
-        :fast
-        | :precision
-        | :precision_codex
-        | :precision_max
-        | :precision_max_codex
+      type run_mode = :super_fast | :fast | :precision | :precision_codex
 
       module RunMode
         extend Deeprails::Internal::Type::Enum
 
+        SUPER_FAST: :super_fast
         FAST: :fast
         PRECISION: :precision
         PRECISION_CODEX: :precision_codex
-        PRECISION_MAX: :precision_max
-        PRECISION_MAX_CODEX: :precision_max_codex
 
         def self?.values: -> ::Array[Deeprails::Models::DefendSubmitAndStreamEventParams::run_mode]
       end

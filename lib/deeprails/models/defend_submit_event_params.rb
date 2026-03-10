@@ -35,8 +35,11 @@ module Deeprails
       # @!attribute run_mode
       #   Run mode for the workflow event. The run mode allows the user to optimize for
       #   speed, accuracy, and cost by determining which models are used to evaluate the
-      #   event. Available run modes include `precision_plus_codex`, `precision_plus`,
-      #   `precision`, `smart`, and `economy`. Defaults to `smart`.
+      #   event. Available run modes (fastest to most thorough): `super_fast`, `fast`,
+      #   `precision`, `precision_codex`, `precision_max`, and `precision_max_codex`.
+      #   Defaults to `fast`. Note: `super_fast` does not support Web Search or File
+      #   Search — if your workflow has these capabilities enabled, use a different run
+      #   mode or edit the workflow to disable them.
       #
       #   @return [Symbol, Deeprails::Models::DefendSubmitEventParams::RunMode]
       required :run_mode, enum: -> { Deeprails::DefendSubmitEventParams::RunMode }
@@ -133,16 +136,20 @@ module Deeprails
 
       # Run mode for the workflow event. The run mode allows the user to optimize for
       # speed, accuracy, and cost by determining which models are used to evaluate the
-      # event. Available run modes include `precision_plus_codex`, `precision_plus`,
-      # `precision`, `smart`, and `economy`. Defaults to `smart`.
+      # event. Available run modes (fastest to most thorough): `super_fast`, `fast`,
+      # `precision`, `precision_codex`, `precision_max`, and `precision_max_codex`.
+      # Defaults to `fast`. Note: `super_fast` does not support Web Search or File
+      # Search — if your workflow has these capabilities enabled, use a different run
+      # mode or edit the workflow to disable them.
       module RunMode
         extend Deeprails::Internal::Type::Enum
 
-        PRECISION_PLUS_CODEX = :precision_plus_codex
-        PRECISION_PLUS = :precision_plus
+        SUPER_FAST = :super_fast
+        FAST = :fast
         PRECISION = :precision
-        SMART = :smart
-        ECONOMY = :economy
+        PRECISION_CODEX = :precision_codex
+        PRECISION_MAX = :precision_max
+        PRECISION_MAX_CODEX = :precision_max_codex
 
         # @!method self.values
         #   @return [Array<Symbol>]
