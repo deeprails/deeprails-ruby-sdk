@@ -158,10 +158,12 @@ module Deeprails
       module RunMode
         extend Deeprails::Internal::Type::Enum
 
-        PRECISION_PLUS = :precision_plus
+        SUPER_FAST = :super_fast
+        FAST = :fast
         PRECISION = :precision
-        SMART = :smart
-        ECONOMY = :economy
+        PRECISION_CODEX = :precision_codex
+        PRECISION_MAX = :precision_max
+        PRECISION_MAX_CODEX = :precision_max_codex
 
         # @!method self.values
         #   @return [Array<Symbol>]

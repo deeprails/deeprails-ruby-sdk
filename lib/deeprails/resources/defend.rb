@@ -105,8 +105,8 @@ module Deeprails
       # Some parameter documentations has been truncated, see
       # {Deeprails::Models::DefendSubmitAndStreamEventParams} for more details.
       #
-      # Use this endpoint to create a new event for a guardrail workflow with real-time
-      # streaming feedback via Server-Sent Events (SSE).
+      # Use this endpoint to submit a model input and output pair to a workflow for
+      # evaluation with streaming responses.
       #
       # @overload submit_and_stream_event_streaming(workflow_id, model_input:, model_output:, model_used:, run_mode:, stream: nil, nametag: nil, request_options: {})
       #
@@ -118,9 +118,9 @@ module Deeprails
       #
       # @param model_used [String] Body param: The model that generated the output (e.g., "gpt-4", "claude-3").
       #
-      # @param run_mode [Symbol, Deeprails::Models::DefendSubmitAndStreamEventParams::RunMode] Body param: The evaluation run mode. Streaming only supports fast, precision, an
+      # @param run_mode [Symbol, Deeprails::Models::DefendSubmitAndStreamEventParams::RunMode] Body param: The evaluation run mode. Streaming is supported on all run modes exc
       #
-      # @param stream [Boolean] Query param: Enable SSE streaming for real-time token feedback. Only supported f
+      # @param stream [Boolean] Query param: Enable SSE streaming for real-time token feedback. Supported on all
       #
       # @param nametag [String] Body param: Optional tag to identify this event.
       #

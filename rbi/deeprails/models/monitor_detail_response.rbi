@@ -194,6 +194,7 @@ module Deeprails
 
         # Run mode for the evaluation. The run mode allows the user to optimize for speed,
         # accuracy, and cost by determining which models are used to evaluate the event.
+        # Note: `super_fast` do not support Web Search or File Search capabilities.
         sig do
           returns(
             Deeprails::MonitorDetailResponse::Evaluation::RunMode::TaggedSymbol
@@ -301,6 +302,7 @@ module Deeprails
           model_output:,
           # Run mode for the evaluation. The run mode allows the user to optimize for speed,
           # accuracy, and cost by determining which models are used to evaluate the event.
+          # Note: `super_fast` do not support Web Search or File Search capabilities.
           run_mode:,
           # The time the evaluation was created in UTC.
           created_at: nil,
@@ -540,6 +542,7 @@ module Deeprails
 
         # Run mode for the evaluation. The run mode allows the user to optimize for speed,
         # accuracy, and cost by determining which models are used to evaluate the event.
+        # Note: `super_fast` do not support Web Search or File Search capabilities.
         module RunMode
           extend Deeprails::Internal::Type::Enum
 
@@ -552,9 +555,14 @@ module Deeprails
             end
           OrSymbol = T.type_alias { T.any(Symbol, String) }
 
-          PRECISION_PLUS =
+          SUPER_FAST =
             T.let(
-              :precision_plus,
+              :super_fast,
+              Deeprails::MonitorDetailResponse::Evaluation::RunMode::TaggedSymbol
+            )
+          FAST =
+            T.let(
+              :fast,
               Deeprails::MonitorDetailResponse::Evaluation::RunMode::TaggedSymbol
             )
           PRECISION =
@@ -562,14 +570,19 @@ module Deeprails
               :precision,
               Deeprails::MonitorDetailResponse::Evaluation::RunMode::TaggedSymbol
             )
-          SMART =
+          PRECISION_CODEX =
             T.let(
-              :smart,
+              :precision_codex,
               Deeprails::MonitorDetailResponse::Evaluation::RunMode::TaggedSymbol
             )
-          ECONOMY =
+          PRECISION_MAX =
             T.let(
-              :economy,
+              :precision_max,
+              Deeprails::MonitorDetailResponse::Evaluation::RunMode::TaggedSymbol
+            )
+          PRECISION_MAX_CODEX =
+            T.let(
+              :precision_max_codex,
               Deeprails::MonitorDetailResponse::Evaluation::RunMode::TaggedSymbol
             )
 

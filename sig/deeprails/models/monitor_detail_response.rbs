@@ -228,15 +228,23 @@ module Deeprails
           end
         end
 
-        type run_mode = :precision_plus | :precision | :smart | :economy
+        type run_mode =
+          :super_fast
+          | :fast
+          | :precision
+          | :precision_codex
+          | :precision_max
+          | :precision_max_codex
 
         module RunMode
           extend Deeprails::Internal::Type::Enum
 
-          PRECISION_PLUS: :precision_plus
+          SUPER_FAST: :super_fast
+          FAST: :fast
           PRECISION: :precision
-          SMART: :smart
-          ECONOMY: :economy
+          PRECISION_CODEX: :precision_codex
+          PRECISION_MAX: :precision_max
+          PRECISION_MAX_CODEX: :precision_max_codex
 
           def self?.values: -> ::Array[Deeprails::Models::MonitorDetailResponse::Evaluation::run_mode]
         end
