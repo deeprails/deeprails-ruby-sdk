@@ -63,7 +63,11 @@ module Deeprails
       end
       attr_accessor :improvement_tool_status
 
-      sig { returns(T::Array[T.anything]) }
+      sig do
+        returns(
+          T::Array[Deeprails::WorkflowEventDetailResponse::KeyImprovement]
+        )
+      end
       attr_accessor :key_improvements
 
       # Status of the event.
@@ -181,7 +185,10 @@ module Deeprails
             T.nilable(
               Deeprails::WorkflowEventDetailResponse::ImprovementToolStatus::OrSymbol
             ),
-          key_improvements: T::Array[T.anything],
+          key_improvements:
+            T::Array[
+              Deeprails::WorkflowEventDetailResponse::KeyImprovement::OrHash
+            ],
           status: Deeprails::WorkflowEventDetailResponse::Status::OrSymbol,
           threshold_type:
             Deeprails::WorkflowEventDetailResponse::ThresholdType::OrSymbol,
@@ -266,7 +273,8 @@ module Deeprails
               T.nilable(
                 Deeprails::WorkflowEventDetailResponse::ImprovementToolStatus::TaggedSymbol
               ),
-            key_improvements: T::Array[T.anything],
+            key_improvements:
+              T::Array[Deeprails::WorkflowEventDetailResponse::KeyImprovement],
             status:
               Deeprails::WorkflowEventDetailResponse::Status::TaggedSymbol,
             threshold_type:
@@ -594,6 +602,32 @@ module Deeprails
           )
         end
         def self.values
+        end
+      end
+
+      class KeyImprovement < Deeprails::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              Deeprails::WorkflowEventDetailResponse::KeyImprovement,
+              Deeprails::Internal::AnyHash
+            )
+          end
+
+        sig { returns(T.nilable(T::Array[String])) }
+        attr_reader :key_improvement
+
+        sig { params(key_improvement: T::Array[String]).void }
+        attr_writer :key_improvement
+
+        sig do
+          params(key_improvement: T::Array[String]).returns(T.attached_class)
+        end
+        def self.new(key_improvement: nil)
+        end
+
+        sig { override.returns({ key_improvement: T::Array[String] }) }
+        def to_hash
         end
       end
 
