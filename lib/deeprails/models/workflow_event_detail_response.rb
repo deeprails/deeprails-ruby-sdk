@@ -63,8 +63,9 @@ module Deeprails
 
       # @!attribute key_improvements
       #
-      #   @return [Array<Object>]
-      required :key_improvements, Deeprails::Internal::Type::ArrayOf[Deeprails::Internal::Type::Unknown]
+      #   @return [Array<Deeprails::Models::WorkflowEventDetailResponse::KeyImprovement>]
+      required :key_improvements,
+               -> { Deeprails::Internal::Type::ArrayOf[Deeprails::WorkflowEventDetailResponse::KeyImprovement] }
 
       # @!attribute status
       #   Status of the event.
@@ -141,7 +142,7 @@ module Deeprails
       #
       #   @param improvement_tool_status [Symbol, Deeprails::Models::WorkflowEventDetailResponse::ImprovementToolStatus, nil] Status of the improvement tool used to improve the event. `improvement_required`
       #
-      #   @param key_improvements [Array<Object>]
+      #   @param key_improvements [Array<Deeprails::Models::WorkflowEventDetailResponse::KeyImprovement>]
       #
       #   @param status [Symbol, Deeprails::Models::WorkflowEventDetailResponse::Status] Status of the event.
       #
@@ -299,6 +300,16 @@ module Deeprails
 
         # @!method self.values
         #   @return [Array<Symbol>]
+      end
+
+      class KeyImprovement < Deeprails::Internal::Type::BaseModel
+        # @!attribute key_improvement
+        #
+        #   @return [Array<String>, nil]
+        optional :key_improvement, Deeprails::Internal::Type::ArrayOf[String]
+
+        # @!method initialize(key_improvement: nil)
+        #   @param key_improvement [Array<String>]
       end
 
       # Status of the event.

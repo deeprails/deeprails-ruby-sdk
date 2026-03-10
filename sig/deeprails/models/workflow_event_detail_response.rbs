@@ -10,7 +10,7 @@ module Deeprails
         improved_model_output: String,
         improvement_action: Deeprails::Models::WorkflowEventDetailResponse::improvement_action,
         improvement_tool_status: Deeprails::Models::WorkflowEventDetailResponse::improvement_tool_status?,
-        key_improvements: ::Array[top],
+        key_improvements: ::Array[Deeprails::WorkflowEventDetailResponse::KeyImprovement],
         status: Deeprails::Models::WorkflowEventDetailResponse::status,
         threshold_type: Deeprails::Models::WorkflowEventDetailResponse::threshold_type,
         workflow_id: String,
@@ -38,7 +38,7 @@ module Deeprails
 
       attr_accessor improvement_tool_status: Deeprails::Models::WorkflowEventDetailResponse::improvement_tool_status?
 
-      attr_accessor key_improvements: ::Array[top]
+      attr_accessor key_improvements: ::Array[Deeprails::WorkflowEventDetailResponse::KeyImprovement]
 
       attr_accessor status: Deeprails::Models::WorkflowEventDetailResponse::status
 
@@ -83,7 +83,7 @@ module Deeprails
         improved_model_output: String,
         improvement_action: Deeprails::Models::WorkflowEventDetailResponse::improvement_action,
         improvement_tool_status: Deeprails::Models::WorkflowEventDetailResponse::improvement_tool_status?,
-        key_improvements: ::Array[top],
+        key_improvements: ::Array[Deeprails::WorkflowEventDetailResponse::KeyImprovement],
         status: Deeprails::Models::WorkflowEventDetailResponse::status,
         threshold_type: Deeprails::Models::WorkflowEventDetailResponse::threshold_type,
         workflow_id: String,
@@ -103,7 +103,7 @@ module Deeprails
         improved_model_output: String,
         improvement_action: Deeprails::Models::WorkflowEventDetailResponse::improvement_action,
         improvement_tool_status: Deeprails::Models::WorkflowEventDetailResponse::improvement_tool_status?,
-        key_improvements: ::Array[top],
+        key_improvements: ::Array[Deeprails::WorkflowEventDetailResponse::KeyImprovement],
         status: Deeprails::Models::WorkflowEventDetailResponse::status,
         threshold_type: Deeprails::Models::WorkflowEventDetailResponse::threshold_type,
         workflow_id: String,
@@ -277,6 +277,18 @@ module Deeprails
         IMPROVEMENT_REQUIRED: :improvement_required
 
         def self?.values: -> ::Array[Deeprails::Models::WorkflowEventDetailResponse::improvement_tool_status]
+      end
+
+      type key_improvement = { key_improvement: ::Array[String] }
+
+      class KeyImprovement < Deeprails::Internal::Type::BaseModel
+        attr_reader key_improvement: ::Array[String]?
+
+        def key_improvement=: (::Array[String]) -> ::Array[String]
+
+        def initialize: (?key_improvement: ::Array[String]) -> void
+
+        def to_hash: -> { key_improvement: ::Array[String] }
       end
 
       type status = :"In Progress" | :Completed
