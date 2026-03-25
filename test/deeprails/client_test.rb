@@ -134,7 +134,6 @@ class DeeprailsTest < Minitest::Test
 
     Thread.current.thread_variable_set(:time_now, time_now)
     assert_raises(Deeprails::Errors::InternalServerError) do
-
       deep_rails.defend.create_workflow(
         improvement_action: :regen,
         name: "name",
