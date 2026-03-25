@@ -1,5 +1,35 @@
 # Changelog
 
+## 0.24.0 (2026-03-25)
+
+Full Changelog: [v0.23.0...v0.24.0](https://github.com/deeprails/deeprails-ruby-sdk/compare/v0.23.0...v0.24.0)
+
+### Features
+
+* **api:** manual updates ([5ef9233](https://github.com/deeprails/deeprails-ruby-sdk/commit/5ef9233307f25347f1fe5cb31d919b775e86018c))
+* **api:** update run mode lists ([4dd6b35](https://github.com/deeprails/deeprails-ruby-sdk/commit/4dd6b35cfd44db08d215bcffcd82e0df013fdbc1))
+
+
+### Bug Fixes
+
+* **client:** always add content-length to post body, even when empty ([a13ed48](https://github.com/deeprails/deeprails-ruby-sdk/commit/a13ed487ebe8d61e23a91427b59568098fa9c509))
+* **client:** loosen json header parsing ([5b586e4](https://github.com/deeprails/deeprails-ruby-sdk/commit/5b586e42540c7495a5a7a90b046f97bd80937a6a))
+* properly mock time in ruby ci tests ([3d4a050](https://github.com/deeprails/deeprails-ruby-sdk/commit/3d4a05086397ebee972f3731c32c546a8680c359))
+
+
+### Chores
+
+* **ci:** add build step ([214a42f](https://github.com/deeprails/deeprails-ruby-sdk/commit/214a42f734b006bc8b121c1e7024e48978d0435c))
+* **ci:** skip uploading artifacts on stainless-internal branches ([31cf2d4](https://github.com/deeprails/deeprails-ruby-sdk/commit/31cf2d4fc4f7cf22594abb421e85fc596bfebfe1))
+* **docs:** remove www prefix ([5809c7c](https://github.com/deeprails/deeprails-ruby-sdk/commit/5809c7c3e4f530b4229837034c41fe991627cebe))
+* **internal:** codegen related update ([963603e](https://github.com/deeprails/deeprails-ruby-sdk/commit/963603e86d5835158ef84320a712c4f688369924))
+* **internal:** codegen related update ([729ecae](https://github.com/deeprails/deeprails-ruby-sdk/commit/729ecaebf5923f1c8fb3534af065422d57c93489))
+* **internal:** codegen related update ([5d6fdf8](https://github.com/deeprails/deeprails-ruby-sdk/commit/5d6fdf835fb9189c925b6a4b7e6ab5be0bb5f6c6))
+* **internal:** codegen related update ([3c60669](https://github.com/deeprails/deeprails-ruby-sdk/commit/3c606699d83fa50f2e89502c829bd2a3270848dc))
+* **internal:** remove mock server code ([6da3225](https://github.com/deeprails/deeprails-ruby-sdk/commit/6da3225fe66a6f2e1519b3a5eba404483e0c7092))
+* **internal:** tweak CI branches ([ce92004](https://github.com/deeprails/deeprails-ruby-sdk/commit/ce920042eb923f09c87bfb8d7c0b92e79cc817fd))
+* update mock server docs ([d247ade](https://github.com/deeprails/deeprails-ruby-sdk/commit/d247ade6db1f06e5d56a815cac033b0c5ed7e3c7))
+
 ## 0.23.0 (2026-01-20)
 
 Full Changelog: [v0.22.0...v0.23.0](https://github.com/deeprails/deeprails-ruby-sdk/compare/v0.22.0...v0.23.0)
