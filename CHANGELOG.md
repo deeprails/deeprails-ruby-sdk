@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.24.1 (2026-03-27)
+
+Full Changelog: [v0.24.0...v0.24.1](https://github.com/deeprails/deeprails-ruby-sdk/compare/v0.24.0...v0.24.1)
+
+### Bug Fixes
+
+* **internal:** correct multipart form field name encoding ([2574ab9](https://github.com/deeprails/deeprails-ruby-sdk/commit/2574ab9830ee7aa7147ca425f99a55a7f622b5a0))
+
 ## 0.24.0 (2026-03-25)
 
 Full Changelog: [v0.23.0...v0.24.0](https://github.com/deeprails/deeprails-ruby-sdk/compare/v0.23.0...v0.24.0)
