@@ -11,7 +11,7 @@ GIT
 PATH
   remote: .
   specs:
-    deeprails (0.24.1)
+    deeprails (0.24.2)
       cgi
       connection_pool
 
