@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.24.2 (2026-03-28)
+
+Full Changelog: [v0.24.1...v0.24.2](https://github.com/deeprails/deeprails-ruby-sdk/compare/v0.24.1...v0.24.2)
+
+### Chores
+
+* **ci:** support opting out of skipping builds on metadata-only commits ([68d423f](https://github.com/deeprails/deeprails-ruby-sdk/commit/68d423fa689e1cdb3062e27e129fd0cf4da05353))
+
 ## 0.24.1 (2026-03-27)
 
 Full Changelog: [v0.24.0...v0.24.1](https://github.com/deeprails/deeprails-ruby-sdk/compare/v0.24.0...v0.24.1)
