@@ -137,7 +137,7 @@ module Deeprails
           method: :post,
           path: ["defend/%1$s/events?stream=true", workflow_id],
           query: query,
-          headers: {"accept" => "text/event-stream"},
+          headers: {"accept" => "text/event-stream", "accept-encoding" => "identity"},
           body: parsed.except(*query_params),
           stream: Deeprails::Internal::Stream,
           model: String,
