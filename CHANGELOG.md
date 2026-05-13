@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.25.0 (2026-05-13)
+
+Full Changelog: [v0.24.2...v0.25.0](https://github.com/deeprails/deeprails-ruby-sdk/compare/v0.24.2...v0.25.0)
+
+### Features
+
+* support setting headers via env ([e213ae1](https://github.com/deeprails/deeprails-ruby-sdk/commit/e213ae1bfaefcbaa91cf571f36d9c49520a38d22))
+
+
+### Bug Fixes
+
+* align path encoding with RFC 3986 section 3.3 ([cfcda05](https://github.com/deeprails/deeprails-ruby-sdk/commit/cfcda05da2b2dafdc9ebd0254ff45c2059784c74))
+* avoid gzip buffering during streaming ([07787a7](https://github.com/deeprails/deeprails-ruby-sdk/commit/07787a7e3ff1351e4f47cb8c215a956934b4631a))
+* multipart encoding for file arrays ([3adae4a](https://github.com/deeprails/deeprails-ruby-sdk/commit/3adae4aa567d20f5427a41e2462ffe548780d6ae))
+* variable name typo ([a83b124](https://github.com/deeprails/deeprails-ruby-sdk/commit/a83b12449256e2a570b5b0cd9d9b5fffa3538951))
+
+
+### Chores
+
+* **internal:** more robust bootstrap script ([0ba6992](https://github.com/deeprails/deeprails-ruby-sdk/commit/0ba69922754d3d9e7f5d05da1f7a43f7623851cd))
+
 ## 0.24.2 (2026-03-28)
 
 Full Changelog: [v0.24.1...v0.24.2](https://github.com/deeprails/deeprails-ruby-sdk/compare/v0.24.1...v0.24.2)
